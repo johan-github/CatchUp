@@ -1,0 +1,240 @@
+*{
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*************************************************************************/
+
+body{
+    background-image: url("https://i.pinimg.com/originals/af/84/35/af8435f0ccb57c2cc1e205cc4637b97a.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+
+/*************************************************************************/
+
+.nav{
+    display: grid;
+    grid-template-rows: repeat( 5, 1fr );
+}
+        #navHome,#navChannels,#navFriends,#navOptions,#navAbout,#navLogout {
+            padding: 10px 10px 10px 10px;
+            margin: 10px;
+            background-color: rgb(33, 50, 65);
+            color: rgb(205, 205, 255);
+
+            align-items: center;
+            text-align: right;
+            
+            font: bold 16px Arial, Helvetica, sans-serif;
+        }
+        a {
+            color: rgb(189, 188, 255);
+            text-decoration: none;
+        }
+
+
+
+
+/*************************************************************************/
+
+#appButton{ grid-area: appButton; }
+#appNav{ grid-area: appNav; }
+#appMain{ grid-area: appMain; }
+
+#appContainer{
+    display: grid;
+    grid-template-columns: 30px minmax(auto, 600px);
+    /*grid-template: repeat( 1, [row] auto) / repeat( 2, [col] 100px);*/
+    grid-template-areas:
+    "appButton appMain";
+
+    padding: 20px;
+    justify-content: center;
+
+}
+        #appButton {
+            position: relative;
+        }
+        #appButton:hover #appNav {
+            visibility: visible;
+        }
+        #appNav:hover {
+            visibility: visible;
+        }
+        #appNav {
+            position: absolute;
+            top: -100;
+            visibility: hidden;
+            z-index: 100;
+            background-color: white;
+            box-shadow: 5px 5px 2px #aaa;
+            border: 1px solid grey;
+            padding: 8px;
+            width: 220px;
+            height: auto;
+        }
+
+        
+
+
+
+/*************************************************************************/
+            
+#messageBoxUserPic{ grid-area: pic; }
+#messageBoxUserName{ grid-area: name; }
+#messageBoxUserAdd{ grid-area: userAdd; }
+#messageBoxUserMessageTime{ grid-area: time; }
+#messageBoxUserMessage{ grid-area: msg; }
+#messageBox{
+    display: grid;
+    /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
+    grid-template-columns: 50px auto 10px;
+    grid-template-rows: 25px 25px auto;
+    grid-template-areas:
+    "pic name name userAdd"
+    "pic time time time"
+    "msg msg msg msg";
+
+    background-color: rgb(27, 44, 44);
+    opacity: 0.9;
+    
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 5px 5px 5px #000000;
+    border-radius: 5px 0px 5px 0px;
+}
+        #messageBoxUserPic{
+            background-image: url("https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png");
+            background-size: cover;
+            background-position: center;
+            box-shadow: 5px 5px 5px #000000;
+        }
+        #messageBoxUserName {
+            padding: 10px 0px 5px 20px;
+        }
+        #messageBoxUserMessageTime {
+            padding: 5px 0px 5px 20px;
+            font: italic 10px Arial, Helvetica, sans-serif;
+        }
+        #messageBoxUserMessage {
+            padding: 20px 10px 10px 20px;
+        }
+        #name, #time{
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #messageBoxUserAdd{
+            justify-self: end;
+        }
+        #time{
+        }
+        #msg{
+        }
+
+
+/*************************************************************************/
+
+#channelAddBoxTextField{ grid-area: channelAddBoxTextField; }
+#channelAddBoxMembers{ grid-area: channelAddBoxMembers; }
+#channelAddBoxAddButton{ grid-area: channelAddBoxAddButton; }
+#channelAddBoxMembersLabel{ grid-area: channelAddBoxMembersLabel; }
+
+#channelAddBox{
+    display: grid;
+    /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
+    grid-template-columns: 80px minmax( 200px, auto) auto;
+    grid-template-rows: 30px 30px;
+    grid-template-areas:
+    "channelAddBoxTextField channelAddBoxTextField channelAddBoxTextField"
+    "channelAddBoxMembersLabel channelAddBoxMembers channelAddBoxAddButton";
+
+    background-color: rgb(26, 48, 48);
+    opacity: 0.9;
+    
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 5px 5px 5px #000000;
+    border-radius: 5px 0px 5px 0px;
+
+    justify-self: center;
+    align-items: center;
+}
+
+/*************************************************************************/
+
+#channelBoxChannelPic{ grid-area: pic; }
+#channelBoxChannelName{ grid-area: name; }
+#channelBoxChannelAdd{ grid-area: ChannelAdd; }
+#channelBoxChannelMessageTime{ grid-area: time; }
+#channelBoxChannelMessage{ grid-area: msg; }
+#channelBox{
+    display: grid;
+    /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
+    grid-template-columns: 50px auto 10px;
+    grid-template-rows: 25px 25px auto;
+    grid-template-areas:
+    "pic name name ChannelAdd"
+    "pic time time time"
+    "msg msg msg msg";
+
+    background-color: rgb(27, 44, 44);
+    opacity: 0.9;
+    
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 5px 5px 5px #000000;
+    border-radius: 5px 0px 5px 0px;
+}
+        #channelBoxChannelPic{
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTyx2KeZp8USg-MPKalmrXVXHOCkpIEa3W6AGCwrCsJ5knnPKpY");
+            background-size: cover;
+            background-position: center;
+            box-shadow: 5px 5px 5px #000000;
+        }
+        #channelBoxChannelName {
+            padding: 10px 0px 5px 20px;
+        }
+        #channelBoxChannelMessageTime {
+            padding: 5px 0px 5px 20px;
+            font: italic 10px Arial, Helvetica, sans-serif;
+        }
+        #channelBoxChannelMessage {
+            padding: 20px 10px 10px 20px;
+        }
+        #name, #time{
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #channelBoxChannelAdd{
+            justify-self: end;
+        }
+
+/*************************************************************************/
+
+#optionsBoxTextField{ grid-area: optionsBoxTextField; }
+#optionsBoxAddButton{ grid-area: optionsBoxAddButton; }
+
+#optionsBox{
+    display: grid;
+    /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
+    grid-template-columns: minmax( 200px, auto) auto;
+    grid-template-areas:
+    "optionsBoxTextField optionsBoxAddButton";
+
+    background-color: rgb(26, 48, 48);
+    opacity: 0.9;
+    
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 5px 5px 5px #000000;
+    border-radius: 5px 0px 5px 0px;
+
+    justify-self: center;
+    align-items: center;
+}
