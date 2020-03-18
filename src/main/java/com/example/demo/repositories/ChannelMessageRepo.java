@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface ChannelMessageRepo extends CrudRepository<ChannelMessage, Integer> {
 
-    public List<ChannelMessage> findAllMessagesByChannelsId(int channels_id);
+    //public List<ChannelMessage> findAllMessagesByChannelsId(int channels_id);
 }

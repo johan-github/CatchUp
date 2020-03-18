@@ -12,9 +12,9 @@ public class ChannelMessagesController {
 
     @Autowired
     ChannelMessageService channelMessageService;
-
+/*
     @GetMapping("/rest/channelmessages/{channel_id}")
     public List<ChannelMessage> getAllMessagesByChannelsId(@PathVariable int channels_id) {
         return channelMessageService.findAllMessagesByChannelsId(channels_id); }
-
+*/
 }

@@ -14,8 +14,8 @@ public class ChannelMessageService {
 
     @Autowired
     private ChannelMessageRepo channelMessageRepo;
-
+/*
     public List<ChannelMessage> findAllMessagesByChannelsId(int channels_id) {
         return (List<ChannelMessage>) channelMessageRepo.findAllMessagesByChannelsId(channels_id);
-    }
+    }*/
 }
