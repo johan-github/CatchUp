@@ -16,11 +16,6 @@ export const router = new Router({
 
         {
             name: 'frontPage',
-            path: '/index.html',
-            component: frontPage
-        },
-        {
-            name: 'frontPage',
             path: '/',
             component: frontPage
         },
