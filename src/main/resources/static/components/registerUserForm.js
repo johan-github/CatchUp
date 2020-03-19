@@ -5,9 +5,10 @@ export default {
     <form>
         <div>
             <label>Enter user name</label>
-        </div>
-        <div>
-            <label>Enter passform</label>
+            <input placeholder="Username">
+            
+            <label>Enter password</label>
+            <input placeholder="Password">
         </div>
     
     </form>
