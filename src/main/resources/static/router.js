@@ -20,6 +20,11 @@ export const router = new Router({
         },
         {
             name: 'home',
+            path: '/index.html',
+            component: home
+        },
+        {
+            name: 'home',
             path: '/home',
             component: home
         },
