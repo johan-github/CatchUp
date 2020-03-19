@@ -40,8 +40,7 @@ public class ChannelController {
 
     //************************************************************************************************* @DeleteMapping
 
-
-    /*@DeleteMapping("/rest/channels/{id}")
+    @DeleteMapping("/rest/channels/{id}")
     public String deleteOneUser(@PathVariable int id) {
         try {
             channelService.deleteById( id );
@@ -49,7 +48,7 @@ public class ChannelController {
         } catch (Exception e) {
             return "Failed";
         }
-    }*/
+    }
 
     //************************************************************************************************* @PutMapping (Update)
 

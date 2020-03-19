@@ -14,8 +14,6 @@ public interface ChannelRepo extends CrudRepository<Channel, Integer> {
 
     public Channel findById( int id );
 
-    public List<Channel> findByAccountId(int account_id );
-
-
+    public List<Channel> findByAccountid( int accountid );
 
 }

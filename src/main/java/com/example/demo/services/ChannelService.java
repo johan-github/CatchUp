@@ -24,17 +24,17 @@ public class ChannelService {
         return channelRepo.findById(id);
     }
 
-    public List<Channel> findAllChannelsByAccountId(int id) {
-        return channelRepo.findByAccountId(id);
+    public List<Channel> findAllChannelsByAccountid(int accountid) {
+        return channelRepo.findByAccountid(accountid);
     }
 
     public Channel addNewChannel( Channel channel ){
         return channelRepo.save( channel );
     }
 
-    /*public void deleteById(int id ){
+    public void deleteById(int id ){
         channelRepo.deleteById( id );
-    };*/
+    };
 
 }
 
