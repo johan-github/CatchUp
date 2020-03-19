@@ -4,7 +4,7 @@ export default {
     
     <div id="app">
       <nav>
-        <router-link to="/user-login"> Login </router-link>
+        <router-link to="/home"> Login </router-link>
         <router-link to="/register-new-user"> Register </router-link>
       </nav>
       <main>

@@ -14,7 +14,7 @@ export const router = new Router({
     routes:[
 
         {
-            //name: 'frontPage',
+            name: 'home',
             path: '/',
             component: home
         },
