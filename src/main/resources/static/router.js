@@ -7,7 +7,7 @@ import channels from './views/channels.js'
 import friends from './views/friends.js'
 import options from './views/options.js'
 import about from './views/about.js'
-import frontPage from './views/frontPage.js'
+//import frontPage from './views/frontPage.js'
 
 export const router = new Router({
     mode: 'history',
@@ -15,9 +15,9 @@ export const router = new Router({
     routes:[
 
         {
-            name: 'frontPage',
+            //name: 'frontPage',
             path: '/',
-            component: frontPage
+            component: home
         },
         {
             name: 'home',

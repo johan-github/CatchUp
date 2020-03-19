@@ -1,41 +1,17 @@
-import navbar from './components/navbar.js'
+export default {
 
-
-export default{
-    components:{
-        navbar
-    },
-
-
-    template:`
-
-<!--
-        <div class="clickToShowInfo">
-	Click here for more info
-	<div class="info">
-		More info!
-	</div>
-</div>-->
-
-        <section id="appContainer">
-
-            <div id="appButton">
-                <h3>| | |</h3>
-
-                <div id="appNav">
-                    <navbar/>
-                </div>
-
-                
-            </div>
-
-            
-
-            <main id="appMain">
-                <router-view/>
-            </main>
-            
-        </section>
+    template: `
     
+    <div id="app">
+      <nav>
+        <router-link to="/user-login"> Login </router-link>
+        <router-link to="/register-new-user"> Register </router-link>
+      </nav>
+      <main>
+        <router-view/>
+      </main>
+    
+    </div>
     `,
+
 }
