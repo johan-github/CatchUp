@@ -17,7 +17,7 @@ export default{
             <div id="optionsChangeNick">
                 <input id="optionsChangeNickField" type="text" placeholder="Change your nickname">            
                 <input id="optionsChangeNickButton" type="submit" value="Change nick">
-            </form>
+            </div>
 
             <form id="optionsBox" action="/action_page.php">
                 <input id="optionsBoxTextField" type="text" placeholder="Change your nickname">            
