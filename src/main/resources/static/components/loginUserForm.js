@@ -4,9 +4,9 @@ export default {
     
     <form>
         <label>Enter username</label>
-        <input placeholder="username">
+        <input placeholder="Username">
         <label>Enter password</label>
-        <input placeholder="password">
+        <input placeholder="Password" type="password">
     </form>
     
     `

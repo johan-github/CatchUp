@@ -8,6 +8,7 @@ import friends from './views/friends.js'
 import options from './views/options.js'
 import about from './views/about.js'
 import registerUser from './views/registerUser.js'
+import loginUser from './views/loginUser.js'
 
 export const router = new Router({
     mode: 'history',
@@ -53,6 +54,11 @@ export const router = new Router({
             name: 'about',
             path: '/about',
             component: about
+        },
+        {
+            name: 'loginUser',
+            path: '/loginUser',
+            component: loginUser
         }
 
 
