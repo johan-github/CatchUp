@@ -321,3 +321,50 @@ body{
         }
         #msg{
         }
+
+
+
+/*************************************************************************/
+            
+#displayChannelPic{ grid-area: dChannelPic; }
+#displayChannelNick{ grid-area: dChannelNick; }
+#displayChannelAddFavorite{ grid-area: dChannelFav; }
+
+#displayChannelBox{
+    display: grid;
+    /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
+    grid-template-columns: 50px minmax( 100px, 150px) auto 20px 20px 20px;
+    grid-template-rows: 10px;grid-template-areas:
+    "dChannelPic dChannelNick dChannelFav";
+
+
+    background-color: rgb(27, 44, 44);
+    opacity: 0.9;
+    
+    padding: 10px;
+    margin: 10px;
+
+    box-shadow: 5px 5px 5px #000000;
+    border-radius: 5px 0px 5px 0px;
+
+    align-items: center;
+}
+        #displayFriendBox > div {
+            padding: 10px;
+        }
+        #displayFriendPic{
+            background-image: url("https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png");
+            background-size: cover;
+            background-position: center;
+            box-shadow: 5px 5px 5px #000000;
+        }
+        #displayFriendNick {
+        }
+        
+        #displayFriendAdd{
+            justify-self: end;
+        }
+        #time{
+        }
+        #msg{
+        }

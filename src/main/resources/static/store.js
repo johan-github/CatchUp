@@ -5,7 +5,7 @@ Vue.use( Vuex )
 export const store = new Vuex.Store({
     state:{
 
-        channelnames:[],
+        channelNames:[],
 
         channels:[
             {
@@ -77,17 +77,17 @@ export const store = new Vuex.Store({
 /*********************************************************************************************************** */
 
     mutations:{
-        setChannelNames(state, channelnames){
-            state.channelnames = channelnames },
+        /*********************************************** channelnames*/
+        setChannelNames(state, channelNames){
+            state.channelNames = channelNames },
+
+        appendChannelNames(state, channelName){
+            state.channelNames.push( channelName ) },
 
 
         /*********************************************** */
 
-        appendChannelNames(state, channelName){
-            state.channelNames.puch( channelName ) },
-
-        appendTestChannels( state, channel ){
-            state.testChannels.push( channel ) },
+        
 
         appendChannel( state, channel){
             state.channels.push( channel ) },
