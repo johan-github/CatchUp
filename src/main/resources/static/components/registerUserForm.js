@@ -10,13 +10,13 @@ export default {
             <div class="inputForm">
                 <i class="fa fa-user"></i>
                 <label>Add username</label>
-                <input class="input-field" type="text"  placeholder="username" v-model="addUserName" >
+                <input class="input-field" placeholder="username" v-model="addUserName" >
             </div>
 
             <div class="inputForm">
                 <i class="fa fa-user"></i>
                 <label>Add nickname</label>
-                <input class="input-field" type="text"  placeholder="nickname" v-model="addNickname" >
+                <input class="input-field" placeholder="nickname" v-model="addNickname" >
             </div>
 
             <div class="inputForm">
@@ -45,15 +45,13 @@ data() {
   // Created by the Vue Ninjas Helena and Matthias
   methods: {
     async registerNewUserForm() {
-        console.log("TEST " + this.addUserName, this.addPassword)
-        if(!this.addUserName.trim() && !this.addPassword.trim() && this.addNickname.trim()){
+        if( !this.addUserName.trim() && !this.addPassword.trim() && !this.addNickname.trim() ){
             return
         } 
 
-     
         let newUser = {
         username: this.addUserName,
-        nickname: this.addNickname,
+        usernick: this.addNickname,
         password: this.addPassword,
         avatar:  this.defaultAvatar,
         online: this.defaultOnline
@@ -71,6 +69,7 @@ data() {
           result = await result.json()
 
         this.addUserName=''
+        this.addNickname=''
         this.addPassword=''
 
         //this.$router.push('/loginUser')
