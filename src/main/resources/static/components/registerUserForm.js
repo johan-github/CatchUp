@@ -2,8 +2,6 @@
 export default {
     template:`
     <div class="registerUser">
-    
-    
     <form @submit.prevent="registerNewUserForm">
 
         <h2>Register new user</h2>
@@ -25,14 +23,11 @@ export default {
                 <input class="input-field" type="password" placeholder="password" v-model="addPassword">
             </div>
         <button class="registerButton">Register</button>
-
     </form>
-
     </div>
     `,
 
 data() {
-
     return {
         addUserName: '',
         addNickname: '',
@@ -49,6 +44,7 @@ data() {
             return
         } 
 
+        // Save variables to be added to database as an object
         let newUser = {
         username: this.addUserName,
         usernick: this.addNickname,
@@ -57,8 +53,10 @@ data() {
         online: this.defaultOnline
         }
 
+        // For testing only
         console.log(newUser)
 
+        // Post object to database
         let result = await fetch('/rest/accounts', {
             method: 'POST',
             headers: {
@@ -68,11 +66,13 @@ data() {
           })
           result = await result.json()
 
+        // Empty input boxes 
         this.addUserName=''
         this.addNickname=''
         this.addPassword=''
 
-        //this.$router.push('/loginUser')
+        // Re-direct to login page
+        this.$router.push('/loginUser')
     }
   }
 }
