@@ -2,22 +2,32 @@
 export default {
     template:`
     <div class="registerUser">
-    <h2>Register new user</h2>
+    
     
     <form @submit.prevent="registerNewUserForm">
-        <div>
 
-            <label>Add username</label>
-            <input placeholder="username" v-model="addUserName" >
+        <h2>Register new user</h2>
+            <div class="inputForm">
+                <i class="fa fa-user"></i>
+                <label>Add username</label>
+                <input class="input-field" type="text"  placeholder="username" v-model="addUserName" >
+            </div>
 
-            <label>Add nickname</label>
-            <input placeholder="nickname?" v-model="addNickname" >
+            <div class="inputForm">
+                <i class="fa fa-user"></i>
+                <label>Add nickname</label>
+                <input class="input-field" type="text"  placeholder="nickname" v-model="addNickname" >
+            </div>
 
-            <label>Add password</label>
-            <input type="password" placeholder="add password" v-model="addPassword">
-        </div>
-        <button>Register</button>
+            <div class="inputForm">
+                <i class="fa fa-key"></i>
+                <label>Add password</label>
+                <input class="input-field" type="password" placeholder="password" v-model="addPassword">
+            </div>
+        <button class="registerButton">Register</button>
+
     </form>
+
     </div>
     `,
 

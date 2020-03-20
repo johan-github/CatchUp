@@ -13,7 +13,6 @@ export default {
       <i class="fa fa-unlock-alt"></i>    
        <router-link to="/register/user"> R E G I S T E R </router-link>
       </div>
-
     </nav>
 
     <main>
