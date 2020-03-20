@@ -1,23 +1,31 @@
 
 export default {
     template:`
-    <form @submit.prevent="registerNewUserForm" class="registerUser" >
+    <div class="registerUser">
+    <h2>Register new user</h2>
+    
+    <form @submit.prevent="registerNewUserForm">
         <div>
-            <label>Enter user name</label>
-            <input placeholder="Username" v-model="addUserName" >
 
-            <label>Enter password</label>
-            <input type="password" placeholder="Password" v-model="addPassword">
+            <label>Add username</label>
+            <input placeholder="username" v-model="addUserName" >
+
+            <label>Add nickname</label>
+            <input placeholder="nickname?" v-model="addNickname" >
+
+            <label>Add password</label>
+            <input type="password" placeholder="add password" v-model="addPassword">
         </div>
         <button>Register</button>
     </form>
+    </div>
     `,
 
 data() {
 
     return {
         addUserName: '',
-        defaultNickname: '',
+        addNickname: '',
         addPassword: '',
         defaultAvatar: '',
         defaultOnline: 'no'
@@ -28,14 +36,14 @@ data() {
   methods: {
     async registerNewUserForm() {
         console.log("TEST " + this.addUserName, this.addPassword)
-        if(!this.addUserName.trim() && !this.addPassword.trim()){
+        if(!this.addUserName.trim() && !this.addPassword.trim() && this.addNickname.trim()){
             return
         } 
 
      
         let newUser = {
         username: this.addUserName,
-        nickname: this.defaultNickname,
+        nickname: this.addNickname,
         password: this.addPassword,
         avatar:  this.defaultAvatar,
         online: this.defaultOnline

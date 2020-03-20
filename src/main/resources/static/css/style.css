@@ -42,6 +42,27 @@ body{
             white-space: nowrap;
         }
 
+        #navLogin, #navRegister {
+
+            background-color: rgb(18, 77, 128);
+            color: rgb(205, 205, 255);
+
+            padding: 10px 10px 10px 10px;
+            margin: 10px;
+
+            align-items: stretch;
+            text-align: justify;
+         
+            
+            font: bold 16px Arial, Helvetica, sans-serif;
+
+        }
+        a {
+            color: rgb(189, 188, 255);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
 
 
 
