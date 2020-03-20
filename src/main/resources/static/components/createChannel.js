@@ -1,6 +1,10 @@
 
-
 export default{
+    components:{
+
+    },
+    
+
     template: `
             <form @submit.prevent="addNewChannelToTestChannels" id="createChannelBox">
                 <input id="createChannelBoxTextField" v-model="channelName" type="text" placeholder="Channel name..." required>
@@ -41,28 +45,40 @@ export default{
             }
 
             console.log( this.channelName )
-            
+
             let channel = {
                 channelName: this.channelName
             }
 
-            this.$store.commit( 'appendTestChannels', channel)
+            this.$store.commit( 'appendChannel', channel)
 
             this.channelName = ''
 
 
         },
 
-
-        addName(){
-            console.log( this.channelName, this.channelStatus )
-
-            let name = {
-                firstName: this.firstName,
-                lastName: this.lastName
+        async createChannel(){
+            if( !this.channelName.trim()){
+                return;
             }
 
-            this.$store.state.commit( 'appendName', name )
+            let channel = {
+                channelName: this.channelName
+            }
+
+            let result = await fetch( '/rest/channel/',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify( channel )
+            })
+
+            result = await result.json();
+            
+            this.$store.commit( 'appendChannel', channel);
+
+            this.channelName = '';
         }
         /*async createChannel(){
             if(!this.channelName.trim()) {

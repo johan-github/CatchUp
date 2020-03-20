@@ -13,6 +13,7 @@ export default{
 
     template:`
         <div>
+            <div>➕</div>
             <createChannel/>
             <listChannels/>
 

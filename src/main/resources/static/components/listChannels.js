@@ -5,12 +5,17 @@ export default{
         displayFriends
     },
 
-    
+
+/*********************************************************************************************************** */
+
+
     template:`
         <section>
-            <div id="displayChannelBox" v-for="(channel, i ) of getTestChannels" :key="channel.testChannelName + i">
-                <div id="displayChannelBoxName">{{ channel.testChannelName }}</div>
-                <div id="displayChannelBoxStatus">🟢{{ channel.status }}</div>
+            <div id="displayChannelBox"
+                v-for="(channelName, i ) of getChannelNames"
+                :key="channelName.name + i">
+
+                <div id="displayChannelBoxName">{{ channel.channelName }}</div>
                 <div id="displayChannelBoxMember">Member(s)</div>
 
                 <select id="displayChannelBoxMember" v-for="(name) of getNames">
@@ -27,29 +32,32 @@ export default{
         </section>
     `,
 
+
+
+/*********************************************************************************************************** */
+
     methods:{
-
-        /***************************************************** */
-
         removeChannel( index ){
-            this.$store.commit( 'removeTestChannel', index )
-        }
+            this.$store.commit( 'removeChannel', index ) }
 
     },
 
 
+/*********************************************************************************************************** */
+
+
     computed:{
+        getChannelNames(){
+            return this.$store.state.channelnames },
+
         getChannels(){
-            return this.$store.state.channels
-        },
+            return this.$store.state.channels },
 
         getTestChannels(){
-            return this.$store.state.testChannels
-        },
+            return this.$store.state.testChannels },
 
         getNames(){
-            return this.$store.state.names
-        }
+            return this.$store.state.names },
 
     }
 }

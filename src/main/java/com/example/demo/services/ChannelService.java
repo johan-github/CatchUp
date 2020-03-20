@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ChannelService {
@@ -24,7 +23,7 @@ public class ChannelService {
         return channelRepo.findById(id);
     }
 
-    public List<Channel> findAllChannelsByAccountid(int accountid) {
+    public List<Channel> findAllChannelByAccountid(int accountid) {
         return channelRepo.findByAccountid(accountid);
     }
 
@@ -35,6 +34,10 @@ public class ChannelService {
     public void deleteById(int id ){
         channelRepo.deleteById( id );
     };
+
+    public Channel updateChannel( Channel channel ){
+        return channelRepo.save( channel );
+    }
 
 }
 

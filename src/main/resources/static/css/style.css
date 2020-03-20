@@ -286,21 +286,25 @@ body{
 #displayFriendBox{
     display: grid;
     /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
-    grid-template-columns: 50px minmax( 100px, max) 20px 20px 20px 20px;
-    grid-template-rows: 20px;
-    grid-template-areas:
+    grid-template-columns: 50px minmax( 100px, 150px) auto 20px 20px 20px;
+    grid-template-rows: 10px;grid-template-areas:
     "dFPic dFNick dFStatus dFFavorite dFCreateChannel displayFriendRemove";
+
 
     background-color: rgb(27, 44, 44);
     opacity: 0.9;
     
     padding: 10px;
     margin: 10px;
+
     box-shadow: 5px 5px 5px #000000;
     border-radius: 5px 0px 5px 0px;
 
-    /*align-items: center;*/
+    align-items: center;
 }
+        #displayFriendBox > div {
+            padding: 10px;
+        }
         #displayFriendPic{
             background-image: url("https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png");
             background-size: cover;
@@ -308,7 +312,6 @@ body{
             box-shadow: 5px 5px 5px #000000;
         }
         #displayFriendNick {
-            padding: 10px 0px 5px 20px;
         }
         
         #displayFriendAdd{

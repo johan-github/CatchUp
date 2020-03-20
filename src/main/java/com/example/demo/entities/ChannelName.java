@@ -4,14 +4,14 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="channelnames")
-public class ChannelNames {
+public class ChannelName {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 
-    public ChannelNames(){}
+    public ChannelName(){}
 
     public int getId() {
         return id;

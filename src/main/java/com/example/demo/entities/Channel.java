@@ -12,7 +12,7 @@ public class Channel {
     private int accountid;
     private int channelnameid;
     private String channelform; //Enum in database: 'private', 'public'
-    private boolean admin; //Enum in database: 'true', 'false'
+    private String admin; //Enum in database: 'true', 'false'
 
     public Channel() {
     }
@@ -50,12 +50,12 @@ public class Channel {
         this.channelform = channelform;
     }
 
-    public boolean isAdmin() {
+    public String getAdmin() {
+
         return admin;
     }
 
-    //Enum in database: 'true', 'false'
-    public void setAdmin(boolean admin) {
+    public void setAdmin(String admin) {
         this.admin = admin;
     }
 }

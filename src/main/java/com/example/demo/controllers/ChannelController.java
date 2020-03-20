@@ -52,15 +52,15 @@ public class ChannelController {
 
     //************************************************************************************************* @PutMapping (Update)
 
-    /*@PutMapping("/rest/channels")
-    public String updateUser(@RequestBody Channel channel) {
+    @PutMapping("/rest/channels")
+    public String updateChannel(@RequestBody Channel channel) {
         try {
-            channelRepo.save( channel );
+            channelService.updateChannel( channel );
             return "Success!";
         } catch (Exception e) {
             return "Failed!";
         }
-    }*/
+    }
 
 
 
