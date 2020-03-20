@@ -5,75 +5,73 @@ import java.time.LocalDate;
 
 
 @Entity
-@Table(name = "channelnames")
+@Table(name = "channelmessages")
 public class ChannelMessage {
 
     @Id
     private int id;
-    private int channels_id;
-    private String channelname;
+    private int channelsid;
+    private String name;
     private LocalDate time;
-    private Boolean admin;
+    private String admin;
     private String usernick;
     private String text;
 
-    public ChannelMessage(){
-    }
-
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setChannels_id(int channels_id) {
-        this.channels_id = channels_id;
-    }
-
-    public void setChannelname(String channelname) {
-        this.channelname = channelname;
-    }
-
-    public void setTime(LocalDate time) {
-        this.time = time;
-    }
-
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
-    }
-
-    public void setUsernick(String usernick) {
-        this.usernick = usernick;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
+    public ChannelMessage(){}
 
     public int getId() {
         return id;
     }
 
-    public int getChannels_id() {
-        return channels_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getChannelname() {
-        return channelname;
+    public int getChannelsid() {
+        return channelsid;
+    }
+
+    public void setChannelsid(int channelsid) {
+        this.channelsid = channelsid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public LocalDate getTime() {
         return time;
     }
 
-    public Boolean getAdmin() {
+    public void setTime(LocalDate time) {
+        this.time = time;
+    }
+
+    public String getAdmin() {
         return admin;
+    }
+
+    public void setAdmin(String admin) {
+        this.admin = admin;
     }
 
     public String getUsernick() {
         return usernick;
     }
 
+    public void setUsernick(String usernick) {
+        this.usernick = usernick;
+    }
+
     public String getText() {
         return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }
