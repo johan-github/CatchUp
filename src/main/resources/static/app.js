@@ -9,26 +9,15 @@ export default{
 
     template:`
 
-<!--
-        <div class="clickToShowInfo">
-	Click here for more info
-	<div class="info">
-		More info!
-	</div>
-</div>-->
-
         <section id="appContainer">
 
             <div id="appButton">
                 <h3>| | |</h3>
-
-                <div id="appNav">
-                    <navbar/>
-                </div>
-
-                
             </div>
 
+            <div id="appNav">
+                <navbar/>
+            </div>
             
 
             <main id="appMain">
@@ -38,4 +27,11 @@ export default{
         </section>
     
     `,
+
+    /*async created(){
+        let channelNames = await fetch('/rest/channelnames')
+        channelNames = await channelNames.json()
+        
+        this.$store.commit('setChannelNames', channelNames)
+    }*/
 }

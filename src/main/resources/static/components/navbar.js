@@ -16,7 +16,7 @@ export default{
             </div>
 
             <div id="navChannels">                
-                <router-link to="/channels">C H A N N E L</router-link>
+                <router-link to="/channels">C H A N N E L S</router-link>
             </div>
 
             <div id="navFriends">                
