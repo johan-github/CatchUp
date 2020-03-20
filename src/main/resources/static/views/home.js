@@ -1,19 +1,13 @@
-import messageBox from '../components/messageBox.js'
+import loginUserForm from '../components/loginUserForm.js'
 
-
-export default{
-    components:{
-        messageBox
-
+export default {
+    components: {
+        loginUserForm
     },
 
-
-    template:`
-        <div>
-
-            <messageBox/>
-
-        </div>
-    `,
-
+    template: `
+    <div>
+    <loginUserForm />
+    </div>
+    `
 }

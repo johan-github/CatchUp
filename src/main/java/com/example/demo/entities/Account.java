@@ -10,9 +10,19 @@ public class Account {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private int id;
     private String username;
-    private String userNick;
+    private String usernick;
     private String password;
+    private String avatar;
     private boolean online;
+
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public Account(){}
 
@@ -33,11 +43,12 @@ public class Account {
     }
 
     public String getUserNick() {
-        return userNick;
+        return usernick;
     }
 
-    public void setUserNick(String userNick) {
-        this.userNick = userNick;
+    // Could be an error, as we could not type "usernick"
+    public void setUsernick(String usernick) {
+        this.usernick = usernick;
     }
 
     public String getPassword() {
