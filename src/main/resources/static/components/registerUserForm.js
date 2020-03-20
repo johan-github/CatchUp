@@ -1,5 +1,3 @@
-import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants"
-
 
 export default {
     template:`
@@ -19,60 +17,51 @@ data() {
 
     return {
         addUserName: '',
-        addPassword: ''
+        defaultNickname: '',
+        addPassword: '',
+        defaultAvatar: '',
+        defaultOnline: 'no'
     }
   },
 
   // Created by the Vue Ninjas Helena and Matthias
   methods: {
-    registerNewUserForm() {
+    async registerNewUserForm() {
         console.log("TEST " + this.addUserName, this.addPassword)
+        if(!this.addUserName.trim() && !this.addPassword.trim()){
+            return
+        } 
 
-        
-
-
-
-        
-
+     
         let newUser = {
-        addUserName: this.addUserName,
-        addPassword: this.addPassword
+        username: this.addUserName,
+        nickname: this.defaultNickname,
+        password: this.addPassword,
+        avatar:  this.defaultAvatar,
+        online: this.defaultOnline
         }
-        console.log("TEST 2 " + newUser)
-        
+
+        console.log(newUser)
+
+        let result = await fetch('/rest/accounts', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newUser)
+          })
+          result = await result.json()
+
         this.addUserName=''
         this.addPassword=''
+
+        //this.$router.push('/loginUser')
     }
-      
   }
-  
-
- 
-
 }
 
-// methods: {
-
-//     addNewProject() {
-
-//       console.log(this.title, this.description)
 
 
-//       let project = {
-
-//         title: this.title, 
-
-//         description: this.description
-
-//       }
 
 
-//       this.$store.commit('appendProject', project)
 
-//       this.$router.push('/')
-
-//     }
-
-//   }
-
-// }
