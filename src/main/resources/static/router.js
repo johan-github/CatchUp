@@ -57,7 +57,7 @@ export const router = new Router({
         },
         {
             name: 'loginUser',
-            path: '/loginUser',
+            path: '/loginuser',
             component: loginUser
         }
 
