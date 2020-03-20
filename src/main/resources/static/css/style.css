@@ -273,6 +273,7 @@ body{
     justify-self: center;
     align-items: center;
 }
+<<<<<<< HEAD
 
 /*************************************************************************/
             
@@ -368,3 +369,15 @@ body{
         }
         #msg{
         }
+=======
+h3{
+    color: white;
+}
+
+.registerUser{
+    color: pink;
+}
+
+.loginUser {
+    color: white;
+}

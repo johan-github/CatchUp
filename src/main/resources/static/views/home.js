@@ -1,19 +1,11 @@
-import messageBox from '../components/messageBox.js'
-
-
-export default{
-    components:{
-        messageBox
+export default {
+    components: {
 
     },
 
-
-    template:`
-        <div>
-
-            <messageBox/>
-
-        </div>
-    `,
-
+    template: `
+    <div>
+    
+    </div>
+    `
 }
