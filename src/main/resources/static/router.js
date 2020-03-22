@@ -21,16 +21,6 @@ export const router = new Router({
             component: home
         },
         {
-            name: 'home',
-            path: '/index.html',
-            component: home
-        },
-        {
-            name: 'home',
-            path: '/home',
-            component: home
-        },
-        {
             name: 'registerUser',
             path: '/register/user',
             component: registerUser

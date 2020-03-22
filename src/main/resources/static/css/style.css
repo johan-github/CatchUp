@@ -286,8 +286,8 @@ body{
 #displayFriendBox{
     display: grid;
     /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
-    grid-template-columns: 50px minmax( 100px, 150px) auto 20px 20px 20px;
-    grid-template-rows: 10px;grid-template-areas:
+    grid-template-columns: 150px minmax( 100px, 150px) auto 20px 20px 20px;
+    grid-template-rows: 55px;grid-template-areas:
     "dFPic dFNick dFStatus dFFavorite dFCreateChannel displayFriendRemove";
 
 
@@ -304,14 +304,16 @@ body{
 }
         #displayFriendBox > div {
             padding: 10px;
+            color: white;
         }
         #displayFriendPic{
-            background-image: url("https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png");
-            background-size: cover;
-            background-position: center;
-            box-shadow: 5px 5px 5px #000000;
-        }
+            max-width: 64px;
+            max-height: 64px;
+            /*box-shadow: 5px 5px 5px #000000;*/
+        } 
         #displayFriendNick {
+            font-weight: bold;
+            
         }
         
         #displayFriendAdd{
@@ -349,21 +351,21 @@ body{
 
     align-items: center;
 }
-        #displayFriendBox > div {
+      /*  #displayFriendBox > div {
             padding: 10px;
-        }
-        #displayFriendPic{
+        }*/
+      /*  #displayFriendPic{
             background-image: url("https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png");
             background-size: cover;
             background-position: center;
             box-shadow: 5px 5px 5px #000000;
-        }
-        #displayFriendNick {
+        }*/
+      /*  #displayFriendNick {
         }
         
         #displayFriendAdd{
             justify-self: end;
-        }
+        }*/
         #time{
         }
         #msg{

@@ -6,6 +6,8 @@ export const store = new Vuex.Store({
     state:{
 
         channelNames:[],
+        friendList:[],
+
 
         channels:[
             {
@@ -65,12 +67,6 @@ export const store = new Vuex.Store({
             
         ]
 
-
-
-
-
-
-
     },
 
 
@@ -99,13 +95,21 @@ export const store = new Vuex.Store({
 
         /*********************************************** */
 
-        
-
         removeTestChannel( state, index ){
             state.testChannels.splice( index, 1 ) /* index: pos / 1: amount */ },
 
         removeChannel( state, index ){
-            state.channels.splice( index, 1 ) /* index: pos / 1: amount */ }
+            state.channels.splice( index, 1 ) /* index: pos / 1: amount */ },
+
+        /*********************************************** listFriends*/
+        setFriendList(state, friendList){
+            state.friendList = friendList },
+
+        appendFriendList(state, friendList){
+            state.friendList.push( friendList ) },
+
+
+
     }
 
 /*********************************************************************************************************** */
