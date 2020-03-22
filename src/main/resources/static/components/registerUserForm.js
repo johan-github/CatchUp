@@ -1,6 +1,3 @@
-import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants"
-
-
 export default {
     template:`
     <form @submit.prevent="registerNewUserForm" class="registerUser" >
