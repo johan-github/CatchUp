@@ -9,6 +9,7 @@ public class FriendList {
 
     @Id
     private int id;
+    private int accountid;
     private int friendid;
     private String avatar;
     private String usernick;
@@ -23,6 +24,14 @@ public class FriendList {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getAccountid() {
+        return accountid;
+    }
+
+    public void setAccountid(int accountid) {
+        this.accountid = accountid;
     }
 
     public int getFriendid() {

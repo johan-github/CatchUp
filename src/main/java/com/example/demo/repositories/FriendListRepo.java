@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface FriendListRepo extends CrudRepository<FriendList, Integer> {
 
-    public List<FriendList> findById(int id);
+    public List<FriendList> findByaccountid(int id);
 
 }
