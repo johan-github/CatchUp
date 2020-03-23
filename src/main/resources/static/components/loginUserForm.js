@@ -35,19 +35,17 @@ export default {
                 enterPassword: this.enterPassword
             }
 
-            // currentUser = await fetch('/rest/accounts/email/' + this.enterUserEmail)
-            
-            currentUser = await fetch('/rest/accounts/email/' + this.enterUserEmail, {
-                method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                // body: JSON.stringify(currentUser)
-              })
+            currentUser = await fetch('/rest/accounts/email/' + this.enterUserEmail)
              
-              currentUser = await currentUser.json()
+            currentUser = await currentUser.json()
 
-            console.log(currentUser)
+            if (currentUser.password == this.enterPassword){
+                console.log(currentUser)
+
+                this.$store.commit('setMyAccount', currentUser)
+                
+            }
+
             console.log(currentUser.password);
             
         }
