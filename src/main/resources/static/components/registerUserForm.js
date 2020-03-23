@@ -32,8 +32,8 @@ data() {
         addUserName: '',
         addNickname: '',
         addPassword: '',
-        defaultAvatar: '',
-        defaultOnline: 'no'
+        defaultAvatar: 'http://158.174.120.227/CatchUp/avatar01.png',
+        defaultStatus: 'no'
     }
   },
 
@@ -50,7 +50,7 @@ data() {
         usernick: this.addNickname,
         password: this.addPassword,
         avatar:  this.defaultAvatar,
-        status: this.defaultOnline
+        status: this.defaultStatus
         }
 
         // For testing only
