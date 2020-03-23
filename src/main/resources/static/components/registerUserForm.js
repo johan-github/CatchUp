@@ -1,75 +1,84 @@
+
 export default {
     template:`
-    <form @submit.prevent="registerNewUserForm" class="registerUser" >
-        <div>
-            <label>Enter user name</label>
-            <input placeholder="Username" v-model="addUserName" >
+    <div class="registerUser">
+    <form @submit.prevent="registerNewUserForm">
 
-            <label>Enter password</label>
-            <input type="password" placeholder="Password" v-model="addPassword">
-        </div>
-        <button>Register</button>
+        <h2>Register new user</h2>
+            <div class="inputForm">
+                <i class="fa fa-user"></i>
+                <label>Add username</label>
+                <input class="input-field" placeholder="username" v-model="addUserName" >
+            </div>
+
+            <div class="inputForm">
+                <i class="fa fa-user"></i>
+                <label>Add nickname</label>
+                <input class="input-field" placeholder="nickname" v-model="addNickname" >
+            </div>
+
+            <div class="inputForm">
+                <i class="fa fa-key"></i>
+                <label>Add password</label>
+                <input class="input-field" type="password" placeholder="password" v-model="addPassword">
+            </div>
+        <button class="registerButton">Register</button>
     </form>
+    </div>
     `,
 
 data() {
-
     return {
         addUserName: '',
-        addPassword: ''
+        addNickname: '',
+        addPassword: '',
+        defaultAvatar: '',
+        defaultOnline: 'no'
     }
   },
 
   // Created by the Vue Ninjas Helena and Matthias
   methods: {
-    registerNewUserForm() {
-        console.log("TEST " + this.addUserName, this.addPassword)
+    async registerNewUserForm() {
+        if( !this.addUserName.trim() && !this.addPassword.trim() && !this.addNickname.trim() ){
+            return
+        } 
 
-        
-
-
-
-        
-
+        // Save variables to be added to database as an object
         let newUser = {
-        addUserName: this.addUserName,
-        addPassword: this.addPassword
+        username: this.addUserName,
+        usernick: this.addNickname,
+        password: this.addPassword,
+        avatar:  this.defaultAvatar,
+        status: this.defaultOnline
         }
-        console.log("TEST 2 " + newUser)
-        
+
+        // For testing only
+        console.log(newUser)
+
+        // Post object to database
+        let result = await fetch('/rest/accounts', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newUser)
+          })
+          result = await result.json()
+
+        // Empty input boxes 
         this.addUserName=''
+        this.addNickname=''
         this.addPassword=''
+
+        // Re-direct to login page
+        this.$router.push('/loginUser')
     }
-      
   }
-  
-
- 
-
 }
 
-// methods: {
-
-//     addNewProject() {
-
-//       console.log(this.title, this.description)
 
 
-//       let project = {
-
-//         title: this.title, 
-
-//         description: this.description
-
-//       }
 
 
-//       this.$store.commit('appendProject', project)
 
-//       this.$router.push('/')
-
-//     }
-
-//   }
-
-// }

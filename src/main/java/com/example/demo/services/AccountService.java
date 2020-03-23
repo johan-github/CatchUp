@@ -11,9 +11,11 @@ public class AccountService {
     @Autowired
     AccountRepo accountRepo;
 
-    public Account createNewAccount(Account newAccount) {
-        return accountRepo.save(newAccount);
+    public Account createNewAccount(Account account) {
+        return accountRepo.save(account);
     }
+
+
 
 
 

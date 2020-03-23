@@ -42,6 +42,32 @@ body{
             white-space: nowrap;
         }
 
+        #navLogin, #navRegister {
+
+            background-color: rgb(18, 77, 128);
+            color: rgb(205, 205, 255);
+
+            padding: 10px 10px 10px 10px;
+            margin: 10px;
+
+            align-items: stretch;
+            text-align: justify;
+         
+            
+            font: bold 16px Arial, Helvetica, sans-serif;
+        }
+
+        nav a:hover {
+            opacity: 0.4;
+          }
+
+
+        a {
+            color: rgb(189, 188, 255);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
 
 
 
@@ -274,6 +300,7 @@ body{
     align-items: center;
 }
 
+
 /*************************************************************************/
             
 #displayFriendPic{ grid-area: dFPic; }
@@ -374,10 +401,69 @@ h3{
     color: white;
 }
 
+
+/*************************************************************************/
+
 .registerUser{
-    color: pink;
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    color: white;
+    background-color:  rgb(26, 48, 48);
+    opacity: 0.9;
 }
 
 .loginUser {
     color: white;
+}
+
+/*************************************************************************/
+
+.fa {
+    color : whitesmoke;
+  }
+
+/*************************************************************************/
+.registerButton{
+        box-sizing: border-box;
+        background-color: red;
+        color: white;
+        padding: 15px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.8;
+        border-radius: 50%;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      
+  }
+
+  /*************************************************************************/
+  .registerButton:hover {
+    opacity: 1;
+  }
+
+  /*************************************************************************/
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+  }
+
+  .input-field:hover{
+      opacity: 0.9;
+  }
+
+  .input-field:focus {
+  border: 2px solid black;
+}
+
+.inputForm .fa {
+    color: red;
 }

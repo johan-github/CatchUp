@@ -3,7 +3,7 @@ package com.example.demo.entities;
 import javax.persistence.*;
 
 @Entity
-@Table( name = "accounts")
+@Table( name="accounts")
 public class Account {
 
     @Id
@@ -13,18 +13,7 @@ public class Account {
     private String usernick;
     private String password;
     private String avatar;
-    private boolean online;
-
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public Account(){}
+    private String status;
 
     public int getId() {
         return id;
@@ -42,11 +31,10 @@ public class Account {
         this.username = username;
     }
 
-    public String getUserNick() {
+    public String getUsernick() {
         return usernick;
     }
 
-    // Could be an error, as we could not type "usernick"
     public void setUsernick(String usernick) {
         this.usernick = usernick;
     }
@@ -59,11 +47,19 @@ public class Account {
         this.password = password;
     }
 
-    public boolean isOnline() {
-        return online;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setOnline(boolean online) {
-        this.online = online;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
