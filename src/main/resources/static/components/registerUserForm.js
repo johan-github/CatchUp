@@ -7,8 +7,8 @@ export default {
         <h2>Register new user</h2>
             <div class="inputForm">
                 <i class="fa fa-user"></i>
-                <label>Add username</label>
-                <input class="input-field" placeholder="username" v-model="addUserName" >
+                <label>Add e-mail</label>
+                <input class="input-field" placeholder="e-mail" v-model="addUserName" >
             </div>
 
             <div class="inputForm">
@@ -29,7 +29,7 @@ export default {
 
 data() {
     return {
-        addUserName: '',
+        addEmail: '',
         addNickname: '',
         addPassword: '',
         defaultAvatar: 'http://158.174.120.227/CatchUp/avatar01.png',
@@ -46,7 +46,7 @@ data() {
 
         // Save variables to be added to database as an object
         let newUser = {
-        username: this.addUserName,
+        email: this.addUserName,
         usernick: this.addNickname,
         password: this.addPassword,
         avatar:  this.defaultAvatar,
@@ -67,7 +67,7 @@ data() {
           result = await result.json()
 
         // Empty input boxes 
-        this.addUserName=''
+        this.addEmail=''
         this.addNickname=''
         this.addPassword=''
 
