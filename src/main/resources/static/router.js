@@ -18,14 +18,11 @@ export const router = new Router({
         {
             name: 'loginUser',
             path: '/',
-<<<<<<< HEAD
-=======
             component: loginUser
         },
         {
             name: 'home',
             path: '/home',
->>>>>>> registeruser
             component: home
         },
         {
