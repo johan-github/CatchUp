@@ -3,7 +3,7 @@ package com.example.demo.controllers;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class FriendsController {
+public class FriendController {
 
 
 }

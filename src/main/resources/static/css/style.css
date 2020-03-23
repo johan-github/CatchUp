@@ -17,23 +17,55 @@ body{
 /*************************************************************************/
 
 .nav{
-    display: grid;
-    grid-template-rows: repeat( 5, 1fr );
+    /*display: grid;
+    grid-template-rows: repeat( 6, 1fr );*/
+    background-color: rgb(18, 77, 128);
+    margin: 60px 10px 10px 0px;
 }
         #navHome,#navChannels,#navFriends,#navOptions,#navAbout,#navLogout {
+
+            background-color: rgb(18, 77, 128);
+            color: rgb(205, 205, 255);
+
             padding: 10px 10px 10px 10px;
             margin: 10px;
-            background-color: rgb(33, 50, 65);
-            color: rgb(205, 205, 255);
 
             align-items: center;
             text-align: right;
             
             font: bold 16px Arial, Helvetica, sans-serif;
+
         }
         a {
             color: rgb(189, 188, 255);
             text-decoration: none;
+            white-space: nowrap;
+        }
+
+        #navLogin, #navRegister {
+
+            background-color: rgb(18, 77, 128);
+            color: rgb(205, 205, 255);
+
+            padding: 10px 10px 10px 10px;
+            margin: 10px;
+
+            align-items: stretch;
+            text-align: justify;
+         
+            
+            font: bold 16px Arial, Helvetica, sans-serif;
+        }
+
+        nav a:hover {
+            opacity: 0.4;
+          }
+
+
+        a {
+            color: rgb(189, 188, 255);
+            text-decoration: none;
+            white-space: nowrap;
         }
 
 
@@ -47,35 +79,63 @@ body{
 
 #appContainer{
     display: grid;
-    grid-template-columns: 30px minmax(auto, 600px);
+    grid-template-columns: 30px 0px minmax(auto, 600px);
     /*grid-template: repeat( 1, [row] auto) / repeat( 2, [col] 100px);*/
     grid-template-areas:
-    "appButton appMain";
-
-    padding: 20px;
-    justify-content: center;
+    "appNav appButton  appMain";
 
 }
         #appButton {
-            position: relative;
+            color: rgb(60, 85, 82);
+            padding-top: 50px;
+            transition: 1s;
+            position: fixed;
+            /*z-index: 100;*/
         }
-        #appButton:hover #appNav {
-            visibility: visible;
+        #appButton:hover{
+            color: white;
+            text-shadow: rgb(255, 255, 255) 2px 2px;
+
+            transition: 1s;
+        }
+
+        #appButton:active + #appNav {
+            /*visibility: visible;*/
+            position: fixed;
+            width: 200px;
         }
         #appNav:hover {
-            visibility: visible;
+            /*visibility: visible;*/
+            position: fixed;
+            width: 200px;
+            z-index: 100;
+        }
+        #appNav:active {
+            visibility: hidden;
+            /*width: 0;*/
+        }
+        
+        a:active + #appNav{
+            visibility: hidden;
+            width: 0px;
+        }
+        a:active {
+            /*visibility: hidden;*/
         }
         #appNav {
-            position: absolute;
-            top: -100;
-            visibility: hidden;
+            opacity: .95;
+            /*visibility: hidden;*/
+
             z-index: 100;
-            background-color: white;
-            box-shadow: 5px 5px 2px #aaa;
-            border: 1px solid grey;
-            padding: 8px;
-            width: 220px;
-            height: auto;
+            
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgb(18, 31, 36);
+            overflow: hidden;
+            width: 0;
+            height: 100%;
+            transition: .2s ease;
         }
 
         
@@ -139,19 +199,19 @@ body{
 
 /*************************************************************************/
 
-#channelAddBoxTextField{ grid-area: channelAddBoxTextField; }
-#channelAddBoxMembers{ grid-area: channelAddBoxMembers; }
-#channelAddBoxAddButton{ grid-area: channelAddBoxAddButton; }
-#channelAddBoxMembersLabel{ grid-area: channelAddBoxMembersLabel; }
+#createChannelBoxTextField{ grid-area: createChannelBoxTextField; }
+#createChannelBoxMembers{ grid-area: createChannelBoxMembers; }
+#createChannelBoxAddButton{ grid-area: createChannelBoxAddButton; }
+#createChannelBoxMembersLabel{ grid-area: createChannelBoxMembersLabel; }
 
-#channelAddBox{
+#createChannelBox{
     display: grid;
     /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
     grid-template-columns: 80px minmax( 200px, auto) auto;
     grid-template-rows: 30px 30px;
     grid-template-areas:
-    "channelAddBoxTextField channelAddBoxTextField channelAddBoxTextField"
-    "channelAddBoxMembersLabel channelAddBoxMembers channelAddBoxAddButton";
+    "createChannelBoxTextField createChannelBoxTextField createChannelBoxTextField"
+    "createChannelBoxMembersLabel createChannelBoxMembers createChannelBoxAddButton";
 
     background-color: rgb(26, 48, 48);
     opacity: 0.9;
@@ -164,55 +224,56 @@ body{
     justify-self: center;
     align-items: center;
 }
+        #createChannelBoxMembers {
+            position: relative;
+
+            width: auto;
+            height: 20px;
+        }
+        #createChannelBoxMembers:hover {
+            position: relative;
+            width:200px;
+            height: 210px;
+        }
 
 /*************************************************************************/
 
-#channelBoxChannelPic{ grid-area: pic; }
-#channelBoxChannelName{ grid-area: name; }
-#channelBoxChannelAdd{ grid-area: ChannelAdd; }
-#channelBoxChannelMessageTime{ grid-area: time; }
-#channelBoxChannelMessage{ grid-area: msg; }
-#channelBox{
+#displayChannelBoxName{ grid-area: dCBName; }
+#displayChannelBoxStatus{ grid-area: dCBStatus; }
+#displayChannelBoxMember{ grid-area: dCBMember; }
+#displayChannelBoxRemove{ grid-area: dCBNRemove; }
+#displayChannelBoxLastMessage{ grid-area: dCBLastMsg; }
+#displayChannelBox{
     display: grid;
     /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
-    grid-template-columns: 50px auto 10px;
+    grid-template-columns: 20px minmax( 100px, max)  20px;
     grid-template-rows: 25px 25px auto;
     grid-template-areas:
-    "pic name name ChannelAdd"
-    "pic time time time"
-    "msg msg msg msg";
+    "dCBStatus dCBName dCBName"
+    "dCBMember dCBMember dCBNRemove"
+    "dCBLastMsg dCBLastMsg dCBLastMsg";
 
     background-color: rgb(27, 44, 44);
     opacity: 0.9;
     
-    padding: 10px;
+    padding: 20px;
     margin: 10px;
+    
     box-shadow: 5px 5px 5px #000000;
     border-radius: 5px 0px 5px 0px;
+    
+    align-items: center;
 }
-        #channelBoxChannelPic{
-            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTyx2KeZp8USg-MPKalmrXVXHOCkpIEa3W6AGCwrCsJ5knnPKpY");
-            background-size: cover;
-            background-position: center;
-            box-shadow: 5px 5px 5px #000000;
+        #displayChannelBox > div {
+            padding: 10px;
+            margin: 10px;
         }
-        #channelBoxChannelName {
-            padding: 10px 0px 5px 20px;
+        #displayChannelBoxName {
+            justify-self: left;
+            padding: 0px 0px 0px 50px;
         }
-        #channelBoxChannelMessageTime {
-            padding: 5px 0px 5px 20px;
-            font: italic 10px Arial, Helvetica, sans-serif;
-        }
-        #channelBoxChannelMessage {
-            padding: 20px 10px 10px 20px;
-        }
-        #name, #time{
-            justify-content: center;
-            align-items: center;
-        }
-        
-        #channelBoxChannelAdd{
-            justify-self: end;
+        #displayChannelBoxRemove:hover{
+            cursor: default;
         }
 
 /*************************************************************************/
@@ -238,14 +299,171 @@ body{
     justify-self: center;
     align-items: center;
 }
+
+
+/*************************************************************************/
+            
+#displayFriendPic{ grid-area: dFPic; }
+#displayFriendNick{ grid-area: dFNick; }
+#displayFriendStatus{ grid-area: dFStatus; }
+#displayFriendAddFavorite{ grid-area: dFFavorite; }
+#displayFriendCreateChannelWith{ grid-area: dFCreateChannel; }
+#displayFriendRemove{ grid-area: displayFriendRemove; }
+
+#displayFriendBox{
+    display: grid;
+    /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
+    grid-template-columns: 150px minmax( 100px, 150px) auto 20px 20px 20px;
+    grid-template-rows: 55px;grid-template-areas:
+    "dFPic dFNick dFStatus dFFavorite dFCreateChannel displayFriendRemove";
+
+
+    background-color: rgb(27, 44, 44);
+    opacity: 0.9;
+    
+    padding: 10px;
+    margin: 10px;
+
+    box-shadow: 5px 5px 5px #000000;
+    border-radius: 5px 0px 5px 0px;
+
+    align-items: center;
+}
+        #displayFriendBox > div {
+            padding: 10px;
+            color: white;
+        }
+        #displayFriendPic{
+            max-width: 64px;
+            max-height: 64px;
+            /*box-shadow: 5px 5px 5px #000000;*/
+        } 
+        #displayFriendNick {
+            font-weight: bold;
+            
+        }
+        
+        #displayFriendAdd{
+            justify-self: end;
+        }
+        #time{
+        }
+        #msg{
+        }
+
+
+
+/*************************************************************************/
+            
+#displayChannelPic{ grid-area: dChannelPic; }
+#displayChannelNick{ grid-area: dChannelNick; }
+#displayChannelAddFavorite{ grid-area: dChannelFav; }
+
+#displayChannelBox{
+    display: grid;
+    /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
+    grid-template-columns: 50px minmax( 100px, 150px) auto 20px 20px 20px;
+    grid-template-rows: 10px;grid-template-areas:
+    "dChannelPic dChannelNick dChannelFav";
+
+
+    background-color: rgb(27, 44, 44);
+    opacity: 0.9;
+    
+    padding: 10px;
+    margin: 10px;
+
+    box-shadow: 5px 5px 5px #000000;
+    border-radius: 5px 0px 5px 0px;
+
+    align-items: center;
+}
+      /*  #displayFriendBox > div {
+            padding: 10px;
+        }*/
+      /*  #displayFriendPic{
+            background-image: url("https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png");
+            background-size: cover;
+            background-position: center;
+            box-shadow: 5px 5px 5px #000000;
+        }*/
+      /*  #displayFriendNick {
+        }
+        
+        #displayFriendAdd{
+            justify-self: end;
+        }*/
+        #time{
+        }
+        #msg{
+        }
 h3{
     color: white;
 }
 
+
+/*************************************************************************/
+
 .registerUser{
-    color: pink;
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    color: white;
+    background-color:  rgb(26, 48, 48);
+    opacity: 0.9;
 }
 
 .loginUser {
     color: white;
+}
+
+/*************************************************************************/
+
+.fa {
+    color : whitesmoke;
+  }
+
+/*************************************************************************/
+.registerButton{
+        box-sizing: border-box;
+        background-color: red;
+        color: white;
+        padding: 15px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.8;
+        border-radius: 50%;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      
+  }
+
+  /*************************************************************************/
+  .registerButton:hover {
+    opacity: 1;
+  }
+
+  /*************************************************************************/
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+  }
+
+  .input-field:hover{
+      opacity: 0.9;
+  }
+
+  .input-field:focus {
+  border: 2px solid black;
+}
+
+.inputForm .fa {
+    color: red;
 }

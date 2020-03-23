@@ -1,20 +1,16 @@
-import listFriends from '../components/listFriends.js'
+import home from './home.js'
 
 
 export default{
     components:{
-        listFriends
+        home
     },
 
     //************************************************************** */
 
 
     template:`
-        <div>
-
-            <listFriends/>
-
-        </div>
+        <home/>
     `,
 
 }

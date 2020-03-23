@@ -16,23 +16,21 @@ export const router = new Router({
     routes:[
 
         {
-            name: 'home',
+            name: 'loginUser',
             path: '/',
-            component: home
-        },
-        {
-            name: 'home',
-            path: '/index.html',
-            component: home
+<<<<<<< HEAD
+=======
+            component: loginUser
         },
         {
             name: 'home',
             path: '/home',
+>>>>>>> registeruser
             component: home
         },
         {
             name: 'registerUser',
-            path: '/register/user',
+            path: '/registerUser',
             component: registerUser
         },
         {

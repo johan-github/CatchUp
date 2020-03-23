@@ -3,18 +3,17 @@ package com.example.demo.entities;
 import javax.persistence.*;
 
 @Entity
-@Table( name = "accounts")
+@Table( name="accounts")
 public class Account {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private int id;
     private String username;
-    private String userNick;
+    private String usernick;
     private String password;
-    private boolean online;
-
-    public Account(){}
+    private String avatar;
+    private String status;
 
     public int getId() {
         return id;
@@ -32,12 +31,12 @@ public class Account {
         this.username = username;
     }
 
-    public String getUserNick() {
-        return userNick;
+    public String getUsernick() {
+        return usernick;
     }
 
-    public void setUserNick(String userNick) {
-        this.userNick = userNick;
+    public void setUsernick(String usernick) {
+        this.usernick = usernick;
     }
 
     public String getPassword() {
@@ -48,11 +47,19 @@ public class Account {
         this.password = password;
     }
 
-    public boolean isOnline() {
-        return online;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setOnline(boolean online) {
-        this.online = online;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
