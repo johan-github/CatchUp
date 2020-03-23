@@ -13,7 +13,7 @@ public class Account {
     private String usernick;
     private String password;
     private String avatar;
-    private String online;
+    private String status;
 
     public int getId() {
         return id;
@@ -55,11 +55,11 @@ public class Account {
         this.avatar = avatar;
     }
 
-    public String getOnline() {
-        return online;
+    public String getStatus() {
+        return status;
     }
 
-    public void setOnline(String online) {
-        this.online = online;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

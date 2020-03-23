@@ -50,7 +50,7 @@ data() {
         usernick: this.addNickname,
         password: this.addPassword,
         avatar:  this.defaultAvatar,
-        online: this.defaultOnline
+        status: this.defaultOnline
         }
 
         // For testing only

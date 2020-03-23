@@ -11,7 +11,7 @@ export default {
 
       <div id="navRegister"> 
       <i class="fa fa-unlock-alt"></i>    
-       <router-link to="/register/user"> R E G I S T E R </router-link>
+       <router-link to="/registerUser"> R E G I S T E R </router-link>
       </div>
     </nav>
 
