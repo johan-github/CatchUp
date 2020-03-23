@@ -15,9 +15,7 @@ public class AccountService {
         return accountRepo.save(account);
     }
 
-
-
-
-
-
+    public Account loginAccount(String email) {
+        return accountRepo.findByEmail(email);
+    }
 }
