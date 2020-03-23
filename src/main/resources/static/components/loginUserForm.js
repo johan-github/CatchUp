@@ -5,7 +5,7 @@ export default {
     <form @submit.prevent="loginCurrentUserForm" class="loginUser">
         <div>
         <label>Enter username</label>
-        <input placeholder="Username" v-model="enterUserName">
+        <input placeholder="Username" v-model="enterUserEmail">
         <label>Enter password</label>
         <input placeholder="Password" v-model="enterPassword" type="password">
         </div>
@@ -17,20 +17,30 @@ export default {
     data() {
         
         return {
-            enterUserName: '',
+            enterUserEmail: '',
             enterPassword: ''
         }
     },
 
     methods: {
-        loginCurrentUserForm() {
-            console.log("TEST " + this.enterUserName, this.enterPassword)
+        async loginCurrentUserForm() {
+            if (!this.enterUserEmail.trim() || !this.enterPassword.trim()) {
+                return
+            }
+
+            console.log("TEST " + this.enterUserEmail, this.enterPassword)
 
             let currentUser = {
-                enterUserName: this.enterUserName,
+                enterUserEmail: this.enterUserEmail,
                 enterPassword: this.enterPassword
             }
-            console.log("TEST 2 " + currentUser)
+
+            currentUser = await fetch('/rest/accounts/email/' + this.enterUserEmail)
+            
+             
+              currentUser = await currentUser.json()
+
+            console.log(currentUser)
         }
     }
 }
