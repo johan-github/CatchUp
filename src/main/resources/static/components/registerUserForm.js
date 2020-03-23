@@ -7,7 +7,7 @@ export default {
         <h2>Register new user</h2>
                 
             <div class="inputForm">
-                <i class="fa fa-user"></i>
+            <i class="fa fa-envelope"></i>
                 <label>Add e-mail</label>
                 <input class="input-field" type="email" placeholder="e-mail" v-model="addEmail" required >
             </div>

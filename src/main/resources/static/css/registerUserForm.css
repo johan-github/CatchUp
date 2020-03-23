@@ -2,7 +2,7 @@
     display: flex;
     width: 100%;
     margin-bottom: 15px;
-    color: white;
+    color: rgb(205, 205, 255);
     background-color:  rgb(26, 48, 48);
     opacity: 0.9;
 }
@@ -20,7 +20,7 @@
 /*************************************************************************/
 .registerButton{
         box-sizing: border-box;
-        background-color: red;
+        background-color: rgb(18, 77, 128);
         color: white;
         padding: 15px 20px;
         border: none;
@@ -41,6 +41,7 @@
   /*************************************************************************/
   .registerButton:hover {
     opacity: 1;
+     color: rgb(205, 205, 255); 
   }
 
   /*************************************************************************/
@@ -59,5 +60,5 @@
 }
 
 .inputForm .fa {
-    color: red;
+    color:whitesmoke;
 }
