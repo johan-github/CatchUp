@@ -5,22 +5,23 @@ export default {
     <form @submit.prevent="registerNewUserForm">
 
         <h2>Register new user</h2>
+                
             <div class="inputForm">
                 <i class="fa fa-user"></i>
                 <label>Add e-mail</label>
-                <input class="input-field" placeholder="e-mail" v-model="addUserName" >
+                <input class="input-field" type="email" placeholder="e-mail" v-model="addEmail" required >
             </div>
 
             <div class="inputForm">
                 <i class="fa fa-user"></i>
                 <label>Add nickname</label>
-                <input class="input-field" placeholder="nickname" v-model="addNickname" >
+                <input class="input-field" placeholder="nickname" v-model="addNickname" required >
             </div>
 
             <div class="inputForm">
                 <i class="fa fa-key"></i>
                 <label>Add password</label>
-                <input class="input-field" type="password" placeholder="password" v-model="addPassword">
+                <input class="input-field" type="password" placeholder="password" v-model="addPassword" required>
             </div>
         <button class="registerButton">Register</button>
     </form>
@@ -33,20 +34,23 @@ data() {
         addNickname: '',
         addPassword: '',
         defaultAvatar: 'http://158.174.120.227/CatchUp/avatar01.png',
-        defaultStatus: 'no'
+        defaultStatus: 'no',
     }
   },
 
   // Created by the Vue Ninjas Helena and Matthias
   methods: {
+
     async registerNewUserForm() {
-        if( !this.addUserName.trim() && !this.addPassword.trim() && !this.addNickname.trim() ){
+
+        console.log("In register form now ")
+        if( !this.addEmail.trim() && !this.addPassword.trim() && !this.addNickname.trim() ){
             return
         } 
 
         // Save variables to be added to database as an object
         let newUser = {
-        email: this.addUserName,
+        email: this.addEmail,
         usernick: this.addNickname,
         password: this.addPassword,
         avatar:  this.defaultAvatar,
@@ -72,7 +76,7 @@ data() {
         this.addPassword=''
 
         // Re-direct to login page
-        this.$router.push('/loginUser')
+        //this.$router.push('/loginUser')
     }
   }
 }
