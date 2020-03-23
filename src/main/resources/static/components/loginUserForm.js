@@ -35,12 +35,21 @@ export default {
                 enterPassword: this.enterPassword
             }
 
-            currentUser = await fetch('/rest/accounts/email/' + this.enterUserEmail)
+            // currentUser = await fetch('/rest/accounts/email/' + this.enterUserEmail)
             
+            currentUser = await fetch('/rest/accounts/email/' + this.enterUserEmail, {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                // body: JSON.stringify(currentUser)
+              })
              
               currentUser = await currentUser.json()
 
             console.log(currentUser)
+            console.log(currentUser.password);
+            
         }
     }
 }
