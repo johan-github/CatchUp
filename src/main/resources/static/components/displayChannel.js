@@ -1,10 +1,5 @@
 
 
-
-
-
-/*********************************************************************************************************** Components: */
-
 export default{
     components:{
     },
@@ -15,10 +10,8 @@ export default{
 
     template:`
         <section>
-
             
-            
-            <!--<div id="displayChannelBox"
+            <div id="displayChannelBox"
             v-for="(channel, i ) of channels">
 
                 <div id="channelNamesFor"
@@ -34,9 +27,7 @@ export default{
 
                 </div>
 
-            </div>-->
-
-            <button @click="getSome">Click</button>
+            </div>
 
         </section>
     `,
