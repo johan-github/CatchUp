@@ -7,16 +7,24 @@ export default{
 
 
     template:`
+    
         <section>
-            <div id="displayFriendBox" v-for="(friend, i ) of getNames" :key="friend.firstName + i">
-                <div id="displayFriendPic">{{ friend.picture }}</div>
-                <div id="displayFriendNick">{{ friend.firstName }}</div>
-                <div id="displayFriendAddFavorite">❤️</div>
-                <div id="displayFriendCreateChannelWith">➕</div>
-                <div id="displayFriendRemove">🗑️</div>
+            
+            <div id="displayChannelNamesBox"
+                v-for="cName of channelNames">
+
+                <div id="displayChannelNamesBoxPic">{{ cName.name }}</div>
+                <div id="displayChannelNamesBoxName">{{ cName.url }}</div>
+                <div id="displayChannelNamesBoxFavorite">❤️</div>
+                <div id="displayChannelNamesBoxSettings">⚙️</div>
+
             </div>
+
         </section>
     `,
+
+
+/***************************************************************************************************************** Methods: */
 
 
     methods:{
@@ -24,8 +32,35 @@ export default{
     },
 
 
+/***************************************************************************************************************** Computed: */
+
+
     computed:{
 
+        channelNames(){
+            return this.$store.state.channelNames
+        }
+
+    },
+
+/***************************************************************************************************************** Created: */
+
+    async created(){
+
+        /*await fetch('/rest/channelnames')
+            .then( channelNames => channelNames.json() )
+            .then( channelNames => this.$store.commit( 'setChannelNames', channelNames ))
+            .catch(error => console.error(error))*/
+
+        await fetch('/rest/channelnames')
+            .then( channelNames => channelNames.json())
+            .then( channelNames => this.$store.commit( 'setChannelNames', channelNames ))
     }
+
+    
+/***************************************************************************************************************** Created: */
+/***************************************************************************************************************** Created: */
+
+
 
 }
