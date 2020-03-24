@@ -6,6 +6,8 @@ export const store = new Vuex.Store({
     state:{
 
         channelNames:[],
+        friendList:[],
+        myAccount: '',
 
         channels:[
             {
@@ -22,55 +24,7 @@ export const store = new Vuex.Store({
             },
         ],
 
-        channelsBU:[
-            {
-                channelName: 'Members of the Sith'
-            },
-            {
-                channelName: 'Homangus Lovers'
-            },
-            {
-                channelName: 'Cars, cars and cars'
-            },
-            {
-                channelName: 'Music e-Type'
-            },
-        ],
-
-        names:[
-            {
-                firstName: 'Helena',
-                lastName: 'Jackson'
-            },
-            {
-                firstName: 'Alberts',
-                lastName: 'Swarzenegger'
-            },
-            {
-                firstName: 'Johan',
-                lastName: 'Stalone'
-            },
-            {
-                firstName: 'Matthias',
-                lastName: 'Scott'
-            },
-            {
-                firstName: 'Tobbe',
-                lastName: 'Messi'
-            },
-            {
-                firstName: 'Hassan',
-                lastName: 'Wayne'
-            }
-            
-        ]
-
-
-
-
-
-
-
+        
     },
 
 
@@ -99,13 +53,26 @@ export const store = new Vuex.Store({
 
         /*********************************************** */
 
-        
-
         removeTestChannel( state, index ){
             state.testChannels.splice( index, 1 ) /* index: pos / 1: amount */ },
 
         removeChannel( state, index ){
-            state.channels.splice( index, 1 ) /* index: pos / 1: amount */ }
+            state.channels.splice( index, 1 ) /* index: pos / 1: amount */ },
+
+        /*********************************************** listFriends*/
+        setFriendList(state, friendList){
+            state.friendList = friendList },
+
+        appendFriendList(state, friendList){
+            state.friendList.push( friendList ) },
+
+        /************************************************ */
+
+        setMyAccount(state, myAccount){
+            state.myAccount = myAccount },
+
+        deleteMyAccount(state, myAccount){
+            state.myAccount = null} // '' instead of null?
     }
 
 /*********************************************************************************************************** */

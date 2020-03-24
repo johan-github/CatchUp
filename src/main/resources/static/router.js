@@ -16,14 +16,9 @@ export const router = new Router({
     routes:[
 
         {
-            name: 'home',
+            name: 'loginUser',
             path: '/',
-            component: home
-        },
-        {
-            name: 'home',
-            path: '/index.html',
-            component: home
+            component: loginUser
         },
         {
             name: 'home',
@@ -32,7 +27,7 @@ export const router = new Router({
         },
         {
             name: 'registerUser',
-            path: '/register/user',
+            path: '/registerUser',
             component: registerUser
         },
         {
