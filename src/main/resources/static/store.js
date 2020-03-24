@@ -5,68 +5,86 @@ Vue.use( Vuex )
 export const store = new Vuex.Store({
     state:{
 
-        channelNames:[],
-
-        channels:[
+        channelNames: [],
+        channels: [],
+        
+        friends: [
             {
-                channelName: 'Members of the Sith'
+                name: 'Ommah'
             },
             {
-                channelName: 'Homangus Lovers'
+                name: 'Sanna'
             },
             {
-                channelName: 'Cars, cars and cars'
+                name: 'Dennosh'
             },
             {
-                channelName: 'Music e-Type'
+                name: 'Loli'
+            },
+            {
+                name: 'Alawi'
+            },
+            {
+                name: 'Sosi'
+            },
+            {
+                name: 'Hassan'
+            },
+            {
+                name: 'Helena'
+            },
+            {
+                name: 'Alberts'
+            },
+            {
+                name: 'Tobbe'
+            },
+            {
+                name: 'Matthias'
+            },
+            {
+                name: 'Johan'
+            },
+            {
+                name: 'Zlatan'
+            },
+            {
+                name: 'Pippi'
+            },
+            {
+                name: 'Stellan'
+            },
+            {
+                name: 'Anna'
+            },
+            {
+                name: 'Nils'
+            },
+            {
+                name: 'Erik'
+            },
+            {
+                name: 'Naruto'
+            },
+            {
+                name: 'Itsa mea, Mario'
+            },
+            {
+                name: 'Beso'
+            },
+            {
+                name: 'Desilva'
+            },
+            {
+                name: 'James'
+            },
+            {
+                name: 'Ronny'
             },
         ],
 
-        channelsBU:[
-            {
-                channelName: 'Members of the Sith'
-            },
-            {
-                channelName: 'Homangus Lovers'
-            },
-            {
-                channelName: 'Cars, cars and cars'
-            },
-            {
-                channelName: 'Music e-Type'
-            },
+        friendsAdded: [
         ],
-
-        names:[
-            {
-                firstName: 'Helena',
-                lastName: 'Jackson'
-            },
-            {
-                firstName: 'Alberts',
-                lastName: 'Swarzenegger'
-            },
-            {
-                firstName: 'Johan',
-                lastName: 'Stalone'
-            },
-            {
-                firstName: 'Matthias',
-                lastName: 'Scott'
-            },
-            {
-                firstName: 'Tobbe',
-                lastName: 'Messi'
-            },
-            {
-                firstName: 'Hassan',
-                lastName: 'Wayne'
-            }
-            
-        ]
-
-
-
 
 
 
@@ -77,82 +95,62 @@ export const store = new Vuex.Store({
 /*********************************************************************************************************** */
 
     mutations:{
-        /*********************************************** channelnames*/
+        /************************************************************************** friendsAdded */
+
+        setFriendsAdded( state, friendsAdded ){
+            state.friendsAdded = friendsAadded },
+
+        appendFriendsAdded( state, friend ){
+            state.friendsAdded.push( friend ) },
+
+        removeFriendsAdded( state, index ){
+            state.friendsAdded.splice( index, 1 ) },
+        
+        /************************************************************************** friends */
+
+        setFriends( state, friends ){
+            state.friends = friends },
+
+        appendFriend( state, friend ){
+            state.friends.push( friend ) },
+
+        removeFriend( state, index ){
+            state.friends.splice( index, 1 ) },
+
+        /************************************************************************* channelNames */
+
+
         setChannelNames(state, channelNames){
             state.channelNames = channelNames },
 
-        appendChannelNames(state, channelName){
+        appendChannelName(state, channelName){
             state.channelNames.push( channelName ) },
 
+        removeChannelName( state, index ){
+            state.channelNames.splice( index, 1 ) },
 
-        /*********************************************** */
 
-        
+        /************************************************************************** channels */
 
-        appendChannel( state, channel){
+
+        setChannels( state, channels ){
+            state.channels = channels },
+
+        appendChannel( state, channel ){
             state.channels.push( channel ) },
 
-        appendName(state, name){
-            state.names.push( name ) },
-
-
-
-        /*********************************************** */
-
-        
-
-        removeTestChannel( state, index ){
-            state.testChannels.splice( index, 1 ) /* index: pos / 1: amount */ },
-
         removeChannel( state, index ){
-            state.channels.splice( index, 1 ) /* index: pos / 1: amount */ }
+            state.channels.splice( index, 1 ) },
+        
+        
+        /************************************************************************** channels */
+        /************************************************************************** channels */
+        /************************************************************************** channels */
+        /************************************************************************** channels */
+        /************************************************************************** channels */
+
+
     }
-
-/*********************************************************************************************************** */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
