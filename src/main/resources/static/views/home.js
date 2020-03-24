@@ -1,11 +1,13 @@
+
+
 export default {
     components: {
 
     },
 
     template: `
-    <div>
-    
-    </div>
+        <div>
+        
+        </div>
     `
 }

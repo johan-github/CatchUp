@@ -1,4 +1,3 @@
-import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from "constants"
 
 
 export default {
@@ -50,29 +49,3 @@ data() {
  
 
 }
-
-// methods: {
-
-//     addNewProject() {
-
-//       console.log(this.title, this.description)
-
-
-//       let project = {
-
-//         title: this.title, 
-
-//         description: this.description
-
-//       }
-
-
-//       this.$store.commit('appendProject', project)
-
-//       this.$router.push('/')
-
-//     }
-
-//   }
-
-// }
