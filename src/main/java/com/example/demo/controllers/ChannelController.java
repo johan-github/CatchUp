@@ -1,13 +1,11 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entities.Channel;
-import com.example.demo.repositories.ChannelRepo;
 import com.example.demo.services.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class ChannelController {
@@ -19,13 +17,13 @@ public class ChannelController {
     //************************************************************************************************* GetMapping
 
     @GetMapping("/rest/channels")
-    public List<Channel> getAllChannels(){
-        return channelService.findAllChannels();
+    public List<Channel> findAllChannelName(){
+        return (List<Channel>) channelService.findAllChannelName();
     }
 
     @GetMapping("/rest/channels/{id}") //fråga efter id
-    public Channel getOneChannel(@PathVariable int id){
-        return channelService.findOneChannel( id );
+    public Channel getOneChannelName(@PathVariable int id){
+        return channelService.findOneChannelName( id );
     }
 
 
@@ -33,15 +31,15 @@ public class ChannelController {
     //************************************************************************************************* PostMapping
 
     @PostMapping("/rest/channels")
-    public Channel addNewChannel( @RequestBody Channel channel ){
-        return channelService.addNewChannel( channel );
+    public Channel addNewChannelName(@RequestBody Channel channel ){
+        return channelService.addNewChannelName( channel );
     }
 
 
     //************************************************************************************************* @DeleteMapping
 
     @DeleteMapping("/rest/channels/{id}")
-    public String deleteOneUser(@PathVariable int id) {
+    public String deleteOneChannelName(@PathVariable int id) {
         try {
             channelService.deleteById( id );
             return "Success";
@@ -53,15 +51,13 @@ public class ChannelController {
     //************************************************************************************************* @PutMapping (Update)
 
     @PutMapping("/rest/channels")
-    public String updateChannel(@RequestBody Channel channel) {
+    public String updateChannelName(@RequestBody Channel channelName) {
         try {
-            channelService.updateChannel( channel );
+            channelService.updateChannelName( channelName );
             return "Success!";
         } catch (Exception e) {
             return "Failed!";
         }
     }
-
-
 
 }

@@ -1,4 +1,5 @@
 @import "registerUserForm.css";
+@import "loginUserForm.css";
 
 *{
     box-sizing: border-box;
@@ -406,4 +407,5 @@ h3{
 
 
 /*************************************************************************/
+
 
