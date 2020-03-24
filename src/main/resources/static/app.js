@@ -13,14 +13,4 @@ export default {
   
   </div>
   `,
-
-<<<<<<< HEAD
-    /*async created(){
-        let channelNames = await fetch('/rest/channelnames')
-        channelNames = await channelNames.json()
-        
-        this.$store.commit('setChannelNames', channelNames)
-    }*/
-=======
->>>>>>> registeruser
 }
