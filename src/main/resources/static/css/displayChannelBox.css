@@ -1,0 +1,40 @@
+/************************************************************************ displayChannelBox */
+
+#displayChannelBoxName{ grid-area: dCName; }
+#displayChannelBoxStatus{ grid-area: dCStatus; }
+#displayChannelBoxMember{ grid-area: dCMember; }
+#displayChannelBoxRemove{ grid-area: dCRemove; }
+#displayChannelBoxLastMessage{ grid-area: dCLastMsg; }
+
+#displayChannelBox{
+    display: grid;
+    /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
+    grid-template-columns: 20px minmax( 100px, max)  20px;
+    grid-template-rows: 25px 25px auto;
+    grid-template-areas:
+    "dCStatus dCName dCName"
+    "dCMember dCMember dCRemove"
+    "dCLastMsg dCLastMsg dCLastMsg";
+
+    background-color: rgb(27, 44, 44);
+    opacity: 0.9;
+    
+    padding: 20px;
+    margin: 10px;
+    
+    box-shadow: 5px 5px 5px #000000;
+    border-radius: 5px 0px 5px 0px;
+    
+    align-items: center;
+}
+        #displayChannelBox > div {
+            padding: 10px;
+            margin: 10px;
+        }
+        #displayChannelBoxName {
+            justify-self: left;
+            padding: 0px 0px 0px 50px;
+        }
+        #displayChannelBoxRemove:hover{
+            cursor: default;
+        }

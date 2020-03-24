@@ -1,4 +1,4 @@
-import home from './home.js'
+import home from '../views/home.js'
 
 
 export default{
@@ -10,7 +10,10 @@ export default{
 
 
     template:`
-        <home/>
+        <div>
+            <home/>
+        </div>
+        
     `,
 
 }

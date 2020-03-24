@@ -1,0 +1,73 @@
+/************************************************************************************ addFriendBox */
+            
+#addFriendBoxTop{ grid-area: aFTop; }
+#addFriendBoxBottom{ grid-area: aFTBottom; }
+#addFriendTextSearchFriend{ grid-area: aFTSFriend; }
+#addFriendBoxForm{ grid-area: aFForm; }
+#addFriendBoxPic{ grid-area: aFPic; }
+#addFriendBoxName{ grid-area: aFName; }
+
+#addFriendBox{
+    display: grid;
+    grid-template-rows: auto minmax(auto, 325px);
+    grid-template-areas:
+    "aFTop"
+    "aFTBottom";
+
+    padding: 10px;
+}
+        #addFriendBoxBottom{
+            /*background-color: rgb(46, 69, 77);*/
+            height: 100%;
+            overflow: auto;
+        }
+
+#addFriendBoxForm{
+    display: grid;
+    grid-template-columns: 50px minmax( 200px, auto);
+    grid-template-rows: 10px;
+    grid-template-areas:
+    "aFPic aFName";
+    
+    opacity: 0.9;
+    
+    padding: 10px;
+    margin: 10px;
+
+    box-shadow: 5px 5px 5px #000000;
+    border-radius: 5px 0px 5px 0px;
+
+    transition: 1s;
+}
+        #addFriendBoxForm > div {
+            padding: 10px;
+        }
+        #addFriendBox, #addFriendBoxForm{
+            align-items: center;
+            justify-items: center;
+        }        
+        #addFriendBoxName{
+            font: bold 16px Arial, Helvetica, sans-serif;
+            color: white;
+            justify-self: end;
+        }
+        #addFriendBoxPic{
+            background-image: url("https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png");
+            background-size: cover;
+            background-position: center;
+            box-shadow: 5px 5px 5px #000000;
+
+            justify-self: start;
+        }
+        #addFriendBoxForm:hover{
+            transition: .2s;
+            background-color: rgb(49, 78, 78);
+            opacity: 0.9;
+        }
+        #addFriendTextSearchFriend{
+            min-width: 200px;
+            background-color: white;
+            border: none;
+            outline: none;
+            padding-left: 10px;
+        }

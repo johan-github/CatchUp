@@ -1,11 +1,14 @@
+import createChannel from '../components/createChannel.js'
+
 export default {
     components: {
-
+        createChannel
     },
 
     template: `
-    <div>
-    
-    </div>
+        <div>
+            <createChannel/>
+        
+        </div>
     `
 }
