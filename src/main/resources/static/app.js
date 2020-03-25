@@ -39,6 +39,7 @@ export default{
 }
 
 
+
 /* OROGINAL SOM SKALL TILLBAKA */
 /*
 export default {
@@ -64,4 +65,4 @@ export default {
   
   </div>
   `,
-}
+}*/
