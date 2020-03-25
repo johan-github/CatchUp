@@ -6,8 +6,8 @@ export default {
     },
 
     template: `
-    <div>
-    <loginUserForm />
-    </div>
+        <div>
+            <loginUserForm />
+        </div>
     `
 }

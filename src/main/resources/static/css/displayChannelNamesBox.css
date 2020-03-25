@@ -1,0 +1,38 @@
+/************************************************************************ displayChannelNamesBox */
+            
+#displayChannelNamesBoxPic{ grid-area: dCNPic; }
+#displayChannelNamesBoxName{ grid-area: dCNName; }
+#displayChannelNamesBoxFavorite{ grid-area: dCNFav; }
+#displayChannelNamesBoxSettings{ grid-area: dCNSettings; }
+
+#displayChannelNamesBox{
+    display: grid;
+    /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
+    grid-template-columns: repeat( 4, 20px );
+    grid-template-rows: 10px;
+    grid-template-areas:
+    "dCNPic dCNName dCNFav dCNSettings";
+
+
+    background-color: rgb(27, 44, 44);
+    opacity: 0.9;
+    
+    padding: 10px;
+    margin: 10px;
+
+    box-shadow: 5px 5px 5px #000000;
+    border-radius: 5px 0px 5px 0px;
+
+    align-items: center;
+    justify-items: center;
+}
+        #displayChannelNamesBoxPic, #displayChannelNamesBoxName, #displayChannelNamesBoxFavorite, #displayChannelNamesBoxSettings {
+            padding: 10px;
+            margin: 10;
+        }
+        #displayChannelNamesBoxPic{
+            background-image: url("https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png");
+            background-size: cover;
+            background-position: center;
+            box-shadow: 5px 5px 5px #000000;
+        }

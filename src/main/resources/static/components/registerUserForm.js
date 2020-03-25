@@ -106,8 +106,28 @@ data() {
 
 }
 
+// methods: {
+
+//     addNewProject() {
+
+//       console.log(this.title, this.description)
 
 
+//       let project = {
+
+//         title: this.title, 
+
+//         description: this.description
+
+//       }
 
 
+//       this.$store.commit('appendProject', project)
 
+//       this.$router.push('/')
+
+//     }
+
+//   }
+
+// }
