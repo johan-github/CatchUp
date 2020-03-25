@@ -5,25 +5,9 @@ Vue.use( Vuex )
 export const store = new Vuex.Store({
     state:{
 
-        channelNames:[],
         friendList:[],
         myAccount: '',
-
-        channels:[
-            {
-                channelName: 'Members of the Sith'
-            },
-            {
-                channelName: 'Homangus Lovers'
-            },
-            {
-                channelName: 'Cars, cars and cars'
-            },
-            {
-                channelName: 'Music e-Type'
-            },
-        ],
-
+        channels:[],
         
     },
 
@@ -32,12 +16,10 @@ export const store = new Vuex.Store({
 
     mutations:{
         /*********************************************** channelnames*/
-        setChannelNames(state, channelNames){
-            state.channelNames = channelNames },
-
-        appendChannelNames(state, channelName){
-            state.channelNames.push( channelName ) },
-
+        setChannels(state, channels){
+            state.channels = channels},
+        appendChannel(state, channel){
+            state.channel.push( channel )},
 
         /*********************************************** */
 
