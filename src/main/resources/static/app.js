@@ -1,6 +1,6 @@
 import navbar from './components/navbar.js'
 
-
+/*
 export default{
     components:{
         navbar
@@ -29,18 +29,19 @@ export default{
     `,
 
 
-    /*async created(){
+    async created(){
         let channelNames = await fetch('/rest/channelnames')
         channelNames = await channelNames.json()
         
         this.$store.commit('setChannelNames', channelNames)
-    }*/
+    }
     
 }
+*/
 
 
 /* OROGINAL SOM SKALL TILLBAKA */
-/*
+
 export default {
 
   template: `
