@@ -1,7 +1,9 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "latestchannelmessages")
@@ -13,7 +15,7 @@ public class LatestChannelMessage {
     private String url;
     private int channelid;
     private String channelname;
-    private LocalDate time;
+    private LocalDateTime time;
     private String usernick;
     private String text;
 
@@ -59,12 +61,12 @@ public class LatestChannelMessage {
     public void setChannelname(String channelname) {
         this.channelname = channelname;
     }
-
-    public LocalDate getTime() {
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(LocalDate time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 
