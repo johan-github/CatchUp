@@ -23,6 +23,14 @@ export default {
                 <label>Add password</label>
                 <input class="input-field" type="password" placeholder="password" v-model="addPassword" required>
             </div>
+
+            <div class="inputForm">
+                <i class="fa fa-key"></i>
+                <label>Confirm password</label>
+                <input class="input-field" type="password" placeholder="confirm password" v-model="confirmPassword" required>
+                <h4 >{{ passwordAlert  }}</h4>
+
+            </div>
         <button class="registerButton">Register</button>
     </form>
     </div>
@@ -35,18 +43,32 @@ data() {
         addPassword: '',
         defaultAvatar: 'http://158.174.120.227/CatchUp/avatar01.png',
         defaultStatus: 'no',
+        confirmPassword: '',
+        passwordAlert: ''
     }
   },
 
-  // Created by the Vue Ninjas Helena and Matthias
+  
   methods: {
 
+   //Adds a new user to backend
     async registerNewUserForm() {
-
         console.log("In register form now ")
-        if( !this.addEmail.trim() && !this.addPassword.trim() && !this.addNickname.trim() ){
-            return
-        } 
+
+         if( !this.addEmail.trim() && !this.addPassword.trim() && !this.addNickname.trim() ){
+             return
+         } 
+
+        if(!this.addPassword === !this.confirmPassword){
+            console.log("ERROR")
+            this.passwordAlert = ''
+            this.passwordAlert = "Password does not match! "
+            console.log(this.addPassword)
+            console.log(this.confirmPassword)
+        }
+
+        if(this.addPassword === this.confirmPassword){
+            console.log("PASSWORD OK")
 
         // Save variables to be added to database as an object
         let newUser = {
@@ -56,10 +78,9 @@ data() {
         avatar:  this.defaultAvatar,
         status: this.defaultStatus
         }
-
-        // For testing only
         console.log(newUser)
 
+ 
         // Post object to database
         let result = await fetch('/rest/accounts', {
             method: 'POST',
@@ -74,11 +95,15 @@ data() {
         this.addEmail=''
         this.addNickname=''
         this.addPassword=''
+        this.confirmPassword=''
 
         // Re-direct to login page
-        //this.$router.push('/loginUser')
-    }
+        this.$router.push('/loginUser')
+      
   }
+}
+}
+
 }
 
 

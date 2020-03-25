@@ -7,7 +7,6 @@ export default{
 
     },
 
-
     template:`
         <div>
 
