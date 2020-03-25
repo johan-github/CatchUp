@@ -12,9 +12,9 @@ export default{
         <section>
             
             <div id="displayChannelBox"
-            v-for="(channel, i ) of channels">            
+            v-for="(currentUser, i ) of currentUsers">
 
-                    <div id="displayChannelBoxAccountid"> {{channel.name}} {{channel.id}} </div>
+                    <div id="displayChannelBoxAccountid"> {{currentUser.enterUserEmail}} </div>
 
                     <div id="displayChannelBoxFavorite">❤️</div>
 
@@ -67,7 +67,15 @@ export default{
     computed:{
         channels(){
             return this.$store.state.channels
-        }
+        },
+        
+        accountChannels(){
+            return this.$store.state.accountChannels
+        },
+
+        currentUsers(){
+            return this.$store.state.currentUser
+        },
     },
 
 
@@ -81,10 +89,17 @@ export default{
 
 //        .then( channels => this.$store.commit( 'setChannels', channels ))
 
-
+/**
+ * Variable translated to json (java),
+ * variable gets sent to store
+ */
         await fetch('/rest/channels')
         .then(channels => channels.json())
         .then(channels => this.$store.commit('setChannels', channels))
+
+        // await fetch('/rest/accountchannels')
+        // .then(accountChannels => accountChannels.json())
+        // .then(accountChannels => this.$store.commit('setAccountChannels', accountChannels))
     }
 
 

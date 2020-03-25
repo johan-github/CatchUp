@@ -8,29 +8,41 @@ export const store = new Vuex.Store({
         friendList:[],
         myAccount: '',
         channels:[],
-        
+        accountChannels:[],
+
+        currentUser:[{
+            enterUserEmail: '',
+            enterPassword: ''
+        }],
     },
 
 
 /*********************************************************************************************************** */
 
     mutations:{
-        /*********************************************** channelnames*/
+
+        /*********************************************** channels*/
         setChannels(state, channels){
             state.channels = channels},
         appendChannel(state, channel){
             state.channel.push( channel )},
+        removeChannel( state, index ){
+            state.channels.splice( index, 1 ) /* index: pos / 1: amount */ },
 
-        /*********************************************** */
+        /**************************************************** accountChannels */
 
-        
+        setAccountChannels(state, accountChannels){
+            state.accountChannels = accountChannels},
+        appendAccountChannel(state, accountChannel){
+            state.accountChannels.push( accountChannel )},
+        removeAccountChannel(state, index){
+            state.accountChannels.splice( index, 1)
+        },
 
-        appendChannel( state, channel){
-            state.channels.push( channel ) },
-
-        appendName(state, name){
-            state.names.push( name ) },
-
+        /*********************************************************** CurrentUser */
+        setCurrentUser(state, currentUser){
+            state.currentUser = currentUser
+        },
 
 
         /*********************************************** */
@@ -38,8 +50,6 @@ export const store = new Vuex.Store({
         removeTestChannel( state, index ){
             state.testChannels.splice( index, 1 ) /* index: pos / 1: amount */ },
 
-        removeChannel( state, index ){
-            state.channels.splice( index, 1 ) /* index: pos / 1: amount */ },
 
         /*********************************************** listFriends*/
         setFriendList(state, friendList){
