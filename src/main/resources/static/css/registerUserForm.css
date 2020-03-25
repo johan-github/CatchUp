@@ -1,7 +1,7 @@
 .registerUser{
     display: flex;
     width: 100%;
-    margin-bottom: 15px;
+    height: 100%;
     color: rgb(205, 205, 255);
     background-color:  rgb(26, 48, 48);
     opacity: 0.9;
@@ -19,22 +19,23 @@
 
 /*************************************************************************/
 .registerButton{
-        box-sizing: border-box;
-        background-color: rgb(18, 77, 128);
-        color: white;
-        padding: 15px 20px;
-        border: none;
-        cursor: pointer;
-        width: 100%;
-        opacity: 0.8;
-        border-radius: 50%;
-        border: none;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
+  box-sizing: border-box;
+  background-color: rgb(18, 77, 128);
+  color: white;
+  padding: 15px 10px;
+  border: none;
+  cursor: pointer;
+  width: 80px;
+  opacity: 0.8;
+  border-radius: 30%;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  margin-left: 156px;
+  cursor: pointer;
       
   }
 
@@ -59,6 +60,24 @@
   border: 2px solid black;
 }
 
+.inputForm {
+  padding: 5px;
+}
+
+.textlabel {
+  padding: 2px;
+}
+
 .inputForm .fa {
     color:whitesmoke;
+}
+
+.form {
+  padding-left: 14px;
+  padding-bottom: 14px;
+}
+
+#passwordalert {
+  padding-top: 5px;
+  margin: 0;
 }
