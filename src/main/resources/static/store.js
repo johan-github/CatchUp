@@ -5,50 +5,44 @@ Vue.use( Vuex )
 export const store = new Vuex.Store({
     state:{
 
-        channelNames:[],
         friendList:[],
         myAccount: '',
+        channels:[],
+        accountChannels:[],
 
-        channels:[
-            {
-                channelName: 'Members of the Sith'
-            },
-            {
-                channelName: 'Homangus Lovers'
-            },
-            {
-                channelName: 'Cars, cars and cars'
-            },
-            {
-                channelName: 'Music e-Type'
-            },
-        ],
-
-        
+        currentUser:[{
+            enterUserEmail: '',
+            enterPassword: ''
+        }],
     },
 
 
 /*********************************************************************************************************** */
 
     mutations:{
-        /*********************************************** channelnames*/
-        setChannelNames(state, channelNames){
-            state.channelNames = channelNames },
 
-        appendChannelNames(state, channelName){
-            state.channelNames.push( channelName ) },
+        /*********************************************** channels*/
+        setChannels(state, channels){
+            state.channels = channels},
+        appendChannel(state, channel){
+            state.channel.push( channel )},
+        removeChannel( state, index ){
+            state.channels.splice( index, 1 ) /* index: pos / 1: amount */ },
 
+        /**************************************************** accountChannels */
 
-        /*********************************************** */
+        setAccountChannels(state, accountChannels){
+            state.accountChannels = accountChannels},
+        appendAccountChannel(state, accountChannel){
+            state.accountChannels.push( accountChannel )},
+        removeAccountChannel(state, index){
+            state.accountChannels.splice( index, 1)
+        },
 
-        
-
-        appendChannel( state, channel){
-            state.channels.push( channel ) },
-
-        appendName(state, name){
-            state.names.push( name ) },
-
+        /*********************************************************** CurrentUser */
+        setCurrentUser(state, currentUser){
+            state.currentUser = currentUser
+        },
 
 
         /*********************************************** */
@@ -56,8 +50,6 @@ export const store = new Vuex.Store({
         removeTestChannel( state, index ){
             state.testChannels.splice( index, 1 ) /* index: pos / 1: amount */ },
 
-        removeChannel( state, index ){
-            state.channels.splice( index, 1 ) /* index: pos / 1: amount */ },
 
         /*********************************************** listFriends*/
         setFriendList(state, friendList){

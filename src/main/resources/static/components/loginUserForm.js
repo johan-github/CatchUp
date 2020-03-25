@@ -49,7 +49,7 @@ export default {
             if (currentUser.password == this.enterPassword){
                 console.log(currentUser)
 
-                this.$store.commit('setMyAccount', currentUser)
+                this.$store.commit('setCurrentUser', currentUser)
                 this.$router.push('/home')
 
             }

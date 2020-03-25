@@ -12,20 +12,11 @@ export default{
         <section>
             
             <div id="displayChannelBox"
-            v-for="(channel, i ) of channels">
+            v-for="(currentUser, i ) of currentUsers">
 
-                <div id="channelNamesFor"
-                    v-for="channelName of channelNames">
-            
-
-                    <div id="displayChannelBoxAccountid">{{ channel.accountid }}</div>
-                    <div id="displayChannelBoxChannelnameid">{{ channel.channelnameid }}</div>
-                    <!-- <div id="displayChannelBoxChannelform">{{ channel.channelform }}</div>
-                    <div id="displayChannelBoxAdmin">{{ channel.admin }}</div> -->
+                    <div id="displayChannelBoxAccountid"> {{currentUser.enterUserEmail}} </div>
 
                     <div id="displayChannelBoxFavorite">❤️</div>
-
-                </div>
 
             </div>
 
@@ -38,52 +29,57 @@ export default{
 
     methods:{
 
-        async getSome( channelnameid ){
+    //     async getSome( channelnameid ){
 
-            let channels = await fetch('/rest/latestchannelmessages/'+5)
-                .then( c => c.json())
+    //         let channels = await fetch('/rest/latestchannelmessages/'+5)
+    //             .then( c => c.json())
 
-            console.log( channelNames[channelnameid].name )
-        },
+    //         console.log( channelNames[channelnameid].name )
+    //     },
 
-        ifSameChannelId( id ){
-            console.log("clicked")
+    //     ifSameChannelId( id ){
+    //         console.log("clicked")
 
-            channels.forEach( c => {
-                console.log( c.id )
-                /*channelNames.forEach( cn => {
-                    console.log( cn[ c.accountid ] )
-                })*/
-            })
-        },
+    //         channels.forEach( c => {
+    //             console.log( c.id )
+    //             /*channelNames.forEach( cn => {
+    //                 console.log( cn[ c.accountid ] )
+    //             })*/
+    //         })
+    //     },
 
-        getChannelNameFromId(){
-            channelNames.forEach( channelName => console.log( channelName ))
-        },
+    //     getChannelNameFromId(){
+    //         channelNames.forEach( channelName => console.log( channelName ))
+    //     },
         
 
         
-        /***************************************************************************** REMOVE */
+    //     /***************************************************************************** REMOVE */
 
-        removeChannels( index ){
-            this.$store.commit( 'removeChannel', index ) },
+    //     removeChannels( index ){
+    //         this.$store.commit( 'removeChannel', index ) },
 
     },
 
 
 /*********************************************************************************************************** Computed: */
 
-
     computed:{
-        
         channels(){
-            return this.$store.state.channels },
-
+            return this.$store.state.channels
+        },
         
-        channelNames(){
-            return this.$store.state.channelNames },
+        accountChannels(){
+            return this.$store.state.accountChannels
+        },
 
+        currentUsers(){
+            return this.$store.state.currentUser
+        },
     },
+
+
+    
 
 
 
@@ -91,9 +87,19 @@ export default{
 
     async created(){
 
-        await fetch('/rest/channels')
-        .then( channels => channels.json())
 //        .then( channels => this.$store.commit( 'setChannels', channels ))
+
+/**
+ * Variable translated to json (java),
+ * variable gets sent to store
+ */
+        await fetch('/rest/channels')
+        .then(channels => channels.json())
+        .then(channels => this.$store.commit('setChannels', channels))
+
+        // await fetch('/rest/accountchannels')
+        // .then(accountChannels => accountChannels.json())
+        // .then(accountChannels => this.$store.commit('setAccountChannels', accountChannels))
     }
 
 
