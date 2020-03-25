@@ -20,8 +20,8 @@ export default{
 
                     <div id="displayChannelBoxAccountid">{{ channel.accountid }}</div>
                     <div id="displayChannelBoxChannelnameid">{{ channel.channelnameid }}</div>
-                    <div id="displayChannelBoxChannelform">{{ channel.channelform }}</div>
-                    <div id="displayChannelBoxAdmin">{{ channel.admin }}</div>
+                    <!-- <div id="displayChannelBoxChannelform">{{ channel.channelform }}</div>
+                    <div id="displayChannelBoxAdmin">{{ channel.admin }}</div> -->
 
                     <div id="displayChannelBoxFavorite">❤️</div>
 

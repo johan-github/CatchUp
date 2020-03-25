@@ -11,7 +11,7 @@ public class LatestChannelMessage {
     private int id;
     private int accountid;
     private String url;
-    private int channelsid;
+    private int channelid;
     private String channelname;
     private LocalDate time;
     private String usernick;
@@ -44,12 +44,12 @@ public class LatestChannelMessage {
         this.url = url;
     }
 
-    public int getChannelsid() {
-        return channelsid;
+    public int getChannelid() {
+        return channelid;
     }
 
-    public void setChannelsid(int channelsid) {
-        this.channelsid = channelsid;
+    public void setChannelid(int channelid) {
+        this.channelid = channelid;
     }
 
     public String getChannelname() {
