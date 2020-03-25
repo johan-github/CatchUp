@@ -40,7 +40,7 @@ export default{
 
         async getSome( channelnameid ){
 
-            let channels = await fetch('/rest/latestchannelmessages/'+5)
+            let channels = await fetch('/rest/channels')
                 .then( c => c.json())
 
             console.log( channelNames[channelnameid].name )
@@ -93,7 +93,7 @@ export default{
 
         await fetch('/rest/channels')
         .then( channels => channels.json())
-//        .then( channels => this.$store.commit( 'setChannels', channels ))
+        .then( channels => this.$store.commit( 'setChannels', channels ))
     }
 
 
