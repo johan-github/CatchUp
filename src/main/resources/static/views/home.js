@@ -8,7 +8,6 @@ export default {
     template: `
         <div>
             <displayChannel/>
-        
         </div>
     `
 }

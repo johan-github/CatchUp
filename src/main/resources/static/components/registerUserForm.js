@@ -59,6 +59,7 @@ data() {
              return
          } 
 
+         // If password does not match
         if(!this.addPassword === !this.confirmPassword){
             console.log("ERROR")
             this.passwordAlert = ''
@@ -70,7 +71,7 @@ data() {
         if(this.addPassword === this.confirmPassword){
             console.log("PASSWORD OK")
 
-        // Save variables to be added to database as an object
+        // Save variables to be added to database as an object newUser
         let newUser = {
         email: this.addEmail,
         usernick: this.addNickname,
