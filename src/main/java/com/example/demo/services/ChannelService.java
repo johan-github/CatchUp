@@ -15,29 +15,27 @@ public class ChannelService {
 
     //*************************************************************************************************
 
-    public List<Channel> findAllChannels(){
+    public List<Channel> findAllChannelName(){
         return (List<Channel>) channelRepo.findAll();
     }
 
-    public Channel findOneChannel(int id) {
+    public Channel findOneChannelName(int id) {
         return channelRepo.findById(id);
     }
 
-    public List<Channel> findAllChannelByAccountid(int accountid) {
+    /*public List<ChannelName> findAllChannelNameByAccountid(int accountid) {
         return channelRepo.findByAccountid(accountid);
-    }
+    }*/
 
-    public Channel addNewChannel( Channel channel ){
-        return channelRepo.save( channel );
+    public Channel addNewChannelName(Channel channelName ){
+        return channelRepo.save( channelName );
     }
 
     public void deleteById(int id ){
         channelRepo.deleteById( id );
     };
 
-    public Channel updateChannel( Channel channel ){
-        return channelRepo.save( channel );
+    public Channel updateChannelName(Channel channelName){
+        return channelRepo.save(channelName);
     }
-
 }
-

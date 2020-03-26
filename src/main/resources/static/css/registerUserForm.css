@@ -1,0 +1,64 @@
+.registerUser{
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    color: rgb(205, 205, 255);
+    background-color:  rgb(26, 48, 48);
+    opacity: 0.9;
+}
+
+.loginUser {
+    color: white;
+}
+
+/*************************************************************************/
+
+.fa {
+    color : whitesmoke;
+  }
+
+/*************************************************************************/
+.registerButton{
+        box-sizing: border-box;
+        background-color: rgb(18, 77, 128);
+        color: white;
+        padding: 15px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.8;
+        border-radius: 50%;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      
+  }
+
+  /*************************************************************************/
+  .registerButton:hover {
+    opacity: 1;
+     color: rgb(205, 205, 255); 
+  }
+
+  /*************************************************************************/
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+  }
+
+  .input-field:hover{
+      opacity: 0.9;
+  }
+
+  .input-field:focus {
+  border: 2px solid black;
+}
+
+.inputForm .fa {
+    color:whitesmoke;
+}

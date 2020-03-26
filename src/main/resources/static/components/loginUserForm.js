@@ -1,36 +1,61 @@
 
 export default {
     template:`
-    
-    <form @submit.prevent="loginCurrentUserForm" class="loginUser">
-        <div>
-        <label>Enter username</label>
-        <input placeholder="Username" v-model="enterUserName">
-        <label>Enter password</label>
-        <input placeholder="Password" v-model="enterPassword" type="password">
+    <div class="loginuser">
+    <form @submit.prevent="loginCurrentUserForm" class="loginuserform">
+    <h2>Please login to continue</h2>
+        <div class="logindiv">
+        <i class="fa fa-user"></i>
+        <label >Enter your email</label>
+        <input class="logininput" placeholder="email" v-model="enterUserEmail">
         </div>
-        <button>Login</button>
+        <div class="logindiv">
+        <i class="fa fa-key"></i>
+        <label>Enter your password</label>
+        <input  class="logininput" placeholder="password" v-model="enterPassword" type="password">
+        </div>
+        <button class="loginbutton">Login</button>
     </form>
+    </div>
+
     
     `,
 
     data() {
         
         return {
-            enterUserName: '',
+            enterUserEmail: '',
             enterPassword: ''
         }
     },
 
     methods: {
-        loginCurrentUserForm() {
-            console.log("TEST " + this.enterUserName, this.enterPassword)
+        async loginCurrentUserForm() {
+            if (!this.enterUserEmail.trim() || !this.enterPassword.trim()) {
+                return
+            }
+
+            console.log("TEST " + this.enterUserEmail, this.enterPassword)
 
             let currentUser = {
-                enterUserName: this.enterUserName,
+                enterUserEmail: this.enterUserEmail,
                 enterPassword: this.enterPassword
             }
-            console.log("TEST 2 " + currentUser)
+
+            currentUser = await fetch('/rest/accounts/email/' + this.enterUserEmail)
+             
+            currentUser = await currentUser.json()
+
+            if (currentUser.password == this.enterPassword){
+                console.log(currentUser)
+
+                this.$store.commit('setCurrentUser', currentUser)
+                this.$router.push('/home')
+
+            }
+
+            console.log(currentUser.password);
+            
         }
     }
 }

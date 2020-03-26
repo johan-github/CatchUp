@@ -1,14 +1,18 @@
-import createChannel from '../components/createChannel.js'
+import displayChannel from '../components/displayChannel.js'
+import { createNamespacedHelpers } from '../libs/vuex.esm.browser.js'
 
 export default {
     components: {
-        createChannel
+        displayChannel
     },
 
     template: `
         <div>
-            <createChannel/>
+            <displayChannel/>
         
         </div>
-    `
+    `,
+
+
+    
 }

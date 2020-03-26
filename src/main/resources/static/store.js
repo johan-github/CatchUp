@@ -5,129 +5,69 @@ Vue.use( Vuex )
 export const store = new Vuex.Store({
     state:{
 
-        channelNames: [],
-        channels: [],
-        
-        friends: [
-            {
-                name: 'Ommah'
-            },
-            {
-                name: 'Sanna'
-            },
-            {
-                name: 'Dennosh'
-            },
-            {
-                name: 'Loli'
-            },
-            {
-                name: 'Alawi'
-            },
-            {
-                name: 'Sosi'
-            },
-            {
-                name: 'Hassan'
-            },
-            {
-                name: 'Helena'
-            },
-            {
-                name: 'Alberts'
-            },
-            {
-                name: 'Tobbe'
-            },
-            {
-                name: 'Matthias'
-            },
-            {
-                name: 'Johan'
-            },
-            {
-                name: 'Zlatan'
-            },
-            {
-                name: 'Pippi'
-            },
-            {
-                name: 'Stellan'
-            },
-            {
-                name: 'Anna'
-            },
-            {
-                name: 'Nils'
-            },
-            {
-                name: 'Erik'
-            },
-            {
-                name: 'Naruto'
-            },
-            {
-                name: 'Itsa mea, Mario'
-            },
-            {
-                name: 'Beso'
-            },
-            {
-                name: 'Desilva'
-            },
-            {
-                name: 'James'
-            },
-            {
-                name: 'Ronny'
-            },
-        ],
+        friendList:[],
+        myAccount: '',
+        channels:[],
+        accountChannels:[],
 
-        friendsAdded: [
-        ],
-
-
-
-
+        currentUser:{
+            id:'',
+            email:'',
+            usernick:'',            
+        },
     },
 
 
 /*********************************************************************************************************** */
 
     mutations:{
-        /************************************************************************** friendsAdded */
 
-        setFriendsAdded( state, friendsAdded ){
-            state.friendsAdded = friendsAadded },
+        /*********************************************** channels*/
+        setChannels(state, channels){
+            state.channels = channels},
+        appendChannel(state, channel){
+            state.channels.push( channel )},
+        removeChannel( state, index ){
+            state.channels.splice( index, 1 ) /* index: pos / 1: amount */ },
 
-        appendFriendsAdded( state, friend ){
-            state.friendsAdded.push( friend ) },
+        /**************************************************** accountChannels */
 
-        removeFriendsAdded( state, index ){
-            state.friendsAdded.splice( index, 1 ) },
-        
-        /************************************************************************** friends */
+        setAccountChannels(state, accountChannels){
+            state.accountChannels = accountChannels},
+        appendAccountChannel(state, accountChannel){
+            state.accountChannels.push( accountChannel )},
+        removeAccountChannel(state, index){
+            state.accountChannels.splice( index, 1)
+        },
 
-        setFriends( state, friends ){
-            state.friends = friends },
+        /*********************************************************** CurrentUser */
+        setCurrentUser(state, currentUser){
+            state.currentUser = currentUser
+        },
 
-        appendFriend( state, friend ){
-            state.friends.push( friend ) },
 
-        removeFriend( state, index ){
-            state.friends.splice( index, 1 ) },
+        /*********************************************** */
+
+        removeTestChannel( state, index ){
+            state.testChannels.splice( index, 1 ) /* index: pos / 1: amount */ },
 
         /************************************************************************* channelNames */
 
+        /*********************************************** listFriends*/
+        setFriendList(state, friendList){
+            state.friendList = friendList },
 
-        setChannelNames(state, channelNames){
-            state.channelNames = channelNames },
+        appendFriendList(state, friendList){
+            state.friendList.push( friendList ) },
 
-        appendChannelName(state, channelName){
-            state.channelNames.push( channelName ) },
+        /************************************************ */
 
-        removeChannelName( state, index ){
-            state.channelNames.splice( index, 1 ) },
+        setMyAccount(state, myAccount){
+            state.myAccount = myAccount },
+
+        deleteMyAccount(state, myAccount){
+            state.myAccount = null // '' instead of null? 
+        },
 
 
         /************************************************************************** channels */

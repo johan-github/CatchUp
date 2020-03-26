@@ -9,6 +9,7 @@ import options from './views/options.js'
 import about from './views/about.js'
 import registerUser from './views/registerUser.js'
 import loginUser from './views/loginUser.js'
+import createChannel from './views/createChannel.js'
 
 export const router = new Router({
     mode: 'history',
@@ -16,14 +17,9 @@ export const router = new Router({
     routes:[
 
         {
-            name: 'home',
+            name: 'loginUser',
             path: '/',
-            component: home
-        },
-        {
-            name: 'home',
-            path: '/index.html',
-            component: home
+            component: loginUser
         },
         {
             name: 'home',
@@ -32,7 +28,7 @@ export const router = new Router({
         },
         {
             name: 'registerUser',
-            path: '/register/user',
+            path: '/registerUser',
             component: registerUser
         },
         {
@@ -59,7 +55,12 @@ export const router = new Router({
             name: 'loginUser',
             path: '/loginuser',
             component: loginUser
-        }
+        },
+        {
+            name: 'createChannel',
+            path: '/createChannel',
+            component: createChannel
+        },
 
 
 

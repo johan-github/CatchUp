@@ -18,36 +18,8 @@ export default{
     template:`
         <div id="viewChannels">
 
-        
-
-        <div id="viewChannelsBoxChannelCreateNew">
-                <createChannel/>
-            </div>
-            
- <!--       
-        
-            <div id="viewChannelsDisplayChannelName">
-                <displayChannelName/>
-            </div>
-
-            <div id="viewChannelsDisplayChannel">
-                <displayChannel/>
-            </div>
-
-            <div id="viewChannelsChannelCreateSearch">
                 <channelCreateSearch/>
-            </div>  
-                
-            
-            <div id="viewChannelsBoxChannelCreateNew">
-                <createChannel/>
-            </div>
 
-            
-            
-            
-            
--->
         </div>
     `,
 
