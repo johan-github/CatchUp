@@ -11,7 +11,7 @@ public class AccountChannel {
     private int id;
     private int accountid;
     private int channelid;
-    private String admin;
+    private String admin; //Enum in database: 'true', 'false'
 
     public AccountChannel() {
     }

@@ -12,22 +12,54 @@ export default{
         <section>
             
             <div id="displayChannelBox"
-            v-for="(currentUser, i ) of currentUsers">
+            v-for="(myChannel, i ) of myChannels">
 
-                    <div id="displayChannelBoxAccountid"> {{currentUser.enterUserEmail}} </div>
+                    <div id="displayChannelBoxAccountid"> {{myChannel}} </div>
 
                     <div id="displayChannelBoxFavorite">❤️</div>
-
             </div>
-
         </section>
     `,
 
 
 
+
+
 /*********************************************************************************************************** Methods:*/
 
+    data() {
+        return {
+            channelIds : [],
+            myChannels : []
+        }
+    },
+
     methods:{
+        getMyChannels(){
+            for(let channel of this.channels) {
+                for(let channelId of this.channelIds) {
+                    if(channel.id === channelId) {
+                        this.myChannels.push(channel.name)
+                        console.log(channel.name)
+                    }
+                }
+            }
+        },
+
+
+        getCurrentUserInfo(){
+         for(let accountChannel of this.accountChannels) {
+             if(accountChannel.accountid === this.currentUsers.id) {
+                 this.channelIds.push(accountChannel.channelid)
+             } 
+         } 
+        //  console.log("hittade inga kanaler")
+        //  return
+
+         console.log(this.channelIds)
+         this.getMyChannels()
+            
+        }
 
     //     async getSome( channelnameid ){
 
@@ -97,9 +129,14 @@ export default{
         .then(channels => channels.json())
         .then(channels => this.$store.commit('setChannels', channels))
 
-        // await fetch('/rest/accountchannels')
-        // .then(accountChannels => accountChannels.json())
-        // .then(accountChannels => this.$store.commit('setAccountChannels', accountChannels))
+
+        await fetch('/rest/accountchannels')
+        .then(accountChannels => accountChannels.json())
+        .then(accountChannels => this.$store.commit('setAccountChannels', accountChannels))
+        .then(this.accountChannels.forEach(accountChannel => console.log(accountChannel)))
+
+        this.getCurrentUserInfo()
+        
     }
 
 
