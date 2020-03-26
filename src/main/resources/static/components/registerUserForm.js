@@ -2,33 +2,33 @@
 export default {
     template:`
     <div class="registerUser">
-    <form @submit.prevent="registerNewUserForm">
+    <form class="form" @submit.prevent="registerNewUserForm">
 
         <h2>Register new user</h2>
                 
             <div class="inputForm">
             <i class="fa fa-envelope"></i>
-                <label>Add e-mail</label>
+                <label class="textlabel">Enter your e-mail</label>
                 <input class="input-field" type="email" placeholder="e-mail" v-model="addEmail" required >
             </div>
 
             <div class="inputForm">
                 <i class="fa fa-user"></i>
-                <label>Add nickname</label>
+                <label class="textlabel">Enter your nickname</label>
                 <input class="input-field" placeholder="nickname" v-model="addNickname" required >
             </div>
 
             <div class="inputForm">
                 <i class="fa fa-key"></i>
-                <label>Add password</label>
+                <label class="textlabel">Enter your password</label>
                 <input class="input-field" type="password" placeholder="password" v-model="addPassword" required>
             </div>
 
             <div class="inputForm">
                 <i class="fa fa-key"></i>
-                <label>Confirm password</label>
+                <label class="textlabel">Confirm your password</label>
                 <input class="input-field" type="password" placeholder="confirm password" v-model="confirmPassword" required>
-                <h4 >{{ passwordAlert  }}</h4>
+                <h4 id="passwordalert" >{{ passwordAlert  }}</h4>
 
             </div>
         <button class="registerButton">Register</button>
@@ -59,6 +59,7 @@ data() {
              return
          } 
 
+         // If password does not match
         if(!this.addPassword === !this.confirmPassword){
             console.log("ERROR")
             this.passwordAlert = ''
@@ -70,7 +71,7 @@ data() {
         if(this.addPassword === this.confirmPassword){
             console.log("PASSWORD OK")
 
-        // Save variables to be added to database as an object
+        // Save variables to be added to database as an object newUser
         let newUser = {
         email: this.addEmail,
         usernick: this.addNickname,

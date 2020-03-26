@@ -1,0 +1,87 @@
+/************************************************************************************ channelCreateSearchBox */
+            
+#channelCreateSearchContainer, #channelCreateSearchContainer,
+#channelCreateSearchSearchAndCreateBox, #channelCreateSearchForm{
+    max-height: 600px;
+    max-width: 600px;
+    
+    
+    padding: 10px;
+    margin: 10px;
+}
+
+#channelCreateSearchForm{
+    overflow: auto;
+}
+
+#channelCreateSearchSearchAndCreateBox{
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    grid-gap: 10px;
+
+    justify-items: center;
+
+}
+
+#channelCreateSearchChannelInfo{
+    background-color: rgb(156, 131, 131);
+    opacity: .9;
+
+    max-width: 500px;
+
+    color: white;
+    font-weight: bold;
+
+    padding: 10px 10px 10px 30px;
+    margin: 10px;
+
+    transition: .3s;
+}
+
+#channelCreateSearchChannelInfo:hover{
+    background-color: rgb(146, 102, 102);
+    opacity: 2;
+    padding-left: 60px;
+    transition: .3s;
+}
+
+#channelCreateSearchBar:focus{
+    width: 400px;
+    max-width: 500px;
+}
+
+#channelCreateSearchBar:focus + #channelCreateSearchButton{
+    background-color: rgb(161, 241, 154);
+}
+
+#channelCreateSearcCreateNewChannelButton, #channelCreateSearchButton{
+    padding-left: 5px;
+    box-shadow: 3px 3px 2px black;
+    
+    width: 150px;
+    max-width: 150px;
+    height: 25px;
+    max-height: 25px;
+    
+    border-radius: 2px 2px 0px 0px;
+    border: none;
+    outline: none;
+
+    transition: .5s;
+}
+
+#channelCreateSearchButton{
+    background-color: rgb(139, 139, 139);
+}
+        #channelCreateSearchButton:active{
+            background-color: rgb(21, 255, 0);
+            box-shadow: 6px 6px 2px black;
+        }
+
+#channelCreateSearcCreateNewChannelButton{
+    background-color: rgb(126, 128, 0);
+}
+        #channelCreateSearcCreateNewChannelButton:hover{
+            background-color: rgb(240, 252, 73);
+            box-shadow: 6px 6px 2px black;
+        }

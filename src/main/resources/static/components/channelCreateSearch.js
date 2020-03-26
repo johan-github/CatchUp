@@ -10,23 +10,42 @@ export default{
     
 
     template: `
-        <section id="channelCreateSearchBox">
+        <section id="channelCreateSearchContainer">
 
-            <div id="channelCreateSearchBoxSearchBar">
-                <input id="channelCreateSearchBoxSearchBarInput">
+             <form id="channelCreateSearchSearchAndCreateBox">
+
+                <input id="channelCreateSearchBar"
+                    type="text" placeholder="Search channel..."
+                    @keyup.enter = "channelName">
+            
+                <button id="channelCreateSearchButton"
+                    @click="namn">Search</button>
+
+                <button id="channelCreateSearcCreateNewChannelButton"
+                    @click="routeToCreateChannels">Create new channel</button>
+                    
+            </form>
+
+            <!------------------------------------------------------------------->
+            <!------------------------------------------------------------------->
+    <div  id="channelCreateSearchForm">
+            <div
+                v-for="(channel, i ) of channels">
+
+                <div id="channelCreateSearchChannelInfo"
+                    @click="filterByName">{{ channel.name }}</div>
+
+            </div>
             </div>
 
-            <div id="channelCreateSearchBoxCreateNewChannel">
-                <button id="channelCreateSearchBoxCreateNewChannelButton">Create new Channel</button>                
-            </div>
 
-            <div id="channelCreateSearchBoxCompCreateChannel">
-                <createChannel/>                
-            </div>
 
-            <div id="channelCreateSearchBoxCompDisplayChannel">
+
+
+
+            <!--<div id="channelCreateSearchBoxCompDisplayChannel">
                 <displayChannel/>                
-            </div>            
+            </div>-->          
 
 
         </section>
@@ -35,51 +54,126 @@ export default{
 
     data(){
         return{
-            channelName: '',
-            channelStatus: '',
 
-            firstName: '',
-            lastName: ''
+            channelName: '',
+                channelURL: '',
+                channelStatus: '',
+            
 
         }
     },
+
+
+
 
 
     methods:{
-        
-        
-        async createChannel(){
-            if( !this.channelName.trim()){
-                return;
-            }
+        clicked(){
+            console.log("clicked")
+        },
 
-            let channel = {
-                channelName: this.channelName
-            }
+        
 
-            let result = await fetch( '/rest/channel/',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify( channel )
+
+        filterByName(){
+
+            /*for( let channel of this.channels ){
+                console.log( channel )
+            }*/
+
+            this.channels.filter( channel => {
+                if( channel === this.channelName ){
+                    console.log( channel.name )
+                }
+
+                console.log( channel )
             })
 
+            /*channels().fiter( channel => channel.name === this.channelName )*/
+            
+            
+
+
+
+
+
+
+        },
+
+
+
+        routeToCreateChannels(){
+            console.log("cliked")
+            this.$router.push( '/createChannel')
+
+        },
+
+        async createChannel(){
+
+            if( !this.channelName.trim()){
+                return
+            }
+            
+            if( this.channelURL === '' ){
+                this.channelURL = 'https://www.barriblog.com/wp-content/uploads/2011/02/python.png'
+            }
+            
+            let newChannel = {
+
+                name : this.channelName,
+                url: this.channelURL,
+                status : this.channelStatus
+            }           
+            
+            let result = await fetch( '/rest/channels',{
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify( newChannel )
+            })
+            
             result = await result.json();
             
-            this.$store.commit( 'appendChannel', channel);
+            this.$store.commit( 'appendChannel', newChannel );
 
-            this.channelName = '';
-        }
+            this.channelName = ''
+            this.channelURL = ''
+            this.channelStatus = ''
+        },
     },
 
+
+
     computed:{
+
+
         returnName(){
             return this.$store.state.names
-        }
+        },
+
+        
+        channels(){
+            return this.$store.state.channels
+        },
+    },
+
+
+
+    async created(){
+
+
+        await fetch('/rest/channels')
+            .then( channels => channels.json())
+            .then( channels => this.$store.commit( 'setChannels', channels))
     }
-}
 
 
 
 
+
+
+
+
+
+} /********* E N D */
