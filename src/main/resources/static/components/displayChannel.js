@@ -12,32 +12,52 @@ export default{
         <section>
             
             <div id="displayChannelBox"
-            v-for="(currentUser, i ) of currentUsers">
+            v-for="(myChannel, i ) of myChannels">
 
-                    <div id="displayChannelBoxAccountid"> {{currentUser.enterUserEmail}} </div>
+                    <div id="displayChannelBoxAccountid"> {{myChannel}} </div>
 
                     <div id="displayChannelBoxFavorite">❤️</div>
             </div>
-
-        <button @click='getCurrentUserInfo'>See Current User</button>
         </section>
     `,
 
 
 
+
+
 /*********************************************************************************************************** Methods:*/
 
+    data() {
+        return {
+            channelIds : [],
+            myChannels : []
+        }
+    },
+
     methods:{
+        getMyChannels(){
+            for(let channel of this.channels) {
+                for(let channelId of this.channelIds) {
+                    if(channel.id === channelId) {
+                        this.myChannels.push(channel.name)
+                        console.log(channel.name)
+                    }
+                }
+            }
+        },
+
 
         getCurrentUserInfo(){
-            let channelIds = [];
          for(let accountChannel of this.accountChannels) {
              if(accountChannel.accountid === this.currentUsers.id) {
-                 channelIds.push(accountChannel.channelid)
-             }
+                 this.channelIds.push(accountChannel.channelid)
+             } 
          } 
+        //  console.log("hittade inga kanaler")
+        //  return
 
-         console.log(channelIds)
+         console.log(this.channelIds)
+         this.getMyChannels()
             
         }
 
@@ -114,6 +134,8 @@ export default{
         .then(accountChannels => accountChannels.json())
         .then(accountChannels => this.$store.commit('setAccountChannels', accountChannels))
         .then(this.accountChannels.forEach(accountChannel => console.log(accountChannel)))
+
+        this.getCurrentUserInfo()
         
     }
 
