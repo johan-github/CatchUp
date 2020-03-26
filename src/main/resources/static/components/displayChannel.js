@@ -30,9 +30,14 @@ export default{
     methods:{
 
         getCurrentUserInfo(){
-            console.log(this.currentUsers.id);
-            console.log(this.currentUsers.email);
-            console.log(this.currentUsers.usernick);
+            let channelIds = [];
+         for(let accountChannel of this.accountChannels) {
+             if(accountChannel.accountid === this.currentUsers.id) {
+                 channelIds.push(accountChannel.channelid)
+             }
+         } 
+
+         console.log(channelIds)
             
         }
 
@@ -108,7 +113,7 @@ export default{
         await fetch('/rest/accountchannels')
         .then(accountChannels => accountChannels.json())
         .then(accountChannels => this.$store.commit('setAccountChannels', accountChannels))
-        // .then(accounts => accounts.forEach(account => console.log(account)))
+        .then(this.accountChannels.forEach(accountChannel => console.log(accountChannel)))
         
     }
 
