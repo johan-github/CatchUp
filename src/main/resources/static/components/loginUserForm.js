@@ -45,6 +45,7 @@ export default {
             currentUser = await fetch('/rest/accounts/email/' + this.enterUserEmail)
              
             currentUser = await currentUser.json()
+            
 
             if (currentUser.password == this.enterPassword){
                 console.log(currentUser)
