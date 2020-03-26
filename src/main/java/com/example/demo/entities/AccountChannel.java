@@ -11,7 +11,6 @@ public class AccountChannel {
     private int id;
     private int accountid;
     private int channelid;
-    private String channelform; //Enum in database: 'private', 'public'
     private String admin; //Enum in database: 'true', 'false'
 
     public AccountChannel() {
@@ -39,14 +38,6 @@ public class AccountChannel {
 
     public void setChannelid(int channelid) {
         this.channelid = channelid;
-    }
-
-    public String getChannelform() {
-        return channelform;
-    }
-
-    public void setChannelform(String channelform) {
-        this.channelform = channelform;
     }
 
     public String getAdmin() {

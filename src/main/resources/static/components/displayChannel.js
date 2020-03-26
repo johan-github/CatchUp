@@ -108,7 +108,7 @@ export default{
         await fetch('/rest/accountchannels')
         .then(accountChannels => accountChannels.json())
         .then(accountChannels => this.$store.commit('setAccountChannels', accountChannels))
-        .then(accounts => accounts.forEach(account => console.log(account)))
+        // .then(accounts => accounts.forEach(account => console.log(account)))
         
     }
 
