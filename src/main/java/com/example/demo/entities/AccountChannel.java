@@ -10,9 +10,8 @@ public class AccountChannel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int accountid;
-    private int channelnameid;
-    private String channelform; //Enum in database: 'private', 'public'
-    private String admin; //Enum in database: 'true', 'false'
+    private int channelid;
+    private String admin;
 
     public AccountChannel() {
     }
@@ -33,25 +32,15 @@ public class AccountChannel {
         this.accountid = accountid;
     }
 
-    public int getChannelnameid() {
-        return channelnameid;
+    public int getChannelid() {
+        return channelid;
     }
 
-    public void setChannelnameid(int channelnameid) {
-        this.channelnameid = channelnameid;
-    }
-
-    public String getChannelform() {
-        return channelform;
-    }
-
-    //Enum in database: 'private', 'public'
-    public void setChannelform(String channelform) {
-        this.channelform = channelform;
+    public void setChannelid(int channelid) {
+        this.channelid = channelid;
     }
 
     public String getAdmin() {
-
         return admin;
     }
 

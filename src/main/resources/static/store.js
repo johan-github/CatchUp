@@ -10,10 +10,11 @@ export const store = new Vuex.Store({
         channels:[],
         accountChannels:[],
 
-        currentUser:[{
-            enterUserEmail: '',
-            enterPassword: ''
-        }],
+        currentUser:{
+            id:'',
+            email:'',
+            usernick:'',            
+        },
     },
 
 
@@ -25,7 +26,7 @@ export const store = new Vuex.Store({
         setChannels(state, channels){
             state.channels = channels},
         appendChannel(state, channel){
-            state.channel.push( channel )},
+            state.channels.push( channel )},
         removeChannel( state, index ){
             state.channels.splice( index, 1 ) /* index: pos / 1: amount */ },
 
@@ -50,6 +51,7 @@ export const store = new Vuex.Store({
         removeTestChannel( state, index ){
             state.testChannels.splice( index, 1 ) /* index: pos / 1: amount */ },
 
+        /************************************************************************* channelNames */
 
         /*********************************************** listFriends*/
         setFriendList(state, friendList){
@@ -64,54 +66,31 @@ export const store = new Vuex.Store({
             state.myAccount = myAccount },
 
         deleteMyAccount(state, myAccount){
-            state.myAccount = null} // '' instead of null?
+            state.myAccount = null // '' instead of null? 
+        },
+
+
+        /************************************************************************** channels */
+
+
+        setChannels( state, channels ){
+            state.channels = channels },
+
+        appendChannel( state, channel ){
+            state.channels.push( channel ) },
+
+        removeChannel( state, index ){
+            state.channels.splice( index, 1 ) },
+        
+        
+        /************************************************************************** channels */
+        /************************************************************************** channels */
+        /************************************************************************** channels */
+        /************************************************************************** channels */
+        /************************************************************************** channels */
+
+
     }
-
-/*********************************************************************************************************** */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

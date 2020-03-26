@@ -34,22 +34,23 @@
     opacity: 0.9;
 }
 
+/*
 .loginbutton {
-        box-sizing: border-box;
-        background-color: rgb(18, 77, 128);
-        color: white;
-        padding: 15px 20px;
-        border: none;
-        cursor: pointer;
-        width: 80px;
-        opacity: 0.8;
-        border-radius: 30%;
-        border: none;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        margin-left: 141px;
-        cursor: pointer;
-}
+    box-sizing: border-box;
+    background-color: rgb(18, 77, 128);
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    width: 80px;
+    opacity: 0.8;
+    border-radius: 30%;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    margin-left: 141px;
+    cursor: pointer;
+}*/
