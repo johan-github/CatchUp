@@ -17,9 +17,9 @@ export default{
                     <div id="displayChannelBoxAccountid"> {{currentUser.enterUserEmail}} </div>
 
                     <div id="displayChannelBoxFavorite">❤️</div>
-
             </div>
 
+        <button @click='getCurrentUserInfo'>See Current User</button>
         </section>
     `,
 
@@ -28,6 +28,13 @@ export default{
 /*********************************************************************************************************** Methods:*/
 
     methods:{
+
+        getCurrentUserInfo(){
+            console.log(this.currentUsers.id);
+            console.log(this.currentUsers.email);
+            console.log(this.currentUsers.usernick);
+            
+        }
 
     //     async getSome( channelnameid ){
 
@@ -97,9 +104,12 @@ export default{
         .then(channels => channels.json())
         .then(channels => this.$store.commit('setChannels', channels))
 
-        // await fetch('/rest/accountchannels')
-        // .then(accountChannels => accountChannels.json())
-        // .then(accountChannels => this.$store.commit('setAccountChannels', accountChannels))
+
+        await fetch('/rest/accountchannels')
+        .then(accountChannels => accountChannels.json())
+        .then(accountChannels => this.$store.commit('setAccountChannels', accountChannels))
+        .then(accounts => accounts.forEach(account => console.log(account)))
+        
     }
 
 

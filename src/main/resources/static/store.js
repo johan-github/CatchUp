@@ -10,10 +10,11 @@ export const store = new Vuex.Store({
         channels:[],
         accountChannels:[],
 
-        currentUser:[{
-            enterUserEmail: '',
-            enterPassword: ''
-        }],
+        currentUser:{
+            id: '',
+            email: '',
+            usernick: '',
+        },
     },
 
 
@@ -41,8 +42,7 @@ export const store = new Vuex.Store({
 
         /*********************************************************** CurrentUser */
         setCurrentUser(state, currentUser){
-            state.currentUser = currentUser
-        },
+            state.currentUser = currentUser},
 
 
         /*********************************************** */
