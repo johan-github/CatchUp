@@ -7,7 +7,7 @@ export default {
         <div class="logindiv">
         <i class="fa fa-envelope"></i>
         <label >Enter your email</label>
-        <input class="logininput" placeholder="email" v-model="enterUserEmail" required>
+        <input class="logininput" type="email" placeholder="email" v-model="enterUserEmail" required>
         </div>
         <div class="logindiv">
         <i class="fa fa-key"></i>
