@@ -1,19 +1,38 @@
-import home from '../views/home.js'
+
+import navbarLoggedIn from './components/navbarLoggedIn.js'
+import loginUserForm from './components/loginUserForm.js'
+
+
 
 
 export default{
-    components:{
-        home
-    },
+  components:{
+    loginUserForm,
+    navbarLoggedIn,
+  },
 
-    //************************************************************** */
 
+  template:`
 
-    template:`
-        <div>
-            <home/>
+    <section id="appContainer">
+
+        <div id="appButton">
+            <h3>| | |</h3>
+        </div>
+
+        <div id="appNav">
+          <navbarLoggedIn/>
         </div>
         
-    `,
 
+        <main id="appMain">
+            <router-view/>
+            <!--<loginUserForm/>-->
+        </main>
+        
+    </section>
+
+  `,
+    
+    
 }

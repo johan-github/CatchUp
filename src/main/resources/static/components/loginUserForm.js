@@ -1,61 +1,141 @@
 
 export default {
     template:`
-    <div class="loginuser">
-    <form @submit.prevent="loginCurrentUserForm" class="loginuserform">
-    <h2>Please login to continue</h2>
-        <div class="logindiv">
-        <i class="fa fa-user"></i>
-        <label >Enter your email</label>
-        <input class="logininput" placeholder="email" v-model="enterUserEmail">
-        </div>
-        <div class="logindiv">
-        <i class="fa fa-key"></i>
-        <label>Enter your password</label>
-        <input  class="logininput" placeholder="password" v-model="enterPassword" type="password">
-        </div>
-        <button class="loginbutton">Login</button>
-    </form>
-    </div>
+        <section>
 
-    
+            <form @submit.prevent="loginCurrentUserForm" id="container">
+
+                <label id="label"> Please login to continue </label>
+                
+                <div id="loginUserFormFields">
+                    
+                    <div>
+                        <input id="loginUserFormUsernameField" placeholder="Enter your email" v-model="enterUserEmail" type="text">
+                        <div id="msgError">{{ msgErrorUsername }}</div>
+                    </div>
+
+                    <div>
+                        <input id="loginUserFormPasswordField" placeholder="Enter your password" v-model="enterPassword" type="password">
+                        <div id="msgError">{{ msgErrorPassword }}</div>
+                    </div>
+
+                    
+                </div>             
+
+                    <button id="loginUserFormButtonLogin">Login</button>
+                
+            </form>
+                
+        </section>    
     `,
+
+
 
     data() {
         
         return {
             enterUserEmail: '',
-            enterPassword: ''
+            enterPassword: '',
+
+            msgErrorUsername : '',
+            msgErrorPassword : '',
         }
     },
 
+
+
     methods: {
         async loginCurrentUserForm() {
-            if (!this.enterUserEmail.trim() || !this.enterPassword.trim()) {
+            if (!this.enterUserEmail.trim()) {
+                this.msgErrorUsername = 'Please enter your email!'
+                this.msgErrorPassword = ''
                 return
             }
+            
 
-            console.log("TEST " + this.enterUserEmail, this.enterPassword)
+            this.msgErrorUsername = ''
 
-            let currentUser = {
-                enterUserEmail: this.enterUserEmail,
-                enterPassword: this.enterPassword
+
+            if (!this.enterPassword.trim()) {
+                this.msgErrorPassword = 'Please enter your password!'
+                return
             }
+            
 
-            currentUser = await fetch('/rest/accounts/email/' + this.enterUserEmail)
-             
-            currentUser = await currentUser.json()
+            this.msgErrorPassword = ''
+            
 
-            if (currentUser.password == this.enterPassword){
-                console.log(currentUser)
+            let accountsFromDB = await fetch('/rest/accounts')
+                .then( accounts => accounts.json())
 
-                this.$store.commit('setCurrentUser', currentUser)
-                this.$router.push('/home')
-
+                console.log( "1")
+                for( let account of accountsFromDB ){
+                    
+                    console.log( "2")
+                    if( account.email.toLowerCase() === this.enterUserEmail.toLowerCase() ){
+                        
+                        let foundUserWithEnteredEmail = await fetch('/rest/accounts/email/' + this.enterUserEmail)
+                        .then( rightAccount => rightAccount.json())
+                        
+                        console.log( "4")
+                        console.log( "account.email " + account.email)
+                        if ( foundUserWithEnteredEmail.password === this.enterPassword ){
+                        this.$store.commit('setCurrentUser', foundUserWithEnteredEmail)
+                        this.$store.commit('changeLoggedIn')
+                        this.$router.push('/home')                        
+                    }
+                }                
             }
-
-            console.log(currentUser.password);
+            
+            this.msgErrorPassword = 'Please enter a valid username and/or password!'
+            return
             
         }
+    },
+
+
+
+    computed:{
+
+        userLoggedIn(){
+            return this.$store.state.userLoggedIn
+        }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

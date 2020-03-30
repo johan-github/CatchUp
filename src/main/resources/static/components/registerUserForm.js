@@ -42,7 +42,7 @@ data() {
         addNickname: '',
         addPassword: '',
         defaultAvatar: 'http://158.174.120.227/CatchUp/avatar01.png',
-        defaultStatus: 'no',
+        defaultStatus: 'offline',
         confirmPassword: '',
         passwordAlert: ''
     }

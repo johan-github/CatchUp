@@ -1,7 +1,10 @@
+import channelCreateSearch from './channelCreateSearch.js'
+
 
 
 export default{
     components:{
+        channelCreateSearch,
     },
 
 
@@ -9,55 +12,95 @@ export default{
 
 
     template:`
-        <section>
-            
-            <div id="displayChannelBox"
-            v-for="(currentUser, i ) of currentUsers">
+        <section id="container">
 
-                    <div id="displayChannelBoxAccountid"> {{currentUser.enterUserEmail}} </div>
+            <h3 id="label">My channels?</h3>
 
-                    <div id="displayChannelBoxFavorite">❤️</div>
+            <div  id="scrollContainer">
+                <div v-for="(myChannelName, i ) of myChannelNames">
 
+                <div id="channelCreateSearchChannelInfo"
+                    @click="channelSelected( myChannelName.id )">{{ myChannelName.name }}</div>
+
+                </div>
+                
             </div>
+
+            <button @click="createNewChannel">Create channel</button>
 
         </section>
     `,
 
 
 
+
+
 /*********************************************************************************************************** Methods:*/
+
+    data() {
+        return {
+            channelIds : [],
+            myChannelNames : [],
+            allMessages : [],            
+        }
+    },
+    
+
+/*********************************************************************************************************** Methods:*/
+
 
     methods:{
 
-    //     async getSome( channelnameid ){
 
-    //         let channels = await fetch('/rest/latestchannelmessages/'+5)
-    //             .then( c => c.json())
+        channelSelected( myChannelId ){
 
-    //         console.log( channelNames[channelnameid].name )
-    //     },
+            let tempMessages = [];
+            
 
-    //     ifSameChannelId( id ){
-    //         console.log("clicked")
+            for( let message of this.allMessages ){
+                if( message.channelid === myChannelId ){
+                    tempMessages.push( message );
+                }
+            }
+            
+            
+            this.$store.commit( 'setCurrentChannelMessages', tempMessages )
+            this.$router.push( '/channelMessage')
 
-    //         channels.forEach( c => {
-    //             console.log( c.id )
-    //             /*channelNames.forEach( cn => {
-    //                 console.log( cn[ c.accountid ] )
-    //             })*/
-    //         })
-    //     },
+            return
 
-    //     getChannelNameFromId(){
-    //         channelNames.forEach( channelName => console.log( channelName ))
-    //     },
-        
+        },
 
-        
-    //     /***************************************************************************** REMOVE */
 
-    //     removeChannels( index ){
-    //         this.$store.commit( 'removeChannel', index ) },
+        getMyChannels(){
+            for(let channel of this.channels) {
+                for(let channelId of this.channelIds) {
+                    if(channel.id === channelId) {
+                        this.myChannelNames.push(channel)
+                    }
+                }
+            }
+        },
+
+
+        getCurrentUserInfo(){
+            if( this.userLoggedIn.loggedIn === 'true' ){
+
+                for(let accountChannel of this.accountChannels) {
+                    if(accountChannel.accountid === this.currentUser.id) {
+                        this.channelIds.push(accountChannel.channelid)
+                    } 
+                }
+                this.getMyChannels()                    
+            }
+        },
+
+
+        createNewChannel(){
+            this.$router.push( '/createChannel')
+        }
+
+
 
     },
 
@@ -73,8 +116,16 @@ export default{
             return this.$store.state.accountChannels
         },
 
-        currentUsers(){
+        currentUser(){
             return this.$store.state.currentUser
+        },
+
+        userLoggedIn(){
+            return this.$store.state.userLoggedIn
+        },
+
+        currentUserMessages(){
+            return this.$store.state.currentChannelMessages;
         },
     },
 
@@ -87,19 +138,27 @@ export default{
 
     async created(){
 
-//        .then( channels => this.$store.commit( 'setChannels', channels ))
-
-/**
- * Variable translated to json (java),
- * variable gets sent to store
- */
+        /**
+         * Variable translated to json (java),
+         * variable gets sent to store
+         */
         await fetch('/rest/channels')
         .then(channels => channels.json())
         .then(channels => this.$store.commit('setChannels', channels))
 
-        // await fetch('/rest/accountchannels')
-        // .then(accountChannels => accountChannels.json())
-        // .then(accountChannels => this.$store.commit('setAccountChannels', accountChannels))
+
+        await fetch('/rest/accountchannels')
+        .then(accountChannels => accountChannels.json())
+        .then(accountChannels => this.$store.commit('setAccountChannels', accountChannels))
+
+        
+        await fetch('/rest/messages')
+            .then( messages => messages.json())
+            .then( messages => this.allMessages = messages )
+
+
+        this.getCurrentUserInfo()
+        
     }
 
 

@@ -9,6 +9,8 @@ import options from './views/options.js'
 import about from './views/about.js'
 import registerUser from './views/registerUser.js'
 import loginUser from './views/loginUser.js'
+import createChannel from './views/createChannel.js'
+import channelMessage from './views/channelMessage.js'
 
 export const router = new Router({
     mode: 'history',
@@ -54,7 +56,17 @@ export const router = new Router({
             name: 'loginUser',
             path: '/loginuser',
             component: loginUser
-        }
+        },
+        {
+            name: 'createChannel',
+            path: '/createChannel',
+            component: createChannel
+        },
+        {
+            name : 'channelMessage',
+            path : '/channelMessage',
+            component : channelMessage,
+        },
 
 
 

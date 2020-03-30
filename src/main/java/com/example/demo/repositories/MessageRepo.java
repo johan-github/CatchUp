@@ -13,5 +13,7 @@ public interface MessageRepo extends CrudRepository<Message, Integer> {
 
     public Message findById(int id );
 
+    public List<Message> findAllByAccountid(int id );
+
     public List<Message> findBychannelid(int id);
 }

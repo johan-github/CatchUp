@@ -15,8 +15,29 @@ public class MessageService {
     @Autowired
     MessageRepo messageRepo;
 
+    @Autowired
+    private SocketService socketService;
+
+    public List<Message> getAllMessages(){
+        return ( List<Message> ) messageRepo.findAll();
+    }
+
+    public List<Message> getAllMessagesByEAccountId( int id ){
+        return ( List<Message> ) messageRepo.findAllByAccountid( id );
+    }
+
+
+
     public Message addNewMessage(Message message ){
-        return messageRepo.save( message );
+
+        Message dbMessage = null;
+
+        try{ //Simple way for avoiding crashes
+            dbMessage = messageRepo.save( message );
+        }catch(Exception e ){
+            e.printStackTrace();
+        }
+        return dbMessage;
     }
 
     public List<Message> getChannelMessage(int id) {

@@ -6,14 +6,45 @@ export const store = new Vuex.Store({
     state:{
 
         friendList:[],
-        myAccount: '',
         channels:[],
         accountChannels:[],
+        messages : [],
 
-        currentUser:[{
-            enterUserEmail: '',
-            enterPassword: ''
-        }],
+        myAccount: '',
+
+        currentUser:{
+            id: '0',
+            email: '',
+            usernick: '',
+        },
+
+        currentChannelMessages : [],
+
+        currentChannelId : '',
+
+
+        navBar:{
+            login : 'L O G I N',
+            register : 'R E G I S T E R',
+            home : '',
+            channels : '',
+            friends : '',
+            options : '',
+            about : '',
+            logOut : '',
+            routeLogin : '/loginUser',
+            routeRegister : '/registerUser',
+            routeHome : '',
+            routeChannels : '',
+            routerFriends : '',
+            routeOptions : '',
+            routeAbout : '',
+            routeLogOut : '',
+        },
+
+        userLoggedIn : {
+            loggedIn : 'false',
+        }
     },
 
 
@@ -21,11 +52,47 @@ export const store = new Vuex.Store({
 
     mutations:{
 
+
+        /*********************************************** currentChannelMessages */
+
+        setCurrentChannelMessages( state, currentChannelMessages ){
+            state.currentChannelMessages = currentChannelMessages; },
+
+
+
+        /*********************************************** currentChannelId */
+        setCurrentChannelId( state, currentChannelId ){
+            state.currentChannelId = currentChannelId; },
+
+
+
+        /*********************************************** messages */
+        setMessages(state, messages){
+            state.messages = messages; },
+
+        appendMessage( state, message ){
+            state.messages.push( message ); },
+
+        removeMessage( state, index ){
+            state.messages.splice( index, 1 ); },
+
+
+
+        /*********************************************** userLoggedIn */
+
+        changeLoggedIn(state){
+            state.userLoggedIn.loggedIn = 'true'
+        },
+
+
+
+
+
         /*********************************************** channels*/
         setChannels(state, channels){
             state.channels = channels},
         appendChannel(state, channel){
-            state.channel.push( channel )},
+            state.channels.push( channel )},
         removeChannel( state, index ){
             state.channels.splice( index, 1 ) /* index: pos / 1: amount */ },
 
@@ -41,8 +108,7 @@ export const store = new Vuex.Store({
 
         /*********************************************************** CurrentUser */
         setCurrentUser(state, currentUser){
-            state.currentUser = currentUser
-        },
+            state.currentUser = currentUser},
 
 
         /*********************************************** */
@@ -50,6 +116,7 @@ export const store = new Vuex.Store({
         removeTestChannel( state, index ){
             state.testChannels.splice( index, 1 ) /* index: pos / 1: amount */ },
 
+        /************************************************************************* channelNames */
 
         /*********************************************** listFriends*/
         setFriendList(state, friendList){
@@ -64,54 +131,31 @@ export const store = new Vuex.Store({
             state.myAccount = myAccount },
 
         deleteMyAccount(state, myAccount){
-            state.myAccount = null} // '' instead of null?
+            state.myAccount = null // '' instead of null? 
+        },
+
+
+        /************************************************************************** channels */
+
+
+        setChannels( state, channels ){
+            state.channels = channels },
+
+        appendChannel( state, channel ){
+            state.channels.push( channel ) },
+
+        removeChannel( state, index ){
+            state.channels.splice( index, 1 ) },
+        
+        
+        /************************************************************************** channels */
+        /************************************************************************** channels */
+        /************************************************************************** channels */
+        /************************************************************************** channels */
+        /************************************************************************** channels */
+
+
     }
-
-/*********************************************************************************************************** */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
