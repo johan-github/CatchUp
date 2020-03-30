@@ -20,6 +20,15 @@
 
 	<dependencies>
 
+		<dependency> <!-- Lägger till WebSocket i Spring -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+
+		<dependency> <!-- GSON är motsvarigheten till JSON (stringify/tolka saker). Här "översätts" saker från JSON/JS till JavaSpring  -->
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>

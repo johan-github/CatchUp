@@ -1,28 +1,42 @@
+@import "styleStandard.css";
+@import "registerUserForm.css";
+@import "loginUserForm.css";
+@import "channelCreateSearch.css";
+@import "createChannel.css";
+
+
+/*************************************************************************/
+
 *{
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
 
+
+
 /*************************************************************************/
 
-body{
+html, body{
     background-image: url("https://i.pinimg.com/originals/af/84/35/af8435f0ccb57c2cc1e205cc4637b97a.jpg");
+    background-color: rgb(48, 119, 83);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
+
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    margin-left: 4px;
 }
 
 
-/*************************************************************************/
 
-.nav{
-    /*display: grid;
-    grid-template-rows: repeat( 6, 1fr );*/
-    background-color: rgb(18, 77, 128);
-    margin: 60px 10px 10px 0px;
-}
-        #navHome,#navChannels,#navFriends,#navOptions,#navAbout,#navLogout {
+/************************************************************************* Scroller ***/
+
+
+
+        #navLogin, #navRegister {
 
             background-color: rgb(18, 77, 128);
             color: rgb(205, 205, 255);
@@ -30,12 +44,18 @@ body{
             padding: 10px 10px 10px 10px;
             margin: 10px;
 
-            align-items: center;
-            text-align: right;
+            align-items: stretch;
+            text-align: justify;
+         
             
             font: bold 16px Arial, Helvetica, sans-serif;
-
         }
+
+        nav a:hover {
+            opacity: 0.4;
+          }
+
+
         a {
             color: rgb(189, 188, 255);
             text-decoration: none;
@@ -53,11 +73,10 @@ body{
 
 #appContainer{
     display: grid;
-    grid-template-columns: 30px 0px minmax(auto, 600px);
+    grid-template-columns: 50px 0px 1150px;
     /*grid-template: repeat( 1, [row] auto) / repeat( 2, [col] 100px);*/
     grid-template-areas:
-    "appNav appButton  appMain";
-
+    "appNav appButton appMain";
 }
         #appButton {
             color: rgb(60, 85, 82);
@@ -112,11 +131,52 @@ body{
             transition: .2s ease;
         }
 
+@media screen and ( max-width: 1200px){
+    #appContainer{
+        display: grid;
+        grid-template-columns: minmax(auto, 50px) 0px minmax(auto, 600px);
+        /*grid-template: repeat( 1, [row] auto) / repeat( 2, [col] 100px);*/
+        grid-template-areas:
+        "appNav appButton  appMain";
+    
+    }
+}
+
         
 
-
-
 /*************************************************************************/
+
+.nav{
+    /*display: grid;
+    grid-template-rows: repeat( 6, 1fr );*/
+    background-color: rgb(18, 77, 128);
+    margin: 10px 0px 10px 0px;
+}
+        #navHome,#navChannels,#navFriends,#navOptions,#navAbout,#navLogout {
+
+            background-color: rgb(18, 77, 128);
+            color: rgb(205, 205, 255);
+
+            padding: 10px 10px 10px 10px;
+            margin: 10px;
+
+            align-items: center;
+            text-align: right;
+            
+            font: bold 16px Arial, Helvetica, sans-serif;
+
+        }
+        a {
+            color: rgb(189, 188, 255);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+
+
+
+
+/******************************************************************************* messageBox **/
             
 #messageBoxUserPic{ grid-area: pic; }
 #messageBoxUserName{ grid-area: name; }
@@ -171,86 +231,8 @@ body{
         }
 
 
-/*************************************************************************/
 
-#createChannelBoxTextField{ grid-area: createChannelBoxTextField; }
-#createChannelBoxMembers{ grid-area: createChannelBoxMembers; }
-#createChannelBoxAddButton{ grid-area: createChannelBoxAddButton; }
-#createChannelBoxMembersLabel{ grid-area: createChannelBoxMembersLabel; }
-
-#createChannelBox{
-    display: grid;
-    /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
-    grid-template-columns: 80px minmax( 200px, auto) auto;
-    grid-template-rows: 30px 30px;
-    grid-template-areas:
-    "createChannelBoxTextField createChannelBoxTextField createChannelBoxTextField"
-    "createChannelBoxMembersLabel createChannelBoxMembers createChannelBoxAddButton";
-
-    background-color: rgb(26, 48, 48);
-    opacity: 0.9;
-    
-    padding: 10px;
-    margin: 10px;
-    box-shadow: 5px 5px 5px #000000;
-    border-radius: 5px 0px 5px 0px;
-
-    justify-self: center;
-    align-items: center;
-}
-        #createChannelBoxMembers {
-            position: relative;
-
-            width: auto;
-            height: 20px;
-        }
-        #createChannelBoxMembers:hover {
-            position: relative;
-            width:200px;
-            height: 210px;
-        }
-
-/*************************************************************************/
-
-#displayChannelBoxName{ grid-area: dCBName; }
-#displayChannelBoxStatus{ grid-area: dCBStatus; }
-#displayChannelBoxMember{ grid-area: dCBMember; }
-#displayChannelBoxRemove{ grid-area: dCBNRemove; }
-#displayChannelBoxLastMessage{ grid-area: dCBLastMsg; }
-#displayChannelBox{
-    display: grid;
-    /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
-    grid-template-columns: 20px minmax( 100px, max)  20px;
-    grid-template-rows: 25px 25px auto;
-    grid-template-areas:
-    "dCBStatus dCBName dCBName"
-    "dCBMember dCBMember dCBNRemove"
-    "dCBLastMsg dCBLastMsg dCBLastMsg";
-
-    background-color: rgb(27, 44, 44);
-    opacity: 0.9;
-    
-    padding: 20px;
-    margin: 10px;
-    
-    box-shadow: 5px 5px 5px #000000;
-    border-radius: 5px 0px 5px 0px;
-    
-    align-items: center;
-}
-        #displayChannelBox > div {
-            padding: 10px;
-            margin: 10px;
-        }
-        #displayChannelBoxName {
-            justify-self: left;
-            padding: 0px 0px 0px 50px;
-        }
-        #displayChannelBoxRemove:hover{
-            cursor: default;
-        }
-
-/*************************************************************************/
+/******************************************************************************************** optionsBox */
 
 #optionsBoxTextField{ grid-area: optionsBoxTextField; }
 #optionsBoxAddButton{ grid-area: optionsBoxAddButton; }
@@ -274,7 +256,7 @@ body{
     align-items: center;
 }
 
-/*************************************************************************/
+/************************************************************************************ displayFriendBox */
             
 #displayFriendPic{ grid-area: dFPic; }
 #displayFriendNick{ grid-area: dFNick; }
@@ -325,22 +307,38 @@ body{
         }
 
 
-
-/*************************************************************************/
+/************************************************************************************ addFriendBox */
             
-#displayChannelPic{ grid-area: dChannelPic; }
-#displayChannelNick{ grid-area: dChannelNick; }
-#displayChannelAddFavorite{ grid-area: dChannelFav; }
+#addFriendBoxTop{ grid-area: aFTop; }
+#addFriendBoxBottom{ grid-area: aFTBottom; }
+#addFriendTextSearchFriend{ grid-area: aFTSFriend; }
+#addFriendBoxForm{ grid-area: aFForm; }
+#addFriendBoxPic{ grid-area: aFPic; }
+#addFriendBoxName{ grid-area: aFName; }
 
-#displayChannelBox{
+#addFriendBox{
     display: grid;
-    /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
-    grid-template-columns: 50px minmax( 100px, 150px) auto 20px 20px 20px;
-    grid-template-rows: 10px;grid-template-areas:
-    "dChannelPic dChannelNick dChannelFav";
+    grid-template-rows: 40px minmax(auto, 250px);
+    grid-template-areas:
+    "aFTop"
+    "aFTBottom";
 
+    padding: 10px;
+    margin: 10px;
+}
+        #addFriendBoxBottom{
+            /*background-color: rgb(46, 69, 77);*/
+            height: 100%;
+            overflow: auto;
+        }
 
-    background-color: rgb(27, 44, 44);
+#addFriendBoxForm{
+    display: grid;
+    grid-template-columns: 50px minmax( 200px, auto);
+    grid-template-rows: 10px;
+    grid-template-areas:
+    "aFPic aFName";
+    
     opacity: 0.9;
     
     padding: 10px;
@@ -349,35 +347,124 @@ body{
     box-shadow: 5px 5px 5px #000000;
     border-radius: 5px 0px 5px 0px;
 
-    align-items: center;
+    transition: 1s;
 }
-      /*  #displayFriendBox > div {
+        #addFriendBoxForm > div {
             padding: 10px;
-        }*/
-      /*  #displayFriendPic{
+        }
+        #addFriendBox, #addFriendBoxForm{
+            align-items: center;
+            justify-items: center;
+        }        
+        #addFriendBoxName{
+            font: bold 16px Arial, Helvetica, sans-serif;
+            color: white;
+            justify-self: end;
+        }
+        #addFriendBoxPic{
             background-image: url("https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png");
             background-size: cover;
             background-position: center;
             box-shadow: 5px 5px 5px #000000;
-        }*/
-      /*  #displayFriendNick {
+
+            justify-self: start;
         }
+        #addFriendBoxForm:hover{
+            transition: .2s;
+            background-color: rgb(49, 78, 78);
+            opacity: 0.9;
+        }
+        #addFriendTextSearchFriend{
+            background-color: rgb(180, 180, 180);
+            border-radius: 2px 2px 0px 0px;
+            width: 250px;
+            padding-left: 5px;
+            box-shadow: 1px 1px 1px black;
+
+            border: none;
+            outline: none;
+
+            transition: .5s;
+        }
+                #addFriendTextSearchFriend:hover{
+                    background-color: rgb(223, 223, 223);
+                    width: 250px;
+                    padding-left: 5px;
+                    box-shadow: 4px 4px 4px black;
         
-        #displayFriendAdd{
+                    border: none;
+                    outline: none;
+
+                    transition: .2s;
+                }
+
+
+/************************************************************************************ addFriendAddedBox */
+
+#addFriendAddedBoxBottom{ grid-area: aFABottom; }
+#addFriendAddedBoxForm{ grid-area: aFAForm; }
+#addFriendAddedBoxPic{ grid-area: aFAPic; }
+#addFriendAddedBoxName{ grid-area: aFAName; }
+
+#addFriendAddedBox{
+    display: grid;
+    grid-template-rows: minmax(auto, 250px);
+    grid-template-areas:
+    "aFABottom";
+
+    padding: 10px;
+
+    max-height: 300px;
+}
+        #addFriendAddedBoxBottom{
+            height: 100%;
+            overflow: auto;
+        }
+
+#addFriendAddedBoxForm{
+    display: grid;
+    grid-template-columns: 50px minmax( 200px, auto);
+    grid-template-rows: 10px;
+    grid-template-areas:
+    "aFAPic aFAName";
+
+    background-color: rgb(26, 141, 26);
+    
+    opacity: 0.9;
+    
+    padding: 10px;
+    margin: 10px;
+
+    box-shadow: 5px 5px 5px #000000;
+    border-radius: 5px 0px 5px 0px;
+
+    transition: 1s;
+}
+        #addFriendAddedBox, #addFriendAddedBoxForm{
+            align-items: center;
+            justify-items: center;
+        }
+        #addFriendAddedBoxForm > div {
+            padding: 10px;
+        }
+        #addFriendAddedBoxName{
+            font: bold 16px Arial, Helvetica, sans-serif;
+            color: white;
             justify-self: end;
-        }*/
-        #time{
         }
-        #msg{
+        #addFriendAddedBoxPic{
+            background-image: url("https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png");
+            background-size: cover;
+            background-position: center;
+            box-shadow: 5px 5px 5px #000000;
+
+            justify-self: start;
         }
-h3{
-    color: white;
-}
+        #addFriendAddedBoxForm:hover{
+            transition: .2s;
+            background-color: rgb(184, 28, 28);
+            opacity: 0.9;
+        }
 
-.registerUser{
-    color: pink;
-}
 
-.loginUser {
-    color: white;
-}
+            

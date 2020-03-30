@@ -1,23 +1,36 @@
-export default {
 
-  template: `
-  
-  <div id="app">
-    <nav>
-      <router-link to="/loginUser"> Login </router-link>
-      <router-link to="/register/user"> Register </router-link>
-    </nav>
-    <main>
-      <router-view/>
-    </main>
-  
-  </div>
-  `,
+import navbarNotLoggedIn from './components/navbarNotLoggedIn.js'
+import loginUserForm from './components/loginUserForm.js'
 
-    /*async created(){
-        let channelNames = await fetch('/rest/channelnames')
-        channelNames = await channelNames.json()
+
+
+
+
+export default{
+  components:{
+    navbarNotLoggedIn,
+    loginUserForm,
+  },
+
+  template:`
+
+  
+  <section id="appContainer">
+
+        <div id="appButton">
+            <h3>| | |</h3>
+        </div>
+
+        <div id="appNav">
+          <navbarNotLoggedIn/>
+        </div>
         
-        this.$store.commit('setChannelNames', channelNames)
-    }*/
+
+        <main id="appMain">
+            <router-view/>
+        </main>
+        
+    </section>
+    
+    `,
 }

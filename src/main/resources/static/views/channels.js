@@ -1,21 +1,24 @@
 import createChannel from '../components/createChannel.js'
-import listChannels from '../components/listChannels.js'
+import displayChannel from '../components/displayChannel.js'
+import channelCreateSearch from '../components/channelCreateSearch.js'
+import displayChannelName from '../components/displayChannelName.js'
 
 
 export default{
     components:{
         createChannel,
-        listChannels
+        displayChannel,
+        channelCreateSearch,
+        displayChannelName,
     },
 
     //************************************************************** */
 
 
     template:`
-        <div>
-            <div>➕</div>
-            <createChannel/>
-            <listChannels/>
+        <div id="viewChannels">
+
+                <channelCreateSearch/>
 
         </div>
     `,

@@ -11,9 +11,9 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int channel_id;
+    private int channelid;
     private LocalDate time;
-    private int account_id;
+    private int accountid;
     private String text;
 
     public Message() {
@@ -27,12 +27,12 @@ public class Message {
         this.id = id;
     }
 
-    public int getChannel_id() {
-        return channel_id;
+    public int getChannelid() {
+        return channelid;
     }
 
-    public void setChannel_id(int channel_id) {
-        this.channel_id = channel_id;
+    public void setChannelid(int channelid) {
+        this.channelid = channelid;
     }
 
     public LocalDate getTime() {
@@ -43,12 +43,12 @@ public class Message {
         this.time = time;
     }
 
-    public int getAccount_id() {
-        return account_id;
+    public int getAccountid() {
+        return accountid;
     }
 
-    public void setAccount_id(int account_id) {
-        this.account_id = account_id;
+    public void setAccountid(int accountid) {
+        this.accountid = accountid;
     }
 
     public String getText() {
