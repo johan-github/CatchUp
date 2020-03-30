@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.Channel;
 import com.example.demo.entities.ChannelMessage;
 import com.example.demo.entities.Message;
 import com.example.demo.repositories.MessageRepo;
@@ -37,5 +38,9 @@ public class MessageService {
             e.printStackTrace();
         }
         return dbMessage;
+    }
+
+    public List<Message> getChannelMessage(int id) {
+        return (List<Message>) messageRepo.findBychannelid( id );
     }
 }
