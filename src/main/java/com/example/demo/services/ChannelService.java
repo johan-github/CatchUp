@@ -12,6 +12,8 @@ public class ChannelService {
 
     @Autowired
     ChannelRepo channelRepo;
+    @Autowired
+    private SocketService socketService;
 
     //*************************************************************************************************
 
@@ -23,11 +25,14 @@ public class ChannelService {
         return channelRepo.findById(id);
     }
 
-    /*public List<ChannelName> findAllChannelNameByAccountid(int accountid) {
-        return channelRepo.findByAccountid(accountid);
-    }*/
-
     public Channel addNewChannelName(Channel channelName ){
+        Channel dbChannel = null;
+
+        try{
+            dbChannel = channelRepo.save( channelName );
+        }catch(Exception e ){
+            e.printStackTrace();
+        }
         return channelRepo.save( channelName );
     }
 

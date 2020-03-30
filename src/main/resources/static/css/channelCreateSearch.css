@@ -50,9 +50,7 @@
     max-width: 500px;
 }
 
-#channelCreateSearchBar:focus + #channelCreateSearchButton{
-    background-color: rgb(161, 241, 154);
-}
+
 
 #channelCreateSearcCreateNewChannelButton, #channelCreateSearchButton{
     padding-left: 5px;
@@ -70,18 +68,29 @@
     transition: .5s;
 }
 
+
 #channelCreateSearchButton{
-    background-color: rgb(139, 139, 139);
+    background-color: rgb(80, 80, 80);
+    color: black;
 }
         #channelCreateSearchButton:active{
-            background-color: rgb(21, 255, 0);
+            background-color: rgb(202, 202, 202);
             box-shadow: 6px 6px 2px black;
         }
 
+        #channelCreateSearchBar:focus + #channelCreateSearchButton{
+            background-color: rgb(202, 202, 202);
+        }
+
+        #channelCreateSearchBar:focus + #channelCreateSearchButton:hover{
+            background-color: rgb(202, 202, 202);
+        }
+
+
 #channelCreateSearcCreateNewChannelButton{
-    background-color: rgb(126, 128, 0);
+    background-color: rgb(142, 145, 0);
 }
         #channelCreateSearcCreateNewChannelButton:hover{
-            background-color: rgb(240, 252, 73);
+            background-color: rgb(177, 180, 0);
             box-shadow: 6px 6px 2px black;
         }

@@ -2,9 +2,10 @@
 
 export default{
     template:`
-        <section>
-            <div id="displayFriendBox" v-for="friend of friendList" :key="friend.id">
-            <img id="displayFriendPic" v-bind:src="friend.avatar" />
+        <section id="container">
+            <div id="displayFriendBox"
+                v-for="friend of friendList" :key="friend.id">
+                <img id="displayFriendPic" v-bind:src="friend.avatar" />
                 <div id="displayFriendNick">{{ friend.usernick }}</div>
                 <div id="displayFriendStatus">Online: {{ friend.status }}</div>
                 <div id="displayFriendAddFavorite">❤️</div>
