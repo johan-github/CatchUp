@@ -6,21 +6,87 @@ export const store = new Vuex.Store({
     state:{
 
         friendList:[],
-        myAccount: '',
         channels:[],
         accountChannels:[],
+        messages : [],
+
+        myAccount: '',
 
         currentUser:{
-            id: '',
+            id: '0',
             email: '',
             usernick: '',
         },
+
+        currentChannelMessages : [],
+
+        currentChannelId : '',
+
+
+        navBar:{
+            login : 'L O G I N',
+            register : 'R E G I S T E R',
+            home : '',
+            channels : '',
+            friends : '',
+            options : '',
+            about : '',
+            logOut : '',
+            routeLogin : '/loginUser',
+            routeRegister : '/registerUser',
+            routeHome : '',
+            routeChannels : '',
+            routerFriends : '',
+            routeOptions : '',
+            routeAbout : '',
+            routeLogOut : '',
+        },
+
+        userLoggedIn : {
+            loggedIn : 'false',
+        }
     },
 
 
 /*********************************************************************************************************** */
 
     mutations:{
+
+
+        /*********************************************** currentChannelMessages */
+
+        setCurrentChannelMessages( state, currentChannelMessages ){
+            state.currentChannelMessages = currentChannelMessages; },
+
+
+
+        /*********************************************** currentChannelId */
+        setCurrentChannelId( state, currentChannelId ){
+            state.currentChannelId = currentChannelId; },
+
+
+
+        /*********************************************** messages */
+        setMessages(state, messages){
+            state.messages = messages; },
+
+        appendMessage( state, message ){
+            state.messages.push( message ); },
+
+        removeMessage( state, index ){
+            state.messages.splice( index, 1 ); },
+
+
+
+        /*********************************************** userLoggedIn */
+
+        changeLoggedIn(state){
+            state.userLoggedIn.loggedIn = 'true'
+        },
+
+
+
+
 
         /*********************************************** channels*/
         setChannels(state, channels){

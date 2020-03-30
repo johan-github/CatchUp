@@ -8,44 +8,36 @@ export default{
     
 
     template: `
-        <section>
-
-        <div id="createChannelContainer">
+        <section id="container">
 
             <form @submit.prevent="createChannelForm">
                 
-                <div>
-                    <input  id="createChannelNameInput"
-                        placeholder="Enter channel name" type="text" required
-                        v-model="channelName">
-                </div>
+                <input id="createChannelNameInput"
+                    placeholder="Enter channel name" type="text"
+                    v-model="channelName">
+
+                <div id="msgError">{{ msgErrorChannelName }}</div>
                 
-                <div>
-                    <input  id="createChannelURLInput"
-                        placeholder="Avatar URL (Optional)" type="text"
-                        v-model="channelURL">
-                </div>
+                <input  id="createChannelURLInput"
+                    placeholder="Avatar URL (Optional)" type="text"
+                    v-model="channelURL">
+                        
+                <select id="selectBox"
+                    v-model="channelStatus">
 
-                <div>
-                    <select id="createChannelSelect"
-                        v-model="channelStatus" required>
+                    <option value="">Status form</option>
+                    <option value="Public">Public</option>
+                    <option value="Private">Private</option>
+                        
+                </select>
 
-                        <option value="">Status form</option>
-                        <option value="Public">Public</option>
-                        <option value="Private">Private</option>
+                <div id="msgError">{{ msgErrorChannelStatus }}</div>
 
-                    </select>
-                </div>
-
-                <div>
-                    <button id="createChannelButton">Create new channel</button>
-                    </div>
+                <button id="createChannelButton">Create new channel</button>
                     
-                </form>
-                <button id="createChannelButton"
-                    @click="checkCurrentUser">Check user</button>
+            </form>
 
-            </div>
+            <button @click="backToDisplayChannelPage">B A C K</button>
 
         </section>
     `,
@@ -57,6 +49,12 @@ export default{
             channelName: '',
             channelURL: '',
             channelStatus: '',
+
+            channelIds : [],
+            myChannels : [],
+
+            msgErrorChannelName : '',
+            msgErrorChannelStatus : '',
             
 
         }
@@ -67,86 +65,173 @@ export default{
 
 
     methods:{
+        
 
-        checkCurrentUser(){
-            console.log( this.currentUser.id )
-            console.log( this.currentUser.email )
-            console.log( this.currentUser.usernick )
-
+        getMyChannels(){   //add to myChannels-array
+            for(let channel of this.channels) {
+                for(let channelId of this.channelIds) {
+                    if(channel.id === channelId) {
+                        this.myChannels.push(channel.name)
+                        console.log(channel.name)
+                    }
+                }
+            }
         },
+
+
+        getCurrentUserInfo(){   //add to channelIds-array
+            for(let accountChannel of this.accountChannels) {
+                if(accountChannel.accountid === this.currentUser.id) {
+                    this.channelIds.push(accountChannel.channelid)
+                } 
+            }
+   
+            this.getMyChannels()
+        },
+
+
 
         routeToChannels(){
             this.$router.push('/channels')
+        },
+
+
+        backToDisplayChannelPage(){
+            this.$router.push( '/home')
         },
         
 
         async createChannelForm(){
 
-            if( !this.channelName.trim()){
-                return
-            }
-            
-            if( this.channelURL === '' ){
-                this.channelURL = 'https://www.barriblog.com/wp-content/uploads/2011/02/python.png'
-            }
-            
-            let newChannel = {
+            if( this.currentUser.id > 0){ //tas bort när man inte behöver logga in hela tiden!
+                    
 
-                name : this.channelName,
-                url: this.channelURL,
-                status : this.channelStatus
-            }           
-            
-            let result = await fetch( '/rest/channels',{
-                method: 'POST',
-                headers: {
-                    'Content-Type' : 'application/json'
-                },
-                body: JSON.stringify( newChannel )
-            })
-            
-            result = await result.json();
-            
-            this.$store.commit( 'appendChannel', newChannel );
+                if( !this.channelName.trim()){
+                    this.msgErrorChannelName = "Please choose a name for your new channel!"
+                    this.msgErrorChannelStatus = ""
+                    return
+                }
+                
+                
+                for( let channel of this.myChannels ){
+                    if( this.channelName.toLowerCase() === channel.toLowerCase() ){
+                        this.msgErrorChannelName = "Please choose another name for your new channel! You have already a channel with this name!"
+                        this.msgErrorChannelStatus = ""
+                        return
+                    }
+                }
 
-            this.channelName = ''
-            this.channelURL = ''
-            this.channelStatus = ''
+                
+                this.msgErrorChannelName = ""
+
+                
+                if( this.channelStatus === '' ){
+                    this.msgErrorChannelStatus = "Please choose a status for your new channel!"
+                    return
+                }
+                
+                
+                this.msgErrorChannelStatus = ""
+
+                
+                if( this.channelURL === '' ){
+                    this.channelURL = 'https://www.barriblog.com/wp-content/uploads/2011/02/python.png'
+                }
+
+                
+                let newChannel = {
+                    name : this.channelName,
+                    url: this.channelURL,
+                    status : this.channelStatus
+                }
+                
+                            
+                await fetch( '/rest/channels',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type' : 'application/json'
+                    },
+                    body: JSON.stringify( newChannel )
+                })
+                .then( result => result.json())
+                .then( result => this.$store.commit( 'appendChannel', result ))
+
+
+
+                await fetch('/rest/channels')
+                .then(channels => channels.json())
+                .then(channels => this.$store.commit('setChannels', channels))
+                
+
+
+                let updatedCurrentUserWithNewChannel = {
+                    accountid : this.currentUser.id,
+                    channelid : this.channels[ this.channels.length - 1 ].id,
+                    admin : 'yes'
+                }
+
+
+                await fetch('/rest/accountchannels',{
+                    method : 'POST',
+                    headers : {
+                        'Content-Type' : 'application/json'
+                    },
+                    body : JSON.stringify( updatedCurrentUserWithNewChannel )
+                })
+                .then( updateDBWithNewAccountChannel => updateDBWithNewAccountChannel.json() )
+                .then( updateDBWithNewAccountChannel => this.$store.commit( 'appendAccountChannel', updateDBWithNewAccountChannel ))
+
+
+                this.channelName = ''
+                this.channelURL = ''
+                this.channelStatus = ''
+
+                this.routeToChannels()
+
+            } else {
+                console.log("Finns ingen inloggad")
+            }
+
         },
     },
 
 
     computed:{
 
+
+        channels(){
+            return this.$store.state.channels
+        },
+
+        
+        accountChannels(){
+            return this.$store.state.accountChannels
+        },
+
+
         currentUser(){
             return this.$store.state.currentUser
         },
 
-        returnName(){
-            return this.$store.state.names
-        },
 
-        
-        channels(){
-            return this.$store.state.channels
-        },
     },
 
 
-
     async created(){
+        
+            await fetch('/rest/channels')
+            .then(channels => channels.json())
+            .then(channels => this.$store.commit('setChannels', channels))
+    
+    
+            await fetch('/rest/accountchannels')
+            .then(accountChannels => accountChannels.json())
+            .then(accountChannels => this.$store.commit('setAccountChannels', accountChannels))
+    
 
-        await fetch('/rest/channels')
-            .then( channels => channels.json())
-            .then( channels => this.$store.commit( 'setChannels', channels))
-
-            console.log("hheofihadlfkhlashdflshdfsa")
-
-        await fetch('/rest/accountchannels')
-            .then( accountChannels => accountChannels.json())
-            .then( accountChannels => this.$store.commit( 'setAccountChannels', accountChannels))
-            .then( accountChannels => accountChannels.forEach( channel => console.log( channel )))
-    }
+            this.getCurrentUserInfo()
+            
+        },
 
 
 

@@ -1,16 +1,14 @@
-import displayChannel from './displayChannel.js'
-import createChannel from './createChannel.js'
+
 
 export default{
+
     components:{
-        createChannel,
-        displayChannel,
 
     },
     
 
     template: `
-        <section id="channelCreateSearchContainer">
+        <section id="container">
 
              <form id="channelCreateSearchSearchAndCreateBox">
 
@@ -19,7 +17,7 @@ export default{
                     @keyup.enter = "channelName">
             
                 <button id="channelCreateSearchButton"
-                    @click="namn">Search</button>
+                    @click="">Search</button>
 
                 <button id="channelCreateSearcCreateNewChannelButton"
                     @click="routeToCreateChannels">Create new channel</button>
@@ -27,25 +25,14 @@ export default{
             </form>
 
             <!------------------------------------------------------------------->
-            <!------------------------------------------------------------------->
-    <div  id="channelCreateSearchForm">
-            <div
-                v-for="(channel, i ) of channels">
 
-                <div id="channelCreateSearchChannelInfo"
-                    @click="filterByName">{{ channel.name }}</div>
+            <div  id="channelCreateSearchForm">
+                <div v-for="(myChannel, i ) of myChannels">
 
+                    <div id="channelCreateSearchChannelInfo">{{ myChannel }}</div>
+
+                </div>
             </div>
-            </div>
-
-
-
-
-
-
-            <!--<div id="channelCreateSearchBoxCompDisplayChannel">
-                <displayChannel/>                
-            </div>-->          
 
 
         </section>
@@ -56,8 +43,11 @@ export default{
         return{
 
             channelName: '',
-                channelURL: '',
-                channelStatus: '',
+            channelURL: '',
+            channelStatus: '',
+
+            channelIds : [],
+            myChannels : [],
             
 
         }
@@ -68,10 +58,11 @@ export default{
 
 
     methods:{
+
+
         clicked(){
             console.log("clicked")
         },
-
         
 
 
@@ -90,13 +81,6 @@ export default{
             })
 
             /*channels().fiter( channel => channel.name === this.channelName )*/
-            
-            
-
-
-
-
-
 
         },
 
@@ -108,64 +92,66 @@ export default{
 
         },
 
-        async createChannel(){
-
-            if( !this.channelName.trim()){
-                return
+        
+        getMyChannels(){
+            for(let channel of this.channels) {
+                for(let channelId of this.channelIds) {
+                    if(channel.id === channelId) {
+                        this.myChannels.push(channel.name)
+                        console.log(channel.name)
+                    }
+                }
             }
-            
-            if( this.channelURL === '' ){
-                this.channelURL = 'https://www.barriblog.com/wp-content/uploads/2011/02/python.png'
-            }
-            
-            let newChannel = {
-
-                name : this.channelName,
-                url: this.channelURL,
-                status : this.channelStatus
-            }           
-            
-            let result = await fetch( '/rest/channels',{
-                method: 'POST',
-                headers: {
-                    'Content-Type' : 'application/json'
-                },
-                body: JSON.stringify( newChannel )
-            })
-            
-            result = await result.json();
-            
-            this.$store.commit( 'appendChannel', newChannel );
-
-            this.channelName = ''
-            this.channelURL = ''
-            this.channelStatus = ''
         },
+
+
+        getCurrentUserInfo(){
+         for(let accountChannel of this.accountChannels) {
+             if(accountChannel.accountid === this.currentUsers.id) {
+                 this.channelIds.push(accountChannel.channelid)
+             } 
+         }
+
+         this.getMyChannels()
+            
+        }
+
     },
 
 
+/*********************************************************************************************************** Computed: */
 
     computed:{
-
-
-        returnName(){
-            return this.$store.state.names
-        },
-
-        
         channels(){
             return this.$store.state.channels
         },
+        
+        accountChannels(){
+            return this.$store.state.accountChannels
+        },
+
+        currentUsers(){
+            return this.$store.state.currentUser
+        },
     },
 
 
+/*********************************************************************************************************** Created: */
 
     async created(){
-
-
+        
         await fetch('/rest/channels')
-            .then( channels => channels.json())
-            .then( channels => this.$store.commit( 'setChannels', channels))
+        .then(channels => channels.json())
+        .then(channels => this.$store.commit('setChannels', channels))
+
+
+        await fetch('/rest/accountchannels')
+        .then(accountChannels => accountChannels.json())
+        .then(accountChannels => this.$store.commit('setAccountChannels', accountChannels))
+        .then(this.accountChannels.forEach(accountChannel => console.log(accountChannel)))
+
+        this.getCurrentUserInfo()
+        
     }
 
 
