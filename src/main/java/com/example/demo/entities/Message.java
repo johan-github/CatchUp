@@ -2,6 +2,7 @@ package com.example.demo.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="messages")
@@ -12,7 +13,7 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int channelid;
-    private LocalDate time;
+    private LocalDateTime time;
     private int accountid;
     private String text;
 
@@ -35,11 +36,11 @@ public class Message {
         this.channelid = channelid;
     }
 
-    public LocalDate getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(LocalDate time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 
