@@ -1,72 +1,76 @@
-import { store } from './store.js'
 
 
 
-let ws;
+let ws; //Var to store WebSocket-class in
 let isConnected = false;
 connect();
 
 function connect() {
-    // PORT!
-    ws = new WebSocket('ws://158.174.120.227:3308/catchup?useSSL=false')
+
+    /**
+     * ws : WebSocket var
+     * Important to add correct PORT. Socket route have to be the same as the one in WebSocket. ('ws://localhost:4000/your-socket-route')
+     */
+    ws = new WebSocket('ws://localhost:4000/chatUp-socket-route');
+
     
+    ws.onopen = (e) => { //onopen : triggers when a connection is made with the server / when ChatUp is on/updated
+
+      sendSomething();
+
+      isConnected = true; };
+
+
     ws.onmessage = (e) => {
-      showSomething(e.data);
-
-      let data = JSON.parse(e.data)
-
-      if(data.timestamp) {
-        console.log(new Date(data.timestamp).toLocaleString())
-      }
-
-      switch(data.action) {
-        case 'message':
-          console.log(data)
-          break;
-        case 'new-channelName':
-          store.commit('appendChannelNames', data)
-          break;
-      }
-      
-
-    }
+      showSomething(e.data); }
     
     
-    {
-        sendSomething();
-        isConnected = true;
-    };
+    ws.onclose = (e) => { //Triggers when a connection is closed
+        console.log("Closing websocket..."); };
 
-    ws.onclose = (e) => {
-        console.log("Closing websocket...");
-    };
 
-  console.log("Connecting...");
+  console.log("Connecting..."); //When the server is connected
+
+
 }
+
+
+
 
 function disconnect() {
+
     if (ws != null) {
-        ws.close();
-    }
+        ws.close(); }
+
+
     isConnected = false;
+
+
     console.log("Disconnected");
+
 }
+
+
+
 
 function sendSomething() {
-  let socketExample = {
-    action: 'message',
-    message: 'Testing sockets',
-    timestamp: Date.now()
+
+  let socket = {
+    message : 'Hi and welcome!',
+    timestamp : Date.now(),
   }
 
-  let addressedMessage = {
-    action: 'message',
-    payload: socketExample
-  }
+    //ws.send( JSON.stringify( { firstname: "Hello World!" })); //.send: Will send its content to the BackEnd ( handleTextMessage in Spring )
 
-    ws.send(JSON.stringify(socketExample));
+    //ws.send( JSON.stringify( socket ))
+
 }
 
+
+
+
 function showSomething(message) {
+
     console.log(message);
+
 }
