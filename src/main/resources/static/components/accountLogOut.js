@@ -6,60 +6,24 @@
  *****************************************/
 
 
- 
-
 export default {
     template:`
         <section>
-            <div type="alert">
-                <loggingOut/>
-                <logOutCurrentUser/>
-            </div>
-                
+        <!-- Replace button for nav-button later! -->
+        <button @click="logOutCurrentAccount">
+          Log out </button>
         </section>    
     `,
 
 
-loggingOut(){
-this.$dialog.confirm('Do you wish to log out?')
-.then(function() {
-    loggingOff()
-        logOutCurrentUser()
-    
-    console.log('Clicked on PROCEED')
-})
-.catch(function() {
-    console.log('Clicked on CANCEL')
-})} ,
-
-
-    data() {
-        return {
-            // logOutAlert: '',
-            // logOutCheck: '',
-            logOutCurrentUser: '',
-        }
-    },
-
-
-
     methods: {
-
-        async logOutCurrentUser() {
-            
+        logOutCurrentAccount() {
+            fetch('/logout') // For Socket
+            console.log("Successfully logged out");
+            this.$store.commit('setAccount', null)
             this.$router.push('/loginUser')
-            
-            //     this.$dialog.confirm
-                // let accountsFromDB = await fetch('/rest/accounts')
-                //     .then( accounts => accounts.json())
         }
     },
-
-
-    computed:{
-
-    }
-
 
 
 
