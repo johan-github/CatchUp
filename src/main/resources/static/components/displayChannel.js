@@ -14,7 +14,7 @@ export default{
     template:`
         <section id="container">
 
-            <h3 id="label">My channels? Display</h3>
+            <h3 id="label">My channels? (DisplayChannel)</h3>
 
             <div  id="scrollContainer">
                 
