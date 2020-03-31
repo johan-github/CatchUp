@@ -18,13 +18,19 @@ export default {
         listFriends,
         channelCreateSearch,
         displayMsgAll,
+        navbarLoggedIn,
 
     },
 
     template: `
+    <div>
+        <div id="appNav">
+            <navbarLoggedIn/>
+        </div>
         <div>
             <displayChannel/>
         </div>
+    </div>
     `,
 
 
