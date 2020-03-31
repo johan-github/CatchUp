@@ -55,14 +55,17 @@ function disconnect() {
 
 function sendSomething() {
 
+  // Testing socket connection
   let socket = {
-    message : 'Hi and welcome!',
+    message : 'Socket test',
     timestamp : Date.now(),
   }
 
+
     //ws.send( JSON.stringify( { firstname: "Hello World!" })); //.send: Will send its content to the BackEnd ( handleTextMessage in Spring )
 
-    //ws.send( JSON.stringify( socket ))
+    // Testing from backend, Entity Socket and SocketController
+    ws.send( JSON.stringify( socket ))
 
 }
 
