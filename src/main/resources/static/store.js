@@ -14,40 +14,11 @@ export const store = new Vuex.Store({
         // TEST for log out-function
         currentAccount: '',
 
-
-        currentUser:{
-            id: '0',
-            email: '',
-            usernick: '',
-        },
-
         currentChannelMessages : [],
 
         currentChannelId : '',
 
 
-        navBar:{
-            login : 'L O G I N',
-            register : 'R E G I S T E R',
-            home : '',
-            channels : '',
-            friends : '',
-            options : '',
-            about : '',
-            logOut : '',
-            routeLogin : '/loginUser',
-            routeRegister : '/registerUser',
-            routeHome : '',
-            routeChannels : '',
-            routerFriends : '',
-            routeOptions : '',
-            routeAbout : '',
-            routeLogOut : '',
-        },
-
-        userLoggedIn : {
-            loggedIn : 'false',
-        }
     },
 
 

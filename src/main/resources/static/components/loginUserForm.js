@@ -82,7 +82,7 @@ export default {
                         if ( foundUserWithEnteredEmail.password === this.enterPassword ){
                         this.$store.commit('setCurrentUser', foundUserWithEnteredEmail)
                         this.$store.commit('changeLoggedIn')
-                        this.$router.push('/home')                        
+                        this.$router.push('/home')
                     }
                 }                
             }
@@ -92,50 +92,4 @@ export default {
             
         }
     },
-
-
-
-    computed:{
-
-        userLoggedIn(){
-            return this.$store.state.userLoggedIn
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

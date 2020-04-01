@@ -1,28 +1,31 @@
-
-import navbarNotLoggedIn from './components/navbarNotLoggedIn.js'
+// import navbar from './components/navbar.js'
 import loginUserForm from './components/loginUserForm.js'
-
-
-
-
 
 export default{
   components:{
-    navbarNotLoggedIn,
+    // navbar,
     loginUserForm,
   },
 
   template:`
 
-  
-  <section id="appContainer">
+  <section>
+
+    <loginUserForm/>
+
+  </section>
+
+
+
+
+  <!-- <section id="appContainer">
 
         <div id="appButton">
             <h3>| | |</h3>
         </div>
 
         <div id="appNav">
-          <navbarNotLoggedIn/>
+          <navbar/>
         </div>
         
 
@@ -30,7 +33,7 @@ export default{
             <router-view/>
         </main>
         
-    </section>
+    </section> -->
     
     `,
 }

@@ -1,9 +1,7 @@
 
 
-import navbarLoggedIn from '../components/navbarLoggedIn.js'
-import loginUserForm from '../components/loginUserForm.js'
-
-
+import navbar from '../components/navbar.js'
+// import loginUserForm from '../components/loginUserForm.js'
 import { createNamespacedHelpers } from '../libs/vuex.esm.browser.js'
 import createChannel from '../components/createChannel.js'
 import displayChannel from '../components/displayChannel.js'
@@ -18,15 +16,21 @@ export default {
         listFriends,
         channelCreateSearch,
         displayMsgAll,
-        navbarLoggedIn,
+        navbar,
 
     },
 
     template: `
     <div>
-        <div id="appNav">
-            <navbarLoggedIn/>
+        <div id="appButton">
+            <h3>| | |</h3>
         </div>
+        <div id="appNav">
+            <navbar/>
+        </div>
+        <main id="appMain">
+            <router-view/>
+        </main>
         <div>
             <displayChannel/>
         </div>
@@ -37,7 +41,7 @@ export default {
     
 }
 
-
+/************************     USEABLE CODE???    ****************************************** */
 /*export default{
   components:{
     loginUserForm,
@@ -71,7 +75,6 @@ export default {
 }*/
 
 
-
 /*import { createNamespacedHelpers } from '../libs/vuex.esm.browser.js'
 import createChannel from '../components/createChannel.js'
 import displayChannel from '../components/displayChannel.js'
@@ -98,3 +101,4 @@ export default {
 
     
 }*/
+/****************************************************************************************** */

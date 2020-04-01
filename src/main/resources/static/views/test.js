@@ -15,6 +15,7 @@ export default {
  
     template: `
     <div>
+    <h2>Test page</h2>
         <!-- <yourComponentHere/>  -->
     </div>
     `,
