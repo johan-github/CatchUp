@@ -1,9 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entities.ChannelMessage;
-import com.example.demo.entities.ChannelName;
 import com.example.demo.services.ChannelMessageService;
-import com.example.demo.services.ChannelNameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

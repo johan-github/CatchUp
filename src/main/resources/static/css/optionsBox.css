@@ -1,0 +1,23 @@
+/******************************************************************************************** optionsBox */
+
+#optionsBoxTextField{ grid-area: optionsBoxTextField; }
+#optionsBoxAddButton{ grid-area: optionsBoxAddButton; }
+
+#optionsBox{
+    display: grid;
+    /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
+    grid-template-columns: minmax( 200px, auto) auto;
+    grid-template-areas:
+    "optionsBoxTextField optionsBoxAddButton";
+
+    background-color: rgb(26, 48, 48);
+    opacity: 0.9;
+    
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 5px 5px 5px #000000;
+    border-radius: 5px 0px 5px 0px;
+
+    justify-self: center;
+    align-items: center;
+}

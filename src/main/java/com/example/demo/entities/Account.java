@@ -3,28 +3,17 @@ package com.example.demo.entities;
 import javax.persistence.*;
 
 @Entity
-@Table( name = "accounts")
+@Table( name="accounts")
 public class Account {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private int id;
-    private String username;
+    private String email;
     private String usernick;
     private String password;
     private String avatar;
-    private boolean online;
-
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public Account(){}
+    private String status;
 
     public int getId() {
         return id;
@@ -34,19 +23,18 @@ public class Account {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getUserNick() {
+    public String getUsernick() {
         return usernick;
     }
 
-    // Could be an error, as we could not type "usernick"
     public void setUsernick(String usernick) {
         this.usernick = usernick;
     }
@@ -59,11 +47,19 @@ public class Account {
         this.password = password;
     }
 
-    public boolean isOnline() {
-        return online;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setOnline(boolean online) {
-        this.online = online;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

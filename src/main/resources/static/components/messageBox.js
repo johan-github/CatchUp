@@ -1,3 +1,8 @@
+/********************************* /
+* Orginal by Hassan. 2020-03-18
+* Last Edited by ......
+* Notes: Design of one message in a channel. ATM hard coded.
+/**********************************/
 import navbar from '../components/navbar.js'
 
 
@@ -6,7 +11,6 @@ export default{
         navbar
 
     },
-
 
     template:`
         <div>

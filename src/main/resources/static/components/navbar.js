@@ -1,10 +1,9 @@
-
-
-
+/********************************* /
+* Orginal by Hassan. 2020-03-18
+* Last Edited by Hassan. 2020-03-30
+* Notes: We are using this at the moment
+/**********************************/
 export default{
-    components:{
-
-    },
 
 
     template:`
@@ -12,7 +11,15 @@ export default{
         <div class="nav">
 
             <div id="navHome">
-                <router-link to="/home">H O M E</router-link>
+                <router-link to="/loginUser"> L O G I N </router-link>
+            </div>
+
+            <div id="navHome">
+                <router-link to="/registerUser"> R E G I S T E R </router-link>
+            </div>
+    
+            <div id="navHome">
+                <router-link to="/loginUser">H O M E</router-link>
             </div>
 
             <div id="navChannels">                
@@ -34,8 +41,11 @@ export default{
             <div id="navLogout">                
                 <router-link to="/logout">L O G   O U T</router-link>
             </div>
-            
 
         </div>
+
     `,
+
+
+
 }

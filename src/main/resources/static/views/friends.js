@@ -1,9 +1,14 @@
-import displayFriends from '../components/displayFriends.js'
+/********************************* /
+* Orginal by Hassan. 2020-03-18
+* Last Edited by ......
+* Notes: Not updated. will be fixed later by ......
+/**********************************/
+import listFriends from '../components/listFriends.js'
 
 
 export default{
     components:{
-        displayFriends
+        listFriends
     },
 
     //************************************************************** */
@@ -12,7 +17,7 @@ export default{
     template:`
         <div>
 
-            <displayFriends/>
+            <listFriends/>
 
         </div>
     `,
