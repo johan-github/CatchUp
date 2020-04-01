@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.entities.Message;
 import com.example.demo.entities.Socket;
 import com.example.demo.services.SocketService;
 import com.google.gson.Gson;
@@ -46,7 +47,20 @@ public class SocketController extends TextWebSocketHandler {
          * message.getPayload(): receives message from Vue and converts it, so it...
          * Socket.class: can be stored in Socket-class
          */
+
+        // Adding Entity Message here
+        Message chatMessage = gson.fromJson( message.getPayload(), Message.class );
+
+        //Testing purpouse only, see if chat message prints
+        //System.out.println(chatMessage.getText()); // How to add setters to this method?
+        //System.out.println(chatMessage.getTime()); // Should this be set time?
+
+        // Class (entity) to test socket connection
         Socket socket = gson.fromJson( message.getPayload(), Socket.class );
+
+        // Testing the connection
+        System.out.println("Message: " + socket.message);
+        System.out.println("Timestamp: " + socket.timestamp);
 
         // Demonstration purpose only: send back "Hello" + same message as received
         // --- socketService.sendToAll("Hello " + message.getPayload());
@@ -67,7 +81,7 @@ public class SocketController extends TextWebSocketHandler {
      */
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
-        socketService.addSession(session);;
+        socketService.addSession(session);
     }
 
     /**
