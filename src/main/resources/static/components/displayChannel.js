@@ -16,22 +16,25 @@ export default{
 
             <h3 id="label">My channels? (DisplayChannel)</h3>
 
-            <div  id="scrollContainer">
-                
-                <div v-for="(myChannelName, i ) of myChannelNames">
+            <div id="scrollContainer">
 
-                    <div v-for="testBuddy of displayChannelFriends( i )">
-                        {{ testBuddy.usernick}} ( {{ testBuddy.id}} )
+                <div id="box"
+                    v-for="(myChannelName, i ) of myChannelNames">
+
+                    <div id="buddy"
+                        v-for="testBuddy of displayChannelFriends( i )">
+                        <div>{{  }}</div>
                     </div>
 
                     
 
-                    <div id="channelCreateSearchChannelInfo"
+                    <div id="name"
                         @click="channelSelected( myChannelName.id )">
                         <div>{{ myChannelName.name }}</div>   
                     </div>
 
-                    <div v-for="channelMessage of displayLatestChannelMessages(myChannelName.id)">
+                    <div id="message"
+                        v-for="channelMessage of displayLatestChannelMessages(myChannelName.id)">
                         {{channelMessage.text}}                    
                     </div>
 
@@ -43,6 +46,46 @@ export default{
 
         </section>
     `,
+
+    /*
+    <section id="container">
+
+            <h3 id="label">My channels? Display</h3>
+
+            <div id="scrollContainer">
+                
+            <div>
+
+                <div id="displayChannelBox"
+                    v-for="(myChannelName, i ) of myChannelNames">
+
+                    <div id="displayChannelBuddies"
+                        v-for="testBuddy of displayChannelFriends( i )">
+                        <div>{{  }}</div>
+                    </div>
+
+                    
+
+                    <div id="displayChannelName"
+                        @click="channelSelected( myChannelName.id )">
+                        <div>{{ myChannelName.name }}</div>   
+                    </div>
+
+                    <div id="displayChannelMessages"
+                        v-for="channelMessage of displayLatestChannelMessages(myChannelName.id)">
+                        {{channelMessage.text}}                    
+                    </div>
+
+                </div>
+
+            </div>
+                
+            </div>
+
+            <button @click="createNewChannel">Create channel</button>
+
+        </section>
+        */
 
 
 
