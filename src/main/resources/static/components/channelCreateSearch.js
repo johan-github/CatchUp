@@ -1,5 +1,8 @@
-
-
+/********************************* /
+* Orginal by Hassan. 2020-03-24
+* Last Edited by Hassan. 2020-03-30
+* Notes: When in channels this will popup from displayChannel.js
+/**********************************/
 export default{
 
     components:{

@@ -1,6 +1,8 @@
-
-
-
+/********************************* /
+* Orginal by Hassan. 2020-03-18
+* Last Edited by ......
+* Notes: Will be edited later. Hardcoded ATM.
+/**********************************/
 export default{
     components:{
         

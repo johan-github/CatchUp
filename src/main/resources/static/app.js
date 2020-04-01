@@ -1,4 +1,8 @@
-
+/********************************* /
+* Orginal by ......
+* Last Edited by ......
+* Notes: First thing you see when going to CatchUp. Might need to change?
+/**********************************/
 import navbarNotLoggedIn from './components/navbarNotLoggedIn.js'
 import loginUserForm from './components/loginUserForm.js'
 

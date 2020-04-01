@@ -1,6 +1,8 @@
-
-
-
+/********************************* /
+* Orginal by Hassan. 2020-03-30
+* Last Edited by ......
+* Notes: This is when you go in to a channel it will display all the messages in the channel.
+/**********************************/
 export default{
     components:{
     },
