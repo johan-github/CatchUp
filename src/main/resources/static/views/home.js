@@ -28,7 +28,7 @@ export default {
 
     },
 
-    template: `
+    template: /* html */ `
     <div>
         <div id="appButton">
             <h3>| | |</h3>
@@ -39,9 +39,10 @@ export default {
         <main id="appMain">
             <router-view/>
         </main>
-        <div>
+        <!-- <div>
             <displayChannel/>
-        </div>
+        </div> -->
+    </div>
     `,
 
 
