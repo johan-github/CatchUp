@@ -30,6 +30,10 @@ export default {
             </div>
 
             <button class="registerButton">Register</button>
+
+            <p class="ReturnToLoginPageText"> Go back to login-page
+            <a class="ReturnToLoginPageLink" href="/loginAccount">here! </a>
+            </p>
             
         </form>
     </section>
