@@ -4,7 +4,7 @@ package com.example.demo.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name="friendlist")
+@Table(name="viewfriendlist")
 public class FriendList {
 
     @Id

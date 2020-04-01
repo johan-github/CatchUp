@@ -5,18 +5,20 @@
 /**********************************/
 // import navbar from './components/navbar.js'
 import loginAccountForm from './components/loginAccountForm.js'
+import home from './views/home.js'
 
 export default{
   components:{
     // navbar,
     loginAccountForm,
+    home,
   },
 
-  template:`
+  template: /* html */`
 
   <section>
 
-    <loginAccountForm/>
+    <home/>
 
   </section>
 
