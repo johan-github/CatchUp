@@ -16,6 +16,7 @@ import registerUser from './views/registerUser.js'
 import loginUser from './views/loginUser.js'
 import createChannel from './views/createChannel.js'
 import channelMessage from './views/channelMessage.js'
+import test from './views/test.js'
 
 export const router = new Router({
     mode: 'history',
@@ -71,6 +72,11 @@ export const router = new Router({
             name : 'channelMessage',
             path : '/channelMessage',
             component : channelMessage,
+        },
+        {
+            name: 'testPage',
+            path: '/test',
+            component: test,
         },
 
 
