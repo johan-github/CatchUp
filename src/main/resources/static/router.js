@@ -11,6 +11,7 @@ import registerUser from './views/registerUser.js'
 import loginUser from './views/loginUser.js'
 import createChannel from './views/createChannel.js'
 import channelMessage from './views/channelMessage.js'
+import testsocketcomp from './components/testsocketcomp.js'
 
 export const router = new Router({
     mode: 'history',
@@ -66,6 +67,12 @@ export const router = new Router({
             name : 'channelMessage',
             path : '/channelMessage',
             component : channelMessage,
+        },
+
+        {
+            name : 'testsocketview',
+            path : '/testsocketview',
+            component : testsocketcomp,
         },
 
 
