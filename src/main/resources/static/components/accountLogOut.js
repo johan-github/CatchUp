@@ -1,9 +1,8 @@
-/****************************************
- *  Original created by Johan,
- * 2020-03-31
- * Notes:
- * 
- *****************************************/
+/********************************* /
+* Orginal by Johan. 2020-03-31
+* Last Edited by Johan 2020-04-01
+* Notes: Temp / test
+/**********************************/
 
 
 export default {
@@ -21,7 +20,7 @@ export default {
             fetch('/logout') // For Socket
             console.log("Successfully logged out");
             this.$store.commit('setAccount', null)
-            this.$router.push('/loginUser')
+            this.$router.push('/loginAccount')
         }
     },
 
