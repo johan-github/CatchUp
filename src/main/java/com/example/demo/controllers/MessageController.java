@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.entities.Channel;
 import com.example.demo.entities.Message;
 import com.example.demo.services.MessageService;
 import com.google.gson.Gson;
@@ -36,6 +37,11 @@ public class MessageController extends TextWebSocketHandler {
 
 
     //************************************************************************************************* GetMapping
+
+    @GetMapping("/rest/messages")
+    public List<Message> getAllMessages() {
+            return (List<Message>) messageService.getAllMessages();
+    }
 
     @GetMapping("/rest/messages/{id}")
     public List<Message> getChannelMessage (@PathVariable int id ){
