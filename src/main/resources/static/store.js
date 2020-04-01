@@ -10,7 +10,10 @@ export const store = new Vuex.Store({
         accountChannels:[],
         messages : [],
 
-        myAccount: '',
+
+        // TEST for log out-function
+        currentAccount: '',
+
 
         currentUser:{
             id: '0',
@@ -127,11 +130,11 @@ export const store = new Vuex.Store({
 
         /************************************************ */
 
-        setMyAccount(state, myAccount){
-            state.myAccount = myAccount },
+        setCurrentAccount(state, currentAccount){
+            state.currentAccount = currentAccount },
 
-        deleteMyAccount(state, myAccount){
-            state.myAccount = null // '' instead of null? 
+        deleteCurrentAccount(state, currentAccount){
+            state.currentAccount = null // '' instead of null? 
         },
 
 
