@@ -19,11 +19,12 @@ export default{
 						<button type="submit" class="primary">Send</button>
 					</div>
 			</form>
+
             <div v-for="(sentMessage, i ) of sentMessages">
 
                     <div id="channelCreateSearchChannelInfo">{{ sentMessage }}</div>
 
-                </div>
+            </div>
 		
     </div>
     
@@ -61,15 +62,29 @@ export default{
             },
             body: JSON.stringify( message )
           })
-          .then (result = result.json())
+          .then (result => result.json())
           .then(result => this.$store.commit("appendMessage", result))
 
 
           await fetch('/rest/messages')
           .then(messages => messages.json())
           .then(messages => this.$store.commit('setMessages', messages))
-            },
 
+
+          // NEW STUFF!
+          let messageElement = document.createElement('li');
+
+          let textElement = document.createElement('p');
+          let messageText = document.createTextNode(text.content);
+          textElement.appendChild(messageText);
+      
+          messageElement.appendChild(textElement);
+      
+          messageArea.appendChild(messageElement);
+          messageArea.scrollTop = messageArea.scrollHeight;
+
+          // TESTING NEW STUFF UP!
+        },
             getMessageSent(){
             for(let message of this.messages) {
                 this.sentMessages.push(message.text)     
