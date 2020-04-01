@@ -11,14 +11,6 @@ export default{
         <div class="nav">
 
             <div id="navHome">
-                <router-link to="/loginUser"> L O G I N </router-link>
-            </div>
-
-            <div id="navHome">
-                <router-link to="/registerUser"> R E G I S T E R </router-link>
-            </div>
-    
-            <div id="navHome">
                 <router-link to="/loginUser">H O M E</router-link>
             </div>
 
