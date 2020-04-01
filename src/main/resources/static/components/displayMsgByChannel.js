@@ -1,6 +1,8 @@
-
-
-
+/********************************* /
+* Orginal by Hassan. 2020-03-30
+* Last Edited by Johan (cleanUp) 2020-04-01
+* Notes: This is when you go in to a channel it will display all the messages in the channel.
+/**********************************/
 export default{
     components:{
     },
@@ -16,7 +18,7 @@ export default{
 
             <div  id="scrollContainer">
 
-                <div v-for="(message, i ) of currentUserMessages">
+                <div v-for="(message, i ) of currentAccountMessages">
 
                     <div id="channelCreateSearchChannelInfo"
                         @click="showMessageIndex( i )">{{ message.text }}</div>
@@ -51,10 +53,10 @@ export default{
 
 
         showMessageIndex( index ){
-            for( let message of this.currentUserMessages ){
+            for( let message of this.currentAccountMessages ){
                 console.log( message.text )
             }
-            console.log( this.currentUserMessages.length );
+            console.log( this.currentAccountMessages.length );
             console.log( index );
         },
 
@@ -71,7 +73,7 @@ export default{
 
     computed:{
 
-        currentUserMessages(){
+        currentAccountMessages(){
             return this.$store.state.currentChannelMessages;
         },
     },

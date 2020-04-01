@@ -1,0 +1,40 @@
+
+
+#container {
+    grid-template-rows: 80px auto 80px; 
+    grid-row-gap: 15px;
+
+
+    padding: 20px;
+    margin: 20px;
+
+
+}
+
+#scrollContainer{
+    width: 100px;
+    height: 100px;
+}
+
+#box{
+    background-color: teal;
+    width: 500px;
+}
+
+#channelName{
+    background-color: tomato;
+    font-weight: 900;
+}
+
+#membersBox{
+    background-color: rgb(99, 15, 0);
+}
+
+#message{
+    background-color: rgb(134, 72, 61);
+}
+
+#memberNick{
+    width: 20px;
+    height: 20px;
+}

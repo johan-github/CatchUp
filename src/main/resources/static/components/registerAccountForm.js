@@ -1,39 +1,38 @@
-
+/********************************* /
+* Orginal by Helena & Alberts. 2020-03-19
+* Last Edited by Johan (cleanUp) 2020-04-01
+* Notes: Is for when registering a account. ./view/registerAccount.js
+/**********************************/
 export default {
-    template:`
-    <div class="registerUser">
-    <form class="form" @submit.prevent="registerNewUserForm">
+    template: /* html */ `
+    <section class="registerAccount">
+    <form @submit.prevent="registerNewAccountForm" class="registerForm">
 
-        <h2>Register new user</h2>
-                
+        <label class="label">Register new account</label>
+            
+        <div class="registerAccountFormFields">
             <div class="inputForm">
-            <i class="fa fa-envelope"></i>
-                <label class="textlabel">Enter your e-mail</label>
-                <input class="input-field" type="email" placeholder="e-mail" v-model="addEmail" required >
+                <input class="input-field" type="email" placeholder="Enter your email" v-model="addEmail" required >
             </div>
 
             <div class="inputForm">
-                <i class="fa fa-user"></i>
-                <label class="textlabel">Enter your nickname</label>
-                <input class="input-field" placeholder="nickname" v-model="addNickname" required >
+                <input class="input-field" type="text" placeholder="Enter your nickname" v-model="addNickname" required >
             </div>
 
             <div class="inputForm">
-                <i class="fa fa-key"></i>
-                <label class="textlabel">Enter your password</label>
-                <input class="input-field" type="password" placeholder="password" v-model="addPassword" required>
+                <input class="input-field" type="password" placeholder="Enter your password" v-model="addPassword" required>
             </div>
 
             <div class="inputForm">
-                <i class="fa fa-key"></i>
-                <label class="textlabel">Confirm your password</label>
-                <input class="input-field" type="password" placeholder="confirm password" v-model="confirmPassword" required>
+                <input class="input-field" type="password" placeholder="Confirm your password" v-model="confirmPassword" required>
                 <h4 id="passwordalert" >{{ passwordAlert  }}</h4>
-
             </div>
-        <button class="registerButton">Register</button>
-    </form>
-    </div>
+            </div>
+
+            <button class="registerButton">Register</button>
+            
+        </form>
+    </section>
     `,
 
 data() {
@@ -51,8 +50,8 @@ data() {
   
   methods: {
 
-   //Adds a new user to backend
-    async registerNewUserForm() {
+   //Adds a new account to backend
+    async registerNewAccountForm() {
         console.log("In register form now ")
 
          if( !this.addEmail.trim() && !this.addPassword.trim() && !this.addNickname.trim() ){
@@ -71,15 +70,15 @@ data() {
         if(this.addPassword === this.confirmPassword){
             console.log("PASSWORD OK")
 
-        // Save variables to be added to database as an object newUser
-        let newUser = {
+        // Save variables to be added to database as an object newAccount
+        let newAccount = {
         email: this.addEmail,
-        usernick: this.addNickname,
+        accountnick: this.addNickname,
         password: this.addPassword,
         avatar:  this.defaultAvatar,
         status: this.defaultStatus
         }
-        console.log(newUser)
+        console.log(newAccount)
 
  
         // Post object to database
@@ -88,7 +87,7 @@ data() {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(newUser)
+            body: JSON.stringify(newAccount)
           })
           result = await result.json()
 
@@ -99,7 +98,7 @@ data() {
         this.confirmPassword=''
 
         // Re-direct to login page
-        this.$router.push('/loginUser')
+        this.$router.push('/loginAccount')
       
   }
 }

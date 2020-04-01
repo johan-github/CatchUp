@@ -1,28 +1,38 @@
-
-import navbarNotLoggedIn from './components/navbarNotLoggedIn.js'
-import loginUserForm from './components/loginUserForm.js'
-
-
-
-
+/********************************* /
+* Orginal by ......
+* Last Edited by Johan (cleanUp) 2020-04-01
+* Notes: First thing you see when going to CatchUp. Might need to change?
+/**********************************/
+// import navbar from './components/navbar.js'
+import loginAccountForm from './components/loginAccountForm.js'
+import home from './views/home.js'
 
 export default{
   components:{
-    navbarNotLoggedIn,
-    loginUserForm,
+    // navbar,
+    loginAccountForm,
+    home,
   },
 
-  template:`
+  template: /* html */`
 
-  
-  <section id="appContainer">
+  <section>
+
+    <home/>
+
+  </section>
+
+
+
+
+  <!-- <section id="appContainer">
 
         <div id="appButton">
             <h3>| | |</h3>
         </div>
 
         <div id="appNav">
-          <navbarNotLoggedIn/>
+          <navbar/>
         </div>
         
 
@@ -30,7 +40,7 @@ export default{
             <router-view/>
         </main>
         
-    </section>
+    </section> -->
     
     `,
 }

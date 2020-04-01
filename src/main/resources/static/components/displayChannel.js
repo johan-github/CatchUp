@@ -1,3 +1,8 @@
+/********************************* /
+* Orginal by Hassan. 2020-03-24
+* Last Edited by Johan (cleanUp) 2020-04-01
+* Notes: This displays all the Account's channels and is used by ./views/home.js
+/**********************************/
 import channelCreateSearch from './channelCreateSearch.js'
 
 
@@ -14,13 +19,57 @@ export default{
     template:`
         <section id="container">
 
-            <h3 id="label">My channels?</h3>
+            <h3 id="label">My channels? (DisplayChannel)</h3>
 
-            <div  id="scrollContainer">
-                <div v-for="(myChannelName, i ) of myChannelNames">
+                    <div id="box" v-for="(myChannelName, i ) of myChannelNames">
 
-                <div id="channelCreateSearchChannelInfo"
-                    @click="channelSelected( myChannelName.id )">{{ myChannelName.name }}</div>
+                    <div id="channelName"
+                            @click="channelSelected( myChannelName.id )">
+                            <div>{{ myChannelName.name }}</div>
+                        </div>
+
+                        <div id="scrollContainer">
+                            <div id="membersBox" v-for="testBuddy of displayChannelFriends( i )">
+                                <div id="memberNick">{{ testBuddy.accountnick}} ( id:{{ testBuddy.id }} )</div>
+                            </div>
+                        </div>
+
+                        <div id="message"
+                            v-for="channelMessage of displayLatestChannelMessages(myChannelName.id)">
+                            <div>{{channelMessage.text}}  </div>                  
+                        </div>
+
+                    </div>
+
+            <button @click="createNewChannel">Create channel</button>
+
+        </section>
+    `,
+
+    /*
+<section id="container">
+
+            <h3 id="label">My channels? (DisplayChannel)</h3>
+
+            <div id="scrollContainer">
+                
+                <div id="displayChannelBox"
+                    v-for="(myChannelName, i ) of myChannelNames">
+
+                    <div id="displayChannelBuddies"
+                        v-for="testBuddy of displayChannelFriends( i )">
+                        {{ testBuddy.accountnick}} ( {{ testBuddy.id}} )
+                    </div>
+                    
+                    <div id="displayChannelName"
+                        @click="channelSelected( myChannelName.id )">
+                        {{ myChannelName.name }}
+                    </div>
+
+                    <div id="displayChannelMessage"
+                        v-for="channelMessage of displayLatestChannelMessages(myChannelName.id)">
+                        {{channelMessage.text}}                    
+                    </div>
 
                 </div>
                 
@@ -29,7 +78,47 @@ export default{
             <button @click="createNewChannel">Create channel</button>
 
         </section>
-    `,
+    */
+
+    /*
+    <section id="container">
+
+            <h3 id="label">My channels? Display</h3>
+
+            <div id="scrollContainer">
+                
+            <div>
+
+                <div id="displayChannelBox"
+                    v-for="(myChannelName, i ) of myChannelNames">
+
+                    <div id="displayChannelBuddies"
+                        v-for="testBuddy of displayChannelFriends( i )">
+                        <div>{{  }}</div>
+                    </div>
+
+                    
+
+                    <div id="displayChannelName"
+                        @click="channelSelected( myChannelName.id )">
+                        <div>{{ myChannelName.name }}</div>   
+                    </div>
+
+                    <div id="displayChannelMessages"
+                        v-for="channelMessage of displayLatestChannelMessages(myChannelName.id)">
+                        {{channelMessage.text}}                    
+                    </div>
+
+                </div>
+
+            </div>
+                
+            </div>
+
+            <button @click="createNewChannel">Create channel</button>
+
+        </section>
+        */
 
 
 
@@ -42,6 +131,8 @@ export default{
             channelIds : [],
             myChannelNames : [],
             allMessages : [],            
+            accounts : [],
+            latestchannelmessages : [],
         }
     },
     
@@ -50,6 +141,39 @@ export default{
 
 
     methods:{
+
+         displayLatestChannelMessages(channelId) {
+             let channelMessages = []
+             for(let message of this.latestchannelmessages) {
+                 if(message.channelid === channelId) {
+                     channelMessages.push(message)
+                     console.log(message.text)
+                 }
+             } 
+             return channelMessages
+         },
+
+
+        displayChannelFriends(index) {
+            let channelBuddies = []
+            let channelAccounts = []
+            
+            for(let accountChannel of this.accountChannels) {
+                if(accountChannel.channelid === index ) {
+                    channelBuddies.push(accountChannel.accountid)
+                }
+            }
+
+            for(let account of this.accounts) {
+                for(let channelBuddy of channelBuddies) {
+                    if(account.id === channelBuddy) {
+                        channelAccounts.push( account )
+                    }
+                }
+            }
+
+            return channelAccounts;
+        },
 
 
         channelSelected( myChannelId ){
@@ -67,6 +191,7 @@ export default{
             this.$store.commit( 'setCurrentChannelMessages', tempMessages )
             this.$router.push( '/channelMessage')
 
+            this.displayChannelFriends(myChannelId)
             return
 
         },
@@ -83,11 +208,11 @@ export default{
         },
 
 
-        getCurrentUserInfo(){
-            if( this.userLoggedIn.loggedIn === 'true' ){
+        getCurrentAccountInfo(){
+            if( this.accountLoggedIn.loggedIn === 'true' ){
 
                 for(let accountChannel of this.accountChannels) {
-                    if(accountChannel.accountid === this.currentUser.id) {
+                    if(accountChannel.accountid === this.currentAccount.id) {
                         this.channelIds.push(accountChannel.channelid)
                     } 
                 }
@@ -116,17 +241,22 @@ export default{
             return this.$store.state.accountChannels
         },
 
-        currentUser(){
-            return this.$store.state.currentUser
+        currentAccount(){
+            return this.$store.state.currentAccount
         },
 
-        userLoggedIn(){
-            return this.$store.state.userLoggedIn
+        accountLoggedIn(){
+            return this.$store.state.accountLoggedIn
         },
 
-        currentUserMessages(){
+        currentAccountMessages(){
             return this.$store.state.currentChannelMessages;
         },
+
+        currentChannelId(){
+            return this.$store.state.currentChannelId;
+        }
+
     },
 
 
@@ -156,8 +286,18 @@ export default{
             .then( messages => messages.json())
             .then( messages => this.allMessages = messages )
 
+        await fetch('/rest/accounts')
+            .then( accounts => accounts.json())
+            .then( accounts => this.accounts = accounts )
 
-        this.getCurrentUserInfo()
+        await fetch('/rest/latestchannelmessages/' + this.currentAccount.id)
+            .then( latestchannelmessages => latestchannelmessages.json())
+            .then(latestchannelmessages => this.latestchannelmessages = latestchannelmessages)
+
+
+        this.getCurrentAccountInfo()
+        this.displayChannelFriends()
+        this.displayLatestChannelMessages()
         
     }
 
