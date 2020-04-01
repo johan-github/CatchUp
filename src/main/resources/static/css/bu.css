@@ -145,18 +145,18 @@ body{
 
 /******************************************************************************* messageBox **/
             
-#messageBoxUserPic{ grid-area: pic; }
-#messageBoxUserName{ grid-area: name; }
-#messageBoxUserAdd{ grid-area: userAdd; }
-#messageBoxUserMessageTime{ grid-area: time; }
-#messageBoxUserMessage{ grid-area: msg; }
+#messageBoxAccountPic{ grid-area: pic; }
+#messageBoxAccountName{ grid-area: name; }
+#messageBoxAccountAdd{ grid-area: accountAdd; }
+#messageBoxAccountMessageTime{ grid-area: time; }
+#messageBoxAccountMessage{ grid-area: msg; }
 #messageBox{
     display: grid;
     /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
     grid-template-columns: 50px auto 10px;
     grid-template-rows: 25px 25px auto;
     grid-template-areas:
-    "pic name name userAdd"
+    "pic name name accountAdd"
     "pic time time time"
     "msg msg msg msg";
 
@@ -168,20 +168,20 @@ body{
     box-shadow: 5px 5px 5px #000000;
     border-radius: 5px 0px 5px 0px;
 }
-        #messageBoxUserPic{
+        #messageBoxAccountPic{
             background-image: url("https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png");
             background-size: cover;
             background-position: center;
             box-shadow: 5px 5px 5px #000000;
         }
-        #messageBoxUserName {
+        #messageBoxAccountName {
             padding: 10px 0px 5px 20px;
         }
-        #messageBoxUserMessageTime {
+        #messageBoxAccountMessageTime {
             padding: 5px 0px 5px 20px;
             font: italic 10px Arial, Helvetica, sans-serif;
         }
-        #messageBoxUserMessage {
+        #messageBoxAccountMessage {
             padding: 20px 10px 10px 20px;
         }
         #name, #time{
@@ -189,7 +189,7 @@ body{
             align-items: center;
         }
         
-        #messageBoxUserAdd{
+        #messageBoxAccountAdd{
             justify-self: end;
         }
         #time{
