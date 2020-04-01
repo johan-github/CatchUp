@@ -1,6 +1,6 @@
 /********************************* /
 * Orginal by Hassan. 2020-03-24
-* Last Edited by Tobias. 2020-03-31
+* Last Edited by Johan (cleanUp) 2020-04-01
 * Notes: This displays all the Account's channels and is used by ./views/home.js
 /**********************************/
 import channelCreateSearch from './channelCreateSearch.js'
@@ -30,7 +30,7 @@ export default{
 
                         <div id="scrollContainer">
                             <div id="membersBox" v-for="testBuddy of displayChannelFriends( i )">
-                                <div id="memberNick">{{ testBuddy.usernick}} ( id:{{ testBuddy.id }} )</div>
+                                <div id="memberNick">{{ testBuddy.accountnick}} ( id:{{ testBuddy.id }} )</div>
                             </div>
                         </div>
 
@@ -58,7 +58,7 @@ export default{
 
                     <div id="displayChannelBuddies"
                         v-for="testBuddy of displayChannelFriends( i )">
-                        {{ testBuddy.usernick}} ( {{ testBuddy.id}} )
+                        {{ testBuddy.accountnick}} ( {{ testBuddy.id}} )
                     </div>
                     
                     <div id="displayChannelName"
@@ -208,11 +208,11 @@ export default{
         },
 
 
-        getCurrentUserInfo(){
-            if( this.userLoggedIn.loggedIn === 'true' ){
+        getCurrentAccountInfo(){
+            if( this.accountLoggedIn.loggedIn === 'true' ){
 
                 for(let accountChannel of this.accountChannels) {
-                    if(accountChannel.accountid === this.currentUser.id) {
+                    if(accountChannel.accountid === this.currentAccount.id) {
                         this.channelIds.push(accountChannel.channelid)
                     } 
                 }
@@ -241,15 +241,15 @@ export default{
             return this.$store.state.accountChannels
         },
 
-        currentUser(){
-            return this.$store.state.currentUser
+        currentAccount(){
+            return this.$store.state.currentAccount
         },
 
-        userLoggedIn(){
-            return this.$store.state.userLoggedIn
+        accountLoggedIn(){
+            return this.$store.state.accountLoggedIn
         },
 
-        currentUserMessages(){
+        currentAccountMessages(){
             return this.$store.state.currentChannelMessages;
         },
 
@@ -290,12 +290,12 @@ export default{
             .then( accounts => accounts.json())
             .then( accounts => this.accounts = accounts )
 
-        await fetch('/rest/latestchannelmessages/' + this.currentUser.id)
+        await fetch('/rest/latestchannelmessages/' + this.currentAccount.id)
             .then( latestchannelmessages => latestchannelmessages.json())
             .then(latestchannelmessages => this.latestchannelmessages = latestchannelmessages)
 
 
-        this.getCurrentUserInfo()
+        this.getCurrentAccountInfo()
         this.displayChannelFriends()
         this.displayLatestChannelMessages()
         

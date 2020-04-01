@@ -1,33 +1,33 @@
 /********************************* /
 * Orginal by Tobias. 2020-03-27
-* Last Edited by Hassan. 2020-03-30 
+* Last Edited by Johan (cleanUp) 2020-04-01
 * Notes: Login need to fix security
 /**********************************/
 export default {
     template: /* html */`
         <section>
 
-            <form @submit.prevent="loginCurrentUserForm" id="container">
+            <form @submit.prevent="loginCurrentAccountForm" id="container">
 
                 <label id="label"> Please login to continue </label>
                 
-                <div id="loginUserFormFields">
+                <div id="loginAccountFormFields">
                     
                     <div>
-                        <input id="loginUserFormUsernameField" placeholder="Enter your email" v-model="enterUserEmail" type="text">
-                        <div id="msgError">{{ msgErrorUsername }}</div>
+                        <input id="loginAccountFormAccountnameField" placeholder="Enter your email" v-model="enterAccountEmail" type="text">
+                        <div id="msgError">{{ msgErrorAccountname }}</div>
                     </div>
 
                     <div>
-                        <input id="loginUserFormPasswordField" placeholder="Enter your password" v-model="enterPassword" type="password">
+                        <input id="loginAccountFormPasswordField" placeholder="Enter your password" v-model="enterPassword" type="password">
                         <div id="msgError">{{ msgErrorPassword }}</div>
                     </div>
 
                     
                 </div>             
 
-                    <button id="loginUserFormButtonLogin">Login</button><br>
-                    <p>Don't have an account? <a href="/registerUser">Register here!</a></p>
+                    <button id="loginAccountFormButtonLogin">Login</button><br>
+                    <p>Don't have an account? <a href="/registerAccount">Register here!</a></p>
                 
             </form>
                 
@@ -39,10 +39,10 @@ export default {
     data() {
         
         return {
-            enterUserEmail: '',
+            enterAccountEmail: '',
             enterPassword: '',
 
-            msgErrorUsername : '',
+            msgErrorAccountname : '',
             msgErrorPassword : '',
         }
     },
@@ -50,15 +50,15 @@ export default {
 
 
     methods: {
-        async loginCurrentUserForm() {
-            if (!this.enterUserEmail.trim()) {
-                this.msgErrorUsername = 'Please enter your email!'
+        async loginCurrentAccountForm() {
+            if (!this.enterAccountEmail.trim()) {
+                this.msgErrorAccountname = 'Please enter your email!'
                 this.msgErrorPassword = ''
                 return
             }
             
 
-            this.msgErrorUsername = ''
+            this.msgErrorAccountname = ''
 
 
             if (!this.enterPassword.trim()) {
@@ -77,21 +77,21 @@ export default {
                 for( let account of accountsFromDB ){
                     
                     console.log( "2")
-                    if( account.email.toLowerCase() === this.enterUserEmail.toLowerCase() ){
+                    if( account.email.toLowerCase() === this.enterAccountEmail.toLowerCase() ){
                         
-                        let foundUserWithEnteredEmail = await fetch('/rest/accounts/email/' + this.enterUserEmail)
+                        let foundAccountWithEnteredEmail = await fetch('/rest/accounts/email/' + this.enterAccountEmail)
                         .then( rightAccount => rightAccount.json())
                         
                         console.log( "4")
                         console.log( "account.email " + account.email)
-                        if ( foundUserWithEnteredEmail.password === this.enterPassword ){
-                        this.$store.commit('setCurrentAccount', foundUserWithEnteredEmail)
-                        this.$router.push('/home')                        
+                        if ( foundAccountWithEnteredEmail.password === this.enterPassword ){
+                        this.$store.commit('setCurrentAccount', foundAccountWithEnteredEmail)
+                        this.$router.push('/displayChannel')                        
                     }
                 }                
             }
             
-            this.msgErrorPassword = 'Please enter a valid username and/or password!'
+            this.msgErrorPassword = 'Please enter a valid accountname and/or password!'
             return
             
         }

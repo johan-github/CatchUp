@@ -1,22 +1,24 @@
 /********************************* /
 * Orginal by ......
-* Last Edited by ......
+* Last Edited by Johan (cleanUp) 2020-04-01
 * Notes: First thing you see when going to CatchUp. Might need to change?
 /**********************************/
 // import navbar from './components/navbar.js'
-import loginUserForm from './components/loginUserForm.js'
+import loginAccountForm from './components/loginAccountForm.js'
+import home from './views/home.js'
 
 export default{
   components:{
     // navbar,
-    loginUserForm,
+    loginAccountForm,
+    home,
   },
 
-  template:`
+  template: /* html */`
 
   <section>
 
-    <loginUserForm/>
+    <home/>
 
   </section>
 

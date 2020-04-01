@@ -1,13 +1,13 @@
 
 
 import navbar from '../components/navbar.js'
-// import loginUserForm from '../components/loginUserForm.js'
+// import loginAccountForm from '../components/loginAccountForm.js'
 /********************************* /
 * Orginal by Hassan. 2020-03-18
-* Last Edited by Hassan. 2020-03-30
+* Last Edited by Johan (cleanUp) 2020-04-01
 * Notes: Displays when logged in. Need to be edited later on.
 /**********************************/
-import loginUserForm from '../components/loginUserForm.js'
+import loginAccountForm from '../components/loginAccountForm.js'
 
 
 import { createNamespacedHelpers } from '../libs/vuex.esm.browser.js'
@@ -28,7 +28,7 @@ export default {
 
     },
 
-    template: `
+    template: /* html */ `
     <div>
         <div id="appButton">
             <h3>| | |</h3>
@@ -39,9 +39,10 @@ export default {
         <main id="appMain">
             <router-view/>
         </main>
-        <div>
+        <!-- <div>
             <displayChannel/>
-        </div>
+        </div> -->
+    </div>
     `,
 
 
@@ -51,7 +52,7 @@ export default {
 /************************     USEABLE CODE???    ****************************************** */
 /*export default{
   components:{
-    loginUserForm,
+    loginAccountForm,
     navbarLoggedIn,
   },
 
@@ -71,7 +72,7 @@ export default {
 
         <main id="appMain">
             <router-view/>
-            <!--<loginUserForm/>-->
+            <!--<loginAccountForm/>-->
         </main>
         
     </section>
