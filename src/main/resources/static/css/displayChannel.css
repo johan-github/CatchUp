@@ -1,40 +1,40 @@
 
 
+#container {
+    grid-template-rows: 80px auto 80px; 
+    grid-row-gap: 15px;
+
+
+    padding: 20px;
+    margin: 20px;
+
+
+}
+
+#scrollContainer{
+    width: 100px;
+    height: 100px;
+}
 
 #box{
-    background-color: aquamarine;
-
-    display: grid;
-    grid-template-rows: repeat( 3, 20px );
-
-    padding: 10px;
-    margin: 10px;
-
+    background-color: teal;
+    width: 500px;
 }
 
-#displayChannelBox > div {
-    background-color: rgb(127, 146, 255);
-
-    display: grid;
-
-    padding: 10px;
-    margin: 10px;
-
-}
-
-#name{
+#channelName{
+    background-color: tomato;
     font-weight: 900;
 }
-#buddy{
-    display: grid;
-    grid-template-columns: repeat(10, 50px);
-    max-width: 50px;
-    max-height: 50px;
-    background-image: url('https://www.pinclipart.com/picdir/big/269-2691398_python-logo-clipart-transparent-background-png-download.png');
-    background-repeat: no-repeat;
-    background-size: cover;
+
+#membersBox{
+    background-color: rgb(99, 15, 0);
 }
 
-#displayChannelMessages{
+#message{
+    background-color: rgb(134, 72, 61);
+}
 
+#memberNick{
+    width: 20px;
+    height: 20px;
 }
