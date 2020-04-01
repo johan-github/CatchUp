@@ -1,3 +1,8 @@
+/********************************* /
+* Orginal by Hassan. 2020-03-30
+* Last Edited by ......
+* Notes: This is a test.
+/**********************************/
 import { store } from '../store.js'
 import channelCreateSearch from './channelCreateSearch.js'
 
@@ -25,9 +30,6 @@ export default{
 
         </section>
     `,
-
-
-
 
 
 /*********************************************************************************************************** Methods:*/

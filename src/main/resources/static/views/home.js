@@ -1,5 +1,8 @@
-
-
+/********************************* /
+* Orginal by Hassan. 2020-03-18
+* Last Edited by Hassan. 2020-03-30
+* Notes: Displays when logged in. Need to be edited later on.
+/**********************************/
 import navbarLoggedIn from '../components/navbarLoggedIn.js'
 import loginUserForm from '../components/loginUserForm.js'
 
