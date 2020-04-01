@@ -7,7 +7,7 @@
 // Call by writing----->  localhost:4000/test
 // Please empty YOUR code before pushing to GIT
 
-import yourComponentHere from '../components/yourComponentHere.js'
+// import yourComponentHere from '../components/yourComponentHere.js'
 export default {
     components: {
         // yourComponentHere

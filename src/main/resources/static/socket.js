@@ -62,7 +62,7 @@ function sendSomething() {
 
     //ws.send( JSON.stringify( { firstname: "Hello World!" })); //.send: Will send its content to the BackEnd ( handleTextMessage in Spring )
 
-    //ws.send( JSON.stringify( socket ))
+    ws.send( JSON.stringify( socket ))
 
 }
 
