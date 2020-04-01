@@ -1,6 +1,8 @@
-
-
-
+/********************************* /
+* Orginal by Hassan. 2020-03-19
+* Last Edited by Hassan. 2020-03-30
+* Notes: This creates a channel. Is in ./views/createChannel.js
+/**********************************/
 export default{
     components:{
 

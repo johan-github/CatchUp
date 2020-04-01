@@ -1,3 +1,8 @@
+/********************************* /
+* Orginal by ......
+* Last Edited by ......
+* Notes: First thing you see when going to CatchUp. Might need to change?
+/**********************************/
 // import navbar from './components/navbar.js'
 import loginUserForm from './components/loginUserForm.js'
 

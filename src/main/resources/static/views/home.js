@@ -2,6 +2,14 @@
 
 import navbar from '../components/navbar.js'
 // import loginUserForm from '../components/loginUserForm.js'
+/********************************* /
+* Orginal by Hassan. 2020-03-18
+* Last Edited by Hassan. 2020-03-30
+* Notes: Displays when logged in. Need to be edited later on.
+/**********************************/
+import loginUserForm from '../components/loginUserForm.js'
+
+
 import { createNamespacedHelpers } from '../libs/vuex.esm.browser.js'
 import createChannel from '../components/createChannel.js'
 import displayChannel from '../components/displayChannel.js'
@@ -34,7 +42,6 @@ export default {
         <div>
             <displayChannel/>
         </div>
-    </div>
     `,
 
 

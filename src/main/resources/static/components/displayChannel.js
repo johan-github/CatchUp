@@ -1,3 +1,8 @@
+/********************************* /
+* Orginal by Hassan. 2020-03-24
+* Last Edited by Tobias. 2020-03-31
+* Notes: This displays all the Account's channels and is used by ./views/home.js
+/**********************************/
 import channelCreateSearch from './channelCreateSearch.js'
 
 
@@ -14,26 +19,54 @@ export default{
     template:`
         <section id="container">
 
-            <h3 id="label">My channels? Display</h3>
+            <h3 id="label">My channels? (DisplayChannel)</h3>
+
+                    <div id="box" v-for="(myChannelName, i ) of myChannelNames">
+
+                    <div id="channelName"
+                            @click="channelSelected( myChannelName.id )">
+                            <div>{{ myChannelName.name }}</div>
+                        </div>
+
+                        <div id="scrollContainer">
+                            <div id="membersBox" v-for="testBuddy of displayChannelFriends( i )">
+                                <div id="memberNick">{{ testBuddy.usernick}} ( id:{{ testBuddy.id }} )</div>
+                            </div>
+                        </div>
+
+                        <div id="message"
+                            v-for="channelMessage of displayLatestChannelMessages(myChannelName.id)">
+                            <div>{{channelMessage.text}}  </div>                  
+                        </div>
+
+                    </div>
+
+            <button @click="createNewChannel">Create channel</button>
+
+        </section>
+    `,
+
+    /*
+<section id="container">
+
+            <h3 id="label">My channels? (DisplayChannel)</h3>
 
             <div id="scrollContainer">
-
-                <div id="box"
+                
+                <div id="displayChannelBox"
                     v-for="(myChannelName, i ) of myChannelNames">
 
-                    <div id="buddy"
+                    <div id="displayChannelBuddies"
                         v-for="testBuddy of displayChannelFriends( i )">
-                        <div>{{  }}</div>
+                        {{ testBuddy.usernick}} ( {{ testBuddy.id}} )
                     </div>
-
                     
-
-                    <div id="name"
+                    <div id="displayChannelName"
                         @click="channelSelected( myChannelName.id )">
-                        <div>{{ myChannelName.name }}</div>   
+                        {{ myChannelName.name }}
                     </div>
 
-                    <div id="message"
+                    <div id="displayChannelMessage"
                         v-for="channelMessage of displayLatestChannelMessages(myChannelName.id)">
                         {{channelMessage.text}}                    
                     </div>
@@ -45,7 +78,7 @@ export default{
             <button @click="createNewChannel">Create channel</button>
 
         </section>
-    `,
+    */
 
     /*
     <section id="container">
@@ -119,6 +152,7 @@ export default{
              } 
              return channelMessages
          },
+
 
         displayChannelFriends(index) {
             let channelBuddies = []
