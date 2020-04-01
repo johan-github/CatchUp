@@ -1,18 +1,18 @@
 /********************************* /
 * Orginal by ......
-* Last Edited by ......
+* Last Edited by Johan (cleanUp) 2020-04-01
 * Notes: goes to this page when not logged in.  Note to Owner rename to loginAccount
 /**********************************/
-import loginUserForm from '../components/loginUserForm.js'
+import loginAccountForm from '../components/loginAccountForm.js'
 
 export default {
     components: {
-        loginUserForm
+        loginAccountForm
     },
 
     template: `
         <div>
-            <loginUserForm />
+            <loginAccountForm />
         </div>
     `
 }

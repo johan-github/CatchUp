@@ -1,6 +1,6 @@
 /********************************* /
 * Orginal by Hassan. 2020-03-18
-* Last Edited by Hassan. 2020-03-30
+* Last Edited by Johan (cleanUp) 2020-04-01
 * Notes: We are using this at the moment
 /**********************************/
 export default{
@@ -11,7 +11,7 @@ export default{
         <div class="nav">
 
             <div id="navHome">
-                <router-link to="/loginUser">H O M E</router-link>
+                <router-link to="/loginAccount">H O M E</router-link>
             </div>
 
             <div id="navChannels">                

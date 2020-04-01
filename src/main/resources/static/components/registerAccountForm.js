@@ -1,16 +1,16 @@
 /********************************* /
 * Orginal by Helena & Alberts. 2020-03-19
-* Last Edited by ......
-* Notes: Is for when registering a user. ./view/registerUser.js
+* Last Edited by Johan (cleanUp) 2020-04-01
+* Notes: Is for when registering a account. ./view/registerAccount.js
 /**********************************/
 export default {
     template: /* html */ `
-    <section class="registerUser">
-    <form @submit.prevent="registerNewUserForm" class="registerForm">
+    <section class="registerAccount">
+    <form @submit.prevent="registerNewAccountForm" class="registerForm">
 
-        <label class="label">Register new user</label>
+        <label class="label">Register new account</label>
             
-        <div class="registerUserFormFields">
+        <div class="registerAccountFormFields">
             <div class="inputForm">
                 <input class="input-field" type="email" placeholder="Enter your email" v-model="addEmail" required >
             </div>
@@ -50,8 +50,8 @@ data() {
   
   methods: {
 
-   //Adds a new user to backend
-    async registerNewUserForm() {
+   //Adds a new account to backend
+    async registerNewAccountForm() {
         console.log("In register form now ")
 
          if( !this.addEmail.trim() && !this.addPassword.trim() && !this.addNickname.trim() ){
@@ -70,15 +70,15 @@ data() {
         if(this.addPassword === this.confirmPassword){
             console.log("PASSWORD OK")
 
-        // Save variables to be added to database as an object newUser
-        let newUser = {
+        // Save variables to be added to database as an object newAccount
+        let newAccount = {
         email: this.addEmail,
-        usernick: this.addNickname,
+        accountnick: this.addNickname,
         password: this.addPassword,
         avatar:  this.defaultAvatar,
         status: this.defaultStatus
         }
-        console.log(newUser)
+        console.log(newAccount)
 
  
         // Post object to database
@@ -87,7 +87,7 @@ data() {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(newUser)
+            body: JSON.stringify(newAccount)
           })
           result = await result.json()
 
@@ -98,7 +98,7 @@ data() {
         this.confirmPassword=''
 
         // Re-direct to login page
-        this.$router.push('/loginUser')
+        this.$router.push('/loginAccount')
       
   }
 }

@@ -1,7 +1,7 @@
 /********************************* /
 * Orginal by Hassan. 2020-03-18
-* Last Edited by ......
-* Notes:  Needs to be looked at. *navBar*  *currentAccount/currentUser* *userLogedIn*
+* Last Edited by Johan (cleanUp) 2020-04-01
+* Notes:  Needs to be looked at. *navBar*  *currentAccount/currentAccount* *accountLogedIn*
 /**********************************/
 import Vue from './libs/vue.esm.browser.js'
 import Vuex from './libs/vuex.esm.browser.js'
