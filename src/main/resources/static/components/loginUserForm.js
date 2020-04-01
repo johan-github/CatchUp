@@ -1,4 +1,8 @@
-
+/********************************* /
+* Orginal by Tobias. 2020-03-27
+* Last Edited by Hassan. 2020-03-30 
+* Notes: Login need to fix security
+/**********************************/
 export default {
     template: /* html */`
         <section>
@@ -81,8 +85,7 @@ export default {
                         console.log( "4")
                         console.log( "account.email " + account.email)
                         if ( foundUserWithEnteredEmail.password === this.enterPassword ){
-                        this.$store.commit('setCurrentUser', foundUserWithEnteredEmail)
-                        this.$store.commit('changeLoggedIn')
+                        this.$store.commit('setCurrentAccount', foundUserWithEnteredEmail)
                         this.$router.push('/home')                        
                     }
                 }                
@@ -93,50 +96,4 @@ export default {
             
         }
     },
-
-
-
-    computed:{
-
-        userLoggedIn(){
-            return this.$store.state.userLoggedIn
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

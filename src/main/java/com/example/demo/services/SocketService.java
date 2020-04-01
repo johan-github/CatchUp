@@ -29,6 +29,7 @@ public class SocketService {
         sendToOne(webSocketSession, gson.toJson(obj, klass));
     }
 
+
     public void sendToAll(Object obj, Class klass) {
         sendToAll( gson.toJson(obj, klass) );
     }

@@ -1,3 +1,8 @@
+/********************************* /
+* Orginal by Hassan. 2020-03-18
+* Last Edited by ......
+* Notes: routes to all the pages.
+/**********************************/
 import Vue from './libs/vue.esm.browser.js'
 import Router from './libs/vue-router.esm.browser.js'
 Vue.use( Router )
@@ -11,6 +16,7 @@ import registerUser from './views/registerUser.js'
 import loginUser from './views/loginUser.js'
 import createChannel from './views/createChannel.js'
 import channelMessage from './views/channelMessage.js'
+import test from './views/test.js'
 
 export const router = new Router({
     mode: 'history',
@@ -66,6 +72,11 @@ export const router = new Router({
             name : 'channelMessage',
             path : '/channelMessage',
             component : channelMessage,
+        },
+        {
+            name: 'testPage',
+            path: '/test',
+            component: test,
         },
 
 

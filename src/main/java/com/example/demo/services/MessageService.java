@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.Channel;
 import com.example.demo.entities.ChannelMessage;
 import com.example.demo.entities.Message;
 import com.example.demo.repositories.MessageRepo;
@@ -12,7 +13,7 @@ import java.util.List;
 public class MessageService {
 
     @Autowired
-    MessageRepo messageRepo;
+    private MessageRepo messageRepo;
 
     @Autowired
     private SocketService socketService;
@@ -27,15 +28,23 @@ public class MessageService {
 
 
 
-    public Message addNewMessage(Message message ){
-
+    public Message addNewMessage(Message newMessage ){
         Message dbMessage = null;
 
-        try{ //Simple way for avoiding crashes
-            dbMessage = messageRepo.save( message );
+        //Simple way for avoiding crashes
+        try{
+            dbMessage = messageRepo.save( newMessage );
+            socketService.sendToAll(dbMessage, Message.class);
+
         }catch(Exception e ){
             e.printStackTrace();
         }
         return dbMessage;
+    }
+
+
+
+    public List<Message> getChannelMessage(int id) {
+        return (List<Message>) messageRepo.findBychannelid( id );
     }
 }
