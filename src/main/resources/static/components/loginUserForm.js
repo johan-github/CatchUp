@@ -1,6 +1,6 @@
 
 export default {
-    template:`
+    template: /* html */`
         <section>
 
             <form @submit.prevent="loginCurrentUserForm" id="container">
@@ -22,7 +22,8 @@ export default {
                     
                 </div>             
 
-                    <button id="loginUserFormButtonLogin">Login</button>
+                    <button id="loginUserFormButtonLogin">Login</button><br>
+                    <p>Don't have an account? <a href="/registerUser">Register here!</a></p>
                 
             </form>
                 

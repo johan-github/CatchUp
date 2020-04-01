@@ -1,83 +1,92 @@
-.registerUser{
-    display: flex;
-    width: 100%;
-    height: 100%;
-    color: rgb(205, 205, 255);
-    background-color:  rgb(26, 48, 48);
-    opacity: 0.9;
+.registerForm {
+  display: grid;
+
+  width: 600px;
+  max-width: 600px;
+
+  min-height: 600px;
+  height: 600px;
+
+  padding: 20px;
+  margin: 20px;
+
+  background-color: rgb(71, 80, 71);
+
+  align-items: center;
+  justify-items: center;
+
+  transition: .3s;
+  opacity: .95;
 }
 
-.loginUser {
-    color: white;
+@media screen and ( min-width: 1200px ){
+  .registerForm{
+     width: 1200px;
+    max-width: 1200px;
+  }
 }
 
 /*************************************************************************/
-
-.fa {
-    color : whitesmoke;
-  }
-
-/*************************************************************************/
-.registerButton{
-  box-sizing: border-box;
-  background-color: rgb(18, 77, 128);
-  color: white;
-  padding: 15px 10px;
+/* .registerButton{
+  background-color: rgb(73, 107, 80);
+  padding-left: 5px;
+  box-shadow: 3px 3px 2px black;
+  
+  width: 150px;
+  max-width: 150px;
+  height: 25px;
+  max-height: 25px;
+  
+  border-radius: 2px 2px 0px 0px;
   border: none;
-  cursor: pointer;
-  width: 80px;
-  opacity: 0.8;
-  border-radius: 30%;
-  border: none;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  margin-left: 156px;
-  cursor: pointer;
-      
-  }
+  outline: none;
 
-  /*************************************************************************/
-  .registerButton:hover {
-    opacity: 1;
-     color: rgb(205, 205, 255); 
-  }
-
-  /*************************************************************************/
-  .input-field {
-    width: 100%;
-    padding: 10px;
-    outline: none;
-  }
-
-  .input-field:hover{
-      opacity: 0.9;
-  }
-
-  .input-field:focus {
-  border: 2px solid black;
+  transition: .5s;
 }
 
-.inputForm {
+.registerButton:hover{
+  background-color: rgb(2, 179, 37);
+  box-shadow: 6px 6px 2px rgb(0, 0, 0);
+  color: rgb(14, 43, 20);
+}
+
+.registerButton:active{
+  background-color: rgb(0, 97, 19);
+  box-shadow: 1px 1px 2px rgb(0, 0, 0);
+} */
+
+  /*************************************************************************/
+
+.label{
+  background-color: rgb(211, 211, 211);
+  color: rgb(45, 53, 47);
+  font-weight: bold;
+
+  min-width: 200px;
+  width: auto;
+  max-width: 400px;
+    
+  padding: 20px;
+  margin: 20px;
+
+  border-radius: 0px 15px 15px 15px;
+    
+  box-shadow: 6px 6px 2px rgb(0, 0, 0);
+    
+  transition: .2s;
+}
+
+@media scrreen and ( min-width: 1200px ){
+  #label{    
+    min-width: 400px;
+    width: auto;
+    max-width: 600px;    
+  }
+
+}
+
+ /*************************************************************************/
+
+ .registerUserFormFields > div{
   padding: 5px;
-}
-
-.textlabel {
-  padding: 2px;
-}
-
-.inputForm .fa {
-    color:whitesmoke;
-}
-
-.form {
-  padding-left: 14px;
-  padding-bottom: 14px;
-}
-
-#passwordalert {
-  padding-top: 5px;
-  margin: 0;
 }

@@ -1,39 +1,34 @@
 
 export default {
-    template:`
-    <div class="registerUser">
-    <form class="form" @submit.prevent="registerNewUserForm">
+    template: /* html */ `
+    <section class="registerUser">
+    <form @submit.prevent="registerNewUserForm" class="registerForm">
 
-        <h2>Register new user</h2>
-                
+        <label class="label">Register new user</label>
+            
+        <div class="registerUserFormFields">
             <div class="inputForm">
-            <i class="fa fa-envelope"></i>
-                <label class="textlabel">Enter your e-mail</label>
-                <input class="input-field" type="email" placeholder="e-mail" v-model="addEmail" required >
+                <input class="input-field" type="email" placeholder="Enter your email" v-model="addEmail" required >
             </div>
 
             <div class="inputForm">
-                <i class="fa fa-user"></i>
-                <label class="textlabel">Enter your nickname</label>
-                <input class="input-field" placeholder="nickname" v-model="addNickname" required >
+                <input class="input-field" type="text" placeholder="Enter your nickname" v-model="addNickname" required >
             </div>
 
             <div class="inputForm">
-                <i class="fa fa-key"></i>
-                <label class="textlabel">Enter your password</label>
-                <input class="input-field" type="password" placeholder="password" v-model="addPassword" required>
+                <input class="input-field" type="password" placeholder="Enter your password" v-model="addPassword" required>
             </div>
 
             <div class="inputForm">
-                <i class="fa fa-key"></i>
-                <label class="textlabel">Confirm your password</label>
-                <input class="input-field" type="password" placeholder="confirm password" v-model="confirmPassword" required>
+                <input class="input-field" type="password" placeholder="Confirm your password" v-model="confirmPassword" required>
                 <h4 id="passwordalert" >{{ passwordAlert  }}</h4>
-
             </div>
-        <button class="registerButton">Register</button>
-    </form>
-    </div>
+            </div>
+
+            <button class="registerButton">Register</button>
+            
+        </form>
+    </section>
     `,
 
 data() {
