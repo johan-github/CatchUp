@@ -1,3 +1,8 @@
+/********************************* /
+* Orginal by Hassan. 2020-03-24
+* Last Edited by Tobias. 2020-03-31
+* Notes: This displays all the Account's channels and is used by ./views/home.js
+/**********************************/
 import channelCreateSearch from './channelCreateSearch.js'
 
 

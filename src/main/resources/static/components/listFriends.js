@@ -1,5 +1,8 @@
-
-
+/********************************* /
+* Orginal by Hassan. 2020-03-26
+* Last Edited by Hassan. 2020-03-30
+* Notes: Not in use any more. Old,. Is replaced with displayFriends.js
+/**********************************/
 export default{
     template:`
         <section id="container">

@@ -1,4 +1,8 @@
-
+/********************************* /
+* Orginal by Helena & Alberts. 2020-03-19
+* Last Edited by ......
+* Notes: Is for when registering a user. ./view/registerUser.js
+/**********************************/
 export default {
     template:`
     <div class="registerUser">

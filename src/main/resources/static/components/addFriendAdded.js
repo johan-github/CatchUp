@@ -1,5 +1,8 @@
-
-
+/********************************* /
+* Orginal by Hassan. 2020-03-24
+* Last Edited by ......
+* Notes: Not in use
+/**********************************/
 export default{
     template:`
         <section id="addFriendAddedBox">            

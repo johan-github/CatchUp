@@ -1,3 +1,8 @@
+/********************************* /
+* Orginal by Hassan. 2020-03-18
+* Last Edited by ......
+* Notes:  Needs to be looked at. *navBar*  *currentAccount/currentUser* *userLogedIn*
+/**********************************/
 import Vue from './libs/vue.esm.browser.js'
 import Vuex from './libs/vuex.esm.browser.js'
 Vue.use( Vuex )
@@ -10,13 +15,7 @@ export const store = new Vuex.Store({
         accountChannels:[],
         messages : [],
 
-        myAccount: '',
-
-        currentUser:{
-            id: '0',
-            email: '',
-            usernick: '',
-        },
+        currentAccount: {},
 
         currentChannelMessages : [],
 
@@ -42,9 +41,6 @@ export const store = new Vuex.Store({
             routeLogOut : '',
         },
 
-        userLoggedIn : {
-            loggedIn : 'false',
-        }
     },
 
 
@@ -77,17 +73,6 @@ export const store = new Vuex.Store({
             state.messages.splice( index, 1 ); },
 
 
-
-        /*********************************************** userLoggedIn */
-
-        changeLoggedIn(state){
-            state.userLoggedIn.loggedIn = 'true'
-        },
-
-
-
-
-
         /*********************************************** channels*/
         setChannels(state, channels){
             state.channels = channels},
@@ -106,17 +91,6 @@ export const store = new Vuex.Store({
             state.accountChannels.splice( index, 1)
         },
 
-        /*********************************************************** CurrentUser */
-        setCurrentUser(state, currentUser){
-            state.currentUser = currentUser},
-
-
-        /*********************************************** */
-
-        removeTestChannel( state, index ){
-            state.testChannels.splice( index, 1 ) /* index: pos / 1: amount */ },
-
-        /************************************************************************* channelNames */
 
         /*********************************************** listFriends*/
         setFriendList(state, friendList){
@@ -125,13 +99,13 @@ export const store = new Vuex.Store({
         appendFriendList(state, friendList){
             state.friendList.push( friendList ) },
 
-        /************************************************ */
+        /************************************************ currentAccount*/
 
-        setMyAccount(state, myAccount){
-            state.myAccount = myAccount },
+        setCurrentAccount(state, currentAccount){
+            state.currentAccount = currentAccount },
 
-        deleteMyAccount(state, myAccount){
-            state.myAccount = null // '' instead of null? 
+        deleteCurrentAccount(state, currentAccount){
+            state.currentAccount = null // '' instead of null? 
         },
 
 

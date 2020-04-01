@@ -1,3 +1,8 @@
+/********************************* /
+* Orginal by Hassan. 2020-03-18
+* Last Edited by ......
+* Notes: routes to all the pages.
+/**********************************/
 import Vue from './libs/vue.esm.browser.js'
 import Router from './libs/vue-router.esm.browser.js'
 Vue.use( Router )

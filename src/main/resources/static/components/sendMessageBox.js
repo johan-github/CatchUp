@@ -1,7 +1,7 @@
 /*********************************+/ 
 * Orginal by Matthias. 2020-03-31
 * Edited by ......
-* Notes: 
+* Notes: A simple textbox and submit button for the channel. 
 /**********************************/
 import navbar from '../components/navbar.js'
 
@@ -36,7 +36,7 @@ export default{
             if(!this.message.trim()){ return }  // returns if string is empty.
             let newMessage = {
                 channelId = currentChannelId(),
-                accountId = currentUser().accountId,
+                accountId = currentAccount().accountId,
                 text = this.message
             }    
             console.log(newMessage)
@@ -50,8 +50,8 @@ export default{
     },
     computed:{
 
-        currentUser(){
-            return this.$store.state.currentUser
+        currentAccount(){
+            return this.$store.state.currentAccount
         },
         currentChannelId(){
             return this.$store.state.currentChannelId
