@@ -11,13 +11,7 @@ export default{
 			
 			<div class="connecting">Connecting...</div>
             
-			<form id="messageForm" @submit.prevent="send" name="messageForm" nameForm="messageForm">
-				
-                <div class="input-group clearfix">
-                    <input type="text" v-model="text"  placeholder="Type a message..."/>
-                    <button type="submit" class="primary">Send</button>
-                </div>
-            </form>
+		
 
             <ul>
                 <li v-for="message of messages" 
@@ -32,6 +26,14 @@ export default{
             </ul>
 
             <div v-model="created()"></div>
+
+            <form id="messageForm" @submit.prevent="send" name="messageForm" nameForm="messageForm">
+				
+                <div class="input-group clearfix">
+                    <input type="text" v-model="text"  placeholder="Type a message..."/>
+                    <button type="submit" class="primary">Send</button>
+                </div>
+            </form>
             
     </div>
     
