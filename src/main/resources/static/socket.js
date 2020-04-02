@@ -67,9 +67,9 @@ function sendSomething() {
 
   // Testing socket connection
   let socket = {
-    message : 'Socket test',
-    timestamp : new Date().toISOString().slice(0,19).replace("T"," ")
-
+    channelid: '3',
+    accountid : '5',
+    text : 'Socket test2'
   }
   console.log( socket)
 

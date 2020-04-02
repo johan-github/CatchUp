@@ -56,15 +56,16 @@ public class MessageController extends TextWebSocketHandler {
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
         System.out.println("Received msg: " + message.getPayload());
 
-        Message chatMessage = gson.fromJson( message.getPayload(), Message.class);
+        //Message chatMessage = gson.fromJson( message.getPayload(), Message.class);
         Message mess = gson.fromJson( message.getPayload(), Message.class );
 
-        // Testing the connection
-        System.out.println("Message: " + mess.getText());
+
+       // Testing the connection
+        System.out.println("Message: " + mess.getText() + " Banana");
         System.out.println("Timestamp: " + mess.getTime());
 
         messageService.sendToAll(mess, Message.class);
-        messageService.sendToOne(session, mess, Message.class);
+      //  messageService.sendToOne(session, mess, Message.class);
     }
 
 
