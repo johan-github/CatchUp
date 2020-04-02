@@ -1,10 +1,41 @@
 /********************************* /
 * Orginal by Helena & Alberts. 2020-03-19
-* Last Edited by Johan (cleanUp) 2020-04-01
+* Last Edited by Johan 2020-04-02
 * Notes: Is for when registering a account. ./view/registerAccount.js
 /**********************************/
 export default {
     template: /* html */ `
+    <section id="container">
+    
+        <label id="label">Register new account</label>
+
+        <form @submit.prevent="registerNewAccountForm" class="registerFormp">
+        
+                    <input class="input-field" type="email" placeholder="Enter your email" v-model="addEmail" required >
+                    
+                    <input class="input-field" type="text" placeholder="Enter your nickname" v-model="addNickname" required >
+                    
+                    <input class="input-field" type="password" placeholder="Enter your password" v-model="addPassword" required >
+
+                <div class="inputForm">
+                    <input class="input-field" type="password" placeholder="Confirm your password" v-model="confirmPassword" required>
+                    <h4 id="passwordalert" >{{ passwordAlert  }}</h4>
+                </div>
+                </div>
+
+                <button class="registerButton">Register</button>
+
+                <p class="ReturnToLoginPageText"> Go back to login-page
+                <a class="ReturnToLoginPageLink" href="/loginAccount">here! </a>
+                </p>
+                
+            </form>
+        </section>
+    </section>
+    `,
+
+    /* ORIGINAL
+    <section id="container">
     <section class="registerAccount">
     <form @submit.prevent="registerNewAccountForm" class="registerForm">
 
@@ -37,7 +68,7 @@ export default {
             
         </form>
     </section>
-    `,
+    </section>*/
 
 data() {
     return {
