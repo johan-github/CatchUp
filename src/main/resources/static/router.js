@@ -16,6 +16,7 @@ import registerAccount from './views/registerAccount.js'
 import loginAccount from './views/loginAccount.js'
 import createChannel from './views/createChannel.js'
 import channelMessage from './views/channelMessage.js'
+import testsocketcomp from './components/testsocketcomp.js'
 import test from './views/test.js'
 
 export const router = new Router({
@@ -77,6 +78,12 @@ export const router = new Router({
             name: 'testPage',
             path: '/test',
             component: test,
+        },
+
+        {
+            name : 'testsocketview',
+            path : '/testsocketview',
+            component : testsocketcomp,
         },
 
 

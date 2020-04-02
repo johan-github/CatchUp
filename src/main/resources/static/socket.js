@@ -1,3 +1,4 @@
+import { store } from './store.js'
 /********************************* /
 * Orginal by Hassan. 2020-03-30
 * Last Edited by Helena 2020-04-01
@@ -12,9 +13,9 @@ function connect() {
 
     /**
      * ws : WebSocket var
-     * Important to add correct PORT. Socket route have to be the same as the one in WebSocket. ('ws://localhost:4000/your-socket-route')
+     * Important to add correct PORT. Socket route have to be the same as the one in WebSocket. ('ws://localhost:4000/socket-message')
      */
-    ws = new WebSocket('ws://localhost:4000/chatUp-socket-route');
+    ws = new WebSocket('ws://localhost:4000/socket-message');
 
     
     ws.onopen = (e) => { //onopen : triggers when a connection is made with the server / when ChatUp is on/updated
@@ -33,27 +34,15 @@ function connect() {
 
 
   console.log("Connecting..."); //When the server is connected
-
-
 }
-
-
-
 
 function disconnect() {
 
     if (ws != null) {
         ws.close(); }
-
-
     isConnected = false;
-
-
     console.log("Disconnected");
-
 }
-
-
 
 
 function sendSomething() {
@@ -64,13 +53,25 @@ function sendSomething() {
     timestamp : Date.now(),
   }
 
-
     //ws.send( JSON.stringify( { firstname: "Hello World!" })); //.send: Will send its content to the BackEnd ( handleTextMessage in Spring )
 
     // Testing from backend, Entity Socket and SocketController
     ws.send( JSON.stringify( socket ))
 
 }
+
+// Testing function to get messages instantly
+function getOneMessage() {
+
+  // Messages from store
+  let messagesFromStore = this.$store.state.messages
+  for(let message of messagesFromStore){
+    ws.send( JSON.stringify ( message ))
+    
+  }
+
+}
+
 
 
 
