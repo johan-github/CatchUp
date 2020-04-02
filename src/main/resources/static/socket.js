@@ -60,6 +60,19 @@ function sendSomething() {
 
 }
 
+// Testing function to get messages instantly
+function getOneMessage() {
+
+  // Messages from store
+  let messagesFromStore = this.$store.state.messages
+  for(let message of messagesFromStore){
+    ws.send( JSON.stringify ( message ))
+    
+  }
+
+}
+
+
 
 
 

@@ -10,8 +10,11 @@ export default{
 			
 			<div class="connecting">Connecting...</div>
 
-			<ul id="messageArea">
-			</ul>
+            <ul>
+                <li v-for="(text, i ) of sentTexts">{{ text }} </li>
+           </ul>
+
+
 			<form id="messageForm" @submit.prevent="send" name="messageForm" nameForm="messageForm">
 				
 					<div class="input-group clearfix">
@@ -20,11 +23,8 @@ export default{
 					</div>
 			</form>
 
-            <div v-for="(sentMessage, i ) of sentMessages">
+            
 
-                    <div id="channelCreateSearchChannelInfo">{{ sentMessage }}</div>
-
-            </div>
 		
     </div>
     
@@ -37,13 +37,14 @@ export default{
             time: '',
             accountid: '9',
             text: '',
-            sentMessages: [],
+            sentTexts: [],
         }
     },
 
     methods: {
 
         async send() {
+
             
             let message = {
                 channelid: this.channelid,
@@ -70,29 +71,19 @@ export default{
           .then(messages => messages.json())
           .then(messages => this.$store.commit('setMessages', messages))
 
-
-          // NEW STUFF!
-          let messageElement = document.createElement('li');
-
-          let textElement = document.createElement('p');
-          let messageText = document.createTextNode(text.content);
-          textElement.appendChild(messageText);
-      
-          messageElement.appendChild(textElement);
-      
-          messageArea.appendChild(messageElement);
-          messageArea.scrollTop = messageArea.scrollHeight;
-
-          // TESTING NEW STUFF UP!
+        //let text = this.text
+        //this.sentTexts.push(text)
+        
+        this.text=''
         },
-            getMessageSent(){
-            for(let message of this.messages) {
-                this.sentMessages.push(message.text)     
-        }                 
+
+        postMessages(){
+            for(text of this.messages){
+                this.sentTexts.push(text)
+                console.log("TEST TEXT: " + text)
             }
-
-
         },
+ 
    
         computed: {
             messages(){
@@ -101,32 +92,10 @@ export default{
         }
 
     }
+    }
         
 
-            /*onMessageReceived() {
-                let message = this.message
-            
-                let messageElement = document.createElement('li');
-                    messageElement.classList.add('event-message');
-                    message.content = message.sender + ' joined!';
-                    messageElement.classList.add('chat-message');
-            
-                
-                let textElement = document.createElement('p');
-                let messageText = document.createTextNode(message.content);
-                textElement.appendChild(messageText);
-            
-                messageElement.appendChild(textElement);
-            
-                messageArea.appendChild(messageElement);
-                messageArea.scrollTop = messageArea.scrollHeight;
-            }
-            
-            
-            
-            
-            
-        }*/
+           
         
     
 
