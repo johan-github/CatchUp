@@ -1,40 +1,75 @@
 
 
-#container {
-    grid-template-rows: 80px auto 80px; 
-    grid-row-gap: 15px;
 
+#box {
+    position: relative;
+    width: 400px;
+    max-width: 100%;
 
-    padding: 20px;
+    padding: 1px;
     margin: 20px;
+}
+        #box:hover #messageBlock{
+            box-shadow: 4px 4px 2px black;
+            transition: .2s;
+        }
 
-
+#blockChannelName, #blockChannelName, #messageBlock{
+    width: 100%;
+    padding: 10px;
 }
 
-#scrollContainer{
-    width: 100px;
-    height: 100px;
-}
-
-#box{
-    background-color: teal;
-    width: 500px;
-}
-
-#channelName{
+#blockChannelName{
+    height: auto;
     background-color: tomato;
     font-weight: 900;
+    border-radius: 10px 0px 0px 0px;
+    box-shadow: 2px 2px 2px black;
 }
 
-#membersBox{
-    background-color: rgb(99, 15, 0);
+#blockBlockMember{
+    display: flex;
+    flex-direction: row;
 }
+        #blockMember{
+            background-image: url('https://cdn.iconscout.com/icon/free/png-512/avatar-380-456332.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            box-shadow: 1px 1px 3px black;
+            transition: .4s;
+        }
+        #blockMember:hover{
+            width: 60px;
+            padding: 20px;
+            box-shadow: 3px 3px 3px rgb(0, 0, 0);
+            transition: .2s;
+        }
 
-#message{
+#messageBlock{
+    display: grid;
+    grid-auto-rows: auto;
     background-color: rgb(134, 72, 61);
+    border-radius: 0px 0px 20px 20px;
+    box-shadow: 2px 2px 2px black;
+    transition: .4s;
 }
+        #messageBlock:empty{
+            padding: 20px;
+            height: 20px;
+            background-color: rgb(134, 72, 61);
+            border-radius: 0px 0px 20px 20px;
+        }
 
-#memberNick{
-    width: 20px;
-    height: 20px;
-}
+        #messageSenderAvatar{
+            background-image: url('https://cdn.iconscout.com/icon/free/png-512/avatar-380-456332.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 20px;
+            height: 20px;
+            border-radius: 50px;
+            box-shadow: 1px 1px 3px black;
+            transition: .4s;
+        }
