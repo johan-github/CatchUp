@@ -9,10 +9,14 @@ export default{
 			<h2>Start chatting</h2>
 			
 			<div class="connecting">Connecting...</div>
-
             <ul>
-                <li v-for="(text, i ) of sentTexts">{{ text }} </li>
-           </ul>
+                <li v-for="message of messages" 
+                    :key="message.id"
+                    class="message-card">
+                    accountid: {{ message.accountid }} <br>
+                    text: {{ message.text }}
+                </li>
+            </ul>
 
 
 			<form id="messageForm" @submit.prevent="send" name="messageForm" nameForm="messageForm">
@@ -45,55 +49,62 @@ export default{
 
         async send() {
 
-            
             let message = {
                 channelid: this.channelid,
                 time: this.time,
                 accountid: this.accountid,
                 text: this.text
             }
-            console.log("TEST" + message);
-            
+            console.log("TEST1: From component: " + message.text);
 
-              // Post object to database
-        await fetch('/rest/messages', { 
+             // Post object to database
+            let result = await fetch('/rest/messages', { 
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify( message )
           })
-          .then (result => result.json())
-          .then(result => this.$store.commit("appendMessage", result))
+          result = await result.json()
+          //this.$store.commit("appendMessage", result)
 
 
-          await fetch('/rest/messages')
+          // Fetch messages from specific channel
+          /*await fetch('/rest/channel/messages/' + '3')
           .then(messages => messages.json())
-          .then(messages => this.$store.commit('setMessages', messages))
+          .then(messages => this.$store.commit('setMessages', messages))*/
 
         //let text = this.text
         //this.sentTexts.push(text)
+
+
+       /* for(message of this.messages){
+            this.sentTexts.push(message.text)
+            console.log("CAN WE READ THIS: " + message.text)
+        }*/
         
         this.text=''
-        },
+        }
+    },
 
-        postMessages(){
+    computed: {
+        messages(){
+            return this.$store.state.messages
+        }
+    }
+}
+
+    /*postMessages(){
             for(text of this.messages){
                 this.sentTexts.push(text)
                 console.log("TEST TEXT: " + text)
             }
-        },
- 
-   
-        computed: {
-            messages(){
-                return this.$store.state.messages
-            }
-        }
-
-    }
-    }
+        }*/
         
+
+        /*<ul>
+        <li v-for="(textOut, i ) of sentTexts">{{ textOut }} </li>
+   </ul>*/
 
            
         

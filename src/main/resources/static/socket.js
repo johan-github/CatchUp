@@ -26,7 +26,25 @@ function connect() {
 
 
     ws.onmessage = (e) => {
-      showSomething(e.data); }
+      showSomething(e.data)
+
+      let data
+      try{
+        data = JSON.parse(e.data)
+      } 
+      catch{
+      }
+      console.log("TEST2: Data to store.js from socket.js: " + data)
+
+      // If data exists and if it contains text (messages)
+      // To make nothing undefined
+      if(data && data.text){
+        store.commit('appendMessage', data)
+      }
+    
+    }
+
+    
     
     
     ws.onclose = (e) => { //Triggers when a connection is closed
@@ -52,6 +70,7 @@ function sendSomething() {
     message : 'Socket test',
     timestamp : Date.now(),
   }
+  console.log( socket )
 
     //ws.send( JSON.stringify( { firstname: "Hello World!" })); //.send: Will send its content to the BackEnd ( handleTextMessage in Spring )
 
