@@ -10,27 +10,28 @@ export default{
 			<h2>Start chatting</h2>
 			
 			<div class="connecting">Connecting...</div>
+            
+			<form id="messageForm" @submit.prevent="send" name="messageForm" nameForm="messageForm">
+				
+                <div class="input-group clearfix">
+                    <input type="text" v-model="text"  placeholder="Type a message..."/>
+                    <button type="submit" class="primary">Send</button>
+                </div>
+            </form>
+
+            <form class="banan test" v-model="created">
             <ul>
                 <li v-for="message of messages" 
                     :key="message.id"
                     class="message-card">
-                    accountid: {{ message.accountid }} <br>
+                    channelid: {{ message.channelid }} 
+                    id: {{ message.id }} 
+                    date: {{ message.time }}
+                    accountid: {{ message.accountid }} <br />
                     text: {{ message.text }}
                 </li>
             </ul>
-
-
-			<form id="messageForm" @submit.prevent="send" name="messageForm" nameForm="messageForm">
-				
-					<div class="input-group clearfix">
-						<input type="text" v-model="text"  placeholder="Type a message..."/>
-						<button type="submit" class="primary">Send</button>
-					</div>
-			</form>
-
-            
-
-		
+            </form>
     </div>
     
     `,
@@ -38,15 +39,28 @@ export default{
     data() {
         return {
 
-            channelid:'3',
+            channelid:'1',
             time: '',
             accountid: '9',
             text: '',
-            sentTexts: [],
         }
     },
 
     methods: {
+
+        async created(){
+            await fetch('/rest/channel/messages/' + '1')
+            .then(messages => messages.json())
+            .then(messages => this.$store.commit('setMessages', messages))
+        },
+
+       /* let friendList = await fetch('/rest/friendlist/' + 4)
+        friendList = await friendList.json()
+
+        console.log(friendList)
+        this.$store.commit('setFriendList', friendList)
+*/
+
 
         async send() {
 
@@ -71,9 +85,9 @@ export default{
 
 
           // Fetch messages from specific channel
-          /*await fetch('/rest/channel/messages/' + '3')
-          .then(messages => messages.json())
-          .then(messages => this.$store.commit('setMessages', messages))*/
+          //await fetch('/rest/channel/messages/' + '1')
+          //.then(messages => messages.json())
+          //.then(messages => this.$store.commit('setMessages', messages))
 
         //let text = this.text
         //this.sentTexts.push(text)
