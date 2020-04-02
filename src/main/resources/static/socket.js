@@ -67,8 +67,9 @@ function sendSomething() {
 
   // Testing socket connection
   let socket = {
-    message : 'Socket test',
-    timestamp : Date.now(),
+    channelid: '3',
+    accountid : '5',
+    text : 'Socket test2'
   }
   console.log( socket )
 
