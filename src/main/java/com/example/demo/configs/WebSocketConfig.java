@@ -14,20 +14,19 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
 
-    //@Autowired
-    //SocketService socketService;
-
     @Autowired
-    MessageService messageService;
+    SocketService socketService;
 
-    /*public void registerWebSocketHandlersSocket(WebSocketHandlerRegistry registry) {
+    //@Autowired
+    //MessageService messageService;
+
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         SocketController sc = new SocketController();
         sc.setSocketService(socketService);
 
-
-        registry.addHandler(sc, "/chatUp-socket-route");
-    }*/
-
+        registry.addHandler(sc, "/socket-message");
+    }
+/*
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         MessageController mc = new MessageController();
         mc.setMessageService(messageService);
@@ -35,6 +34,6 @@ public class WebSocketConfig implements WebSocketConfigurer {
         /**
          * Has to be same as Vue-socket-ws-route
          */
-        registry.addHandler(mc, "/socket-message");
-    }
+     //   registry.addHandler(mc, "/socket-message");
+    //}
 }
