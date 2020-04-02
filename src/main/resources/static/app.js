@@ -1,24 +1,25 @@
 /********************************* /
 * Orginal by ......
-* Last Edited by Johan (cleanUp) 2020-04-01
+* Last Edited by Johan Fixed toggle login/register. Removed navBar 2020-04-02
 * Notes: First thing you see when going to CatchUp. Might need to change?
 /**********************************/
-// import navbar from './components/navbar.js'
-import loginAccountForm from './components/loginAccountForm.js'
-import home from './views/home.js'
 
+// import loginAccountForm from './components/loginAccountForm.js'
+// import home from './views/home.js'
+// import loginAccount from './views/loginAccount.js'
 export default{
   components:{
-    // navbar,
-    loginAccountForm,
-    home,
+    // loginAccount
+    // loginAccountForm,
+    // home,
   },
 
   template: /* html */`
 
   <section>
 
-    <home/>
+    <!--  <loginAccount/> -->
+    <router-view/>
 
   </section>
 

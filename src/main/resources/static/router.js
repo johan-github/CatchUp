@@ -1,6 +1,6 @@
 /********************************* /
 * Orginal by Hassan. 2020-03-18
-* Last Edited by Johan (cleanUp) 2020-04-01
+* Last Edited by Alberts 2020-04-02
 * Notes: routes to all the pages.
 /**********************************/
 import Vue from './libs/vue.esm.browser.js'
@@ -16,7 +16,10 @@ import registerAccount from './views/registerAccount.js'
 import loginAccount from './views/loginAccount.js'
 import createChannel from './views/createChannel.js'
 import channelMessage from './views/channelMessage.js'
+import testsocketcomp from './components/testsocketcomp.js'
 import test from './views/test.js'
+import logOutPage from './views/logOutPage.js'
+
 
 export const router = new Router({
     mode: 'history',
@@ -77,6 +80,17 @@ export const router = new Router({
             name: 'testPage',
             path: '/test',
             component: test,
+        },
+        {
+            name: 'logOutPage',
+            path: '/logoutpage',
+            component: logOutPage,
+        },
+
+        {
+            name : 'testsocketview',
+            path : '/testsocketview',
+            component : testsocketcomp,
         },
 
 

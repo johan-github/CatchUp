@@ -33,8 +33,8 @@ export default{
                     <div id="blockChannelName" @click="selectChannelAndShowItsMessages( myChannel.id )"> {{ myChannel.name }} </div>
 
                     <div id="messageBlock">
-                        <div id="messageSender">{{ displayLatestMessageSender( myChannel.id ) }}</div>
-                        <div id="messageSender">{{ displayLatestChannelMessages( myChannel.id ) }} </div>
+                        <div id="messageSenderAvatar">{{  }}</div>
+                        <div id="messageSenderMessage">{{ displayLatestChannelMessages( myChannel.id ) }} </div>
                     </div>
 
                 </div>
@@ -64,6 +64,8 @@ export default{
 
 
     methods:{
+
+        
 
         //search channel name
         searchByName( string ){
@@ -104,21 +106,18 @@ export default{
          //
          displayLatestMessageSender( channelId ) {
 
-            let tempMessage = '';
+            let messageSender = '';
              
             for( let message of this.latestChannelMessages ){
                 if( message.channelid === channelId ){
-
-                    if( message.text === null ){
-                        tempMessage = 'Error! Message is empty';
-                    }
-
-                    tempMessage = message.text;
+                    messageSender = message.usernick
                 }
             }
-
-            return tempMessage;
-
+            for(let account of this.accounts) {
+                if(account.usernick === messageSender) {
+                    return account.avatar
+                }
+            }
          },
 
 

@@ -59,8 +59,8 @@ public class SocketController extends TextWebSocketHandler {
         Socket socket = gson.fromJson( message.getPayload(), Socket.class );
 
         // Testing the connection
-        System.out.println("Message: " + socket.message);
-        System.out.println("Timestamp: " + socket.timestamp);
+        //System.out.println("Message: " + socket.message);
+        //System.out.println("Timestamp: " + socket.timestamp);
 
         // Demonstration purpose only: send back "Hello" + same message as received
         // --- socketService.sendToAll("Hello " + message.getPayload());

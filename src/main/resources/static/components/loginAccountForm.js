@@ -86,8 +86,7 @@ export default {
                         console.log( "account.email " + account.email)
                         if ( foundAccountWithEnteredEmail.password === this.enterPassword ){
                         this.$store.commit('setCurrentAccount', foundAccountWithEnteredEmail)
-                        //this.$router.push('/displayChannel')                        
-                        this.$router.push('/channels')                        
+                        this.$router.push('/home')
                     }
                 }                
             }

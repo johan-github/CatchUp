@@ -12,7 +12,7 @@ export default {
 
     template: `
     <div>
-    <registerAccountForm />
+        <registerAccountForm />
     </div>
     `
 }
