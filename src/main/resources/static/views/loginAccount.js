@@ -13,6 +13,11 @@ export default {
     template: `
         <div>
             <loginAccountForm />
+
         </div>
     `
+}
+
+method: {
+    
 }
