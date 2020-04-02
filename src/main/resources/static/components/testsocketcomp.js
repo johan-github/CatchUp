@@ -42,7 +42,7 @@ export default{
 
             channelid:'1',
             time: '',
-            accountid: '9',
+            accountid: '',
             text: '',
         }
     },
@@ -58,9 +58,10 @@ export default{
             let message = {
                 channelid: this.channelid,
                 time: this.time,
-                accountid: this.accountid,
+                accountid: this.currentAccount,
                 text: this.text
             }
+            console.log(this.currentAccount)
             console.log("TEST1: From component: " + message.text);
 
              // Post object to database
@@ -96,6 +97,10 @@ export default{
     computed: {
         messages(){
             return this.$store.state.messages
+        },
+
+        currentAccount() {
+            return this.$store.state.currentAccount
         }
     }
 }
