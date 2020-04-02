@@ -1,6 +1,6 @@
 /********************************* /
 * Orginal by Hassan. 2020-03-18
-* Last Edited by Johan (cleanUp) 2020-04-01
+* Last Edited by: Tobbe and Hassan (cleanUp) 2020-04-01
 * Notes:  Needs to be looked at. *navBar*  *currentAccount/currentAccount* *accountLogedIn*
 /**********************************/
 import Vue from './libs/vue.esm.browser.js'
@@ -16,9 +16,6 @@ export const store = new Vuex.Store({
         messages : [],
 
         currentAccount: {},
-
-        // TEST for log out-function
-        currentAccount: '',
 
         currentChannelMessages : [],
 

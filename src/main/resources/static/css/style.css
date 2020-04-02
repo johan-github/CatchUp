@@ -469,4 +469,29 @@ html, body{
         }
 
 
-            
+/************************************************************************************ Toggle Login/Register */
+        .ReturnToLoginPageText{
+            font-weight: 900;
+            color: rgb(2, 151, 69);
+            opacity: 2.0;
+        }
+
+        .ReturnToLoginPageLink{
+            font-weight: 900;
+            color: rgb(93, 112, 15);
+            opacity: 2.0;
+            text-decoration-style: solid;
+        }
+
+
+/************************************************************************************ Added colors for logout page */
+
+.logOutPageDiv {
+    color: white;
+}
+
+.logoutDivFields {
+    color: white;
+}
+
+/************************************************************************************  */

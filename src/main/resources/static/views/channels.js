@@ -23,7 +23,7 @@ export default{
     template:`
         <div id="viewChannels">
 
-                <channelCreateSearch/>
+                <displayChannel/>
 
         </div>
     `,

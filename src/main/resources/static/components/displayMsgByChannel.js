@@ -87,6 +87,11 @@ export default{
 
     async created(){
 
+        //Fetches/gets all the channels from channels.db and stores it in a channels ("class-array")
+        await fetch('/rest/messages')
+            .then( messages => messages.json())
+            .then( messages => this.allMessages = messages )
+
         this.showMessageIndex()
         
     }
