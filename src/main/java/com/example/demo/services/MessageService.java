@@ -74,6 +74,9 @@ public class MessageService {
 
 
 
+
+    // All connected clients will be notified a new message has been created
+    // Save to database, then update to SocketService (sendToAll)
     public Message addNewMessage(Message newMessage ){
         Message dbMessage = null;
 
