@@ -25,19 +25,17 @@ export default {
     },
 
     template: /* html */ `
-    <div>
+    <div id="homeContainer">
         <div id="appButton">
             <h3>| | |</h3>
         </div>
         <div id="appNav">
             <navbar/>
         </div>
+        
         <main id="appMain">
-            <router-view/>
-        </main>
-        <div>
             <displayChannel/>
-        </div>
+        </main>
     </div>
     `,
 

@@ -13,7 +13,6 @@ export default {
  
      template: /* html */ `
      <div class="logOutPageDiv">
-     <h2>Log out page</h2>
      <accountLogOut/>
      <!--<router-view/> -->
      </div>
