@@ -16,20 +16,15 @@ export default {
                     <input class="input-field" type="text" placeholder="Enter your nickname" v-model="addNickname" required >
                     
                     <input class="input-field" type="password" placeholder="Enter your password" v-model="addPassword" required >
-
-                <div class="inputForm">
+                
                     <input class="input-field" type="password" placeholder="Confirm your password" v-model="confirmPassword" required>
                     <h4 id="passwordalert" >{{ passwordAlert  }}</h4>
-                </div>
-                </div>
 
                 <button class="registerButton">Register</button>
-
-                <p class="ReturnToLoginPageText"> Go back to login-page
-                <a class="ReturnToLoginPageLink" href="/loginAccount">here! </a>
                 </p>
                 
-            </form>
+                </form>
+                <button @click="backButton"> Back </button>
         </section>
     </section>
     `,
@@ -85,8 +80,12 @@ data() {
   
   methods: {
 
+    backButton(){
+        this.$router.push('/loginAccount')
+    },
    //Adds a new account to backend
     async registerNewAccountForm() {
+
         console.log("In register form now ")
 
          if( !this.addEmail.trim() && !this.addPassword.trim() && !this.addNickname.trim() ){

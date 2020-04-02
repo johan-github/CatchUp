@@ -25,6 +25,7 @@
     font-weight: 900;
     border-radius: 10px 0px 0px 0px;
     box-shadow: 2px 2px 2px black;
+    cursor: pointer;
 }
 
 #blockBlockMember{

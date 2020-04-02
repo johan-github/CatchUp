@@ -12,7 +12,7 @@ export default{
         <div class="nav">
 
             <div id="navHome">
-                <router-link to="/loginAccount">H O M E</router-link>
+                <router-link to="/home">H O M E</router-link>
             </div>
 
             <div id="navChannels">
