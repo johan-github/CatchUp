@@ -58,10 +58,10 @@ export default{
             let message = {
                 channelid: this.channelid,
                 time: this.time,
-                accountid: this.currentAccount,
+                accountid: this.currentAccount.id,
                 text: this.text
             }
-            console.log(this.currentAccount)
+            console.log(this.currentAccount.id)
             console.log("TEST1: From component: " + message.text);
 
              // Post object to database
