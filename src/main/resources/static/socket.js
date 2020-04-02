@@ -68,9 +68,10 @@ function sendSomething() {
   // Testing socket connection
   let socket = {
     message : 'Socket test',
-    timestamp : Date.now(),
+    timestamp : new Date().toISOString().slice(0,19).replace("T"," ")
+
   }
-  console.log( socket )
+  console.log( socket)
 
     //ws.send( JSON.stringify( { firstname: "Hello World!" })); //.send: Will send its content to the BackEnd ( handleTextMessage in Spring )
 
