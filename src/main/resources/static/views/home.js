@@ -35,9 +35,9 @@ export default {
         <main id="appMain">
             <router-view/>
         </main>
-        <!-- <div>
+        <div>
             <displayChannel/>
-        </div> -->
+        </div>
     </div>
     `,
 

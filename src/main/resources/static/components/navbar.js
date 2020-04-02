@@ -3,8 +3,14 @@
 * Last Edited by Johan (cleanUp) 2020-04-01
 * Notes: We are using this at the moment
 /**********************************/
+
+import accountLogOut from '../components/accountLogOut.js'
+
 export default{
 
+    components:
+    accountLogOut
+    ,
 
     template:`
 
@@ -30,8 +36,9 @@ export default{
                 <router-link to="/about">A B O U T</router-link>
             </div>
 
-            <div id="navLogout">                
-                <router-link to="/logout">L O G   O U T</router-link>
+            <div id="navLogout">
+                <accountLogOut/>               
+                <router-link to="/loginAccount">L O G   O U T</router-link>
             </div>
 
         </div>

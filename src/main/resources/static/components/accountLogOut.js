@@ -18,11 +18,18 @@ export default {
     methods: {
         logOutCurrentAccount() {
             fetch('/logout') // For Socket
-            console.log("Successfully logged out");
             this.$store.commit('setAccount', null)
+            console.log("Successfully logged out");
             this.$router.push('/loginAccount')
         }
     },
+
+    data(){
+        return {
+            currentAccount: {},
+
+        }
+    }
 
 
 

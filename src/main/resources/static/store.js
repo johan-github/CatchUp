@@ -18,7 +18,6 @@ export const store = new Vuex.Store({
         currentAccount: {},
 
         // TEST for log out-function
-        currentAccount: '',
 
         currentChannelMessages : [],
 
