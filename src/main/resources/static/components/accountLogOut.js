@@ -15,8 +15,9 @@ export default {
             <form class="logOutForm">
                 <div class="logOutDivFields">
                     <div class="logOutDiv">
-                        <p id="label">You have Successfully logged out!</p>
-                        <p>You will be redirected in 5 seconds to the login page</p>
+                        <p id="label">You have Successfully logged out!<br>
+                        You will be redirected in 5 seconds to the login page
+                        <br>Please wait...</p>
                     </div>
                 </div>
             </form>
