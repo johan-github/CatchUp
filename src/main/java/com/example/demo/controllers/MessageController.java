@@ -51,7 +51,7 @@ public class MessageController extends TextWebSocketHandler {
 
     //************************************************************************************************* DeleteMapping
 
-    // ADDING AND TESING WEBSOCKETS
+    // ADDING AND TESTING WEBSOCKETS
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
         System.out.println("Received msg: " + message.getPayload());
@@ -62,6 +62,9 @@ public class MessageController extends TextWebSocketHandler {
         // Testing the connection
         System.out.println("Message: " + mess.getText());
         System.out.println("Timestamp: " + mess.getTime());
+
+        messageService.sendToAll(mess, Message.class);
+        messageService.sendToOne(session, mess, Message.class);
     }
 
 

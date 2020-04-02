@@ -6,6 +6,7 @@ export default{
     template:`
 
        <div id="chat-room">
+       
 			<h2>Start chatting</h2>
 			
 			<div class="connecting">Connecting...</div>
