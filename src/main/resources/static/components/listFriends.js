@@ -1,12 +1,15 @@
-
-
+/********************************* /
+* Orginal by Hassan. 2020-03-26
+* Last Edited by Johan (cleanUp) 2020-04-01
+* Notes: Not in use any more. Old,. Is replaced with displayFriends.js
+/**********************************/
 export default{
     template:`
         <section id="container">
             <div id="displayFriendBox"
                 v-for="friend of friendList" :key="friend.id">
                 <img id="displayFriendPic" v-bind:src="friend.avatar" />
-                <div id="displayFriendNick">{{ friend.usernick }}</div>
+                <div id="displayFriendNick">{{ friend.accountnick }}</div>
                 <div id="displayFriendStatus">Online: {{ friend.status }}</div>
                 <div id="displayFriendAddFavorite">❤️</div>
                 <div id="displayFriendCreateChannelWith">➕</div>
@@ -39,7 +42,7 @@ methods:{
         },
     /**
      * 
-     *         Atm. friendslist is hardcoded to 9. Until store has current active user account.id    
+     *         Atm. friendslist is hardcoded to 9. Until store has current active account account.id    
      * 
      * */
     async created(){

@@ -1,6 +1,8 @@
 package com.example.demo.configs;
 
+import com.example.demo.controllers.MessageController;
 import com.example.demo.controllers.SocketController;
+import com.example.demo.services.MessageService;
 import com.example.demo.services.SocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -15,13 +17,23 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Autowired
     SocketService socketService;
 
+    //@Autowired
+    //MessageService messageService;
+
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         SocketController sc = new SocketController();
         sc.setSocketService(socketService);
 
-        /**
-         * Socket-route måste vara exakt densamma som i Vue-socket-ws-route
-         */
-        registry.addHandler(sc, "/chatUp-socket-route");
+        registry.addHandler(sc, "/socket-message");
     }
+/*
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        MessageController mc = new MessageController();
+        mc.setMessageService(messageService);
+
+        /**
+         * Has to be same as Vue-socket-ws-route
+         */
+     //   registry.addHandler(mc, "/socket-message");
+    //}
 }

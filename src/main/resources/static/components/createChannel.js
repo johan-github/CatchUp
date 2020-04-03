@@ -1,6 +1,8 @@
-
-
-
+/********************************* /
+* Orginal by Hassan. 2020-03-19
+* Last Edited by Johan (cleanUp) 2020-04-01
+* Notes: This creates a channel. Is in ./views/createChannel.js
+/**********************************/
 export default{
     components:{
 
@@ -79,9 +81,9 @@ export default{
         },
 
 
-        getCurrentUserInfo(){   //add to channelIds-array
+        getCurrentAccountInfo(){   //add to channelIds-array
             for(let accountChannel of this.accountChannels) {
-                if(accountChannel.accountid === this.currentUser.id) {
+                if(accountChannel.accountid === this.currentAccount.id) {
                     this.channelIds.push(accountChannel.channelid)
                 } 
             }
@@ -103,7 +105,7 @@ export default{
 
         async createChannelForm(){
 
-            if( this.currentUser.id > 0){ //tas bort när man inte behöver logga in hela tiden!
+            if( this.currentAccount.id > 0){ //tas bort när man inte behöver logga in hela tiden!
                     
 
                 if( !this.channelName.trim()){
@@ -164,8 +166,8 @@ export default{
                 
 
 
-                let updatedCurrentUserWithNewChannel = {
-                    accountid : this.currentUser.id,
+                let updatedCurrentAccountWithNewChannel = {
+                    accountid : this.currentAccount.id,
                     channelid : this.channels[ this.channels.length - 1 ].id,
                     admin : 'yes'
                 }
@@ -176,7 +178,7 @@ export default{
                     headers : {
                         'Content-Type' : 'application/json'
                     },
-                    body : JSON.stringify( updatedCurrentUserWithNewChannel )
+                    body : JSON.stringify( updatedCurrentAccountWithNewChannel )
                 })
                 .then( updateDBWithNewAccountChannel => updateDBWithNewAccountChannel.json() )
                 .then( updateDBWithNewAccountChannel => this.$store.commit( 'appendAccountChannel', updateDBWithNewAccountChannel ))
@@ -209,8 +211,8 @@ export default{
         },
 
 
-        currentUser(){
-            return this.$store.state.currentUser
+        currentAccount(){
+            return this.$store.state.currentAccount
         },
 
 
@@ -229,7 +231,7 @@ export default{
             .then(accountChannels => this.$store.commit('setAccountChannels', accountChannels))
     
 
-            this.getCurrentUserInfo()
+            this.getCurrentAccountInfo()
             
         },
 

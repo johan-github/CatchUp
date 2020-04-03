@@ -1,3 +1,8 @@
+/********************************* /
+* Orginal by Hassan. 2020-03-30
+* Last Edited by Johan (cleanUp) 2020-04-01
+* Notes: This is a test.
+/**********************************/
 import { store } from '../store.js'
 import channelCreateSearch from './channelCreateSearch.js'
 
@@ -27,9 +32,6 @@ export default{
     `,
 
 
-
-
-
 /*********************************************************************************************************** Methods:*/
 
     data() {
@@ -48,11 +50,11 @@ export default{
     methods:{
 
 
-        getCurrentUserInfo(){
-            if( this.userLoggedIn.loggedIn === 'true' ){
+        getCurrentAccountInfo(){
+            if( this.accountLoggedIn.loggedIn === 'true' ){
 
                 for(let message of this.messages) {
-                    if(message.accountid === this.currentUser.id) {
+                    if(message.accountid === this.currentAccount.id) {
                         this.myMessages.push(message.text)
                     } 
                 }                 
@@ -75,12 +77,12 @@ export default{
             return this.$store.state.accountChannels;
         },
 
-        currentUser(){
-            return this.$store.state.currentUser;
+        currentAccount(){
+            return this.$store.state.currentAccount;
         },
 
-        userLoggedIn(){
-            return this.$store.state.userLoggedIn;
+        accountLoggedIn(){
+            return this.$store.state.accountLoggedIn;
         },
 
         messages(){
@@ -116,7 +118,7 @@ export default{
             .then( messages => this.$store.commit( 'setMessages', messages ))
 
 
-        this.getCurrentUserInfo()
+        this.getCurrentAccountInfo()
         
     }
 

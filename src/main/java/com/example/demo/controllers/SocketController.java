@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.entities.Message;
 import com.example.demo.entities.Socket;
 import com.example.demo.services.SocketService;
 import com.google.gson.Gson;
@@ -10,6 +11,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  *  TextWebSocketHandler tar emot saker som strings, precis det vi gör mellan Vue och Spring (GSON/JSON.stringify)
@@ -40,34 +42,32 @@ public class SocketController extends TextWebSocketHandler {
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
         System.out.println("Received msg: " + message.getPayload());
 
-        /**
-         * Create a Socket-object to store incoming data from Vue
-         * In Vue we create an object: let socket = { message : 'hello', timestamp : Date.now() } , and send it: ws.send( JSON.stringify( socket ));
-         * message.getPayload(): receives message from Vue and converts it, so it...
-         * Socket.class: can be stored in Socket-class
-         */
-        Socket socket = gson.fromJson( message.getPayload(), Socket.class );
 
-        // Demonstration purpose only: send back "Hello" + same message as received
-        // --- socketService.sendToAll("Hello " + message.getPayload());
+        Map event = gson.fromJson(message.getPayload(), Map.class);
 
-        //socketService.sendToAll( socket, Socket.class );
-        //socketService.sendToOne( session, socket, Socket.class );
+        String action = event.get("action").toString();
+        switch (action) {
+            case "message":
+                System.out.println("Message:");
+                System.out.println(event.get("text").toString());
+                socketService.sendToAll(event.get("text").toString());
+                break;
+            case "nisse-lever":
+                System.out.println("Bid:");
+                System.out.println(event.get("text").toString());
+                break;
+            default:
+                System.out.println("Could not handle action: " + action);
+                socketService.sendToOne(session, "Could not handle action: " + action);
 
-        // Example with a generic Map instead of converting the JSON to a specific class
-        // Map keysAndValues = new Gson().fromJson(message.getPayload(), Map.class);
-        // Get the value of a key named "firstname"
-        // String firstname = keysAndValues.get("firstname");
-
-
+        }
     }
-
     /**
      * When connected from FrontEnd
      */
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
-        socketService.addSession(session);;
+        socketService.addSession(session);
     }
 
     /**

@@ -76,7 +76,7 @@
 
 /************************************************************************ input[ type = "text" ] */
 
-input[ type = "text" ], input[ type = "password" ]{
+input[ type = "text" ], input[ type = "password" ], input[ type = "email" ]{
     background-color: rgb(151, 151, 151);
     padding-left: 20px;
     box-shadow: 3px 3px 2px black;
@@ -97,26 +97,28 @@ input[ type = "text" ], input[ type = "password" ]{
 }
 
 input[ type = "text" ]:focus, input[ type = "text" ]:hover,
-input[ type = "password" ]:focus, input[ type = "password" ]:hover{
+input[ type = "password" ]:focus, input[ type = "password" ]:hover,
+input[ type = "email" ]:focus, input[ type = "email" ]:hover{
     /*width: 350px;
     max-width: 350px;*/
     background-color: rgb(223, 223, 223);
     box-shadow: 6px 6px 2px black;
 }
 
-input[ type = "text" ]::placeholder, input[ type = "password" ]::placeholder{
+input[ type = "text" ]::placeholder, input[ type = "password" ]::placeholder, input[ type = "email" ]::placeholder{
     font-weight: bold;
     color: black;
 }
 
 @media screen and ( min-width: 1200px ){
-    input[ type = "text" ], input[ type = "password" ]{
+    input[ type = "text" ], input[ type = "password" ], input[ type = "email" ]{
         width: 350px;
         max-width: 350px;
     }
 
     input[ type = "text" ]:focus, input[ type = "text" ]:hover,
-    input[ type = "password" ]:focus, input[ type = "password" ]:hover{
+    input[ type = "password" ]:focus, input[ type = "password" ]:hover,
+    input[ type = "email" ]:focus, input[ type = "email" ]:hover{
         /*width: 450px;
         max-width: 450px;*/
     }
@@ -142,6 +144,8 @@ input[ type = "text" ]::placeholder, input[ type = "password" ]::placeholder{
     box-shadow: 6px 6px 2px rgb(0, 0, 0);
     
     transition: .2s;
+
+    text-align: center;
 }
 
 @media scrreen and ( min-width: 1200px ){
