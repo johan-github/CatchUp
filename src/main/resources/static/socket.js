@@ -1,10 +1,10 @@
-import { store } from './store.js'
 /********************************* /
 * Orginal by Hassan. 2020-03-30
 * Last Edited by Helena 2020-04-01
 * Notes: ......
 /**********************************/
 
+import { store } from './store.js'
 let ws; //Var to store WebSocket-class in
 let isConnected = false;
 connect();

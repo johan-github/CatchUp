@@ -1,4 +1,8 @@
-
+/********************************* /
+ * Original by Matthias & Helena. 2020-04-03
+ * Last Edited by Matthias & Helena 2020-04-03
+ * Notes: ......
+ /**********************************/
 
 package com.example.demo.services;
 
@@ -63,7 +67,6 @@ public class MessageService {
     }
 
 
-
     public List<Message> getAllMessages(){
         return ( List<Message> ) messageRepo.findAll();
     }
@@ -71,8 +74,6 @@ public class MessageService {
     public List<Message> getAllMessagesByEAccountId( int id ){
         return ( List<Message> ) messageRepo.findAllByAccountid( id );
     }
-
-
 
 
     // All connected clients will be notified a new message has been created
@@ -83,6 +84,7 @@ public class MessageService {
         try{
             dbMessage = messageRepo.save( newMessage );
             socketService.sendToAll(dbMessage, Message.class);
+            System.out.println("IN MESSAGE SERVICE: addNewMessage");
 
         }catch(Exception e ){
             e.printStackTrace();

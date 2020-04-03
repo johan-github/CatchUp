@@ -18,7 +18,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     SocketService socketService;
 
     //@Autowired
-    //MessageService messageService;
+    //    //MessageService messageService;
 
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         SocketController sc = new SocketController();
