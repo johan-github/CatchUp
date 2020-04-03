@@ -1,25 +1,29 @@
+#container{
+    display: grid;
+    grid-template-rows: 100px 400px 50px;    
+}
+        #container > div{
+            padding: 10px;
+        }
 
 
-
-#box {
-    position: relative;
-    width: 400px;
-    max-width: 100%;
+#displayChannelBox, #displayChannelBox:empty {
+    width: 600px;
 
     padding: 1px;
     margin: 20px;
 }
-        #box:hover #messageBlock{
+        #displayChannelBox:hover #displayChannelMessageBlock{
             box-shadow: 4px 4px 2px black;
             transition: .2s;
         }
 
-#blockChannelName, #blockChannelName, #messageBlock{
+#displayChannelName, #displayChannelMessageBlock{
     width: 100%;
     padding: 10px;
 }
 
-#blockChannelName{
+#displayChannelName{
     height: auto;
     background-color: tomato;
     font-weight: 900;
@@ -28,44 +32,44 @@
     cursor: pointer;
 }
 
-#blockBlockMember{
+#displayChannelMemberBox{
     display: flex;
     flex-direction: row;
 }
-        #blockMember{
+        #displayChannelMember{
             background-image: url('https://cdn.iconscout.com/icon/free/png-512/avatar-380-456332.png');
             background-repeat: no-repeat;
             background-size: cover;
-            width: 50px;
-            height: 50px;
+            width: 30px;
+            height: 30px;
             border-radius: 50px;
             box-shadow: 1px 1px 3px black;
             transition: .4s;
         }
-        #blockMember:hover{
-            width: 60px;
-            padding: 20px;
+        #displayChannelMember:hover{
+            width: 40px;
             box-shadow: 3px 3px 3px rgb(0, 0, 0);
             transition: .2s;
         }
-
-#messageBlock{
+        
+#displayChannelMessageBlock{
     display: grid;
+    grid-template-columns: 30px auto;
     grid-auto-rows: auto;
     background-color: rgb(134, 72, 61);
     border-radius: 0px 0px 20px 20px;
     box-shadow: 2px 2px 2px black;
     transition: .4s;
 }
-        #messageBlock:empty{
+        #displayChannelMessageBlock:empty{
             padding: 20px;
             height: 20px;
             background-color: rgb(134, 72, 61);
             border-radius: 0px 0px 20px 20px;
         }
 
-        #messageSenderAvatar{
-            background-image: url('https://cdn.iconscout.com/icon/free/png-512/avatar-380-456332.png');
+        #messageSenderAvatar {
+            background-color: var( --aa );
             background-repeat: no-repeat;
             background-size: cover;
             width: 20px;
@@ -74,3 +78,9 @@
             box-shadow: 1px 1px 3px black;
             transition: .4s;
         }
+
+@media screen and ( max-width: 1200px ){
+    #displayChannelBox, #displayChannelBox:empty {
+        width: 400px;
+    }
+}

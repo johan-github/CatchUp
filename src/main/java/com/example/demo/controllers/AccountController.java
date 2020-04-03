@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class AccountController {
@@ -27,6 +28,11 @@ public class AccountController {
         return accountService.loginAccount(email);
     }
 
+    @GetMapping("/rest/accounts/{id}")
+    public Optional<Account> findById(@PathVariable int id) {
+        return accountService.findAccountById(id);
+    }
+
     //@GetMapping("/rest/accounts/{id}")
     /*public CurrentAccount loginAccount(@PathVariable int id) {
         return accountService.loginAccount(id);
@@ -40,7 +46,22 @@ public class AccountController {
     }
 
 
+    //************************************************************************************************* PutMapping
+
+    @PutMapping("/rest/accounts")
+    public Account updatAccount(@RequestBody Account account) {
+        try {
+            accountService.updateAccount(account);
+            System.out.println("Account is updated");
+            return account;
+        } catch (Exception e) {
+            System.out.println("Account NOT updated");
+        }
+        return null;
+    }
 }
+
+
 
 
 

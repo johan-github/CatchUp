@@ -1,3 +1,9 @@
+/********************************* /
+* Original by Matthias & Helena. 2020-04-03
+* Last Edited by Matthias & Helena 2020-04-03
+* Notes: ......
+/**********************************/
+
 package com.example.demo.controllers;
 
 import com.example.demo.entities.Channel;
@@ -40,13 +46,13 @@ public class MessageController extends TextWebSocketHandler {
 
     @GetMapping("/rest/messages")
     public List<Message> getAllMessages() {
-            return (List<Message>) messageService.getAllMessages();
+        return (List<Message>) messageService.getAllMessages();
     }
 
-    @GetMapping("/rest/channel/messages/{id}")
+    /*@GetMapping("/rest/channel/messages/{id}")
     public List<Message> getChannelMessage (@PathVariable int id ){
         return messageService.getChannelMessage( id );
-    }
+    }*/
 
 
     //************************************************************************************************* DeleteMapping
@@ -60,12 +66,12 @@ public class MessageController extends TextWebSocketHandler {
         Message mess = gson.fromJson( message.getPayload(), Message.class );
 
 
-       // Testing the connection
+        // Testing the connection
         System.out.println("Message: " + mess.getText() + " Banana");
         System.out.println("Timestamp: " + mess.getTime());
 
         messageService.sendToAll(mess, Message.class);
-      //  messageService.sendToOne(session, mess, Message.class);
+        //  messageService.sendToOne(session, mess, Message.class);
     }
 
 
