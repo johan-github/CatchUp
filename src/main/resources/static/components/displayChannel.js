@@ -18,21 +18,24 @@ export default{
 
     template:`
         <section id="container">
-            
-            <input id="aa" type="text" placeholder="Search channel..." @keyup="searchByName" v-model="searchVar">
-            <button @click="resetSearchField">Reset</button>            
+
+            <div>
+                <h3 id="label">My channels</h3>
+                <input type="text" placeholder="Search channel..." @keyup="searchChannel()" v-model="searchString">
+                <button @click="resetSearchField()">Reset search!</button>
+            </div>          
 
             <section id="scrollContainer">
 
-                <div id="box" v-for="(myChannel, i ) of getMyChannels()">
+                <div id="displayChannelBox" v-for="(myChannel, i ) of searchChannel()">
 
-                    <div id="blockBlockMember">
-                        <div id="blockMember" v-for="testBuddy of displayChannelFriends( myChannel.id )">  </div>
+                    <div id="displayChannelMemberBox">
+                        <div id="displayChannelMember" v-for="testBuddy of displayChannelFriends( myChannel.id )">  </div>
                     </div>
 
-                    <div id="blockChannelName" @click="selectChannelAndShowItsMessages( myChannel.id )"> {{ myChannel.name }} </div>
+                    <div id="displayChannelName" @click="selectChannelAndShowItsMessages( myChannel.id )"> {{ myChannel.name }} </div>
 
-                    <div id="messageBlock">
+                    <div id="displayChannelMessageBlock">
                         <div id="messageSenderAvatar">{{  }}</div>
                         <div id="messageSenderMessage">{{ displayLatestChannelMessages( myChannel.id ) }} </div>
                     </div>
@@ -56,31 +59,35 @@ export default{
             latestChannelMessages : [],
             allMessages : [],
 
-            searchVar : '',
+            searchString : '',
         }
     },
 
     /*********************************************************************************************************** Methods:*/
 
 
-    methods:{
-
-        
+    methods:{        
 
         //search channel name
-        searchByName( string ){
-            for( let channel of this.channels )
-            if( channel.name.toLowerCase() === this.searchVar.toLowerCase() ){
-                console.log( this.searchVar)
+        searchChannel(){
+            let tempChannels = [];
+
+            if( this.searchString === '' ){
+                return this.getMyChannels();
             }
-        },
 
-
-        //vi jobbar med denna
-        resetSearchField(){
-            this.searchVar = '';
+            for( let channel of this.getMyChannels() ){
+                if( channel.name.toLowerCase().includes( this.searchString.toLowerCase() )){
+                    tempChannels.push( channel );
+                }
+            }
+            return tempChannels;
         },
         
+        //Makes the search field, that holds searchString, empty
+        resetSearchField(){
+            this.searchString = '';
+        },
 
         //displaying latest channel message
          displayLatestChannelMessages( channelId ) {
@@ -93,17 +100,14 @@ export default{
                     if( message.text === null ){
                         tempMessage = 'Error! Message is empty';
                     }
-
                     tempMessage = message.text;
                 }
             }
 
             return tempMessage;
-
          },
 
-
-         //
+         //Displays an avatar next to the latest channel message
          displayLatestMessageSender( channelId ) {
 
             let messageSender = '';
@@ -119,7 +123,6 @@ export default{
                 }
             }
          },
-
 
          //display all friends (members) in channel
         displayChannelFriends( index ) {
@@ -143,7 +146,6 @@ export default{
             return channelAccounts;
         },
 
-
         //Method to activate when selecting/clicking a channel to route the user to channelMessage
         selectChannelAndShowItsMessages( myChannelId ){
 
@@ -160,21 +162,16 @@ export default{
 
             this.displayChannelFriends(myChannelId)
             return
-
         },
-
 
         //gets all channels by the logged in user and stores them in myChannels[]
         getMyChannels(){
-
-            console.log( "getMyChannels" );
 
             let tempChannelIds = [];
             let tempChannels = [];
 
             for( let accountChannel of this.accountChannels ){
                 if( accountChannel.accountid === this.currentAccount.id ){
-                    console.log( "2" );
                     tempChannelIds.push( accountChannel.channelid )
                 }
             }
@@ -182,7 +179,6 @@ export default{
             for(let channel of this.channels) {
                 for(let channelId of tempChannelIds) {
                     if(channel.id === channelId) {
-                        console.log( "3" );
                         tempChannels.push( channel )
                     }
                 }
@@ -197,9 +193,6 @@ export default{
             //this.$router.push( '/createChannel')
             this.$router.push( '/loginAccount')
         }
-
-
-
     },
 
 
