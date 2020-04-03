@@ -12,7 +12,7 @@ export default {
             <form class="logOutForm">
                 <div class="logOutDivFields">
                     <div class="logOutDiv">
-                        <p id="label">You have Successfully logged out!<br>
+                        <p id="label">You have Successfully logged out!<br><br>
                         You will be redirected in 5 seconds to the login page
                         <br>Please wait...</p>
                     </div>
@@ -23,19 +23,14 @@ export default {
     `,
 
     async created(){
-
-        /*let foundAccountWithEnteredEmail = await fetch('/rest/accounts/email/' + this.$store.currentAccount.email)
-            .then( rightAccount => rightAccount.json())*/
-              
-            console.log(this.$store.currentAccount.id);
             
             let changeStatusToOffline = {
                             
-                id: this.$store.currentAccount.id,
-                email: this.$store.currentAccount.email,
-                usernick: this.$store.currentAccount.usernick,
-                password: this.$store.currentAccount.password,
-                avatar: this.$store.currentAccount.avatar,
+                id: this.currentAccount.id,
+                email: this.currentAccount.email,
+                usernick: this.currentAccount.usernick,
+                password: this.currentAccount.password,
+                avatar: this.currentAccount.avatar,
                 status: "offline"
             
         }
