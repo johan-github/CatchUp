@@ -1,6 +1,6 @@
 /********************************* /
 * Orginal by Tobias. 2020-03-27
-* Last Edited by Johan (cleanUp) 2020-04-01
+* Last Edited by Johan, Hassan, Tobbe (cleanUp) 2020-04-03
 * Notes: Login need to fix security
 /**********************************/
 export default {
@@ -73,19 +73,34 @@ export default {
             let accountsFromDB = await fetch('/rest/accounts')
                 .then( accounts => accounts.json())
 
-                console.log( "1")
                 for( let account of accountsFromDB ){
                     
-                    console.log( "2")
                     if( account.email.toLowerCase() === this.enterAccountEmail.toLowerCase() ){
                         
                         let foundAccountWithEnteredEmail = await fetch('/rest/accounts/email/' + this.enterAccountEmail)
                         .then( rightAccount => rightAccount.json())
                         
-                        console.log( "4")
-                        console.log( "account.email " + account.email)
                         if ( foundAccountWithEnteredEmail.password === this.enterPassword ){
-                        this.$store.commit('setCurrentAccount', foundAccountWithEnteredEmail)
+                            let changeStatusToOnline = {
+                                
+                                    id: foundAccountWithEnteredEmail.id,
+                                    email: foundAccountWithEnteredEmail.email,
+                                    usernick: foundAccountWithEnteredEmail.usernick,
+                                    password: foundAccountWithEnteredEmail.password,
+                                    avatar: foundAccountWithEnteredEmail.avatar,
+                                    status: "online"
+                                
+                            }
+                            await fetch('/rest/accounts',{
+                                method:'PUT',
+                                headers:{
+                                    'Content-Type':'application/json'
+                                },
+                                body: JSON.stringify(changeStatusToOnline)
+
+                            })
+                            console.log(changeStatusToOnline.status)
+                        this.$store.commit('setCurrentAccount', changeStatusToOnline)
                         this.$router.push('/home')
                     }
                 }                
