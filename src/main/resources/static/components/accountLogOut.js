@@ -6,9 +6,6 @@
 
 
 export default {
-    created(){
-        setTimeout( () => this.$router.push({ path: '/loginAccount'}), 5000);
-    },
     template: /* html */ `
     <section id="container">
         <section class="logOutSection">
@@ -25,15 +22,41 @@ export default {
     </section>
     `,
 
+    async created(){
 
-    methods: {
-        logOutCurrentAccount() {
-            fetch('/logout') // For Socket
-            console.log(this.$store.state.currentAccount);
-            this.$store.commit('setAccount', null)
-            console.log(this.$store.state.currentAccount);
-            console.log("Successfully logged out");
-            this.$router.push('/loginAccount')
+        /*let foundAccountWithEnteredEmail = await fetch('/rest/accounts/email/' + this.$store.currentAccount.email)
+            .then( rightAccount => rightAccount.json())*/
+              
+            console.log(this.$store.currentAccount.id);
+            
+            let changeStatusToOffline = {
+                            
+                id: this.$store.currentAccount.id,
+                email: this.$store.currentAccount.email,
+                usernick: this.$store.currentAccount.usernick,
+                password: this.$store.currentAccount.password,
+                avatar: this.$store.currentAccount.avatar,
+                status: "offline"
+            
         }
+        await fetch('/rest/accounts',{
+            method:'PUT',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(changeStatusToOffline)
+
+        })
+        console.log(changeStatusToOffline.status)
+
+        this.$store.commit('setAccount', null)
+        
+        setTimeout( () => this.$router.push({ path: '/loginAccount'}), 5000);
     },
+
+    computed:{
+        currentAccount() {
+            return this.$store.state.currentAccount
+        }
+    }
 }
