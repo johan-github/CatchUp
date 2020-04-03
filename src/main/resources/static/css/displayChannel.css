@@ -1,0 +1,86 @@
+#container{
+    display: grid;
+    grid-template-rows: 100px 400px 50px;    
+}
+        #container > div{
+            padding: 10px;
+        }
+
+
+#displayChannelBox, #displayChannelBox:empty {
+    width: 600px;
+
+    padding: 1px;
+    margin: 20px;
+}
+        #displayChannelBox:hover #displayChannelMessageBlock{
+            box-shadow: 4px 4px 2px black;
+            transition: .2s;
+        }
+
+#displayChannelName, #displayChannelMessageBlock{
+    width: 100%;
+    padding: 10px;
+}
+
+#displayChannelName{
+    height: auto;
+    background-color: tomato;
+    font-weight: 900;
+    border-radius: 10px 0px 0px 0px;
+    box-shadow: 2px 2px 2px black;
+    cursor: pointer;
+}
+
+#displayChannelMemberBox{
+    display: flex;
+    flex-direction: row;
+}
+        #displayChannelMember{
+            background-image: url('https://cdn.iconscout.com/icon/free/png-512/avatar-380-456332.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 30px;
+            height: 30px;
+            border-radius: 50px;
+            box-shadow: 1px 1px 3px black;
+            transition: .4s;
+        }
+        #displayChannelMember:hover{
+            width: 40px;
+            box-shadow: 3px 3px 3px rgb(0, 0, 0);
+            transition: .2s;
+        }
+        
+#displayChannelMessageBlock{
+    display: grid;
+    grid-template-columns: 30px auto;
+    grid-auto-rows: auto;
+    background-color: rgb(134, 72, 61);
+    border-radius: 0px 0px 20px 20px;
+    box-shadow: 2px 2px 2px black;
+    transition: .4s;
+}
+        #displayChannelMessageBlock:empty{
+            padding: 20px;
+            height: 20px;
+            background-color: rgb(134, 72, 61);
+            border-radius: 0px 0px 20px 20px;
+        }
+
+        #messageSenderAvatar {
+            background-color: var( --aa );
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 20px;
+            height: 20px;
+            border-radius: 50px;
+            box-shadow: 1px 1px 3px black;
+            transition: .4s;
+        }
+
+@media screen and ( max-width: 1200px ){
+    #displayChannelBox, #displayChannelBox:empty {
+        width: 400px;
+    }
+}

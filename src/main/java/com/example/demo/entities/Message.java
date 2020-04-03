@@ -1,7 +1,10 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="messages")
@@ -11,9 +14,11 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int channel_id;
-    private LocalDate time;
-    private int account_id;
+    private int channelid;
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
+    private LocalDateTime time;
+    private int accountid;
     private String text;
 
     public Message() {
@@ -27,28 +32,28 @@ public class Message {
         this.id = id;
     }
 
-    public int getChannel_id() {
-        return channel_id;
+    public int getChannelid() {
+        return channelid;
     }
 
-    public void setChannel_id(int channel_id) {
-        this.channel_id = channel_id;
+    public void setChannelid(int channelid) {
+        this.channelid = channelid;
     }
-
-    public LocalDate getTime() {
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(LocalDate time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 
-    public int getAccount_id() {
-        return account_id;
+    public int getAccountid() {
+        return accountid;
     }
 
-    public void setAccount_id(int account_id) {
-        this.account_id = account_id;
+    public void setAccountid(int accountid) {
+        this.accountid = accountid;
     }
 
     public String getText() {

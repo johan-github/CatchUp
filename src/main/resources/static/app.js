@@ -1,31 +1,47 @@
-export default {
+/********************************* /
+* Orginal by ......
+* Last Edited by Johan Fixed toggle login/register. Removed navBar 2020-04-02
+* Notes: First thing you see when going to CatchUp. Might need to change?
+/**********************************/
 
-  template: `
-  
-  <div id="app">
-    <nav class="nav">
-      <div id="navLogin">
-      <i class="fa fa-user"></i>
-        <router-link to="/loginUser"> L O G I N </router-link>
-      </div>
+// import loginAccountForm from './components/loginAccountForm.js'
+// import home from './views/home.js'
+// import loginAccount from './views/loginAccount.js'
+export default{
+  components:{
+    // loginAccount
+    // loginAccountForm,
+    // home,
+  },
 
-      <div id="navRegister"> 
-      <i class="fa fa-unlock-alt"></i>    
-       <router-link to="/registerUser"> R E G I S T E R </router-link>
-      </div>
-    </nav>
+  template: /* html */`
 
-    <main>
-      <router-view/>
-    </main>
-  
-  </div>
-  `,
+  <section>
 
-    /*async created(){
-        let channelNames = await fetch('/rest/channelnames')
-        channelNames = await channelNames.json()
+    <!--  <loginAccount/> -->
+    <router-view/>
+
+  </section>
+
+
+
+
+  <!-- <section id="appContainer">
+
+        <div id="appButton">
+            <h3>| | |</h3>
+        </div>
+
+        <div id="appNav">
+          <navbar/>
+        </div>
         
-        this.$store.commit('setChannelNames', channelNames)
-    }*/
+
+        <main id="appMain">
+            <router-view/>
+        </main>
+        
+    </section> -->
+    
+    `,
 }
