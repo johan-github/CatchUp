@@ -144,6 +144,8 @@ input[ type = "text" ]::placeholder, input[ type = "password" ]::placeholder, in
     box-shadow: 6px 6px 2px rgb(0, 0, 0);
     
     transition: .2s;
+
+    text-align: center;
 }
 
 @media scrreen and ( min-width: 1200px ){
