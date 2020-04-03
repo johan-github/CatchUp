@@ -49,10 +49,10 @@ public class MessageController extends TextWebSocketHandler {
         return (List<Message>) messageService.getAllMessages();
     }
 
-    @GetMapping("/rest/channel/messages/{id}")
+    /*@GetMapping("/rest/channel/messages/{id}")
     public List<Message> getChannelMessage (@PathVariable int id ){
         return messageService.getChannelMessage( id );
-    }
+    }*/
 
 
     //************************************************************************************************* DeleteMapping
