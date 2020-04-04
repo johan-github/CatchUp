@@ -1,5 +1,6 @@
 
 // TESTING PURPOSE ONLY!
+import { sendSocketEvent } from '../socket.js'
 
 export default{
   
@@ -56,14 +57,15 @@ export default{
         async send() {
 
             let message = {
+                action: "message",
                 channelid: this.channelid,
                 time: this.time,
                 accountid: this.currentAccount.id,
                 text: this.text
             }
             console.log(this.currentAccount.id)
-            console.log("TEST1: From component: " + message.text);
-
+            console.log("testsocetcomp rad 65: " + message.text);
+            
              // Post object to database
             let result = await fetch('/rest/messages', { 
             method: 'POST',
@@ -73,13 +75,14 @@ export default{
             body: JSON.stringify( message )
           })
           result = await result.json()
+          sendSocketEvent(result)
           //this.$store.commit("appendMessage", result)
 
 
           // Fetch messages from specific channel
-          await fetch('/rest/channel/messages/' + '1')
+        /*  await fetch('/rest/channel/messages/' + '1')
           .then(messages => messages.json())
-          .then(messages => this.$store.commit('setMessages', messages))
+          .then(messages => this.$store.commit('setMessages', messages))   */
 
         //let text = this.text
         //this.sentTexts.push(text)

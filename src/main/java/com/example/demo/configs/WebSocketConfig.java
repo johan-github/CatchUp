@@ -17,23 +17,20 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Autowired
     SocketService socketService;
 
-    //@Autowired
-    //MessageService messageService;
+    @Autowired
+    MessageService messageService;
 
-    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+   public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         SocketController sc = new SocketController();
         sc.setSocketService(socketService);
 
         registry.addHandler(sc, "/socket-message");
     }
-/*
-    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+
+ /*   public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         MessageController mc = new MessageController();
         mc.setMessageService(messageService);
 
-        /**
-         * Has to be same as Vue-socket-ws-route
-         */
-     //   registry.addHandler(mc, "/socket-message");
-    //}
+        registry.addHandler(mc, "/socket-message");
+    }*/
 }

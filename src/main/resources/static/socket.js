@@ -18,40 +18,55 @@ function connect() {
     ws = new WebSocket('ws://localhost:4000/socket-message');
 
     
+/*************************************************************** OnOpen */
+
     ws.onopen = (e) => { //onopen : triggers when a connection is made with the server / when ChatUp is on/updated
 
-      sendSomething();
+      loginEvent();
 
       isConnected = true; };
 
 
+/*************************************************************** OnMessage */
+
     ws.onmessage = (e) => {
-      showSomething(e.data)
-
-      let data
-      try{
-        data = JSON.parse(e.data)
-      } 
-      catch{
-      }
-      console.log("TEST2: Data to store.js from socket.js: " + data)
-
-      // If data exists and if it contains text (messages)
-      // To make nothing undefined
-      if(data && data.text){
-        store.commit('appendMessage', data)
+      //showedata(e.data)
+      console.log("showedata: rad 30 " + e.data)
+      let data = JSON.parse(e.data)
+      switch(data.action) {
+        case 'message':
+          console.log(data)
+          
+          store.commit('appendMessage', data)
+          break;
+        case 'login':
+          //store.commit('appendPet', data)
+          break;
       }
     
     }
 
     
-    
+/*************************************************************** OnClose */
     
     ws.onclose = (e) => { //Triggers when a connection is closed
-        console.log("Closing websocket..."); };
+        console.log("Closing websocket..."); 
+        disconnect();
+      };
 
 
   console.log("Connecting..."); //When the server is connected
+}
+
+export function sendSocketEvent(payload) {
+  console.log("reading payload " + payload)
+  ws.send(JSON.stringify(payload))
+}
+
+async function updateChannel(){
+  await fetch('/rest/channel/messages/' + '1')
+  .then(messages => messages.json())
+  .then(messages => store.commit('setMessages', messages))
 }
 
 function disconnect() {
@@ -62,28 +77,29 @@ function disconnect() {
     console.log("Disconnected");
 }
 
+function loginEvent() {
+  let socket = {
+  action: 'loginEvent',
+  text: 'testsocketcomp: loginEvent rad 70',
+ // time: new Date().toISOString().slice(0,19).replace("T", " ")
+}
+  console.log("socket rad 73" + socket )
+    ws.send( JSON.stringify( socket ))
+}
 
 function sendSomething() {
-
-  // Testing socket connection
   let socket = {
   action: 'message',
-  text: 'Testing sockets new version',
-  time: Date.now()
+  text: 'sendSomething rad 102',
+  time: new Date().toISOString().slice(0,19).replace("T", " ")
 }
- /* let socket = {
-    channelid: '3',
-    accountid : '5',
-    text : 'Socket test2'
-  }*/
-  console.log( socket )
+console.log("socket rad 105" + socket )
     ws.send( JSON.stringify( socket ))
-
 }
 
 // Testing function to get messages instantly
 function getOneMessage() {
-
+  console.log( "getOneMessage: rad 89");
   // Messages from store
   let messagesFromStore = this.$store.state.messages
   for(let message of messagesFromStore){
@@ -92,13 +108,8 @@ function getOneMessage() {
   }
 
 }
+function showedata(message) {
 
-
-
-
-
-function showSomething(message) {
-
-    console.log(message);
+    console.log( "showedata: " + message);
 
 }

@@ -31,6 +31,7 @@ public class SocketController extends TextWebSocketHandler {
      */
     private SocketService socketService;
     public void setSocketService(SocketService socketService) {
+        System.out.println("SocketController: setService rad 34");
         this.socketService = socketService;
     }
 
@@ -40,6 +41,7 @@ public class SocketController extends TextWebSocketHandler {
      */
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
+        System.out.println("SocketController: handleTextMessage rad 44");
         System.out.println("Received msg: " + message.getPayload());
 
 
@@ -48,15 +50,19 @@ public class SocketController extends TextWebSocketHandler {
         String action = event.get("action").toString();
         switch (action) {
             case "message":
+                System.out.println("SocketController: handleTextMessage rad 53");
                 System.out.println("Message:");
                 System.out.println(event.get("text").toString());
-                socketService.sendToAll(event.get("text").toString());
+                //socketService.sendToAll(event.get("text").toString());
+                socketService.sendToAll(message.getPayload());
                 break;
-            case "nisse-lever":
-                System.out.println("Bid:");
+            case "loginEvent":
+                System.out.println("SocketController: handleTextMessage rad 59");
+                System.out.println("LoginEvent:");
                 System.out.println(event.get("text").toString());
                 break;
             default:
+                System.out.println("SocketController: handleTextMessage rad 64");
                 System.out.println("Could not handle action: " + action);
                 socketService.sendToOne(session, "Could not handle action: " + action);
 
@@ -67,6 +73,7 @@ public class SocketController extends TextWebSocketHandler {
      */
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
+        System.out.println("SocketController: afterConnectionEstablished rad 75");
         socketService.addSession(session);
     }
 
@@ -75,6 +82,7 @@ public class SocketController extends TextWebSocketHandler {
      */
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
+        System.out.println("SocketController: afterConnectionClosed rad 84");
         socketService.removeSession(session);
     }
 }

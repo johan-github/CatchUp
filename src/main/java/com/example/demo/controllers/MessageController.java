@@ -23,15 +23,16 @@ public class MessageController extends TextWebSocketHandler {
     @Autowired
     private MessageService messageService;
 
-    public void setMessageService(MessageService messageService) {
+  /*  public void setMessageService(MessageService messageService) {
         this.messageService = messageService;
-    }
+    } */
 
     //************************************************************************************************* PostMapping
 
 
     @PostMapping("/rest/messages")
     public Message addNewMessage (@RequestBody Message message ){
+        System.out.println("MessageController: addNewMessage rad 35");  /// (1) först hit sen till MessageService: addNewMessage rad 86
         return messageService.addNewMessage( message );
     }
 
@@ -40,20 +41,23 @@ public class MessageController extends TextWebSocketHandler {
 
     @GetMapping("/rest/messages")
     public List<Message> getAllMessages() {
+        System.out.println("MessageController: getAllMessages rad 44");
             return (List<Message>) messageService.getAllMessages();
     }
 
     @GetMapping("/rest/channel/messages/{id}")
     public List<Message> getChannelMessage (@PathVariable int id ){
+        System.out.println("MessageController: getChannelMessage rad 50"); /// (6)  sen till MessageService: getChannelMessage rad 102
         return messageService.getChannelMessage( id );
     }
 
 
     //************************************************************************************************* DeleteMapping
-
+/*
     // ADDING AND TESTING WEBSOCKETS
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
+        System.out.println("MessageController: handleTextMessage rad 60");
         System.out.println("Received msg: " + message.getPayload());
 
         //Message chatMessage = gson.fromJson( message.getPayload(), Message.class);
@@ -67,23 +71,25 @@ public class MessageController extends TextWebSocketHandler {
         messageService.sendToAll(mess, Message.class);
       //  messageService.sendToOne(session, mess, Message.class);
     }
-
+*/
 
     /**
      * When connected from FrontEnd
      */
-    @Override
+   /* @Override
     public void afterConnectionEstablished(WebSocketSession session) {
+        System.out.println("MessageController: afterConnectionEstablished rad 81");
         messageService.addSession(session);
-    }
+    } */
 
     /**
      * When disconnected from FrontEnd
      */
-    @Override
+    /*@Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
+        System.out.println("MessageController: afterConnectionClosed rad 90");
         messageService.removeSession(session);
-    }
+    }*/
 
 
 }

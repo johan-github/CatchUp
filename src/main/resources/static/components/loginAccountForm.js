@@ -87,6 +87,7 @@ export default {
                         if ( foundAccountWithEnteredEmail.password === this.enterPassword ){
                         this.$store.commit('setCurrentAccount', foundAccountWithEnteredEmail)
                         this.$router.push('/home')
+                        return
                     }
                 }                
             }
