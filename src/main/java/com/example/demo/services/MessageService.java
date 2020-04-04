@@ -1,4 +1,8 @@
-
+/********************************* /
+ * Original by Matthias & Helena. 2020-04-03
+ * Last Edited by Matthias & Helena 2020-04-03
+ * Notes: ......
+ /**********************************/
 
 package com.example.demo.services;
 
@@ -14,7 +18,6 @@ import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
@@ -70,7 +73,6 @@ public class MessageService {
     }
 
 
-
     public List<Message> getAllMessages(){
         System.out.println("MessageService: getAllMessages rad 47");
         return ( List<Message> ) messageRepo.findAll();
@@ -80,6 +82,9 @@ public class MessageService {
         System.out.println("MessageService: getAllMessagesByEAccountId rad 79");
         return ( List<Message> ) messageRepo.findAllByAccountid( id );
     }
+
+
+
 
     // All connected clients will be notified a new message has been created
     // Save to database, then update to SocketService (sendToAll)
@@ -105,7 +110,9 @@ public class MessageService {
         return (List<Message>) messageRepo.findBychannelid( id );
     }
 
-
+    public void deleteMessageById(int id ){
+        messageRepo.deleteById( id );
+    }
 
 
 

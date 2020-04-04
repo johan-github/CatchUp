@@ -1,6 +1,9 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.Message;
+import com.example.demo.repositories.MessageRepo;
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -14,6 +17,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class SocketService {
 
     Gson gson = new Gson();
+
 
     /**
      * List<WebSocketSession> för att spara alla anslutna klienter i, som vi senare kan loopa igenom för att ett skicka meddelande
@@ -55,6 +59,7 @@ public class SocketService {
                 e.printStackTrace();
             }
         }
+        System.out.println("TEST 1: IN SOCKETSERVICE TEST ");
     }
 
     public void sendToGroup(String message) {
