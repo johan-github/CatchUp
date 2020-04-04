@@ -5,6 +5,7 @@
 /**********************************/
 
 import { store } from './store.js'
+//import { testsocketcomp } from '/components/testsocketcomp.js'
 let ws; //Var to store WebSocket-class in
 let isConnected = false;
 connect();
@@ -38,6 +39,7 @@ function connect() {
           console.log(data)
           
           store.commit('appendMessage', data)
+          //keepScrollAtBottom()
           break;
         case 'login':
           //store.commit('appendPet', data)

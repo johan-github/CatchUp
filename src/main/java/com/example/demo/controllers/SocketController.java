@@ -54,7 +54,7 @@ public class SocketController extends TextWebSocketHandler {
                 System.out.println("Message:");
                 System.out.println(event.get("text").toString());
                 //socketService.sendToAll(event.get("text").toString());
-                socketService.sendToAll(message.getPayload());
+                socketService.sendToGroup(message.getPayload());
                 break;
             case "loginEvent":
                 System.out.println("SocketController: handleTextMessage rad 59");

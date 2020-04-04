@@ -6,9 +6,12 @@
 
 package com.example.demo.services;
 
+import com.example.demo.entities.AccountMessage;
 import com.example.demo.entities.Channel;
 import com.example.demo.entities.ChannelMessage;
 import com.example.demo.entities.Message;
+import com.example.demo.repositories.AccountMessageRepo;
+import com.example.demo.repositories.AccountRepo;
 import com.example.demo.repositories.MessageRepo;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;

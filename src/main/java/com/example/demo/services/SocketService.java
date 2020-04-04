@@ -50,7 +50,7 @@ public class SocketService {
      * for(WebSocketSession webSocketSession : sessions): Loops through ALL connected sessions (try-catch to prevent crash if a connected session would close in the middle of the loop)
      */
     public void sendToAll(String message) {
-        System.out.println("SocketService: sendToAll rad 46");   // (5)  här måste det vara att den skickar ut till alla. sedan dom som får det går till MessageController: getChannelMessage rad 50
+        System.out.println("SocketService: sendToAll rad 53");   // (5)  här måste det vara att den skickar ut till alla. sedan dom som får det går till MessageController: getChannelMessage rad 50
         TextMessage msg = new TextMessage(message);
         for(WebSocketSession webSocketSession : sessions) {
             try {
@@ -59,7 +59,7 @@ public class SocketService {
                 e.printStackTrace();
             }
         }
-        System.out.println("TEST 1: IN SOCKETSERVICE TEST ");
+        System.out.println("SocketService: sendToAll rad 62");
     }
 
     public void sendToGroup(String message) {

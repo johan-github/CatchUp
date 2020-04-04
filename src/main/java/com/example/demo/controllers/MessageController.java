@@ -6,19 +6,16 @@
 
 package com.example.demo.controllers;
 
-import com.example.demo.entities.Channel;
+import com.example.demo.entities.AccountMessage;
 import com.example.demo.entities.Message;
+import com.example.demo.services.AccountMessageService;
 import com.example.demo.services.MessageService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.socket.CloseStatus;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -29,6 +26,8 @@ public class MessageController extends TextWebSocketHandler {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private AccountMessageService accountMessageService;
   /*  public void setMessageService(MessageService messageService) {
         this.messageService = messageService;
     } */
@@ -36,10 +35,16 @@ public class MessageController extends TextWebSocketHandler {
     //************************************************************************************************* PostMapping
 
 
-    @PostMapping("/rest/messages")
-    public Message addNewMessage (@RequestBody Message message ){
-        System.out.println("MessageController: addNewMessage rad 35");  /// (1) först hit sen till MessageService: addNewMessage rad 86
-        return messageService.addNewMessage( message );
+    @PostMapping("/rest/message")
+    public AccountMessage addNewMessage (@RequestBody Message message ){
+        System.out.println("MessageController: addNewMessage rad 46");  /// (1) först hit sen till MessageService: addNewMessage rad 86
+        System.out.println("MessageController: addNewMessage rad 47");
+        Message msg = messageService.addNewMessage( message );
+        System.out.println("MessageController: addNewMessage rad 49");
+        AccountMessage ac = accountMessageService.findMessageById(msg.getId());
+        ac.action = "message";
+        return ac;
+        //return messageService.addNewMessage( message );
     }
 
 
@@ -59,7 +64,7 @@ public class MessageController extends TextWebSocketHandler {
 
     //************************************************************************************************* DeleteMapping
 
-    @DeleteMapping("/rest/messages/{id}")
+    @DeleteMapping("/rest/message/{id}")
     public String deleteMessageById( @PathVariable int id ){
         try{
             messageService.deleteMessageById( id );

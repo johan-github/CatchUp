@@ -25,6 +25,9 @@ public class AccountMessage {
     public AccountMessage() {
     }
 
+    @Transient
+    public String action;
+
     public int getId() {
         return id;
     }
