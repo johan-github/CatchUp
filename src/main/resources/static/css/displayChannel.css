@@ -1,17 +1,30 @@
+/*#item01{ grid-area: item01;}
+#scrollContainer{ grid-area: scrollContainer;}
+#item03{ grid-area: item03;}*/
+
+
 #container{
+    background-color: rgb(26, 68, 26);
     display: grid;
-    grid-template-rows: 100px 400px 50px;    
+    grid-template-rows: 200px 300px 50px;
+    /*grid-template-areas:
+    "item01"
+    "scrollContainer"
+    "item03";*/
+
+    margin: 10px;
 }
-        #container > div{
-            padding: 10px;
+        #container > div {
+           
         }
 
-
+#scrollContainer{
+    height: 80%;
+    width: 100%;
+}
 #displayChannelBox, #displayChannelBox:empty {
-    width: 600px;
-
-    padding: 1px;
-    margin: 20px;
+    margin: 10px;
+    width: 800px;
 }
         #displayChannelBox:hover #displayChannelMessageBlock{
             box-shadow: 4px 4px 2px black;
@@ -37,18 +50,19 @@
     flex-direction: row;
 }
         #displayChannelMember{
-            background-image: url('https://cdn.iconscout.com/icon/free/png-512/avatar-380-456332.png');
+            /*background-image: url('https://cdn.iconscout.com/icon/free/png-512/avatar-380-456332.png');*/
             background-repeat: no-repeat;
             background-size: cover;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             border-radius: 50px;
             box-shadow: 1px 1px 3px black;
             transition: .4s;
         }
         #displayChannelMember:hover{
-            width: 40px;
-            box-shadow: 3px 3px 3px rgb(0, 0, 0);
+            width: 45px;
+            margin-left: 10px;
+            margin-right: 10px;
             transition: .2s;
         }
         
@@ -78,6 +92,10 @@
             box-shadow: 1px 1px 3px black;
             transition: .4s;
         }
+
+#messageBoxButtonBack:hover{
+    background-color: rgb(224, 81, 62);
+}
 
 @media screen and ( max-width: 1200px ){
     #displayChannelBox, #displayChannelBox:empty {
