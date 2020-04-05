@@ -1,6 +1,6 @@
 /*********************************+/ 
-* Orginal by Matthias. 2020-04-02
-* Edited by Hassan 2020-04-05
+* Orginal by Hassan. 2020-03-30
+* Edited by Hassan 2020-04-06
 * Notes: Here will a channels messages be displayed
 /**********************************/
 
@@ -48,33 +48,21 @@ export default{
             channelMessages : [],
             accounts : [],
 
-            channelid:'1',
             time: '',
-            accountid: '',
             text: '',
         }
     },
 
+    //constructor
     async created(){
-
-        //Fetched accounts from DB
-        await fetch('/rest/accounts')
-            .then( accounts => accounts.json() )
-            .then( accounts => this.accounts = accounts );
-
-         
-        //this.getMessages();
-        this.getCurrentChannelMessages();
-        this.keepScrollAtBottom();
+        this.getMessages();
+        this.getAccount();
     },
     
     
     methods: {
 
-        getCurrentChannelMessages(){
-            this.channelMessages = this.currentChannelMessages;
-        },
-
+        //Displays an avatar for every member and only allows a specific file-types, or else a default avatar will be chosen
         displayAvatar( message ){
             let allowedImageFileTypes = [ '.png', '.jpeg', '.jpg', '.gif' ];
             let accountWithAvatar;
@@ -99,20 +87,18 @@ export default{
             this.text = '';
         },
 
-        displayCurrentChannelMessages(){
-            let messages = this.currentChannelMessages;
-            return messages;
-        },
-
+        //Routes to "home" page
         returnToChannels(){
             this.$router.push( '/home' );
         },
         
+        //Makes the scroll-bar always at the bottom
         keepScrollAtBottom(){
             let scrollContainer = document.getElementById("scrollContainer");
             scrollContainer.scrollTop = scrollContainer.scrollHeight;
         },        
 
+        //Displays online status of every member/friend of the channel
         currentAccountStatusIcon( status ){
             if( status === 'online'){
                 return '🟢';
@@ -120,6 +106,7 @@ export default{
             return '🔴';
         },
         
+        //Displays a trash bin if youre logged in as an admin. Else the trach bin will not be visible
         removeMessageIcon(){
             if( this.currentAccount != null ){
                 return '🗑️';
@@ -129,20 +116,21 @@ export default{
 
         //Delete a message (click on trashbin)
         async removeMessage( message, index ){
+            this.getMessages();
             console.log( message );
             console.log( index );
             let answer = await fetch('/rest/messages/' + message.id, {
                 method : 'DELETE'
             });
 
+            this.getMessages();
+
             console.log( "answer " + answer );
-            
-            this.$store.commit( 'removeCurrentChannelMessage', index );
         },
 
 
-
-        async send( channelId ) {
+        //The message/text from input field will be merged in a message object and sent to the DB
+        async send() {
         
             if( !this.text.trim() ){
                     return;
@@ -155,41 +143,42 @@ export default{
                 text: this.text
             }
 
-            let messageToSendToStore = {
-                /*id : this.currentChannelMessages.slice(-1)[0].id + 1,*/
-                channelid : this.currentChannel.id,
-                avatar : this.currentAccount.avatar,
-                status : 'online',
-                usernick : this.currentAccount.usernick,
-                time : this.time,
-                text : this.text,
-            }
-
             await fetch('/rest/messages',{
                     method : 'POST',
                     headers : { 'Content-Type' : 'application/json'},
                     body : JSON.stringify( messageToSendToDB )
             });
             
-            this.$store.commit( 'appendCurrentChannelMessage', messageToSendToStore );
-            
             this.resetSearchField();
-            this.getCurrentChannelMessages();
-            //this.keepScrollAtBottom();
-        },        
+            this.getMessages();
+        },
+        
+        //Fetches messages by id from DB
+        async getMessages(){
+            await fetch('/rest/channel/messages/' + this.currentChannel.id )
+            .then(messages => messages.json())
+            .then(messages => this.channelMessages = messages)
+
+            this.keepScrollAtBottom();
+        },
+
+        //Fetched accounts from DB
+        async getAccount(){
+            await fetch('/rest/accounts')
+                .then( accounts => accounts.json() )
+                .then( accounts => this.accounts = accounts );
+        }
     },
 
 
 
     computed: {
+        //Get logged in account information from $store
         currentAccount() {
             return this.$store.state.currentAccount;
         },
 
-        currentChannelMessages(){
-            return this.$store.state.currentChannelMessages;
-        },
-
+        //Get selected channel information from $store
         currentChannel(){
             return this.$store.state.currentChannel;
         }
