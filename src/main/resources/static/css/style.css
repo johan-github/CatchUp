@@ -1,9 +1,11 @@
 @import "styleStandard.css";
-@import "registerUserForm.css";
-@import "loginUserForm.css";
+@import "registerAccountForm.css";
+@import "loginAccountForm.css";
 @import "channelCreateSearch.css";
 @import "createChannel.css";
 @import "displayChannel.css";
+@import "testsocket.css";
+@import "messageBox.css";
 
 
 /*************************************************************************/
@@ -72,13 +74,18 @@ html, body{
 #appNav{ grid-area: appNav; }
 #appMain{ grid-area: appMain; }
 
-#appContainer{
+#homeContainer{
     display: grid;
-    grid-template-columns: 50px 0px 1150px;
+    grid-template-columns: 50px 0px 600px;
     /*grid-template: repeat( 1, [row] auto) / repeat( 2, [col] 100px);*/
     grid-template-areas:
     "appNav appButton appMain";
 }
+        #appMain{
+            /* width: 600px;
+            max-width: 600px; */
+            position: relative;
+        }
         #appButton {
             color: rgb(60, 85, 82);
             padding-top: 50px;
@@ -93,10 +100,16 @@ html, body{
             transition: 1s;
         }
 
-        #appButton:active + #appNav {
+        #appButton:active + #appNav{
             /*visibility: visible;*/
             position: fixed;
             width: 200px;
+
+        }
+        #appButton:active + #appMain{
+            /*visibility: visible;*/
+            position: relative;
+
         }
         #appNav:hover {
             /*visibility: visible;*/
@@ -172,65 +185,6 @@ html, body{
             text-decoration: none;
             white-space: nowrap;
         }
-
-
-
-
-
-/******************************************************************************* messageBox **/
-            
-#messageBoxUserPic{ grid-area: pic; }
-#messageBoxUserName{ grid-area: name; }
-#messageBoxUserAdd{ grid-area: userAdd; }
-#messageBoxUserMessageTime{ grid-area: time; }
-#messageBoxUserMessage{ grid-area: msg; }
-#messageBox{
-    display: grid;
-    /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
-    grid-template-columns: 50px auto 10px;
-    grid-template-rows: 25px 25px auto;
-    grid-template-areas:
-    "pic name name userAdd"
-    "pic time time time"
-    "msg msg msg msg";
-
-    background-color: rgb(27, 44, 44);
-    opacity: 0.9;
-    
-    padding: 10px;
-    margin: 10px;
-    box-shadow: 5px 5px 5px #000000;
-    border-radius: 5px 0px 5px 0px;
-}
-        #messageBoxUserPic{
-            background-image: url("https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png");
-            background-size: cover;
-            background-position: center;
-            box-shadow: 5px 5px 5px #000000;
-        }
-        #messageBoxUserName {
-            padding: 10px 0px 5px 20px;
-        }
-        #messageBoxUserMessageTime {
-            padding: 5px 0px 5px 20px;
-            font: italic 10px Arial, Helvetica, sans-serif;
-        }
-        #messageBoxUserMessage {
-            padding: 20px 10px 10px 20px;
-        }
-        #name, #time{
-            justify-content: center;
-            align-items: center;
-        }
-        
-        #messageBoxUserAdd{
-            justify-self: end;
-        }
-        #time{
-        }
-        #msg{
-        }
-
 
 
 /******************************************************************************************** optionsBox */
@@ -466,6 +420,3 @@ html, body{
             background-color: rgb(184, 28, 28);
             opacity: 0.9;
         }
-
-
-            

@@ -7,21 +7,22 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="messages")
-
-public class Message {
+@Table( name = "viewmessages" )
+public class AccountMessage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int channelid;
+    private String avatar;
+    private String status;
+    private String usernick;
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime time;
-    private int accountid;
     private String text;
 
-    public Message() {
+    public AccountMessage() {
     }
 
     public int getId() {
@@ -39,21 +40,38 @@ public class Message {
     public void setChannelid(int channelid) {
         this.channelid = channelid;
     }
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getUsernick() {
+        return usernick;
+    }
+
+    public void setUsernick(String usernick) {
+        this.usernick = usernick;
+    }
+
     public LocalDateTime getTime() {
         return time;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     public void setTime(LocalDateTime time) {
         this.time = time;
-    }
-
-    public int getAccountid() {
-        return accountid;
-    }
-
-    public void setAccountid(int accountid) {
-        this.accountid = accountid;
     }
 
     public String getText() {

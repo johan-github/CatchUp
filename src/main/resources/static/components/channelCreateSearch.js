@@ -1,6 +1,6 @@
 /********************************* /
 * Orginal by Hassan. 2020-03-24
-* Last Edited by Hassan. 2020-03-30
+* Last Edited by Johan (cleanUp) 2020-04-01
 * Notes: When in channels this will popup from displayChannel.js
 /**********************************/
 export default{
@@ -108,9 +108,9 @@ export default{
         },
 
 
-        getCurrentUserInfo(){
+        getCurrentAccountInfo(){
          for(let accountChannel of this.accountChannels) {
-             if(accountChannel.accountid === this.currentUsers.id) {
+             if(accountChannel.accountid === this.currentAccounts.id) {
                  this.channelIds.push(accountChannel.channelid)
              } 
          }
@@ -133,8 +133,8 @@ export default{
             return this.$store.state.accountChannels
         },
 
-        currentUsers(){
-            return this.$store.state.currentUser
+        currentAccounts(){
+            return this.$store.state.currentAccount
         },
     },
 
@@ -153,7 +153,7 @@ export default{
         .then(accountChannels => this.$store.commit('setAccountChannels', accountChannels))
         .then(this.accountChannels.forEach(accountChannel => console.log(accountChannel)))
 
-        this.getCurrentUserInfo()
+        this.getCurrentAccountInfo()
         
     }
 

@@ -1,32 +1,39 @@
 /********************************* /
 * Orginal by ......
-* Last Edited by ......
+* Last Edited by Johan Fixed toggle login/register. Removed navBar 2020-04-02
 * Notes: First thing you see when going to CatchUp. Might need to change?
 /**********************************/
-import navbarNotLoggedIn from './components/navbarNotLoggedIn.js'
-import loginUserForm from './components/loginUserForm.js'
 
-
-
-
-
+// import loginAccountForm from './components/loginAccountForm.js'
+// import home from './views/home.js'
+// import loginAccount from './views/loginAccount.js'
 export default{
   components:{
-    navbarNotLoggedIn,
-    loginUserForm,
+    // loginAccount
+    // loginAccountForm,
+    // home,
   },
 
-  template:`
+  template: /* html */`
 
-  
-  <section id="appContainer">
+  <section>
+
+    <!--  <loginAccount/> -->
+    <router-view/>
+
+  </section>
+
+
+
+
+  <!-- <section id="appContainer">
 
         <div id="appButton">
             <h3>| | |</h3>
         </div>
 
         <div id="appNav">
-          <navbarNotLoggedIn/>
+          <navbar/>
         </div>
         
 
@@ -34,7 +41,7 @@ export default{
             <router-view/>
         </main>
         
-    </section>
+    </section> -->
     
     `,
 }

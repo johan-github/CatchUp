@@ -1,7 +1,7 @@
 /********************************* /
 * Orginal by Hassan. 2020-03-24
-* Last Edited by Tobias. 2020-03-31
-* Notes: This displays all the Account's channels and is used by ./views/home.js
+* Last Edited by: Hassan 2020-04-05
+* Notes: This displays all the Account's channels, with channel members (friends) and channels latest message ./views/home.js
 /**********************************/
 import channelCreateSearch from './channelCreateSearch.js'
 
@@ -19,148 +19,138 @@ export default{
     template:`
         <section id="container">
 
-            <h3 id="label">My channels? (DisplayChannel)</h3>
 
-                    <div id="box" v-for="(myChannelName, i ) of myChannelNames">
+            <div>
+                <h3 id="label">My channels</h3>
+                <input type="text" placeholder="Search channel..." @keyup="searchChannel()" v-model="searchString">
+                <button @click="resetSearchField()">Reset search!</button>
+            </div>          
 
-                    <div id="channelName"
-                            @click="channelSelected( myChannelName.id )">
-                            <div>{{ myChannelName.name }}</div>
-                        </div>
+            <div id="scrollContainer">
 
-                        <div id="scrollContainer">
-                            <div id="membersBox" v-for="testBuddy of displayChannelFriends( i )">
-                                <div id="memberNick">{{ testBuddy.usernick}} ( id:{{ testBuddy.id }} )</div>
-                            </div>
-                        </div>
+                <div id="displayChannelBox" v-for="(channel, i ) of searchChannel()">
 
-                        <div id="message"
-                            v-for="channelMessage of displayLatestChannelMessages(myChannelName.id)">
-                            <div>{{channelMessage.text}}  </div>                  
-                        </div>
+                <div id="displayChannelMemberBox" >
+                    <div v-for="friend of displayChannelFriends( channel.id )">
+                        <img id="displayChannelMember" :src="displayChannelFriendAvatar( friend.avatar )">
+                    </div>
+                </div>
+                    
 
+                    <div id="displayChannelName" @click="selectChannelAndShowItsMessages( channel )"> {{ channel.name }} </div>
+
+                    <div id="displayChannelMessageBlock">
+                        <img id="messageSenderAvatar" :src="displayLatestMessageSenderAvatar( channel.id )">
+                        <div id="messageSenderMessage">{{ displayLatestChannelMessageText( channel.id ) }} </div>
                     </div>
 
-            <button @click="createNewChannel">Create channel</button>
+                    <!--<div id="displayChannelMessageBlock">
+                        <img id="messageSenderAvatar" :src="displayLatestMessageSenderAvatar()">
+                        <div id="messageSenderMessage">{{ displayLatestChannelMessage( channel.id ) }} </div>
+                    </div>-->
+
+                </div>
+
+            </div>
+
+            <div>
+                <button id="displayChannelCreateChannelButton" @click="createNewChannel">Create channel</button>            
+            </div>
 
         </section>
     `,
-
-    /*
-<section id="container">
-
-            <h3 id="label">My channels? (DisplayChannel)</h3>
-
-            <div id="scrollContainer">
-                
-                <div id="displayChannelBox"
-                    v-for="(myChannelName, i ) of myChannelNames">
-
-                    <div id="displayChannelBuddies"
-                        v-for="testBuddy of displayChannelFriends( i )">
-                        {{ testBuddy.usernick}} ( {{ testBuddy.id}} )
-                    </div>
-                    
-                    <div id="displayChannelName"
-                        @click="channelSelected( myChannelName.id )">
-                        {{ myChannelName.name }}
-                    </div>
-
-                    <div id="displayChannelMessage"
-                        v-for="channelMessage of displayLatestChannelMessages(myChannelName.id)">
-                        {{channelMessage.text}}                    
-                    </div>
-
-                </div>
-                
-            </div>
-
-            <button @click="createNewChannel">Create channel</button>
-
-        </section>
-    */
-
-    /*
-    <section id="container">
-
-            <h3 id="label">My channels? Display</h3>
-
-            <div id="scrollContainer">
-                
-            <div>
-
-                <div id="displayChannelBox"
-                    v-for="(myChannelName, i ) of myChannelNames">
-
-                    <div id="displayChannelBuddies"
-                        v-for="testBuddy of displayChannelFriends( i )">
-                        <div>{{  }}</div>
-                    </div>
-
-                    
-
-                    <div id="displayChannelName"
-                        @click="channelSelected( myChannelName.id )">
-                        <div>{{ myChannelName.name }}</div>   
-                    </div>
-
-                    <div id="displayChannelMessages"
-                        v-for="channelMessage of displayLatestChannelMessages(myChannelName.id)">
-                        {{channelMessage.text}}                    
-                    </div>
-
-                </div>
-
-            </div>
-                
-            </div>
-
-            <button @click="createNewChannel">Create channel</button>
-
-        </section>
-        */
-
-
-
-
 
 /*********************************************************************************************************** Methods:*/
 
     data() {
         return {
-            channelIds : [],
-            myChannelNames : [],
-            allMessages : [],            
+            channels : [],
+            accountChannels : [],
             accounts : [],
-            latestchannelmessages : [],
+            latestChannelMessages : [],
+            allMessages : [],
+
+            searchString : '',
         }
     },
-    
 
-/*********************************************************************************************************** Methods:*/
+    /*********************************************************************************************************** Methods:*/
 
 
-    methods:{
+    methods:{        
 
-         displayLatestChannelMessages(channelId) {
-             let channelMessages = []
-             for(let message of this.latestchannelmessages) {
-                 if(message.channelid === channelId) {
-                     channelMessages.push(message)
-                     console.log(message.text)
-                 }
-             } 
-             return channelMessages
+        //search channel name
+        searchChannel(){
+            let tempChannels = [];
+
+            if( this.searchString === '' ){
+                return this.getMyChannels();
+            }
+
+            for( let channel of this.getMyChannels() ){
+                if( channel.name.toLowerCase().includes( this.searchString.toLowerCase() )){
+                    tempChannels.push( channel );
+                }
+            }
+            return tempChannels;
+        },
+        
+        //Makes the search field, that holds searchString, empty
+        resetSearchField(){
+            this.searchString = '';
+        },
+
+        //displaying latest channel message
+         displayLatestChannelMessageText( channelId ) {
+            for( let latestChannelMessage of this.latestChannelMessages ){
+                if( latestChannelMessage.channelid === channelId ){
+                    this.displayLatestMessageSenderAvatar( latestChannelMessage );
+                    if( latestChannelMessage.text === null ){
+                        return '';
+                    }
+                    return latestChannelMessage.text;
+                }
+            }
+       },
+
+         //Displays an avatar next to the latest channel message
+        displayLatestMessageSenderAvatar( channelId ) {
+            for( let latestChannelMessage of this.latestChannelMessages ){
+                if( latestChannelMessage.channelid === channelId ){
+                    for( let account of this.accounts ){
+                        if( account.id === latestChannelMessage.accountid ){
+                            return this.displayAccountOrDefaultAvatar( account.avatar );
+                        }
+                    }
+                }
+            }
+       },
+
+         displayAccountOrDefaultAvatar( avatar ){
+            let allowedImageFileTypes = [ '.png', '.jpeg', '.jpg', '.gif' ];
+            for( let type of allowedImageFileTypes ){
+                if( avatar.toLowerCase().includes( type ) ){
+                    return avatar;
+                }                
+            }
+            return 'http://158.174.120.227/CatchUp/avatar01.png';
          },
 
+         //Displays an avatar of evey member/friend of a channel
+        displayChannelFriendAvatar( avatar ){
+            return this.displayAccountOrDefaultAvatar( avatar );
+        },
 
-        displayChannelFriends(index) {
+         
+
+         //display all friends (members) in channel
+        displayChannelFriends( channelId ) {
             let channelBuddies = []
             let channelAccounts = []
             
             for(let accountChannel of this.accountChannels) {
-                if(accountChannel.channelid === index ) {
-                    channelBuddies.push(accountChannel.accountid)
+                if(accountChannel.channelid === channelId ) {
+                    channelBuddies.push( accountChannel.accountid )
                 }
             }
 
@@ -175,81 +165,60 @@ export default{
             return channelAccounts;
         },
 
+        //Method to activate when selecting/clicking a channel to route the user to channelMessage
+        async selectChannelAndShowItsMessages( myChannel ){
 
-        channelSelected( myChannelId ){
+            this.$store.commit( 'setCurrentChannel', myChannel );
 
-            let tempMessages = [];
-            
+            await fetch('/rest/channel/messages/' + myChannel.id )
+                .then(messages => messages.json())
+                .then(messages => this.$store.commit( 'setCurrentChannelMessages', messages ))
 
-            for( let message of this.allMessages ){
-                if( message.channelid === myChannelId ){
-                    tempMessages.push( message );
-                }
-            }
-            
-            
-            this.$store.commit( 'setCurrentChannelMessages', tempMessages )
             this.$router.push( '/channelMessage')
-
-            this.displayChannelFriends(myChannelId)
             return
-
         },
 
-
+        //gets all channels by the logged in user and stores them in myChannels[]
         getMyChannels(){
+
+            let tempChannelIds = [];
+            let tempChannels = [];
+
+            for( let accountChannel of this.accountChannels ){
+                if( accountChannel.accountid === this.currentAccount.id ){
+                    tempChannelIds.push( accountChannel.channelid )
+                }
+            }
+
             for(let channel of this.channels) {
-                for(let channelId of this.channelIds) {
+                for(let channelId of tempChannelIds) {
                     if(channel.id === channelId) {
-                        this.myChannelNames.push(channel)
+                        tempChannels.push( channel )
                     }
                 }
             }
-        },
+
+            return tempChannels;
+        },        
 
 
-        getCurrentUserInfo(){
-            if( this.userLoggedIn.loggedIn === 'true' ){
-
-                for(let accountChannel of this.accountChannels) {
-                    if(accountChannel.accountid === this.currentUser.id) {
-                        this.channelIds.push(accountChannel.channelid)
-                    } 
-                }
-                this.getMyChannels()                    
-            }
-        },
-
-
+        //router to views/createChannel
         createNewChannel(){
-            this.$router.push( '/createChannel')
+            //this.$router.push( '/createChannel')
+            this.$router.push( '/loginAccount')
         }
-
-
-
     },
 
 
 /*********************************************************************************************************** Computed: */
 
     computed:{
-        channels(){
-            return this.$store.state.channels
-        },
-        
-        accountChannels(){
-            return this.$store.state.accountChannels
-        },
 
-        currentUser(){
-            return this.$store.state.currentUser
-        },
+        currentAccount(){
+            return this.$store.state.currentAccount
+        },        
 
-        userLoggedIn(){
-            return this.$store.state.userLoggedIn
-        },
-
-        currentUserMessages(){
+        currentAccountMessages(){
             return this.$store.state.currentChannelMessages;
         },
 
@@ -260,47 +229,36 @@ export default{
     },
 
 
-    
-
-
-
 /*********************************************************************************************************** Created: */
 
-    async created(){
+    async created(){  
 
-        /**
-         * Variable translated to json (java),
-         * variable gets sent to store
-         */
+        //Fetches/gets all the channels from channels.db and stores it in a channels ("class-array")
         await fetch('/rest/channels')
-        .then(channels => channels.json())
-        .then(channels => this.$store.commit('setChannels', channels))
+            .then(channels => channels.json())
+            .then(channels => this.channels = channels)
 
 
-        await fetch('/rest/accountchannels')
-        .then(accountChannels => accountChannels.json())
-        .then(accountChannels => this.$store.commit('setAccountChannels', accountChannels))
-
-        
-        await fetch('/rest/messages')
-            .then( messages => messages.json())
-            .then( messages => this.allMessages = messages )
-
+        //Fetches/gets all the accounts from accounts.db and stores it in a accounts ("class-array")
         await fetch('/rest/accounts')
             .then( accounts => accounts.json())
             .then( accounts => this.accounts = accounts )
 
-        await fetch('/rest/latestchannelmessages/' + this.currentUser.id)
-            .then( latestchannelmessages => latestchannelmessages.json())
-            .then(latestchannelmessages => this.latestchannelmessages = latestchannelmessages)
+
+        //Fetches/gets all the accountchannels from accountchannels.db and stores it in a accountChannels ("class-array")
+        await fetch('/rest/accountchannels' )
+            .then(accountChannels => accountChannels.json())
+            .then(accountChannels => this.accountChannels = accountChannels)
 
 
-        this.getCurrentUserInfo()
-        this.displayChannelFriends()
-        this.displayLatestChannelMessages()
+        //Fetches/gets all the latestchannelmessages from latestchannelmessages.db and stores it in a latestchannelmessages ("class-array")
+        await fetch('/rest/latestchannelmessages/' + this.currentAccount.id )
+            .then( latestChannelMessages => latestChannelMessages.json())
+            .then( latestChannelMessages => this.latestChannelMessages = latestChannelMessages )
+
+
+        //Run these methods when class is entered
+        //this.getMyChannels();
         
     }
-
-
-
 }

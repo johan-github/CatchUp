@@ -1,63 +1,57 @@
-/****************************************
- *  Original created by Johan,
- * 2020-03-31
- * Notes:
- * 
- *****************************************/
+/********************************* /
+* Orginal by Johan. 2020-03-31
+* Last Edited by Johan 2020-04-02
+* Notes: Temp / test
+/**********************************/
 
 
 export default {
-    template:`
-        <section>
-        <!-- Replace button for nav-button later! -->
-        <button @click="logOutCurrentAccount">
-          Log out </button>
-        </section>    
+    template: /* html */ `
+    <section id="container">
+        <section class="logOutSection">
+            <form class="logOutForm">
+                <div class="logOutDivFields">
+                    <div class="logOutDiv">
+                        <p id="label">You have Successfully logged out!<br><br>
+                        You will be redirected in 5 seconds to the login page
+                        <br>Please wait...</p>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </section>
     `,
 
-
-    methods: {
-        logOutCurrentAccount() {
-            fetch('/logout') // For Socket
-            console.log("Successfully logged out");
-            this.$store.commit('setAccount', null)
-            this.$router.push('/loginUser')
+    async created(){
+            
+            let changeStatusToOffline = {
+                            
+                id: this.currentAccount.id,
+                email: this.currentAccount.email,
+                usernick: this.currentAccount.usernick,
+                password: this.currentAccount.password,
+                avatar: this.currentAccount.avatar,
+                status: "offline"
+            
         }
+        await fetch('/rest/accounts',{
+            method:'PUT',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(changeStatusToOffline)
+
+        })
+        console.log(changeStatusToOffline.status)
+
+        this.$store.commit('setAccount', null)
+        
+        setTimeout( () => this.$router.push({ path: '/loginAccount'}), 5000);
     },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    computed:{
+        currentAccount() {
+            return this.$store.state.currentAccount
+        }
+    }
 }

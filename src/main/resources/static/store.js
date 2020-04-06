@@ -1,7 +1,7 @@
 /********************************* /
 * Orginal by Hassan. 2020-03-18
-* Last Edited by ......
-* Notes:  Needs to be looked at. *navBar*  *currentAccount/currentUser* *userLogedIn*
+* Last Edited by: Tobbe and Hassan (cleanUp) 2020-04-01
+* Notes:  Needs to be looked at. *navBar*  *currentAccount/currentAccount* *accountLogedIn*
 /**********************************/
 import Vue from './libs/vue.esm.browser.js'
 import Vuex from './libs/vuex.esm.browser.js'
@@ -19,27 +19,10 @@ export const store = new Vuex.Store({
 
         currentChannelMessages : [],
 
+        currentChannel : {},
+
         currentChannelId : '',
 
-
-        navBar:{
-            login : 'L O G I N',
-            register : 'R E G I S T E R',
-            home : '',
-            channels : '',
-            friends : '',
-            options : '',
-            about : '',
-            logOut : '',
-            routeLogin : '/loginUser',
-            routeRegister : '/registerUser',
-            routeHome : '',
-            routeChannels : '',
-            routerFriends : '',
-            routeOptions : '',
-            routeAbout : '',
-            routeLogOut : '',
-        },
 
     },
 
@@ -48,11 +31,28 @@ export const store = new Vuex.Store({
 
     mutations:{
 
+        /*********************************************** currentChannel */
 
+        setCurrentChannel( state, currentChannel ){
+            state.currentChannel = currentChannel; },
+
+
+        /*********************************************** currentChannelName */
+
+        setCurrentChannelName( state, currentChannelName ){
+            state.currentChannelName = currentChannelName; },
+
+        
         /*********************************************** currentChannelMessages */
 
         setCurrentChannelMessages( state, currentChannelMessages ){
             state.currentChannelMessages = currentChannelMessages; },
+
+        appendCurrentChannelMessage( state, message ){
+            state.currentChannelMessages.push( message ); },
+
+        removeCurrentChannelMessage( state, index ){
+            state.currentChannelMessages.splice( index, 1 ); },
 
 
 
@@ -109,7 +109,7 @@ export const store = new Vuex.Store({
         },
 
 
-        /************************************************************************** channels */
+        /****************************************************** channels */
 
 
         setChannels( state, channels ){

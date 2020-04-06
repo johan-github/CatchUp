@@ -1,17 +1,37 @@
+/********************************* /
+* Original by Matthias & Helena. 2020-04-03
+* Last Edited by Matthias & Helena 2020-04-03
+* Notes: ......
+/**********************************/
+
 package com.example.demo.controllers;
 
+import com.example.demo.entities.Channel;
 import com.example.demo.entities.Message;
 import com.example.demo.services.MessageService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import java.io.IOException;
 import java.util.List;
 
+@Controller
 @RestController
-public class MessageController {
+public class MessageController extends TextWebSocketHandler {
+    Gson gson = new Gson();
 
     @Autowired
-    MessageService messageService;
+    private MessageService messageService;
+
+    public void setMessageService(MessageService messageService) {
+        this.messageService = messageService;
+    }
 
     //************************************************************************************************* PostMapping
 
@@ -24,16 +44,65 @@ public class MessageController {
 
     //************************************************************************************************* GetMapping
 
-    @GetMapping("/rest/messages/{id}")
+    @GetMapping("/rest/messages")
+    public List<Message> getAllMessages() {
+        return (List<Message>) messageService.getAllMessages();
+    }
+
+    /*@GetMapping("/rest/channel/messages/{id}")
     public List<Message> getChannelMessage (@PathVariable int id ){
         return messageService.getChannelMessage( id );
+    }*/
+
+    //************************************************************************************************* DeleteMapping
+
+    @DeleteMapping("/rest/messages/{id}")
+    public String deleteMessageById( @PathVariable int id ){
+        try{
+            messageService.deleteMessageById( id );
+            return "Deleted!";
+        } catch (Exception e ){
+
+        }
+            return "Not deleted!";
     }
 
 
     //************************************************************************************************* DeleteMapping
 
+    // ADDING AND TESTING WEBSOCKETS
+    @Override
+    public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
+        System.out.println("Received msg: " + message.getPayload());
+
+        //Message chatMessage = gson.fromJson( message.getPayload(), Message.class);
+        Message mess = gson.fromJson( message.getPayload(), Message.class );
 
 
+        // Testing the connection
+        System.out.println("Message: " + mess.getText() + " Banana");
+        System.out.println("Timestamp: " + mess.getTime());
+
+        messageService.sendToAll(mess, Message.class);
+        //  messageService.sendToOne(session, mess, Message.class);
+    }
+
+
+    /**
+     * When connected from FrontEnd
+     */
+    @Override
+    public void afterConnectionEstablished(WebSocketSession session) {
+        messageService.addSession(session);
+    }
+
+    /**
+     * When disconnected from FrontEnd
+     */
+    @Override
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
+        messageService.removeSession(session);
+    }
 
 
 }

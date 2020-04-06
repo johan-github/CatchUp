@@ -1,18 +1,18 @@
 /********************************* /
 * Orginal by Tobbe & Alberts
-* Last Edited by ......
+* Last Edited by Johan (cleanUp) 2020-04-01
 * Notes: Is for regitering a new account. Note to owner. Rename to registerAccount.
 /**********************************/
-import registerUserForm from '../components/registerUserForm.js'
+import registerAccountForm from '../components/registerAccountForm.js'
 
 export default {
     components: {
-        registerUserForm
+        registerAccountForm
     },
 
     template: `
     <div>
-    <registerUserForm />
+        <registerAccountForm />
     </div>
     `
 }

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "latestchannelmessages")
+@Table(name = "viewlatestchannelmessages")
 public class LatestChannelMessage {
 
     @Id

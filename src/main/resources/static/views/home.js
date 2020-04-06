@@ -1,13 +1,12 @@
 /********************************* /
-* Orginal by Hassan. 2020-03-18
-* Last Edited by Hassan. 2020-03-30
-* Notes: Displays when logged in. Need to be edited later on.
-/**********************************/
-import navbarLoggedIn from '../components/navbarLoggedIn.js'
-import loginUserForm from '../components/loginUserForm.js'
-
-
-import { createNamespacedHelpers } from '../libs/vuex.esm.browser.js'
+ * Orginal by Hassan. 2020-03-18
+ * Last Edited by Johan (cleanUp) 2020-04-01
+ * Notes: Displays when logged in. Need to be edited later on.
+ /**********************************/
+ 
+ 
+import navbar from '../components/navbar.js'
+import { createNamespacedHelpers } from '../libs/vuex.esm.browser.js' //??
 import createChannel from '../components/createChannel.js'
 import displayChannel from '../components/displayChannel.js'
 import channelCreateSearch from '../components/channelCreateSearch.js'
@@ -16,28 +15,38 @@ import listFriends from '../components/listFriends.js'
 
 export default {
     components: {
+        navbar,
         createChannel,
         displayChannel,
-        listFriends,
         channelCreateSearch,
         displayMsgAll,
+        listFriends,
 
     },
 
-    template: `
-        <div>
-            <displayChannel/>
+    template: /* html */ `
+    <div id="homeContainer">
+        <div id="appButton">
+            <h3>| | |</h3>
         </div>
+        <div id="appNav">
+            <navbar/>
+        </div>
+        
+        <main id="appMain">
+            <displayChannel/>
+        </main>
+    </div>
     `,
 
 
     
 }
 
-
+/************************     USEABLE CODE???    ****************************************** */
 /*export default{
   components:{
-    loginUserForm,
+    loginAccountForm,
     navbarLoggedIn,
   },
 
@@ -57,7 +66,7 @@ export default {
 
         <main id="appMain">
             <router-view/>
-            <!--<loginUserForm/>-->
+            <!--<loginAccountForm/>-->
         </main>
         
     </section>
@@ -66,7 +75,6 @@ export default {
     
     
 }*/
-
 
 
 /*import { createNamespacedHelpers } from '../libs/vuex.esm.browser.js'
@@ -95,3 +103,4 @@ export default {
 
     
 }*/
+/****************************************************************************************** */

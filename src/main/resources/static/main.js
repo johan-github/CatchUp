@@ -9,6 +9,7 @@ import { router } from './router.js'
 import app from './app.js'
 import './socket.js'
 
+
 new Vue({
     store,
     router,

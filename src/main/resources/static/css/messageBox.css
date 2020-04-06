@@ -1,53 +1,83 @@
-/******************************************************************************* messageBox **/
-            
-#messageBoxUserPic{ grid-area: pic; }
-#messageBoxUserName{ grid-area: name; }
-#messageBoxUserAdd{ grid-area: userAdd; }
-#messageBoxUserMessageTime{ grid-area: time; }
-#messageBoxUserMessage{ grid-area: msg; }
-#messageBox{
+#container{
     display: grid;
-    /*grid-template: repeat(2, [row] 1fr) / repeat( 2, [col] 1fr);*/
-    grid-template-columns: 50px auto 10px;
-    grid-template-rows: 25px 25px auto;
-    grid-template-areas:
-    "pic name name userAdd"
-    "pic time time time"
-    "msg msg msg msg";
-
-    background-color: rgb(27, 44, 44);
-    opacity: 0.9;
-    
-    padding: 10px;
-    margin: 10px;
-    box-shadow: 5px 5px 5px #000000;
-    border-radius: 5px 0px 5px 0px;
+    grid-template-rows: 50px auto 50px;
 }
-        #messageBoxUserPic{
-            background-image: url("https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png");
-            background-size: cover;
-            background-position: center;
-            box-shadow: 5px 5px 5px #000000;
+
+#messageBoxAvatarStatus{ grid-area: mBAS;}
+#messageBoxStatus{ grid-area: mBS;}
+#messageBoxAvatar{ grid-area: mBA;}
+
+#messageBoxNickDelete{ grid-area: mBND;}
+#messageBoxNick{ grid-area: mBN;}
+#messageBoxMessageDelete{ grid-area: mBD;}
+
+#messageBoxMessageTime{ grid-area: mBMT;}
+#messageBoxMessage{ grid-area: mBM;}
+
+#messageBoxContainer{
+    background-image: linear-gradient(rgb(116, 17, 0), rgb(29, 0, 0));;
+
+    display: grid;
+    grid-template-columns: 60px auto;
+    grid-template-rows: 20px 20px auto;
+    grid-template-areas:
+    "mBAS mBND"
+    "mBAS mBMT"
+    "mBM mBM";
+
+    width: 800px;
+
+    border-radius: 10px;
+
+    padding: 5px;
+    margin: 10px;
+}
+
+        #messageBoxNick{
+            font-weight: 900;
         }
-        #messageBoxUserName {
-            padding: 10px 0px 5px 20px;
-        }
-        #messageBoxUserMessageTime {
-            padding: 5px 0px 5px 20px;
-            font: italic 10px Arial, Helvetica, sans-serif;
-        }
-        #messageBoxUserMessage {
-            padding: 20px 10px 10px 20px;
-        }
-        #name, #time{
-            justify-content: center;
-            align-items: center;
+
+        #messageBoxMessageTime{          
+            font-size: 10px;
+            font-style: italic;
         }
         
-        #messageBoxUserAdd{
-            justify-self: end;
+        #messageBoxMessage{
+            margin: 5px 5px 5px 15px;
         }
-        #time{
+
+#messageBoxNickDelete{
+    display: grid;
+    grid-template-columns: auto 20px;
+    grid-template-areas:
+    "mBN mBD";
+}
+
+#messageBoxAvatarStatus{
+    display: grid;
+    grid-template-columns: 10px auto;
+    grid-template-areas:
+    "mBS mBA";
+}
+
+#messageBoxAvatar{
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    box-shadow: 1px 1px 3px black;
+}
+
+#messageBoxMessageDelete:empty{
+    display: none;
+}
+        #messageBoxMessageDelete:hover{
+            cursor: pointer;
         }
-        #msg{
-        }
+
+@media screen and ( max-width: 1200px ){
+    #messageBoxContainer{    
+        width: 80%;
+    }
+}

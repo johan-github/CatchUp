@@ -1,40 +1,104 @@
+/*#item01{ grid-area: item01;}
+#scrollContainer{ grid-area: scrollContainer;}
+#item03{ grid-area: item03;}*/
 
 
-#container {
-    grid-template-rows: 80px auto 80px; 
-    grid-row-gap: 15px;
+#container{
+    background-color: rgb(26, 68, 26);
+    display: grid;
+    grid-template-rows: 200px 300px 50px;
+    /*grid-template-areas:
+    "item01"
+    "scrollContainer"
+    "item03";*/
 
-
-    padding: 20px;
-    margin: 20px;
-
-
+    margin: 10px;
 }
+        #container > div {
+           
+        }
 
 #scrollContainer{
-    width: 100px;
-    height: 100px;
+    height: 80%;
+    width: 100%;
+}
+#displayChannelBox, #displayChannelBox:empty {
+    margin: 10px;
+    width: 800px;
+}
+        #displayChannelBox:hover #displayChannelMessageBlock{
+            box-shadow: 4px 4px 2px black;
+            transition: .2s;
+        }
+
+#displayChannelName, #displayChannelMessageBlock{
+    width: 100%;
+    padding: 10px;
 }
 
-#box{
-    background-color: teal;
-    width: 500px;
-}
-
-#channelName{
+#displayChannelName{
+    height: auto;
     background-color: tomato;
     font-weight: 900;
+    border-radius: 10px 0px 0px 0px;
+    box-shadow: 2px 2px 2px black;
+    cursor: pointer;
 }
 
-#membersBox{
-    background-color: rgb(99, 15, 0);
+#displayChannelMemberBox{
+    display: flex;
+    flex-direction: row;
 }
-
-#message{
+        #displayChannelMember{
+            /*background-image: url('https://cdn.iconscout.com/icon/free/png-512/avatar-380-456332.png');*/
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 40px;
+            height: 40px;
+            border-radius: 50px;
+            box-shadow: 1px 1px 3px black;
+            transition: .4s;
+        }
+        #displayChannelMember:hover{
+            width: 45px;
+            margin-left: 10px;
+            margin-right: 10px;
+            transition: .2s;
+        }
+        
+#displayChannelMessageBlock{
+    display: grid;
+    grid-template-columns: 30px auto;
+    grid-auto-rows: auto;
     background-color: rgb(134, 72, 61);
+    border-radius: 0px 0px 20px 20px;
+    box-shadow: 2px 2px 2px black;
+    transition: .4s;
+}
+        #displayChannelMessageBlock:empty{
+            padding: 20px;
+            height: 20px;
+            background-color: rgb(134, 72, 61);
+            border-radius: 0px 0px 20px 20px;
+        }
+
+        #messageSenderAvatar {
+            background-color: var( --aa );
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 20px;
+            height: 20px;
+            border-radius: 50px;
+            box-shadow: 1px 1px 3px black;
+            transition: .4s;
+        }
+
+#messageBoxButtonBack:hover{
+    background-color: rgb(224, 81, 62);
 }
 
-#memberNick{
-    width: 20px;
-    height: 20px;
+@media screen and ( max-width: 1200px ){
+    #displayChannelBox, #displayChannelBox:empty {
+        width: 400px;
+    }
 }
