@@ -7,12 +7,12 @@
 
 export default{
   
-    template:`
+    template: /* html */ `
     <section id="container">
       
     <div>
         <p id="label">{{ currentChannel.name }} </p>
-        <button>Leave</button>
+        <button @click= "leaveChannel()">Leave</button>
         </div>
             
         
@@ -84,6 +84,11 @@ export default{
                 }
             }
             return 'http://158.174.120.227/CatchUp/avatar01.png';
+        },
+
+
+        leaveChannel() {
+
         },
 
         //Makes the search field, that holds searchString, empty
