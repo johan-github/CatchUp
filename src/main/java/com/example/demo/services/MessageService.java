@@ -18,6 +18,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
@@ -97,7 +98,9 @@ public class MessageService {
         return (List<Message>) messageRepo.findBychannelid( id );
     }
 
-
+    public void deleteMessageById(int id ){
+        messageRepo.deleteById( id );
+    }
 
 
 
