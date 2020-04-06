@@ -9,19 +9,23 @@ export default{
   
     template:`
     <section id="container">
+      
+    <div>
+        <p id="label">{{ currentChannel.name }} </p>
+        <button>Leave</button>
+        </div>
+            
         
-        <p id="label">{{ currentChannel.name }}</p>
+            <div id="scrollContainer">
 
-        <div id="scrollContainer">
+                <div id="messageBoxContainer"  v-for="(message, i) of channelMessages" :key="message.id">
 
-            <div id="messageBoxContainer"  v-for="(message, i) of channelMessages" :key="message.id">
+                    <div id="messageBoxAvatarStatus">
+                        <img id="messageBoxAvatar" :src="displayAvatar( message )">
+                        <div id="messageBoxStatus">{{ currentAccountStatusIcon( message.status ) }}</div>
+                    </div>
 
-                <div id="messageBoxAvatarStatus">
-                    <img id="messageBoxAvatar" :src="displayAvatar( message )">
-                    <div id="messageBoxStatus">{{ currentAccountStatusIcon( message.status ) }}</div>
-                </div>
-
-                <div id="messageBoxNickDelete">
+                    <div id="messageBoxNickDelete">
                     <div id="messageBoxNick">{{ message.usernick }}</div>
                     <div id="messageBoxMessageDelete" @click="removeMessage( message, i )">{{ removeMessageIcon() }}</div>
                 </div>
