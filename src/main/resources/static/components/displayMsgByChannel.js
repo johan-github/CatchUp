@@ -12,7 +12,7 @@ export default{
       
     <div>
         <p id="label">{{ currentChannel.name }} </p>
-        <button @click= "leaveChannel()">Leave</button>
+        <button @click= "leaveChannel">Leave</button>
         </div>
             
         
@@ -91,11 +91,11 @@ export default{
 
         async leaveChannel() {
             for(let accountChannel of this.accountChannels){
-                if(accountChannel.id === this.currentChannel.id){
-                    await fetch('/rest/accountchannels/' + this.accountChannelid,{
+                if(accountChannel.channelid === this.currentChannel.id){
+                    await fetch('/rest/accountchannels/' + accountChannel.id,{
                     method: 'DELETE'
                     }); 
-                    returnToChannels()
+                    this.$router.push( '/home' );
                 } 
             }
         },
