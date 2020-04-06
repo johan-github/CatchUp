@@ -27,7 +27,7 @@ export default{
 
                     <div id="messageBoxNickDelete">
                     <div id="messageBoxNick">{{ message.usernick }}</div>
-                    <div id="messageBoxMessageDelete" @click="removeMessage( message, i )">{{ removeMessageIcon() }}</div>
+                    <div id="messageBoxMessageDelete" @click="removeMessage( message, i )">{{ removeMessageIcon( message ) }}</div>
                 </div>
                 
                 <div id="messageBoxMessageTime">{{ message.time }}</div>
@@ -51,6 +51,7 @@ export default{
         return {
             channelMessages : [],
             accounts : [],
+            loggedInAccountChannels : [],
 
             time: '',
             text: '',
@@ -61,6 +62,7 @@ export default{
     async created(){
         this.getMessages();
         this.getAccount();
+        this.getAccountChannel();
     },
     
     
@@ -116,25 +118,26 @@ export default{
         },
         
         //Displays a trash bin if youre logged in as an admin. Else the trach bin will not be visible
-        removeMessageIcon(){
-            if( this.currentAccount != null ){
-                return '🗑️';
+        removeMessageIcon( message ){
+            for( let loggedInAccountChannel of this.loggedInAccountChannels ){
+                if( loggedInAccountChannel.channelid === this.currentChannel.id && loggedInAccountChannel.admin === 'yes' ){
+                    return '🗑️';
+                }
+            }
+
+            if( message.accountid === this.currentAccount.id ){
+                return '🗑️'
             }
             return '';
         },
 
         //Delete a message (click on trashbin)
-        async removeMessage( message, index ){
-            this.getMessages();
-            console.log( message );
-            console.log( index );
-            let answer = await fetch('/rest/messages/' + message.id, {
+        async removeMessage( message ){
+            await fetch('/rest/messages/' + message.id, {
                 method : 'DELETE'
             });
 
             this.getMessages();
-
-            console.log( "answer " + answer );
         },
 
 
@@ -158,17 +161,22 @@ export default{
                     body : JSON.stringify( messageToSendToDB )
             });
             
+            this.getMessages( true );
             this.resetSearchField();
-            this.getMessages();
         },
         
         //Fetches messages by id from DB
-        async getMessages(){
-            await fetch('/rest/channel/messages/' + this.currentChannel.id )
-            .then(messages => messages.json())
-            .then(messages => this.channelMessages = messages)
+        async getMessages( scrollDownYesOrNo ){
+            let scrollDown = scrollDownYesOrNo;
 
-            this.keepScrollAtBottom();
+            await fetch('/rest/channel/messages/' + this.currentChannel.id )
+                .then(messages => messages.json())
+                .then(messages => this.channelMessages = messages);
+
+            if( scrollDown === true ){
+                this.keepScrollAtBottom();
+            }
+            
         },
 
         //Fetched accounts from DB
@@ -176,7 +184,15 @@ export default{
             await fetch('/rest/accounts')
                 .then( accounts => accounts.json() )
                 .then( accounts => this.accounts = accounts );
-        }
+        },
+
+        //Fetched accountChannel for current logged in account from DB
+        async getAccountChannel(){
+            await fetch('/rest/accountchannels/accountid/' + this.currentAccount.id )
+                .then( loggedInAccountChannels => loggedInAccountChannels.json() )
+                .then( loggedInAccountChannels => this.loggedInAccountChannels = loggedInAccountChannels );
+        },
+
     },
 
 

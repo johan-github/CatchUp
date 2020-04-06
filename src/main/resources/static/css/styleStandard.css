@@ -59,7 +59,7 @@
 
     overflow: auto;
 
-    scroll-behavior: normal;
+    /*scroll-behavior: normal;*/
 }
 
 @media screen and ( min-width: 1200px ){
