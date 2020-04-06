@@ -107,23 +107,33 @@ data() {
         // Save variables to be added to database as an object newAccount
         let newAccount = {
         email: this.addEmail,
-        accountnick: this.addNickname,
+        usernick: this.addNickname,
         password: this.addPassword,
         avatar:  this.defaultAvatar,
         status: this.defaultStatus
         }
         console.log(newAccount)
 
- 
+        // Check if e-mail already exists in database
+        /*let emailAlreadyExists = await fetch('/rest/accounts/email/' + this.addEmail)
+        emailAlreadyExists = await emailAlreadyExists.json()
+        console.log("TEST EMAIL EXISTS? " + emailAlreadyExists)
+        if(this.addEmail == emailAlreadyExists){
+            console.log("TEST 1: EMAIL ALREADY EXISTS!")
+        }*/
+
+        
+
         // Post object to database
         let result = await fetch('/rest/accounts', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newAccount)
-          })
-          result = await result.json()
+        method: 'POST',
+        headers: {
+         'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newAccount)
+        })
+        result = await result.json()
+        console.log("TEST 2: " + result)
 
         // Empty input boxes 
         this.addEmail=''
