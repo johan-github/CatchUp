@@ -1,6 +1,6 @@
 /*********************************+/ 
 * Orginal by Hassan. 2020-03-30
-* Edited by Hassan 2020-04-06
+* Edited by Helena, Johan, Tobbe 2020-04-06
 * Notes: Here will a channels messages be displayed
 /**********************************/
 
@@ -89,8 +89,15 @@ export default{
         },
 
 
-        leaveChannel() {
-
+        async leaveChannel() {
+            for(let accountChannel of this.accountChannels){
+                if(accountChannel.id === this.currentChannel.id){
+                    await fetch('/rest/accountchannels/' + this.accountChannelid,{
+                    method: 'DELETE'
+                    }); 
+                    returnToChannels()
+                } 
+            }
         },
 
         //Makes the search field, that holds searchString, empty
@@ -206,6 +213,10 @@ export default{
         //Get selected channel information from $store
         currentChannel(){
             return this.$store.state.currentChannel;
+        },
+
+        accountChannels(){
+            return this.$store.state.accountChannels;
         }
     }
 }
