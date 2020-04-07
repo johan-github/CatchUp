@@ -13,31 +13,17 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.io.IOException;
 import java.util.Map;
 
-/**
- *  TextWebSocketHandler tar emot saker som strings, precis det vi gör mellan Vue och Spring (GSON/JSON.stringify)
- */
 @Controller
 public class SocketController extends TextWebSocketHandler {
 
-    /**
-     * GSON: The same as JSON. Stiringifies stuff
-     */
     Gson gson = new Gson();
 
-    /**
-     *  SocketService har REDAN en @Autowired i WebSocketConfig-klassen och därfär skapas den inte här. @Autowired görs endast en enda gång på Controllers!
-     *  Autowired är en automatisk setter.
-     *  Då @Autowired redan körs i WebSocket måste vi manuellt skriva en Setter här ( this.socketService = socketService; )
-     */
     private SocketService socketService;
     public void setSocketService(SocketService socketService) {
+        System.out.println("SocketController: setService rad 34");
         this.socketService = socketService;
     }
 
-    /**
-     * handleTextMessage: Handles incoming messages from Vue, when a ws.send( JSON.stringify { return 'Hello' }) is made, handleTextMessage will run it and display its message.
-     * Payload: The message from the FrontEnd (Vue) will be stored there
-     */
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
         System.out.println("Received msg: " + message.getPayload());
@@ -48,15 +34,18 @@ public class SocketController extends TextWebSocketHandler {
         String action = event.get("action").toString();
         switch (action) {
             case "message":
-                System.out.println("Message:");
+                System.out.println("SocketController: message");
+                System.out.print("Message: ");
                 System.out.println(event.get("text").toString());
-                socketService.sendToAll(event.get("text").toString());
+                socketService.sendToGroup(message.getPayload());
                 break;
-            case "nisse-lever":
-                System.out.println("Bid:");
+            case "loginEvent":
+                System.out.println("SocketController: loginEvent");
+                System.out.print("LoginEvent: ");
                 System.out.println(event.get("text").toString());
                 break;
             default:
+                System.out.println("SocketController: handleTextMessage rad 64");
                 System.out.println("Could not handle action: " + action);
                 socketService.sendToOne(session, "Could not handle action: " + action);
 
@@ -67,6 +56,7 @@ public class SocketController extends TextWebSocketHandler {
      */
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
+        System.out.println("SocketController: afterConnectionEstablished rad 75");
         socketService.addSession(session);
     }
 
@@ -75,6 +65,7 @@ public class SocketController extends TextWebSocketHandler {
      */
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
+        System.out.println("SocketController: afterConnectionClosed rad 84");
         socketService.removeSession(session);
     }
 }

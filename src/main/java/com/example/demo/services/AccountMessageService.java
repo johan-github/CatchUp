@@ -16,6 +16,11 @@ public class AccountMessageService {
     public List<AccountMessage> findMessageByChannelId(int id) {
         return accountMessageRepo.findBychannelid(id);
     }
+
+    public AccountMessage findMessageById(int id) {
+        return accountMessageRepo.findByid(id);
+    }
+
 }
 
 

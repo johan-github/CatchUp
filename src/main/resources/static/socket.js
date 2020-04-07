@@ -7,7 +7,7 @@
 import { store } from './store.js'
 let ws; 
 let isConnected = false;
-let currentChannelId = 1;  // this needs to found from store but I can't get it from teh fucking $store.
+let currentChannelId = 0;  // this needs to found from store but I can't get it from teh fucking $store.
 connect();
 
 function connect() {
@@ -21,19 +21,36 @@ function connect() {
     
     ws.onopen = (e) => { //onopen : triggers when a connection is made with the server / when ChatUp is on/updated
 
-      sendSomething();
+      //sendSomething();
 
       isConnected = true; };
 
 
     ws.onmessage = (e) => {
       let data = JSON.parse(e.data)
+      console.log("currentChannelId " + store.state.currentChannelId );
+      console.log("currentChannel.id " + store.state.currentChannel.id );
+      console.log("data " + data.action );
+      if(store.state.currentChannel.id === undefined){
+        console.log("currentChannel.id");
+        currentChannelId = store.state.currentChannelId
+        
+      }
+      else if(store.state.currentChannelId === undefined){
+        console.log("currentChannelId");
+        currentChannelId = store.state.currentChannel.id
+        
+      }
+      else{currentChannelId = 0}
+      console.log("my current channel id: " + currentChannelId);
       switch(data.action) {
         case 'message':
-          if(currentChannelId === 0){ // this is ment to update if you are in the route-home 
+          if(currentChannelId == 0){ // this is ment to update if you are in the route-home 
 
           }
-          else if(currentChannelId === data.channelid){ // if you are in the right channel then print it out.         
+          else if(currentChannelId == data.channelid){ // if you are in the right channel then print it out.         
+            console.log("Current channel on message " + currentChannelId);
+            
             store.commit('appendMessage', data)
           }
           else { // TODO: This can be a popup thing if you are in another channel and then can't see the message from current channel.
@@ -57,6 +74,7 @@ console.log("Connected...");
 }
 
 export function sendSocketEvent(payload) {
+  console.log("sendSocketEvent..."); 
   ws.send(JSON.stringify(payload))
 }
 
@@ -68,13 +86,6 @@ function disconnect() {
     console.log("Disconnected");
 }
 
-function disconnect() {
-  if (ws != null) {
-      ws.close(); }
-  isConnected = false;
-  console.log("Disconnected");
-}
-
 function loginEvent() { // implemented when the first stepp of sockets is working.
 let socket = {
 action: 'loginEvent',
@@ -82,3 +93,4 @@ text: 'testsocketcomp: loginEvent rad 70',
 }
   ws.send( JSON.stringify( socket ))
 }
+

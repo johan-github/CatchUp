@@ -8,6 +8,8 @@ import java.util.List;
 @Repository
 public interface AccountMessageRepo extends CrudRepository<AccountMessage, Integer> {
     public List<AccountMessage> findBychannelid(int id );
+
+    public AccountMessage findByid(int id);
 }
 
 
