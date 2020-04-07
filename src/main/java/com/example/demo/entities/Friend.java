@@ -9,8 +9,8 @@ public class Friend {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int account_id;
-    private int account_friend_id;
+    private int accountid;
+    private int accountfriendid;
 
     public Friend(){}
 
@@ -22,19 +22,19 @@ public class Friend {
         this.id = id;
     }
 
-    public int getAccount_id() {
-        return account_id;
+    public int getAccountid() {
+        return accountid;
     }
 
-    public void setAccount_id(int account_id) {
-        this.account_id = account_id;
+    public void setAccountid(int accountid) {
+        this.accountid = accountid;
     }
 
-    public int getAccount_friend_id() {
-        return account_friend_id;
+    public int getAccountfriendid() {
+        return accountfriendid;
     }
 
-    public void setAccount_friend_id(int account_friend_id) {
-        this.account_friend_id = account_friend_id;
+    public void setAccountfriendid(int accountfriendid) {
+        this.accountfriendid = accountfriendid;
     }
 }
