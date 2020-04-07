@@ -28,18 +28,11 @@ function connect() {
 
     ws.onmessage = (e) => {
       let data = JSON.parse(e.data)
-      console.log("currentChannelId " + store.state.currentChannelId );
-      console.log("currentChannel.id " + store.state.currentChannel.id );
-      console.log("data " + data.action );
-      if(store.state.currentChannel.id === undefined){
-        console.log("currentChannel.id");
-        currentChannelId = store.state.currentChannelId
-        
-      }
-      else if(store.state.currentChannelId === undefined){
-        console.log("currentChannelId");
+      if(store.state.currentChannel.id !== undefined){        
         currentChannelId = store.state.currentChannel.id
-        
+      }
+      else if(store.state.currentChannelId !== undefined){
+        currentChannelId = store.state.currentChannelId
       }
       else{currentChannelId = 0}
       console.log("my current channel id: " + currentChannelId);
@@ -49,8 +42,6 @@ function connect() {
 
           }
           else if(currentChannelId == data.channelid){ // if you are in the right channel then print it out.         
-            console.log("Current channel on message " + currentChannelId);
-            
             store.commit('appendMessage', data)
           }
           else { // TODO: This can be a popup thing if you are in another channel and then can't see the message from current channel.

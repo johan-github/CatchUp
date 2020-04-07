@@ -125,13 +125,7 @@ export default{
                 body : JSON.stringify( message )
             })
             .then(x => x.json())
-            /*let newResult = await fetch('/rest/channel/message/' + result.id,{
-                method : 'GET',
-                headers : { 'Content-Type' : 'application/json'}
-            })
-            .then(x => x.json())*/
             newResult.action = "message"
-            console.log("adsdawad wad awd " + newResult);
             
             sendSocketEvent(newResult)
 
