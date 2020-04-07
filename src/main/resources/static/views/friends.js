@@ -27,8 +27,15 @@ export default{
 
             <main id="appMain">
                 <listFriends/>
+                <button @click="routeToAddFriend" >Add new friend</button>
             </main>
         </div>
     `,
 
+    methods:
+    {
+        routeToAddFriend(){
+            this.$router.push('/addNewFriend')
+        }
+    }
 }
