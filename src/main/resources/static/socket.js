@@ -68,13 +68,6 @@ function disconnect() {
     console.log("Disconnected");
 }
 
-function disconnect() {
-  if (ws != null) {
-      ws.close(); }
-  isConnected = false;
-  console.log("Disconnected");
-}
-
 function loginEvent() { // implemented when the first stepp of sockets is working.
 let socket = {
 action: 'loginEvent',
