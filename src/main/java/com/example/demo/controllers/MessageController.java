@@ -35,7 +35,7 @@ public class MessageController extends TextWebSocketHandler {
     //************************************************************************************************* PostMapping
 
     /// (1) först hit sen till MessageService: addNewMessage rad 86
-    @PostMapping("/rest/message")
+    @PostMapping("/rest/messages")
     public AccountMessage addNewMessage (@RequestBody Message message ){
         Message msg = messageService.addNewMessage( message );
         AccountMessage ac = accountMessageService.findMessageById(msg.getId());
@@ -53,7 +53,7 @@ public class MessageController extends TextWebSocketHandler {
 
     //************************************************************************************************* DeleteMapping
 
-    @DeleteMapping("/rest/message/{id}")
+    @DeleteMapping("/rest/messages/{id}")
     public String deleteMessageById( @PathVariable int id ){
         try{
             messageService.deleteMessageById( id );
