@@ -5,12 +5,7 @@
 
 #container{
     background-color: rgb(26, 68, 26);
-    display: grid;
-    grid-template-rows: 200px 300px 50px;
-    /*grid-template-areas:
-    "item01"
-    "scrollContainer"
-    "item03";*/
+    grid-template-rows: 100px auto 50px;
 
     margin: 10px;
 }
@@ -19,7 +14,7 @@
         }
 
 #scrollContainer{
-    height: 80%;
+    height: 90%;
     width: 100%;
 }
 #displayChannelBox, #displayChannelBox:empty {
