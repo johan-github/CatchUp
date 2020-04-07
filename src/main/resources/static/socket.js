@@ -1,104 +1,95 @@
 /********************************* /
 * Orginal by Hassan. 2020-03-30
-* Last Edited by Helena 2020-04-01
+* Last Edited by Matthias 2020-04-07
 * Notes: ......
 /**********************************/
 
 import { store } from './store.js'
-let ws; //Var to store WebSocket-class in
+let ws; 
 let isConnected = false;
+let currentChannelId = 1;  // this needs to found from store but I can't get it from teh fucking $store.
 connect();
 
 function connect() {
 
-    /**
-     * ws : WebSocket var
-     * Important to add correct PORT. Socket route have to be the same as the one in WebSocket. ('ws://localhost:4000/socket-message')
-     */
-    ws = new WebSocket('ws://localhost:4000/socket-message');
+  ws = new WebSocket('ws://localhost:4000/socket-message');
 
     
+/*************************************************************** OnOpen */
+
     ws.onopen = (e) => { //onopen : triggers when a connection is made with the server / when ChatUp is on/updated
 
-      sendSomething();
+      loginEvent();
 
       isConnected = true; };
 
 
-    ws.onmessage = (e) => {
-      showSomething(e.data)
+/*************************************************************** OnMessage */
 
-      let data
-      try{
-        data = JSON.parse(e.data)
-      } 
-      catch{
-      }
-      console.log("TEST2: Data to store.js from socket.js: " + data)
+    ws.onmessage = (e) => {      
+      let data = JSON.parse(e.data)
+      switch(data.action) {
+        case 'message':
+          if(currentChannelId === 0){ // this is ment to update if you are in the route-home 
 
-      // If data exists and if it contains text (messages)
-      // To make nothing undefined
-      if(data && data.text){
-        store.commit('appendMessage', data)
+          }
+          else if(currentChannelId === data.channelid){ // if you are in the right channel then print it out.         
+            store.commit('appendMessage', data)
+          }
+          else { // TODO: This can be a popup thing if you are in another channel and then can't see the message from current channel.
+
+          }
+          break;
+        case 'login':
+
+          break;
       }
     
     }
 
     
-    
+/*************************************************************** OnClose */
     
     ws.onclose = (e) => { //Triggers when a connection is closed
-        console.log("Closing websocket..."); };
-
-
-  console.log("Connecting..."); //When the server is connected
+        console.log("Closing websocket..."); 
+        disconnect();
+      };
+  console.log("Connected...");
 }
 
-function disconnect() {
+export function sendSocketEvent(payload) {
+  ws.send(JSON.stringify(payload))
+}
 
+export function myupdateChannel(payload) {
+  currentChannelId = payload;
+}
+
+function readInCurrentChannel(){
+  return this.$store.state.currentChannelId
+}
+
+
+
+function disconnect() {
     if (ws != null) {
         ws.close(); }
     isConnected = false;
     console.log("Disconnected");
 }
 
-
-function sendSomething() {
-
-  // Testing socket connection
+function loginEvent() { // implemented when the first stepp of sockets is working.
   let socket = {
-  action: 'message',
-  text: 'Testing sockets new version',
-  time: Date.now()
+  action: 'loginEvent',
+  text: 'testsocketcomp: loginEvent rad 70',
 }
- /* let socket = {
-    channelid: '3',
-    accountid : '5',
-    text : 'Socket test2'
-  }*/
-  console.log( socket )
+  console.log("socket rad 73" + socket )
     ws.send( JSON.stringify( socket ))
-
-}
-
-// Testing function to get messages instantly
-function getOneMessage() {
-
-  // Messages from store
-  let messagesFromStore = this.$store.state.messages
-  for(let message of messagesFromStore){
-    ws.send( JSON.stringify ( message ))
-    
-  }
-
 }
 
 
+function showedata(message) {
 
-
-
-function showSomething(message) {
-
-    console.log(message);
+    console.log( "showedata: " + message);
 
 }

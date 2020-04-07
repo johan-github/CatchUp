@@ -16,7 +16,7 @@ export const store = new Vuex.Store({
         messages : [],
 
         currentAccount: {},
-
+        currentChannelId : '1',
         currentChannelMessages : [],
 
         currentChannel : {},
