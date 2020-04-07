@@ -1,6 +1,6 @@
 /********************************* /
 * Orginal by Helena & Alberts. 2020-03-19
-* Last Edited by Johan 2020-04-02
+* Last Edited by Alberts 2020-04-07
 * Notes: Is for when registering a account. ./view/registerAccount.js
 /**********************************/
 export default {
@@ -38,42 +38,6 @@ export default {
             </form>
     </section>
     `,
-
-    /* ORIGINAL
-    <section id="container">
-    <section class="registerAccount">
-    <form @submit.prevent="registerNewAccountForm" class="registerForm">
-
-        <label class="label">Register new account</label>
-            
-        <div class="registerAccountFormFields">
-            <div class="inputForm">
-                <input class="input-field" type="email" placeholder="Enter your email" v-model="addEmail" required >
-            </div>
-
-            <div class="inputForm">
-                <input class="input-field" type="text" placeholder="Enter your nickname" v-model="addNickname" required >
-            </div>
-
-            <div class="inputForm">
-                <input class="input-field" type="password" placeholder="Enter your password" v-model="addPassword" required>
-            </div>
-
-            <div class="inputForm">
-                <input class="input-field" type="password" placeholder="Confirm your password" v-model="confirmPassword" required>
-                <h4 id="passwordalert" >{{ passwordAlert  }}</h4>
-            </div>
-            </div>
-
-            <button class="registerButton">Register</button>
-
-            <p class="ReturnToLoginPageText"> Go back to login-page
-            <a class="ReturnToLoginPageLink" href="/loginAccount">here! </a>
-            </p>
-            
-        </form>
-    </section>
-    </section>*/
 
 data() {
     return {
