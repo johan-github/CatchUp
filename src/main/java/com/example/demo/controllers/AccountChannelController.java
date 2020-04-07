@@ -16,6 +16,11 @@ public class AccountChannelController {
 
     //************************************************************************************************* GetMapping
 
+    @GetMapping("/rest/accountchannels/accountid/{id}")
+    public List<AccountChannel> getAccountChannelByAccountId(@PathVariable int id) {
+        return accountChannelService.findAccountChannelsByAccountId(id);
+    }
+
     @GetMapping("/rest/accountchannels")
     public List<AccountChannel> getAllChannels(){
         return accountChannelService.findAllChannels();

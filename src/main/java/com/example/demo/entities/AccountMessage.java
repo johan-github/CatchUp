@@ -7,13 +7,14 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table( name = "viewmessages" )
+@Table( name = "viewmessagesaccountid" )
 public class AccountMessage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int channelid;
+    private int accountid;
     private String avatar;
     private String status;
     private String usernick;
@@ -83,5 +84,13 @@ public class AccountMessage {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public int getAccountid() {
+        return accountid;
+    }
+
+    public void setAccountid(int accountid) {
+        this.accountid = accountid;
     }
 }

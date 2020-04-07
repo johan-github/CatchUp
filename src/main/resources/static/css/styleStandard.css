@@ -50,7 +50,7 @@
     display: grid;
     
     width: 100%;
-    height: 80%;
+    height: 100%;
 
     padding: 20px;
     margin: 20px;
@@ -59,8 +59,7 @@
 
     overflow: auto;
 
-    scroll-behavior: normal;
-    scroll-margin-bottom: 100px;
+    /*scroll-behavior: normal;*/
 }
 
 @media screen and ( min-width: 1200px ){
@@ -131,12 +130,11 @@ input[ type = "text" ]::placeholder, input[ type = "password" ]::placeholder, in
     background-color: rgb(211, 211, 211);
     color: rgb(45, 53, 47);
     font-weight: bold;
-
-    min-width: 200px;
+    
     width: auto;
     max-width: 400px;
     
-    padding: 20px;
+    padding: 10px;
     margin: 20px;
 
     border-radius: 0px 15px 15px 15px;
@@ -149,8 +147,7 @@ input[ type = "text" ]::placeholder, input[ type = "password" ]::placeholder, in
 }
 
 @media scrreen and ( min-width: 1200px ){
-    #label{    
-        min-width: 400px;
+    #label{
         width: auto;
         max-width: 600px;    
     }

@@ -22,6 +22,7 @@ export default{
                 <div id="displayChannelNamesBoxSettings">⚙️</div>
 
             </div>
+           
 
         </section>
     `,

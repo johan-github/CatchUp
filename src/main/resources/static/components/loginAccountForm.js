@@ -102,7 +102,7 @@ export default {
                             console.log(changeStatusToOnline.status)
                         this.$store.commit('setCurrentAccount', changeStatusToOnline)
                         this.$router.push('/home')
-                        return
+                        return;
                     }
                 }                
             }

@@ -15,4 +15,6 @@ public interface AccountChannelRepo extends CrudRepository<AccountChannel, Integ
 
     public List<AccountChannel> findByAccountid(int accountid );
 
+    public  List<AccountChannel> findAllByAccountid(int accountid);
+
 }
