@@ -7,6 +7,9 @@ import Vue from './libs/vue.esm.browser.js'
 import Vuex from './libs/vuex.esm.browser.js'
 Vue.use( Vuex )
 
+let currentChannelIdToSend;
+
+
 export const store = new Vuex.Store({
     state:{
 
@@ -25,6 +28,7 @@ export const store = new Vuex.Store({
 
 
     },
+
 
 
 /*********************************************************************************************************** */
@@ -124,11 +128,7 @@ export const store = new Vuex.Store({
 
     }
 
-
-
-
-
-
-
-
 })
+
+export default store
+
