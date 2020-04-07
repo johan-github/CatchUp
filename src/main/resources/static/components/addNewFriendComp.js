@@ -7,7 +7,7 @@ export default{
     template:`
         <section>            
             <input v-model="searchNickname" type="text" placeholder="Enter nickname here"/>
-            <button type="submit">Search</button>
+            <button @click="searchByNickname" type="submit">Search</button>
          
 
         </section>
@@ -16,20 +16,29 @@ export default{
     data()
     {
         return{
-            searchNickname: ''
+            searchNickname: '',
+            accounts: []
         }
     },
 
     methods:{
         async searchByNickname(){
-            await fetch( '/rest/accounts', {
-                method: 'POST',
-                headers: {
-                'Content-Type' : 'application/json'
-                },
-                body: JSON.stringify( newFriend ) // ???
-                })
+
+            await fetch('/rest/accounts')
+            .then( accounts => accounts.json())
+            .then( accounts => this.accounts = accounts )
+            this.findAccounts();
+        },
+
+        findAccounts() {
+            for(let account of this.accounts) {
+                if(account.usernick === this.searchNickname) {
+                    console.log(account.usernick)
+                }
+            }
         }
+
+        
         
     },
 
