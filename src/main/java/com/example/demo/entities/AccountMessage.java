@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table( name = "viewmessagesaccountid" )
+@Table( name = "viewmessages" )
 public class AccountMessage {
 
     @Id
@@ -25,6 +25,9 @@ public class AccountMessage {
 
     public AccountMessage() {
     }
+
+    @Transient
+    public String action;
 
     public int getId() {
         return id;
