@@ -5,8 +5,9 @@
 /**********************************/
 
 import { store } from './store.js'
-let ws; //Var to store WebSocket-class in
+let ws; 
 let isConnected = false;
+let currentChannelId = 1;  // this needs to found from store but I can't get it from teh fucking $store.
 connect();
 
 function connect() {
@@ -26,32 +27,37 @@ function connect() {
 
 
     ws.onmessage = (e) => {
-      showSomething(e.data)
+      let data = JSON.parse(e.data)
+      switch(data.action) {
+        case 'message':
+          if(currentChannelId === 0){ // this is ment to update if you are in the route-home 
 
-      let data
-      try{
-        data = JSON.parse(e.data)
-      } 
-      catch{
-      }
-      console.log("TEST2: Data to store.js from socket.js: " + data)
+          }
+          else if(currentChannelId === data.channelid){ // if you are in the right channel then print it out.         
+            store.commit('appendMessage', data)
+          }
+          else { // TODO: This can be a popup thing if you are in another channel and then can't see the message from current channel.
 
-      // If data exists and if it contains text (messages)
-      // To make nothing undefined
-      if(data && data.text){
-        store.commit('appendMessage', data)
+          }
+          break;
+        case 'login':
+
+          break;
       }
     
     }
-
     
+/*************************************************************** OnClose */
     
-    
-    ws.onclose = (e) => { //Triggers when a connection is closed
-        console.log("Closing websocket..."); };
+ws.onclose = (e) => { //Triggers when a connection is closed
+  console.log("Closing websocket..."); 
+  disconnect();
+};
+console.log("Connected...");
+}
 
-
-  console.log("Connecting..."); //When the server is connected
+export function sendSocketEvent(payload) {
+  ws.send(JSON.stringify(payload))
 }
 
 function disconnect() {
@@ -62,43 +68,17 @@ function disconnect() {
     console.log("Disconnected");
 }
 
-
-function sendSomething() {
-
-  // Testing socket connection
-  let socket = {
-  action: 'message',
-  text: 'Testing sockets new version',
-  time: Date.now()
-}
- /* let socket = {
-    channelid: '3',
-    accountid : '5',
-    text : 'Socket test2'
-  }*/
-  console.log( socket )
-    ws.send( JSON.stringify( socket ))
-
+function disconnect() {
+  if (ws != null) {
+      ws.close(); }
+  isConnected = false;
+  console.log("Disconnected");
 }
 
-// Testing function to get messages instantly
-function getOneMessage() {
-
-  // Messages from store
-  let messagesFromStore = this.$store.state.messages
-  for(let message of messagesFromStore){
-    ws.send( JSON.stringify ( message ))
-    
-  }
-
+function loginEvent() { // implemented when the first stepp of sockets is working.
+let socket = {
+action: 'loginEvent',
+text: 'testsocketcomp: loginEvent rad 70',
 }
-
-
-
-
-
-function showSomething(message) {
-
-    console.log(message);
-
+  ws.send( JSON.stringify( socket ))
 }
