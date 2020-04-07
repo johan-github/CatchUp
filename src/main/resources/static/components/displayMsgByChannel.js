@@ -174,6 +174,21 @@ export default{
         }
     },
 
+      //Fetched accounts from DB
+      async getAccountChannel(){
+        await fetch('/rest/accountchannels')
+            .then( accounts => accounts.json() )
+            .then( accounts => this.accounts = accounts );
+    },
+
+    async testGetAccountChannelID(){
+        await fetch('/rest/accountchannels/' + this.getAccountChannel.id)
+            .then( accounts => accounts.json() )
+            .then( accounts => this.accounts = accounts )
+
+            // TEST
+            console.log(accounts)
+    },
 
 
     computed: {
