@@ -19,7 +19,9 @@ export const store = new Vuex.Store({
 
         currentChannelMessages : [],
 
-        currentChannelId : '',
+        currentChannel : {},
+
+        currentChannelId : {},
 
 
     },
@@ -29,11 +31,28 @@ export const store = new Vuex.Store({
 
     mutations:{
 
+        /*********************************************** currentChannel */
 
+        setCurrentChannel( state, currentChannel ){
+            state.currentChannel = currentChannel; },
+
+
+        /*********************************************** currentChannelName */
+
+        setCurrentChannelName( state, currentChannelName ){
+            state.currentChannelName = currentChannelName; },
+
+        
         /*********************************************** currentChannelMessages */
 
         setCurrentChannelMessages( state, currentChannelMessages ){
             state.currentChannelMessages = currentChannelMessages; },
+
+        appendCurrentChannelMessage( state, message ){
+            state.currentChannelMessages.push( message ); },
+
+        removeCurrentChannelMessage( state, index ){
+            state.currentChannelMessages.splice( index, 1 ); },
 
 
 
@@ -101,13 +120,6 @@ export const store = new Vuex.Store({
 
         removeChannel( state, index ){
             state.channels.splice( index, 1 ) },
-        
-        
-        /************************************************************************** channels */
-        /************************************************************************** channels */
-        /************************************************************************** channels */
-        /************************************************************************** channels */
-        /************************************************************************** channels */
 
 
     }

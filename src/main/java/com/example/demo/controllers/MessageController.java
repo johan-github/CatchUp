@@ -54,6 +54,19 @@ public class MessageController extends TextWebSocketHandler {
         return messageService.getChannelMessage( id );
     }*/
 
+    //************************************************************************************************* DeleteMapping
+
+    @DeleteMapping("/rest/messages/{id}")
+    public String deleteMessageById( @PathVariable int id ){
+        try{
+            messageService.deleteMessageById( id );
+            return "Deleted!";
+        } catch (Exception e ){
+
+        }
+            return "Not deleted!";
+    }
+
 
     //************************************************************************************************* DeleteMapping
 
