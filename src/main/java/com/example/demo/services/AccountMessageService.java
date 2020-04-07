@@ -13,12 +13,8 @@ public class AccountMessageService {
     @Autowired
     AccountMessageRepo accountMessageRepo;
 
-    public List<AccountMessage> findMessagesByChannelId(int id) {
+    public List<AccountMessage> findMessageByChannelId(int id) {
         return accountMessageRepo.findBychannelid(id);
-    }
-
-    public AccountMessage findMessageById(int id) {
-        return accountMessageRepo.findByid(id);
     }
 }
 
