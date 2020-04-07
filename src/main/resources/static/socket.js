@@ -1,22 +1,18 @@
 /********************************* /
 * Orginal by Hassan. 2020-03-30
-* Last Edited by Helena 2020-04-01
+* Last Edited by Matthias 2020-04-07
 * Notes: ......
 /**********************************/
 
 import { store } from './store.js'
-//import { testsocketcomp } from '/components/testsocketcomp.js'
-let ws; //Var to store WebSocket-class in
+let ws; 
 let isConnected = false;
+let currentChannelId = 1;  // this needs to found from store but I can't get it from teh fucking $store.
 connect();
 
 function connect() {
 
-    /**
-     * ws : WebSocket var
-     * Important to add correct PORT. Socket route have to be the same as the one in WebSocket. ('ws://localhost:4000/socket-message')
-     */
-    ws = new WebSocket('ws://localhost:4000/socket-message');
+  ws = new WebSocket('ws://localhost:4000/socket-message');
 
     
 /*************************************************************** OnOpen */
@@ -30,19 +26,22 @@ function connect() {
 
 /*************************************************************** OnMessage */
 
-    ws.onmessage = (e) => {
-      //showedata(e.data)
-      console.log("showedata: rad 30 " + e.data)
+    ws.onmessage = (e) => {      
       let data = JSON.parse(e.data)
       switch(data.action) {
         case 'message':
-          console.log(data)
-          
-          store.commit('appendMessage', data)
-          //keepScrollAtBottom()
+          if(currentChannelId === 0){ // this is ment to update if you are in the route-home 
+
+          }
+          else if(currentChannelId === data.channelid){ // if you are in the right channel then print it out.         
+            store.commit('appendMessage', data)
+          }
+          else { // TODO: This can be a popup thing if you are in another channel and then can't see the message from current channel.
+
+          }
           break;
         case 'login':
-          //store.commit('appendPet', data)
+
           break;
       }
     
@@ -55,61 +54,40 @@ function connect() {
         console.log("Closing websocket..."); 
         disconnect();
       };
-
-
-  console.log("Connecting..."); //When the server is connected
+  console.log("Connected...");
 }
 
 export function sendSocketEvent(payload) {
-  console.log("reading payload " + payload)
   ws.send(JSON.stringify(payload))
 }
 
-async function updateChannel(){
-  await fetch('/rest/channel/messages/' + '1')
-  .then(messages => messages.json())
-  .then(messages => store.commit('setMessages', messages))
+export function myupdateChannel(payload) {
+  currentChannelId = payload;
 }
 
-function disconnect() {
+function readInCurrentChannel(){
+  return this.$store.state.currentChannelId
+}
 
+
+
+function disconnect() {
     if (ws != null) {
         ws.close(); }
     isConnected = false;
     console.log("Disconnected");
 }
 
-function loginEvent() {
+function loginEvent() { // implemented when the first stepp of sockets is working.
   let socket = {
   action: 'loginEvent',
   text: 'testsocketcomp: loginEvent rad 70',
- // time: new Date().toISOString().slice(0,19).replace("T", " ")
 }
   console.log("socket rad 73" + socket )
     ws.send( JSON.stringify( socket ))
 }
 
-function sendSomething() {
-  let socket = {
-  action: 'message',
-  text: 'sendSomething rad 102',
-  time: new Date().toISOString().slice(0,19).replace("T", " ")
-}
-console.log("socket rad 105" + socket )
-    ws.send( JSON.stringify( socket ))
-}
 
-// Testing function to get messages instantly
-function getOneMessage() {
-  console.log( "getOneMessage: rad 89");
-  // Messages from store
-  let messagesFromStore = this.$store.state.messages
-  for(let message of messagesFromStore){
-    ws.send( JSON.stringify ( message ))
-    
-  }
-
-}
 function showedata(message) {
 
     console.log( "showedata: " + message);

@@ -24,10 +24,6 @@ public class Message {
     public Message() {
     }
 
-    @Transient
-    public String action;
-
-
     public int getId() {
         return id;
     }

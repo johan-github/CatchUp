@@ -6,7 +6,8 @@
 // TESTING PURPOSE ONLY! -Matthias
 // NOT ANYMORE I GUESS? -Hassan
 
-import { sendSocketEvent } from '../socket.js'
+import { sendSocketEvent  } from '../socket.js';
+
 export default{
   
     template:`
@@ -58,6 +59,7 @@ export default{
     created(){
         
         this.getMessages();
+        this.setCurrentChannel();
     },
     
     
@@ -117,24 +119,17 @@ export default{
             if( !this.text.trim() ){
                 return;
             }
-            
-
-            console.log("Who am I? " + this.currentAccount.id)
-            console.log("testsocetcomp rad 122: " + message.text);
-
             let result = await fetch('/rest/message',{
                 method : 'POST',
                 headers : { 'Content-Type' : 'application/json'},
                 body : JSON.stringify( message )
             })
             .then(x => x.json())
-            console.log("testsocetcomp rad 129: " + result.id);
             let newResult = await fetch('/rest/channel/message/' + result.id,{
                 method : 'GET',
                 headers : { 'Content-Type' : 'application/json'}
             })
             .then(x => x.json())
-            console.log(" is this correct?? " + newResult)
             newResult.action = "message"
             sendSocketEvent(newResult)
 
@@ -151,6 +146,12 @@ export default{
             .then(messages => this.$store.commit('setMessages', messages))
 
             this.keepScrollAtBottom();
+        },
+
+        async setCurrentChannel(){
+            this.$store.commit('setCurrentChannelId', this.channelid)
+            console.log("setChannelid: " + this.$store.state.currentChannelId );
+            
         }
     },
 

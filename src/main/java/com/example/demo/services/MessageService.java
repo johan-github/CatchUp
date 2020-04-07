@@ -87,20 +87,10 @@ public class MessageService {
     }
 
 
-
-
-    // All connected clients will be notified a new message has been created
-    // Save to database, then update to SocketService (sendToAll)
     public Message addNewMessage(Message newMessage ){
-        System.out.println("MessageService: addNewMessage rad 86"); /// (2) sen till MessageService: addNewMessage rad 91
         Message dbMessage = newMessage;
-
         try{
             dbMessage = messageRepo.save( newMessage );
-            System.out.println("MessageService: addNewMessage rad 91"); /// (3) sen till SocketService: sendToAll rad 36
-            //socketService.sendToGroup(dbMessage, Message.class);  // <<< denna som ska fixa det till alla
-            dbMessage.action = "message";
-            //socketService.sendToGroup(dbMessage, Message.class);  // <<< denna som ska fixa det till alla
         }catch(Exception e ){
             e.printStackTrace();
         }
@@ -109,7 +99,6 @@ public class MessageService {
 
 
     public List<Message> getChannelMessage(int id) {
-        System.out.println("MessageService: getChannelMessage rad 102"); /// (7) sedan slutar cirkeln här.
         return (List<Message>) messageRepo.findBychannelid( id );
     }
 
