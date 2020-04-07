@@ -1,12 +1,10 @@
 /*********************************+/ 
 * Orginal by Matthias. 2020-04-02
-* Edited by Matthias 2020-04-04
+* Edited by Hassan 2020-04-04
 * Notes: A simple textbox and submit button for the channel. 
 /**********************************/
 // TESTING PURPOSE ONLY! -Matthias
 // NOT ANYMORE I GUESS? -Hassan
-
-import { sendSocketEvent  } from '../socket.js';
 
 export default{
   
@@ -17,7 +15,7 @@ export default{
 
         <div id="scrollContainer">
 
-            <div id="messageBoxContainer"  v-for="message of messages" :key="message.id">
+            <div id="messageBoxContainer"  v-for="message of channelMessages" :key="message.id">
 
                 <div id="messageBoxAvatarStatus">
                     <img id="messageBoxAvatar" :src="displayAvatar( message.avatar )">
@@ -34,9 +32,39 @@ export default{
 
             </div>
                 
+            
+
+                <!--<ul>
+                    <li v-for="message of messages" 
+                        :key="message.id"
+                        class="message-card">
+                        channelid: {{ message.channelid }} 
+                        id: {{ message.id }} 
+                        date: {{ message.time }}
+                        accountid: {{ message.accountid }} <br />
+                        text: {{ message.text }}
+                    </li>
+                </ul>-->
+
+                <!-- <div v-model="hittas()"></div> 
+
+                <form id="messageForm" @submit.prevent="send" name="messageForm" nameForm="messageForm">
+                    <div class="input-group clearfix">
+                        
+                    </div>
+                </form>-->
+
+            
+
+            
 
         </div>
-
+        
+        <!--<form @submit.prevent="send()">
+            <input type="text" v-model="text" placeholder="Type a message..."/>
+            <button type="submit" class="primary">Send</button>
+            
+        </form>-->
         <div>
             <input type="text" @keyup.enter="send()" v-model="text" placeholder="Type a message..."/>
             <button @click="send()">Send</button>
@@ -57,9 +85,12 @@ export default{
     },
 
     created(){
+        /*await fetch('/rest/channel/messages/' + '1')
+        .then(messages => messages.json())
+        .then(messages => this.$store.commit('setMessages', messages))*/
+
         
         this.getMessages();
-        this.setCurrentChannel();
     },
     
     
@@ -96,10 +127,14 @@ export default{
 
         //Delete a message (click on trashbin)
         async removeMessage( messageId ){
-            await fetch('/rest/message/' + messageId, {
+            await fetch('/rest/messages/' + messageId, {
                 method : 'DELETE'
             })
 
+            // Fetch messages from specific channel (Matthias, det skulle uppskattas om denna fetch fanns i en metod att kalla på, men vill inte ta bort från din kod :) )
+          /*await fetch('/rest/channel/messages/' + '1')
+          .then(messages => messages.json())
+          .then(messages => this.$store.commit('setMessages', messages))*/
 
           this.getMessages();
 
@@ -108,8 +143,6 @@ export default{
         async send( channelId ) {
 
             let message = {
-                id: '',
-                action: "message",
                 channelid: this.channelid,
                 time: this.time,
                 accountid: this.currentAccount.id,
@@ -119,46 +152,65 @@ export default{
             if( !this.text.trim() ){
                 return;
             }
-            let result = await fetch('/rest/message',{
+            
+
+            console.log(this.currentAccount.id)
+            //console.log("TEST1: From component: " + message.text);
+
+            //add the new message
+            await fetch('/rest/messages',{
                 method : 'POST',
                 headers : { 'Content-Type' : 'application/json'},
                 body : JSON.stringify( message )
             })
-            .then(x => x.json())
-            let newResult = await fetch('/rest/channel/message/' + result.id,{
-                method : 'GET',
-                headers : { 'Content-Type' : 'application/json'}
-            })
-            .then(x => x.json())
-            newResult.action = "message"
-            sendSocketEvent(newResult)
 
-          //this.getMessages();
+             // Post object to database
+            /*let result = await fetch('/rest/messages', { 
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify( message )
+          })
+          result = await result.json()*/
+          //this.$store.commit("appendMessage", result)
 
-          this.keepScrollAtBottom();
+
+          // Fetch messages from specific channel
+          /*await fetch('/rest/channel/messages/' + '1')
+          .then(messages => messages.json())
+          .then(messages => this.$store.commit('setMessages', messages))*/
+
+          this.getMessages();
+          
+
+        //let text = this.text
+        //this.sentTexts.push(text)
+
+
+       /* for(message of this.messages){
+            this.sentTexts.push(message.text)
+            console.log("CAN WE READ THIS: " + message.text)
+        }*/
+        
         this.text='';
         },
 
 
         async getMessages(){
-            await fetch('/rest/channel/messages/' + this.channelid)
+            await fetch('/rest/channel/messages/' + '1')
             .then(messages => messages.json())
-            .then(messages => this.$store.commit('setMessages', messages))
+            .then(messages => this.channelMessages = messages)
 
             this.keepScrollAtBottom();
-        },
-
-        async setCurrentChannel(){
-            this.$store.commit('setCurrentChannelId', this.channelid)
-            console.log("setChannelid: " + this.$store.state.currentChannelId );
-            
         }
     },
 
     computed: {
-        messages(){
+        //Behövs ej :)
+        /*messages(){
             return this.$store.state.messages
-        },
+        },*/
 
         currentAccount() {
             return this.$store.state.currentAccount
@@ -166,6 +218,19 @@ export default{
     }
 }
 
+    /*postMessages(){
+            for(text of this.messages){
+                this.sentTexts.push(text)
+                console.log("TEST TEXT: " + text)
+            }
+        }*/
+        
+
+        /*<ul>
+        <li v-for="(textOut, i ) of sentTexts">{{ textOut }} </li>
+   </ul>*/
+
+           
         
     
 
