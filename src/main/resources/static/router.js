@@ -19,6 +19,7 @@ import channelMessage from './views/channelMessage.js'
 import testsocketcomp from './components/testsocketcomp.js'
 import test from './views/test.js'
 import logOutPage from './views/logOutPage.js'
+import addNewFriend from './views/addNewFriend.js'
 
 
 export const router = new Router({
@@ -93,6 +94,11 @@ export const router = new Router({
             component : testsocketcomp,
         },
 
+        {
+            name : 'addNewFriend',
+            path : '/addNewFriend',
+            component : addNewFriend,
+        },
 
 
     ]
