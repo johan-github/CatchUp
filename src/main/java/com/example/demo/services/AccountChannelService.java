@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.Account;
 import com.example.demo.entities.AccountChannel;
 import com.example.demo.repositories.AccountChannelRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,10 @@ public class AccountChannelService {
 
     //*************************************************************************************************
 
+    public List<AccountChannel> findAccountChannelsByAccountId(int id) {
+        return accountChannelRepo.findAllByAccountid(id);
+    }
+
     public List<AccountChannel> findAllChannels(){
         return (List<AccountChannel>) accountChannelRepo.findAll();
     }
@@ -23,7 +28,7 @@ public class AccountChannelService {
         return accountChannelRepo.findById(id);
     }
 
-    public List<AccountChannel> findAllChannelByAccountid(int accountid) {
+    public List<AccountChannel> findChannelByAccountid(int accountid) {
         return accountChannelRepo.findByAccountid(accountid);
     }
 

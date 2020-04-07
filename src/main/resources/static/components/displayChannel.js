@@ -256,7 +256,14 @@ export default{
             .then( latestChannelMessages => latestChannelMessages.json())
             .then( latestChannelMessages => this.latestChannelMessages = latestChannelMessages )
 
-
+        //Fetches/gets via Spring accountID
+        console.log("Test rest/accountChannels: " + this.currentAccount.id);
+        
+        await fetch('/rest/accountchannels/accountid/' + this.currentAccount.id )
+            .then(accountchannelsid => accountchannelsid.json())
+            .then(accountchannelsid => this.$store.commit('setAccountChannels', accountchannelsid))
+            console.log("Reached???");
+            
         //Run these methods when class is entered
         //this.getMyChannels();
         

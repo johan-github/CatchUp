@@ -1,18 +1,18 @@
 /*********************************+/ 
 * Orginal by Hassan. 2020-03-30
-* Edited by Hassan 2020-04-06
+* Edited by Helena, Johan, Tobbe 2020-04-06
 * Notes: Here will a channels messages be displayed
 /**********************************/
 
 
 export default{
   
-    template:`
+    template: /* html */ `
     <section id="container">
       
     <div>
         <p id="label">{{ currentChannel.name }} </p>
-        <button>Leave</button>
+        <button @click= "leaveChannel">Leave</button>
         </div>
             
         
@@ -27,7 +27,7 @@ export default{
 
                     <div id="messageBoxNickDelete">
                     <div id="messageBoxNick">{{ message.usernick }}</div>
-                    <div id="messageBoxMessageDelete" @click="removeMessage( message, i )">{{ removeMessageIcon() }}</div>
+                    <div id="messageBoxMessageDelete" @click="removeMessage( message, i )">{{ removeMessageIcon( message ) }}</div>
                 </div>
                 
                 <div id="messageBoxMessageTime">{{ message.time }}</div>
@@ -51,6 +51,7 @@ export default{
         return {
             channelMessages : [],
             accounts : [],
+            loggedInAccountChannels : [],
 
             time: '',
             text: '',
@@ -61,6 +62,7 @@ export default{
     async created(){
         this.getMessages();
         this.getAccount();
+        this.getAccountChannel();
     },
     
     
@@ -84,6 +86,18 @@ export default{
                 }
             }
             return 'http://158.174.120.227/CatchUp/avatar01.png';
+        },
+
+
+        async leaveChannel() {
+            for(let accountChannel of this.accountChannels){
+                if(accountChannel.channelid === this.currentChannel.id){
+                    await fetch('/rest/accountchannels/' + accountChannel.id,{
+                    method: 'DELETE'
+                    }); 
+                    this.$router.push( '/home' );
+                } 
+            }
         },
 
         //Makes the search field, that holds searchString, empty
@@ -111,25 +125,26 @@ export default{
         },
         
         //Displays a trash bin if youre logged in as an admin. Else the trach bin will not be visible
-        removeMessageIcon(){
-            if( this.currentAccount != null ){
-                return '🗑️';
+        removeMessageIcon( message ){
+            for( let loggedInAccountChannel of this.loggedInAccountChannels ){
+                if( loggedInAccountChannel.channelid === this.currentChannel.id && loggedInAccountChannel.admin === 'yes' ){
+                    return '🗑️';
+                }
+            }
+
+            if( message.accountid === this.currentAccount.id ){
+                return '🗑️'
             }
             return '';
         },
 
         //Delete a message (click on trashbin)
-        async removeMessage( message, index ){
-            this.getMessages();
-            console.log( message );
-            console.log( index );
-            let answer = await fetch('/rest/messages/' + message.id, {
+        async removeMessage( message ){
+            await fetch('/rest/messages/' + message.id, {
                 method : 'DELETE'
             });
 
             this.getMessages();
-
-            console.log( "answer " + answer );
         },
 
 
@@ -153,17 +168,22 @@ export default{
                     body : JSON.stringify( messageToSendToDB )
             });
             
+            this.getMessages( true );
             this.resetSearchField();
-            this.getMessages();
         },
         
         //Fetches messages by id from DB
-        async getMessages(){
-            await fetch('/rest/channel/messages/' + this.currentChannel.id )
-            .then(messages => messages.json())
-            .then(messages => this.channelMessages = messages)
+        async getMessages( scrollDownYesOrNo ){
+            let scrollDown = scrollDownYesOrNo;
 
-            this.keepScrollAtBottom();
+            await fetch('/rest/channel/messages/' + this.currentChannel.id )
+                .then(messages => messages.json())
+                .then(messages => this.channelMessages = messages);
+
+            if( scrollDown === true ){
+                this.keepScrollAtBottom();
+            }
+            
         },
 
         //Fetched accounts from DB
@@ -171,7 +191,15 @@ export default{
             await fetch('/rest/accounts')
                 .then( accounts => accounts.json() )
                 .then( accounts => this.accounts = accounts );
-        }
+        },
+
+        //Fetched accountChannel for current logged in account from DB
+        async getAccountChannel(){
+            await fetch('/rest/accountchannels/accountid/' + this.currentAccount.id )
+                .then( loggedInAccountChannels => loggedInAccountChannels.json() )
+                .then( loggedInAccountChannels => this.loggedInAccountChannels = loggedInAccountChannels );
+        },
+
     },
 
       //Fetched accounts from DB
@@ -200,6 +228,10 @@ export default{
         //Get selected channel information from $store
         currentChannel(){
             return this.$store.state.currentChannel;
+        },
+
+        accountChannels(){
+            return this.$store.state.accountChannels;
         }
     }
 }
