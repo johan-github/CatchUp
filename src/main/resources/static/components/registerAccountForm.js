@@ -5,27 +5,37 @@
 /**********************************/
 export default {
     template: /* html */ `
-    <section id="container">
+    <section>
     
-        <label id="label">Register new account</label>
+        <form @submit.prevent="registerNewAccountForm" id="container">
 
-        <form @submit.prevent="registerNewAccountForm" class="registerFormp">
-        
-                    <input class="input-field" type="email" placeholder="Enter your email" v-model="addEmail" required >
-                    
-                    <input class="input-field" type="text" placeholder="Enter your nickname" v-model="addNickname" required >
-                    
-                    <input class="input-field" type="password" placeholder="Enter your password" v-model="addPassword" required >
-                
-                    <input class="input-field" type="password" placeholder="Confirm your password" v-model="confirmPassword" required>
-                    <h4 id="passwordalert" >{{ passwordAlert  }}</h4>
+            <label id="label">Register new account</label>
+
+                <div id="registerAccountFormFields">
+
+                    <div>
+                        <input class="registerAccountFormAccountemailField" type="email" placeholder="Enter your email" v-model="addEmail" required >
+                    </div>
+
+                    <div>
+                        <input class="registerAccountFormAccountnameField" type="text" placeholder="Enter your nickname" v-model="addNickname" required >
+                    </div>
+
+                    <div>
+                        <input class="registerAccountFormAccountpasswordField" type="password" placeholder="Enter your password" v-model="addPassword" required >
+                    </div>
+
+                    <div>
+                        <input class="registerAccountFormAccountpasswordField" type="password" placeholder="Confirm your password" v-model="confirmPassword" required>
+                        <h4 id="passwordalert" >{{ passwordAlert  }}</h4>
+                    </div>
+
+                </div>    
 
                 <button class="registerButton">Register</button>
-                </p>
                 
-                </form>
                 <button @click="backButton"> Back </button>
-        </section>
+            </form>
     </section>
     `,
 
