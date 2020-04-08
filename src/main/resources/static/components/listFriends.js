@@ -15,6 +15,7 @@ export default{
                 <div id="displayFriendCreateChannelWith">➕</div> -->
                 <!-- <div id="displayFriendRemove">🗑️</div> -->
             </div>
+            <button @click="routeToAddFriend" >Add new friend</button>
         </section>
     `,
 /*********************************************************************************************************** */
@@ -35,8 +36,13 @@ export default{
              return '🟢'
          }
              return '🔴'
-     }
- },
+     },
+     
+     routeToAddFriend(){
+        this.$router.push('/addNewFriend')
+    }
+} ,
+
 
 /*********************************************************************************************************** */
 

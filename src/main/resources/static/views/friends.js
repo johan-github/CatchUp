@@ -29,7 +29,6 @@ export default{
 
             
             <main id="appMain">
-            <button @click="routeToAddFriend" >Add new friend</button>
                 <listFriends/>
             </main>
 
