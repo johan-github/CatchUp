@@ -40,7 +40,7 @@ public class ChannelService {
         channelRepo.deleteById( id );
     };
 
-    public Channel updateChannelName(Channel channelName){
-        return channelRepo.save(channelName);
+    public void updateChannelName(Channel channelName){
+        channelRepo.save(channelName);
     }
 }
