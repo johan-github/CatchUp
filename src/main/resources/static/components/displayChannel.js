@@ -205,7 +205,7 @@ export default{
         //router to views/createChannel
         createNewChannel(){
             //this.$router.push( '/createChannel')
-            this.$router.push( '/loginAccount')
+            this.$router.push( '/createchannel')
         }
     },
 

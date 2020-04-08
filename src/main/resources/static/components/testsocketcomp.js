@@ -5,8 +5,6 @@
 /**********************************/
 import channelCreateSearch from './channelCreateSearch.js'
 
-
-
 export default{
     components:{
         channelCreateSearch,
@@ -18,10 +16,8 @@ export default{
 
     template:`
         <section id="container">
-
-
             <div>
-                <h3 id="label">All channels</h3>
+                <h3 id="label">Search and join a new channel</h3>
                 <input type="text" placeholder="Search channel..." @keyup="searchChannel()" v-model="searchString">
                 <button @click="resetSearchField()">Reset search!</button>
             </div>          
@@ -29,16 +25,23 @@ export default{
             <div id="scrollContainer">
 
                 <div id="displayChannelBox" v-for="(channel, i ) of searchChannel()">
-                <div id="displayChannelName" @click="selectChannelAndShowItsMessages( channel )"> {{ channel.name }}</div>
-                <div id="status" >{{ statusForChannel }}</div>
+                <div id="displayChannelName" @click="selectChannelAndShowItsMessages( channel )"> {{ channel.name }}
+                <div v-if="alreadyAddedChannel( channel )">✅</div>
+                <div v-else>⛔</div>
+                </div>
+                
 
             </div>
 
             </div>
 
             <div>
-                <button id="displayChannelCreateChannelButton" @click="createNewChannel"></button>            
+                <button id="displayChannelCreateChannelButton" @click="createNewChannel">Create new channel</button>            
             </div>
+            <div>
+                <div id="clickBackToHome" @click="backToHome" style="font-size:3rem;width:50%;text-align:center;">↩️</div>
+            </div>
+            
 
         </section>
     `,
@@ -52,7 +55,7 @@ export default{
             accounts : [],
             latestChannelMessages : [],
             allMessages : [],
-            statusForChannel: '',
+            statusForChannel: true,
 
             searchString : '',
         }
@@ -95,27 +98,31 @@ export default{
                 .then(messages => messages.json())
                 .then(messages => this.$store.commit( 'setCurrentChannelMessages', messages ))
                 
-                console.log("My channel id? " + myChannel.id)
-
-                
+                console.log("My channel id " + myChannel.id)
+   
                 for(let accountchannel of this.accountChannels){
                     if(accountchannel.accountid === this.currentAccount.id && myChannel.id === accountchannel.channelid){
                         this.$router.push( '/channelMessage')
-                        this.statusForChannel = '✅'
                         return
                         
                     }
-                    else{
-                        this.statusForChannel = '➕'
-                        //this.$router.push( '/home')
-                    }  
-               
+                   
                 }
 
                 // this.statusForChannel = '✅'
                 //  this.statusForChannel = '➕'
                 
         },
+
+        alreadyAddedChannel( channel ){
+            for(let accountchannel of this.accountChannels){
+                if(accountchannel.accountid === this.currentAccount.id && accountchannel.channelid === channel.id){
+                    return true
+                }
+            }
+
+        },
+
 
         //gets all channels by the logged in user and stores them in myChannels[]
         getChannels(){
@@ -136,6 +143,10 @@ export default{
         createNewChannel(){
             //this.$router.push( '/createChannel')
             this.$router.push( '/createChannel')
+        },
+
+        backToHome(){
+            this.$router.push( '/home')
         }
     },
 
