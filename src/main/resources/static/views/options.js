@@ -30,7 +30,7 @@ export default{
                 </div>
 
                 <form id="optionsBox" action="/action_page.php">
-                    <input id="optionsBoxTextField" type="text" placeholder="Change your nickname">            
+                    <input id="optionsBoxTextField" type="text" placeholder="Enter avatar URL">            
                     <input id="optionsBoxAddButton" type="submit" value="Upload avatar">
                 </form>
 
