@@ -32,9 +32,6 @@ export default{
                 <div id="displayChannelName" @click="selectChannelAndShowItsMessages( channel )"> {{ channel.name }}
                 <div v-if="alreadyAddedChannel( channel )">✅</div>
                 <div v-else>⛔</div>
-
-
-
                 </div>
                 
 
