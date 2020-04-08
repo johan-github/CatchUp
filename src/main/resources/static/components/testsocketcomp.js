@@ -26,6 +26,7 @@ export default{
 
                 <div id="displayChannelBox" v-for="(channel, i ) of searchChannel()">
                 <div id="displayChannelName" @click="selectChannelAndShowItsMessages( channel )"> {{ channel.name }}
+                
                 <div v-if="alreadyAddedChannel( channel )">{{ addedChannel }}</div>
                 
                 <div v-else style="font-size:2rem;width:50%;">{{ notAddedChannel }}
@@ -33,10 +34,7 @@ export default{
                 </div>
                 
             </div>
-            
-            
-                
-
+           
             </div>
 
             </div>
@@ -62,8 +60,7 @@ export default{
             latestChannelMessages : [],
             allMessages : [],
             addedChannel: '',
-            notAddedChannel: '',
-
+    
             searchString : '',
         }
     },
@@ -132,6 +129,7 @@ export default{
         },
 
 
+
         //gets all channels by the logged in user and stores them in myChannels[]
         getChannels(){
             let tempChannels = [];
@@ -164,8 +162,6 @@ export default{
                  },
                  body : JSON.stringify( addNewChannel )
              })
-
-            
 
         },
             
