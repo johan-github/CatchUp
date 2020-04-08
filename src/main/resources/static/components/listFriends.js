@@ -10,11 +10,12 @@ export default{
                 v-for="friend of friendList" :key="friend.accountid">
                 <img id="displayFriendPic" v-bind:src="friend.avatar" />
                 <div id="displayFriendNick">{{ friend.usernick }}</div>
-                <div id="displayFriendStatus">Status: {{ friend.status }}</div>
+                <div id="displayFriendStatus">Status: {{ userStatus( friend.status ) }}</div>
                 <!-- <div id="displayFriendAddFavorite">❤️</div>
                 <div id="displayFriendCreateChannelWith">➕</div> -->
                 <!-- <div id="displayFriendRemove">🗑️</div> -->
             </div>
+            <button @click="routeToAddFriend" >Add new friend</button>
         </section>
     `,
 /*********************************************************************************************************** */
@@ -30,10 +31,18 @@ export default{
          this.$store.commit('setFriendList', friendList)
      },
 
-     userStatus(){
-         
-     }
- },
+     userStatus( status ){
+         if(status === 'online'){
+             return '🟢'
+         }
+             return '🔴'
+     },
+     
+     routeToAddFriend(){
+        this.$router.push('/addNewFriend')
+    }
+} ,
+
 
 /*********************************************************************************************************** */
 
@@ -50,11 +59,7 @@ export default{
         }
         
         },
-    /**
-     * 
-     *         Atm. friendslist is hardcoded to 9. Until store has current active account account.id    
-     * 
-     * */
+   
     async created(){
         console.log("our accountid " + this.getCurrentAccount.id)
         let friendList = await fetch('/rest/friendlist/' + this.getCurrentAccount.id)
