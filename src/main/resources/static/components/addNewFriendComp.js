@@ -38,10 +38,14 @@ export default{
                     console.log(account.usernick)
                     this.addFriendToFriendlist(account.id);
                     this.addedFriend = "You have added " + account.usernick + " as a friend"
-                    console.log("TEST usernick " + this.addedFriend)
+                    //console.log("TEST usernick " + this.addedFriend)
+                    break
                 }
-            
+                if(account.usernick !== this.searchNickname){
+                    this.addedFriend = "Could not find user " + this.searchNickname
+                }
             }
+           
         },
 
         async addFriendToFriendlist( friendId ) {
