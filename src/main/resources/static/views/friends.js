@@ -17,18 +17,23 @@ export default{
 
     template:`
         <div id="homeContainer">
+            
             <div id="appButton">
                 <h3>| | |</h3>
             </div>
+            
 
             <div id="appNav">
                 <navBar/>
             </div>
 
+            
             <main id="appMain">
+            <button @click="routeToAddFriend" >Add new friend</button>
                 <listFriends/>
-                <button @click="routeToAddFriend" >Add new friend</button>
             </main>
+
+            
         </div>
     `,
 
