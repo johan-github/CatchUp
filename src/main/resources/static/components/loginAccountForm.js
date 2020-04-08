@@ -3,6 +3,8 @@
 * Last Edited by Johan, Hassan, Tobbe (cleanUp) 2020-04-03
 * Notes: Login need to fix security
 /**********************************/
+import { sendSocketEvent  } from '../socket.js';
+
 export default {
     template: /* html */`
         <section>
@@ -100,6 +102,11 @@ export default {
 
                             })
                             console.log(changeStatusToOnline.status)
+                            let loginAcc = {
+                                action: "loginAcc",
+                                id: foundAccountWithEnteredEmail.id,
+                            }
+                            sendSocketEvent(loginAcc)
                         this.$store.commit('setCurrentAccount', changeStatusToOnline)
                         this.$router.push('/home')
                         return;

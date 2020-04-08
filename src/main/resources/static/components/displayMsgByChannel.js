@@ -1,39 +1,51 @@
 /*********************************+/ 
 * Orginal by Hassan. 2020-03-30
-* Edited by Helena, Johan, Tobbe 2020-04-06
+* Edited by Hassan 2020-04-07
 * Notes: Here will a channels messages be displayed
 /**********************************/
-
+import { sendSocketEvent  } from '../socket.js';
 
 export default{
   
     template: /* html */ `
-    <section id="container">
-      
-    <div>
-        <p id="label">{{ currentChannel.name }} </p>
-        <button @click= "leaveChannel">Leave</button>
-        </div>
+    <section id="container"><!--temp container in messageBox.css -> messageBoxMainContainer <- -->
+
+        <div id="messageBoxSettings">
+
+            <div id="messageBoxGear" @click="showTextFieldToChangeChannelName = !showTextFieldToChangeChannelName, showButtonToLeaveChannel = !showButtonToLeaveChannel" v-if="showChangeNameAndLeaveChannel"></div>
+            <div id="messageBoxGear" @click="showButtonToLeaveChannel = !showButtonToLeaveChannel" v-if="showLeaveChannelSettings"></div>
+
+            <input id="messageBoxSettingsInput" type="text" placeholder="🖊️Change channel name?"  v-if="showTextFieldToChangeChannelName"
+                @submit.prevent="changeChannelName" @keyup.enter="changeChannelName" v-model="inputChannelName">
+
+            <button id="messageBoxSettingsChangeChannelName" @click="changeChannelName"  v-if="showTextFieldToChangeChannelName">Save</button>
             
+            <button id="messageBoxSettingsLeaveChannel" @click="leaveChannel" v-if="showButtonToLeaveChannel">Leave channel</button>
+
+            <p id="label"> {{ currentChannelName }} </p> 
+        </div>
         
-            <div id="scrollContainer">
+        
+        <div id="scrollContainer">
 
-                <div id="messageBoxContainer"  v-for="(message, i) of channelMessages" :key="message.id">
+                <div id="messageBoxContainer"  v-for="(message, i) of currentChannelmessages" :key="message.id">
 
-                    <div id="messageBoxAvatarStatus">
-                        <img id="messageBoxAvatar" :src="displayAvatar( message )">
+                <div id="messageBoxAvatarStatus">
+                    <img id="messageBoxAvatar" :src="displayAvatar( message )">
+                    <div>
                         <div id="messageBoxStatus">{{ currentAccountStatusIcon( message.status ) }}</div>
                     </div>
-
-                    <div id="messageBoxNickDelete">
-                    <div id="messageBoxNick">{{ message.usernick }}</div>
-                    <div id="messageBoxMessageDelete" @click="removeMessage( message, i )">{{ removeMessageIcon( message ) }}</div>
                 </div>
-                
-                <div id="messageBoxMessageTime">{{ message.time }}</div>
-                <div id="messageBoxMessage">{{ message.text }}</div>
 
+                <div id="messageBoxNickDelete">
+                <div id="messageBoxNick">{{ message.usernick }}</div>
+                <div id="messageBoxMessageDelete" @click="removeMessage( message, i )">{{ removeMessageIcon( message ) }}</div>
             </div>
+            
+            <div id="messageBoxMessageTime">{{ message.time }}</div>
+            <div id="messageBoxMessage">{{ message.text }}</div>
+
+        </div>
 
         </div>
 
@@ -55,6 +67,14 @@ export default{
 
             time: '',
             text: '',
+
+            currentChannelName : '',
+            inputChannelName : '',
+
+            showChangeNameAndLeaveChannel : false,
+            showLeaveChannelSettings : false,
+            showTextFieldToChangeChannelName : false,
+            showButtonToLeaveChannel : false,
         }
     },
 
@@ -63,10 +83,49 @@ export default{
         this.getMessages();
         this.getAccount();
         this.getAccountChannel();
+        this.displayChannelSettings();
+        
+        this.currentChannelName = this.currentChannel.name;
     },
     
     
     methods: {
+
+        displayChannelSettings(){
+            for( let loggedInAccountChannel of this.loggedInAccountChannels ){
+                if( loggedInAccountChannel.channelid === this.currentChannel.id && loggedInAccountChannel.admin === 'yes' ){
+                    this.showChangeNameAndLeaveChannel = true;
+                    this.showLeaveChannelSettings = false;
+                    return;
+                }
+            }
+            this.showChangeNameAndLeaveChannel = false;
+            this.showLeaveChannelSettings = true;
+            return;
+        },
+
+        async changeChannelName(){
+            if( !this.inputChannelName.trim()){
+                return;
+            }
+
+            let channelWithChangedName = {
+                id : this.currentChannel.id,
+                name : this.inputChannelName,
+                url : this.currentChannel.url,
+                status : this.currentChannel.status,
+            }
+
+            await fetch('/rest/channels', {
+                method : 'PUT',
+                headers : { 'Content-Type' : ' application/json' },
+                body : JSON.stringify( channelWithChangedName )
+            });
+
+
+            this.currentChannelName = this.inputChannelName;
+            this.inputChannelName = '';
+        },
 
         //Displays an avatar for every member and only allows a specific file-types, or else a default avatar will be chosen
         displayAvatar( message ){
@@ -128,23 +187,34 @@ export default{
         removeMessageIcon( message ){
             for( let loggedInAccountChannel of this.loggedInAccountChannels ){
                 if( loggedInAccountChannel.channelid === this.currentChannel.id && loggedInAccountChannel.admin === 'yes' ){
+                    this.displayChannelSettings();
                     return '🗑️';
                 }
             }
 
             if( message.accountid === this.currentAccount.id ){
+                this.displayChannelSettings();
                 return '🗑️'
             }
+            this.displayChannelSettings();
             return '';
         },
 
         //Delete a message (click on trashbin)
         async removeMessage( message ){
-            await fetch('/rest/messages/' + message.id, {
+            let responce = await fetch('/rest/message/' + message.id, {
                 method : 'DELETE'
-            });
-
-            this.getMessages();
+            })
+            
+            let delMsg = {
+                action: "delMsg",
+                id: message.id,
+                channelid: message.channelid,
+                accountid: this.currentAccount.id
+            }
+            sendSocketEvent(delMsg)
+        
+            //this.getMessages();
         },
 
 
@@ -162,12 +232,15 @@ export default{
                 text: this.text
             }
 
-            await fetch('/rest/messages',{
+            let responce = await fetch('/rest/message',{
                     method : 'POST',
                     headers : { 'Content-Type' : 'application/json'},
                     body : JSON.stringify( messageToSendToDB )
-            });
-            
+            })
+            .then(x => x.json());
+            responce.action = "newMsg"
+            sendSocketEvent(responce)
+
             this.getMessages( true );
             this.resetSearchField();
         },
@@ -178,7 +251,7 @@ export default{
 
             await fetch('/rest/channel/messages/' + this.currentChannel.id )
                 .then(messages => messages.json())
-                .then(messages => this.channelMessages = messages);
+                .then(messages => this.$store.commit('setMessages', messages))
 
             if( scrollDown === true ){
                 this.keepScrollAtBottom();
@@ -202,6 +275,21 @@ export default{
 
     },
 
+      //Fetched accounts from DB
+      async getAccountChannel(){
+        await fetch('/rest/accountchannels')
+            .then( accounts => accounts.json() )
+            .then( accounts => this.accounts = accounts );
+    },
+
+    async testGetAccountChannelID(){
+        await fetch('/rest/accountchannels/' + this.getAccountChannel.id)
+            .then( accounts => accounts.json() )
+            .then( accounts => this.accounts = accounts )
+
+            // TEST
+            console.log(accounts)
+    },
 
 
     computed: {
@@ -213,6 +301,9 @@ export default{
         //Get selected channel information from $store
         currentChannel(){
             return this.$store.state.currentChannel;
+        },
+        currentChannelmessages(){
+            return this.$store.state.messages
         },
 
         accountChannels(){

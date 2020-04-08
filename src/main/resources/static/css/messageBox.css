@@ -1,6 +1,21 @@
-#container{
+#messageBoxMainContainer{    
     display: grid;
-    grid-template-rows: 50px auto 50px;
+    grid-template-rows: 200px auto 50px;
+
+    width: 1200px;
+    
+    height: 800px;
+
+    padding: 20px;
+    margin: 20px;
+
+    background-color: rgb(71, 80, 71);
+
+    align-items: center;
+    justify-items: center;
+
+    transition: .3s;
+    opacity: .95;
 }
 
 #messageBoxAvatarStatus{ grid-area: mBAS;}
@@ -25,7 +40,8 @@
     "mBAS mBMT"
     "mBM mBM";
 
-    width: 800px;
+    width: 900px;
+    height: 80px;
 
     border-radius: 10px;
 
@@ -76,8 +92,66 @@
             cursor: pointer;
         }
 
+
+#messageBoxGear{
+    background-color: inherit;
+    width: 20px;
+    padding: 0px;
+    margin:0;
+    border-radius: 25px;
+    font-size: 20px;
+    box-shadow: 2px 2px 2px black;
+}
+#messageBoxGear::after{
+    content: '⚙️';
+}
+
+#messageBoxGear:hover{
+    box-shadow: 6px 6px 2px black;
+}
+
+#messageBoxGear:active{
+    transition: .0s;
+    box-shadow: 2px 2px 2px black;
+}
+
+#messageBoxSettingsInput{
+    background-color: white;
+    border-radius: 25px 0px 0px 25px;
+}
+
+#messageBoxSettingsChangeChannelName{
+    border-radius: 0px 50px 50px 0px;
+}
+
+#messageBoxSettingsChangeChannelName:hover{
+    box-shadow: 3px 3px 2px black;
+}
+#messageBoxSettingsChangeChannelName:active{
+    box-shadow: 3px 3px 2px black;
+}
+
+#messageBoxSettingsLeaveChannel{
+    border-radius: 50px;
+    transition: .3s;
+    background-color: rgb(88, 0, 0);
+}
+
+#messageBoxSettingsLeaveChannel:hover{
+    transition: .3s;
+    background-color: red;
+    background-image: radial-gradient(rgb(251, 255, 0),red);
+    color: rgb(255, 0, 0);
+    box-shadow: 3px 3px 5px rgb(206, 134, 0);
+    font-weight: bold;
+}
+
 @media screen and ( max-width: 1200px ){
+    #messageBoxMainContainer{
+        width: 600px;
+    }
     #messageBoxContainer{    
-        width: 80%;
+        width: 400px;
+        max-height: 100%;
     }
 }
