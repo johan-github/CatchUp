@@ -40,7 +40,7 @@ export default{
                     <div id="displayChannelName" @click="selectChannelAndShowItsMessages( channel )"> {{ channel.name }} </div>
 
                     <div id="displayChannelMessageBlock">
-                        <img id="messageSenderAvatar" :src="displayLatestMessageSenderAvatar( channel.id )">
+                        <img id="messageSenderAvatar" :src="displayLatestMessageSenderAvatar( channel, i )">
                         <div id="messageSenderMessage">{{ displayLatestChannelMessageText( channel.id ) }} </div>
                     </div>
 
@@ -104,7 +104,6 @@ export default{
          displayLatestChannelMessageText( channelId ) {
             for( let latestChannelMessage of this.latestChannelMessages ){
                 if( latestChannelMessage.channelid === channelId ){
-                    this.displayLatestMessageSenderAvatar( latestChannelMessage );
                     if( latestChannelMessage.text === null ){
                         return '';
                     }
@@ -114,13 +113,13 @@ export default{
        },
 
          //Displays an avatar next to the latest channel message
-        displayLatestMessageSenderAvatar( channelId ) {
+        displayLatestMessageSenderAvatar( channel, index ) {
             for( let latestChannelMessage of this.latestChannelMessages ){
-                if( latestChannelMessage.channelid === channelId ){
-                    for( let account of this.accounts ){
-                        if( account.id === latestChannelMessage.accountid ){
+                if( latestChannelMessage.channelid === channel.id ){
+                    for( let account of this.accounts ){                        
+                        if( account.usernick === latestChannelMessage.usernick || account.usernick === null || account.usernick === undefined || account.usernick === ''){
                             return this.displayAccountOrDefaultAvatar( account.avatar );
-                        }
+                        }                      
                     }
                 }
             }
@@ -132,6 +131,9 @@ export default{
                 if( avatar.toLowerCase().includes( type ) ){
                     return avatar;
                 }                
+            }
+            if( avatar === '' || avatar === null || avatar === undefined ){
+                return '';
             }
             return 'http://158.174.120.227/CatchUp/avatar01.png';
          },
