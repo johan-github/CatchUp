@@ -8,6 +8,7 @@ export default{
         <section>            
             <input v-model="searchNickname" type="text" placeholder="Enter nickname here"/>
             <button @click="searchByNickname" type="submit">Add Friend</button>
+            <div id="addedFriend">{{ addedFriend }}</div>
         </section>
     `,
 
@@ -15,6 +16,7 @@ export default{
     {
         return{
             searchNickname: '',
+            addedFriend: '',
             accounts: []
         }
     },
@@ -35,12 +37,14 @@ export default{
                     console.log(account.id)
                     console.log(account.usernick)
                     this.addFriendToFriendlist(account.id);
+                    this.addedFriend = "You have added " + account.usernick + " as a friend"
+                    console.log("TEST usernick " + this.addedFriend)
                 }
             
             }
         },
 
-           async addFriendToFriendlist( friendId ) {
+        async addFriendToFriendlist( friendId ) {
 
          let friend = {
              accountid: this.currentAccount.id,
@@ -54,8 +58,11 @@ export default{
              headers: { 'Content-Type' : 'application/json'},
              body: JSON.stringify( friend )
          })
+
          
-     }
+         
+     },
+
         
     },
 
