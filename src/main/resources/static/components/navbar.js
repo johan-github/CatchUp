@@ -12,11 +12,11 @@ export default{
         <div class="nav">
 
             <div id="navHome">
-                <router-link to="/home">C H A N N E L S</router-link>
+                <router-link to="/home">H O M E</router-link>
             </div>
 
             <div id="navChannels">
-                <router-link to="/testsocketview">T E S T</router-link>
+                <router-link to="/testsocketview">C H A N N E L S</router-link>
             </div>
 
             <div id="navFriends">
