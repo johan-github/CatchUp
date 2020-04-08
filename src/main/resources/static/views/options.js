@@ -44,21 +44,28 @@ export default{
 
     methods: {
 
-        async changeNickButton() {
-            console.log("funkar det?")
-            
+        changeNickButton() {  
         },
 
         changeAvatarButton() {
-            console.log("change avatar")
         }
+    },
 
+    computed:{
 
+        getCurrentAccount(){
+            return this.$store.state.currentAccount
+        }
+        
+        },
+   
+    async setNewNickname(){
+        console.log("your new nickname is: " + this.getCurrentAccount.usernick)
+        let newUserNick = await fetch('/rest/accounts/' + this.getCurrentAccount.usernick)
+        newUserNick = await newUserNick.json()
 
-
-
-
-
-    }
+        //console.log(friendList.id)
+        this.$store.commit('setCurrentAccount', newUserNick)
+     }
 
 }
