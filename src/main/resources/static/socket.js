@@ -27,10 +27,7 @@ function connect() {
 
 
     ws.onmessage = (e) => {
-      console.log(currentChannelId);
       let data = JSON.parse(e.data)
-      console.log(store.state.currentChannel.id);
-      console.log(store.state.currentChannelId);
       if(store.state.currentChannel.id !== undefined){      
         currentChannelId = store.state.currentChannel.id
       }
