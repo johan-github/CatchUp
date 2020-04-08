@@ -26,9 +26,15 @@ export default{
 
                 <div id="displayChannelBox" v-for="(channel, i ) of searchChannel()">
                 <div id="displayChannelName" @click="selectChannelAndShowItsMessages( channel )"> {{ channel.name }}
-                <div v-if="alreadyAddedChannel( channel )">✅</div>
-                <div v-else>⛔</div>
+                <div v-if="alreadyAddedChannel( channel )">{{ addedChannel }}</div>
+                
+                <div v-else style="font-size:2rem;width:50%;">{{ notAddedChannel }}
+                <button @click="joinChannel" >J O I N ➕</button>
                 </div>
+                
+            </div>
+            
+            
                 
 
             </div>
@@ -55,7 +61,8 @@ export default{
             accounts : [],
             latestChannelMessages : [],
             allMessages : [],
-            statusForChannel: true,
+            addedChannel: '',
+            notAddedChannel: '',
 
             searchString : '',
         }
@@ -104,21 +111,22 @@ export default{
                     if(accountchannel.accountid === this.currentAccount.id && myChannel.id === accountchannel.channelid){
                         this.$router.push( '/channelMessage')
                         return
-                        
                     }
-                   
                 }
 
-                // this.statusForChannel = '✅'
-                //  this.statusForChannel = '➕'
+                this.joinChannel(myChannel.id, myChannel.name)
+
                 
         },
 
         alreadyAddedChannel( channel ){
             for(let accountchannel of this.accountChannels){
                 if(accountchannel.accountid === this.currentAccount.id && accountchannel.channelid === channel.id){
+                    this.addedChannel = '✅'
                     return true
                 }
+                this.notAddedChannel = '⛔'
+                
             }
 
         },
@@ -136,6 +144,30 @@ export default{
                 }
                 return tempChannels;
             },
+
+        async joinChannel(channelId, name){
+            console.log("id" + channelId )
+            console.log("name "  + name)
+            console.log("current account "  + this.currentAccount.id)
+
+            let addNewChannel = {
+                accountid: this.currentAccount.id,
+                channelid: channelId,
+                admin: 'no'
+            }
+
+            //Post to database and update
+            await fetch('/rest/accountchannels',{
+                 method : 'POST',
+                 headers : {
+                     'Content-Type' : 'application/json'
+                 },
+                 body : JSON.stringify( addNewChannel )
+             })
+
+            
+
+        },
             
       
 
