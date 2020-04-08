@@ -186,6 +186,9 @@ export default{
             this.channelURL = ''
             this.channelStatus = ''
 
+            //reset temp list of friends in $store
+            this.$store.commit( 'resetForChannelCreationMyFriendsThatWillBeAddedToTheNewChannel' );
+            
             this.routeToChannels()
 
         },
@@ -207,12 +210,16 @@ export default{
 
         //routes to mychannels
         routeToChannels(){
+            this.$store.commit( 'resetForChannelCreationMyFriendsThatWillBeAddedToTheNewChannel' );
+
             this.$router.push('/channels')
         },
 
 
         //routes home
         backToDisplayChannelPage(){
+            this.$store.commit( 'resetForChannelCreationMyFriendsThatWillBeAddedToTheNewChannel' );
+
             this.$router.push( '/channels')
         },
     },
