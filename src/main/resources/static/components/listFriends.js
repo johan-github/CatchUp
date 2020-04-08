@@ -7,7 +7,7 @@ export default{
     template:`
         <section id="container">
             <div id="displayFriendBox"
-                v-for="friend of friendList" :key="friend.accountid">
+                v-for="(friend, accountid) of friendList" :key="accountid">
                 <img id="displayFriendPic" v-bind:src="friend.avatar" />
                 <div id="displayFriendNick">{{ friend.usernick }}</div>
                 <div id="displayFriendStatus">Status: {{ userStatus( friend.status ) }}</div>
@@ -22,14 +22,14 @@ export default{
    
  methods:{
             
-     async getFriendList(){
-         console.log("Current account id " + this.getCurrentAccount.id)
-        let friendList = await fetch('/rest/friendlist/' + this.getCurrentAccount.id)
-         friendList = await friendList.json()
+    //  async getFriendList(){
+    //      console.log("Current account id " + this.getCurrentAccount.id)
+    //     let friendList = await fetch('/rest/friendlist/' + this.getCurrentAccount.id)
+    //      friendList = await friendList.json()
 
-         console.log(friendList)
-         this.$store.commit('setFriendList', friendList)
-     },
+    //      console.log(friendList)
+    //      this.$store.commit('setFriendList', friendList)
+    //  },
 
      userStatus( status ){
          if(status === 'online'){
