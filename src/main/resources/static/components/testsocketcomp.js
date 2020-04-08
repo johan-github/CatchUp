@@ -29,8 +29,7 @@ export default{
             <div id="scrollContainer">
 
                 <div id="displayChannelBox" v-for="(channel, i ) of searchChannel()">
-                <div id="displayChannelName"> {{ channel.name }}</div>
-                <div @click="selectChannelAndShowItsMessages( channel )">➕</div>
+                <div id="displayChannelName" @click="selectChannelAndShowItsMessages( channel )"> {{ channel.name }}</div>
                 <div id="status" >{{ statusForChannel }}</div>
 
             </div>
@@ -102,10 +101,13 @@ export default{
                 for(let accountchannel of this.accountChannels){
                     if(accountchannel.accountid === this.currentAccount.id && myChannel.id === accountchannel.channelid){
                         this.$router.push( '/channelMessage')
+                        this.statusForChannel = '✅'
                         return
+                        
                     }
                     else{
-                        this.$router.push( '/home')
+                        this.statusForChannel = '➕'
+                        //this.$router.push( '/home')
                     }  
                
                 }
