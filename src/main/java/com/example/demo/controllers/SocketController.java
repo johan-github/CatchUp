@@ -33,19 +33,22 @@ public class SocketController extends TextWebSocketHandler {
 
         String action = event.get("action").toString();
         switch (action) {
-            case "message":
-                System.out.println("SocketController: message");
-                System.out.print("Message: ");
-                System.out.println(event.get("text").toString());
+            case "newMsg":
+                System.out.println("SocketController: newMsg");
                 socketService.sendToGroup(message.getPayload());
                 break;
-            case "loginEvent":
-                System.out.println("SocketController: loginEvent");
-                System.out.print("LoginEvent: ");
-                System.out.println(event.get("text").toString());
+            case "delMsg":
+                System.out.println("SocketController: delMsg");
+                socketService.sendToGroup(message.getPayload());
+                break;
+            case "loginAcc":
+                System.out.println("SocketController: loginAcc");
+                break;
+            case "logoutAcc":
+                System.out.println("SocketController: logoutAcc");
                 break;
             default:
-                System.out.println("SocketController: handleTextMessage rad 64");
+                System.out.println("SocketController: Unknown action");
                 System.out.println("Could not handle action: " + action);
                 socketService.sendToOne(session, "Could not handle action: " + action);
 

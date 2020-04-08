@@ -3,6 +3,7 @@ package com.example.demo.entities;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+// this is not in use.?
 
 @Entity
 @Table(name = "channelmessages")

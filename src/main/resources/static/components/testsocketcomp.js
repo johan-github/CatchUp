@@ -1,5 +1,5 @@
 /*********************************+/ 
-* Orginal by Matthias. 2020-04-02
+* Orginal by Helena. 2020-04-02
 * Edited by Matthias 2020-04-04
 * Notes: A simple textbox and submit button for the channel. 
 /**********************************/
@@ -96,10 +96,11 @@ export default{
 
         //Delete a message (click on trashbin)
         async removeMessage( messageId ){
-            await fetch('/rest/messages/' + messageId, {
+            await fetch('/rest/message/' + messageId, {
                 method : 'DELETE'
             })
-
+            console.log("testing " + message);
+            
 
           this.getMessages();
 
@@ -119,13 +120,13 @@ export default{
             if( !this.text.trim() ){
                 return;
             }
-            let newResult = await fetch('/rest/messages',{
+            let newResult = await fetch('/rest/message',{
                 method : 'POST',
                 headers : { 'Content-Type' : 'application/json'},
                 body : JSON.stringify( message )
             })
             .then(x => x.json())
-            newResult.action = "message"
+            newResult.action = "newMsg"
             
             sendSocketEvent(newResult)
 

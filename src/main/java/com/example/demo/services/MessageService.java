@@ -32,42 +32,6 @@ public class MessageService {
 
     Gson gson = new Gson();
 
-    // Websocket part
-    private List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
-
-    public void sendToOne(WebSocketSession webSocketSession, String message) throws IOException {
-        webSocketSession.sendMessage(new TextMessage(message));
-    }
-
-    public void sendToOne(WebSocketSession webSocketSession, Object obj, Class klass) throws IOException {
-        sendToOne(webSocketSession, gson.toJson(obj, klass));
-    }
-
-
-    public void sendToAll(Object obj, Class klass) {
-        sendToAll( gson.toJson(obj, klass) );
-    }
-
-    public void sendToAll(String message) {
-        TextMessage msg = new TextMessage(message);
-        for(WebSocketSession webSocketSession : sessions) {
-            try {
-                webSocketSession.sendMessage(msg);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void addSession(WebSocketSession session) {
-        sessions.add(session);
-    }
-
-    public void removeSession(WebSocketSession session) {
-        sessions.remove(session);
-    }
-
-
     public List<Message> getAllMessages(){
         return ( List<Message> ) messageRepo.findAll();
     }
@@ -84,9 +48,6 @@ public class MessageService {
 
         try{
             dbMessage = messageRepo.save( newMessage );
-            socketService.sendToAll(dbMessage, Message.class);
-            System.out.println("IN MESSAGE SERVICE: addNewMessage");
-
         }catch(Exception e ){
             e.printStackTrace();
         }
