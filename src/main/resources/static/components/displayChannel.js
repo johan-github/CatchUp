@@ -32,6 +32,7 @@ export default{
 
                 <div id="displayChannelMemberBox" >
                     <div v-for="friend of displayChannelFriends( channel.id )">
+                        <div id="messageBoxStatus">{{ currentAccountStatusIcon( friend.status ) }}</div>
                         <img id="displayChannelMember" :src="displayChannelFriendAvatar( friend.avatar )">
                     </div>
                 </div>
@@ -77,7 +78,15 @@ export default{
     /*********************************************************************************************************** Methods:*/
 
 
-    methods:{        
+    methods:{
+        
+        //Displays online status of every member/friend of the channel
+        currentAccountStatusIcon( status ){
+            if( status === 'online'){
+                return '🟢';
+            }
+            return '🔴';
+        },
 
         //search channel name
         searchChannel(){
