@@ -43,9 +43,15 @@ public class SocketController extends TextWebSocketHandler {
                 break;
             case "loginAcc":
                 System.out.println("SocketController: loginAcc");
+                socketService.sendToGroup(message.getPayload());
                 break;
             case "logoutAcc":
                 System.out.println("SocketController: logoutAcc");
+                socketService.sendToGroup(message.getPayload());
+                break;
+            case "important":
+                System.out.println("SocketController: important");
+                socketService.sendToAll(message.getPayload());
                 break;
             default:
                 System.out.println("SocketController: Unknown action");
@@ -71,4 +77,7 @@ public class SocketController extends TextWebSocketHandler {
         System.out.println("SocketController: afterConnectionClosed rad 84");
         socketService.removeSession(session);
     }
+
+
+
 }
