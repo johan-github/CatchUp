@@ -8,8 +8,6 @@ export default{
         <section>            
             <input v-model="searchNickname" type="text" placeholder="Enter nickname here"/>
             <button @click="searchByNickname" type="submit">Add Friend</button>
-         
-
         </section>
     `,
 
