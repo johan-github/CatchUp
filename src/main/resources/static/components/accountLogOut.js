@@ -49,7 +49,7 @@ export default {
         sendSocketEvent(logoutAcc)
         console.log(changeStatusToOffline.status)
 
-        this.$store.commit('setAccount', null)
+        this.$store.commit('setCurrentAccount', null)
         
         setTimeout( () => this.$router.push({ path: '/loginAccount'}), 5000);
     },
