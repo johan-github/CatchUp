@@ -5,8 +5,6 @@
 /**********************************/
 import channelCreateSearch from './channelCreateSearch.js'
 
-
-
 export default{
     components:{
         channelCreateSearch,
@@ -18,8 +16,6 @@ export default{
 
     template:`
         <section id="container">
-
-
             <div>
                 <h3 id="label">Search and join a new channel</h3>
                 <input type="text" placeholder="Search channel..." @keyup="searchChannel()" v-model="searchString">
@@ -42,6 +38,10 @@ export default{
             <div>
                 <button id="displayChannelCreateChannelButton" @click="createNewChannel">Create new channel</button>            
             </div>
+            <div>
+                <div id="clickBackToHome" @click="backToHome" style="font-size:3rem;width:50%;text-align:center;">↩️</div>
+            </div>
+            
 
         </section>
     `,
@@ -143,6 +143,10 @@ export default{
         createNewChannel(){
             //this.$router.push( '/createChannel')
             this.$router.push( '/createChannel')
+        },
+
+        backToHome(){
+            this.$router.push( '/home')
         }
     },
 
