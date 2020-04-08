@@ -44,13 +44,10 @@ export default{
 
     methods: {
 
-        changeNickButton() {
-            console.log("funkar det?")
-            setNewNickname    
+        changeNickButton() {  
         },
 
         changeAvatarButton() {
-            console.log("change avatar")
         }
     },
 
