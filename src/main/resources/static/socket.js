@@ -28,13 +28,12 @@ function connect() {
 
     ws.onmessage = (e) => {
       let data = JSON.parse(e.data)
-      if(store.state.currentChannel.id !== undefined){        
+      if(store.state.currentChannel.id !== undefined){      
         currentChannelId = store.state.currentChannel.id
       }
-      else if(store.state.currentChannelId !== undefined){
-        currentChannelId = store.state.currentChannelId
+      else { 
+        currentChannelId = 0
       }
-      else{currentChannelId = 0}
       switch(data.action) {
         case 'newMsg':
           if(currentChannelId == 0){ // this is ment to update if you are in the route-home 
@@ -58,8 +57,25 @@ function connect() {
 
           }
           break;
-          break;
+          case 'loginAcc':
+            if(currentChannelId === 0){ // this is ment to update if you are in the route-home 
 
+  
+            }
+            else { // if you are in the right channel then print it out.   
+               console.log(currentChannelId);
+                
+              onlineEvent();
+            }
+            break;
+            case 'logoutAcc':
+              if(currentChannelId === 0){ // this is ment to update if you are in the route-home 
+    
+              }
+              else { // if you are in the right channel then print it out.         
+                offlineEvent();
+              }
+              break;
       }
     
     }
@@ -82,6 +98,22 @@ export function sendSocketEvent(payload) {
 
 async function delMsgEvent(){
   console.log("socket: delMsg");
+  
+  await fetch('/rest/channel/messages/' + currentChannelId)
+  .then(messages => messages.json())
+  .then(messages => store.commit('setMessages', messages))
+}
+
+async function onlineEvent(){
+  console.log("socket: online");
+  
+  await fetch('/rest/channel/messages/' + currentChannelId)
+  .then(messages => messages.json())
+  .then(messages => store.commit('setMessages', messages))
+}
+
+async function offlineEvent(){
+  console.log("socket: online");
   
   await fetch('/rest/channel/messages/' + currentChannelId)
   .then(messages => messages.json())

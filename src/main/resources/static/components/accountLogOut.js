@@ -3,7 +3,7 @@
 * Last Edited by Johan 2020-04-02
 * Notes: Temp / test
 /**********************************/
-
+import { sendSocketEvent  } from '../socket.js';
 
 export default {
     template: /* html */ `
