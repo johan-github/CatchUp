@@ -1,7 +1,7 @@
 /********************************* /
 * Orginal by Hassan. 2020-03-18
-* Last Edited by ......
-* Notes: Will be edited later. Hardcoded ATM.
+* Last Edited by Tobbe och Johan 2020-04-08
+* Notes: 
 /**********************************/
 import navBar from '../components/navbar.js'
 
@@ -22,27 +22,43 @@ export default{
                     <navBar/>
                 </div>
                 <main id="appMain">
-                <div id="container">
+                <div id="optionsContainer">
                     <h3>O P T I O N S</h3>
-                    <div id="optionsChangeNick">
-                        <input id="optionsChangeNickField" type="text" placeholder="Change your nickname">            
-                        <input id="optionsChangeNickButton" type="submit" value="Change nick">
-                    </div>
-                
-
-                <form id="optionsBox" action="/action_page.php">
-                    <input id="optionsBoxTextField" type="text" placeholder="Enter avatar URL">            
-                    <input id="optionsBoxAddButton" type="submit" value="Upload avatar">
-                </form>
-
-                <form id="optionsBox" action="/action_page.php">
+                    <form @submit.prevent="changeNickButton" id="optionsBox">
                     <input id="optionsBoxTextField" type="text" placeholder="Change your nickname">            
-                    <input id="optionsBoxAddButton" type="submit" value="Change nick">
+                    <button id="optionsBoxAddButton">Submit</button>    
+                    </form>
+                
+                
+                <form @submit.prevent="changeAvatarButton" id="optionsBox">
+                    <input id="optionsBoxTextField" type="text" placeholder="Enter avatar URL">            
+                    <button id="optionsBoxAddButton">Submit</button> 
                 </form>
+
+               
                 </div> <!-- div-end tag id="container" -->
                 </main>
             </div> <!-- end-tag homeContainer -->
         </div>
     `,
+
+    methods: {
+
+        async changeNickButton() {
+            console.log("funkar det?")
+            
+        },
+
+        changeAvatarButton() {
+            console.log("change avatar")
+        }
+
+
+
+
+
+
+
+    }
 
 }
