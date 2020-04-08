@@ -1,7 +1,7 @@
 /********************************* /
 * Orginal by Hassan. 2020-03-18
-* Last Edited by: Tobbe and Hassan (cleanUp) 2020-04-01
-* Notes:  Needs to be looked at. *navBar*  *currentAccount/currentAccount* *accountLogedIn*
+* Last Edited by: Hassan 2020-04-08
+*
 /**********************************/
 import Vue from './libs/vue.esm.browser.js'
 import Vuex from './libs/vuex.esm.browser.js'
@@ -25,6 +25,10 @@ export const store = new Vuex.Store({
         currentChannel : {},
 
         currentChannelId : {},
+
+
+        forChannelCreationMyFriends : [], /* Used by addFriend.js */
+        forChannelCreationMyFriendsThatWillBeAddedToTheNewChannel : [], /* Used by addFriendAdded.js */
 
 
     },
@@ -124,6 +128,31 @@ export const store = new Vuex.Store({
 
         removeChannel( state, index ){
             state.channels.splice( index, 1 ) },
+
+
+        
+        /****************************************************** forChannelCreationMyFriendsThatWillBeAddedToTheNewChannel */
+
+        setForChannelCreationMyFriendsThatWillBeAddedToTheNewChannel( state, forChannelCreationMyFriendsThatWillBeAddedToTheNewChannel ){
+            state.forChannelCreationMyFriendsThatWillBeAddedToTheNewChannel = forChannelCreationMyFriendsThatWillBeAddedToTheNewChannel },
+
+        appendForChannelCreationMyFriendThatWillBeAddedToTheNewChannel( state, friend ){
+            state.forChannelCreationMyFriendsThatWillBeAddedToTheNewChannel.push( friend ) },
+
+        removeForChannelCreationMyFriendThatWillBeAddedToTheNewChannel( state, friend ){
+            state.forChannelCreationMyFriendsThatWillBeAddedToTheNewChannel.splice( friend, 1 ) },
+
+
+        /****************************************************** forChannelCreationMyFriends */
+
+        setForChannelCreationMyFriends( state, forChannelCreationMyFriends ){ //används ejj
+            state.forChannelCreationMyFriends = forChannelCreationMyFriends },
+
+        appendForChannelCreationMyFriend( state, friend ){
+            state.forChannelCreationMyFriends.push( friend ) },
+
+        removeForChannelCreationMyFriend( state, friend ){
+            state.forChannelCreationMyFriends.splice( friend, 1 ) },
 
 
     }

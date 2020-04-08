@@ -1,173 +1,216 @@
-/*********************************+/ 
-* Orginal by Helena. 2020-04-02
-* Edited by Matthias 2020-04-04
-* Notes: A simple textbox and submit button for the channel. 
+/********************************* /
+* Orginal by Hassan. 2020-03-24
+* Last Edited by: Helena 2020-04-08
+* Notes: This displays all the Account's channels, with channel members (friends) and channels latest message ./views/home.js
 /**********************************/
-// TESTING PURPOSE ONLY! -Matthias
-// NOT ANYMORE I GUESS? -Hassan
-
-import { sendSocketEvent  } from '../socket.js';
+import channelCreateSearch from './channelCreateSearch.js'
 
 export default{
-  
+    components:{
+        channelCreateSearch,
+    },
+
+
+/*********************************************************************************************************** Template: */
+
+
     template:`
-    <section id="container">
-        
-        <p id="label">Messages</p>
+        <section id="container">
+            <div>
+                <h3 id="label">Search and join a new channel</h3>
+                <input type="text" placeholder="Search channel..." @keyup="searchChannel()" v-model="searchString">
+                <button @click="resetSearchField()">Reset search!</button>
+            </div>          
 
-        <div id="scrollContainer">
+            <div id="scrollContainer">
 
-            <div id="messageBoxContainer"  v-for="message of messages" :key="message.id">
-
-                <div id="messageBoxAvatarStatus">
-                    <img id="messageBoxAvatar" :src="displayAvatar( message.avatar )">
-                    <div id="messageBoxStatus">{{ currentAccountStatusIcon( message.status ) }}</div>
+                <div id="displayChannelBox" v-for="(channel, i ) of searchChannel()">
+                <div id="displayChannelName" @click="selectChannelAndShowItsMessages( channel )"> {{ channel.name }}
+                <div v-if="alreadyAddedChannel( channel )">✅</div>
+                <div v-else>⛔</div>
                 </div>
-
-                <div id="messageBoxNickDelete">
-                    <div id="messageBoxNick">{{ message.usernick }}</div>
-                    <div id="messageBoxMessageDelete" @click="removeMessage( message.id )">{{ removeMessageIcon() }}</div>
-                </div>
-                <!--<div id="messageBoxAdd">➕</div>-->
-                <div id="messageBoxMessageTime">{{ message.time }}</div>
-                <div id="messageBoxMessage">{{ message.text }}</div>
-
-            </div>
                 
 
-        </div>
+            </div>
 
-        <div>
-            <input type="text" @keyup.enter="send()" v-model="text" placeholder="Type a message..."/>
-            <button @click="send()">Send</button>
-        </div>
-    </section>
-    
+            </div>
+
+            <div>
+                <button id="displayChannelCreateChannelButton" @click="createNewChannel">Create new channel</button>            
+            </div>
+            <div>
+                <div id="clickBackToHome" @click="backToHome" style="font-size:3rem;width:50%;text-align:center;">↩️</div>
+            </div>
+            
+
+        </section>
     `,
+
+/*********************************************************************************************************** Methods:*/
 
     data() {
         return {
-            channelMessages : [],
+            channels : [],
+            accountChannels : [],
+            accounts : [],
+            latestChannelMessages : [],
+            allMessages : [],
+            statusForChannel: true,
 
-            channelid:'1',
-            time: '',
-            accountid: '',
-            text: '',
+            searchString : '',
         }
     },
 
-    created(){
-        
-        this.getMessages();
-        this.setCurrentChannel();
-    },
-    
-    
-    methods: {
-        
-        keepScrollAtBottom(){
-            let scrollContainer = document.getElementById("scrollContainer");
-            scrollContainer.scrollTop = scrollContainer.scrollHeight;
-        },
+    /*********************************************************************************************************** Methods:*/
 
-        displayAvatar( accountAvatar ){
-            let allowedImageFileTypes = [ '.png', '.jpeg', '.jpg', '.gif' ];
-            for( let type of allowedImageFileTypes ){
-                if( accountAvatar.toLowerCase().includes( type ) ){
-                    return accountAvatar;
-                }                
-            }
-            return 'http://158.174.120.227/CatchUp/avatar01.png';
-        },
 
-        currentAccountStatusIcon( status ){
-            if( status === 'online'){
-                return '🟢';
+    methods:{        
+
+        //search channel name
+        searchChannel(){
+            let tempChannels = [];
+
+            if( this.searchString === '' ){
+                return this.getChannels();
             }
-            return '🔴';
+
+            for( let channel of this.getChannels() ){
+                if( channel.name.toLowerCase().includes( this.searchString.toLowerCase() )){
+                    tempChannels.push( channel );
+                }
+            }
+            return tempChannels;
         },
         
-        removeMessageIcon(){
-            if( this.currentAccount != null ){
-                return '🗑️';
+        //Makes the search field, that holds searchString, empty
+        resetSearchField(){
+            this.searchString = '';
+        },
+
+
+        //Method to activate when selecting/clicking a channel to route the user to channelMessage
+        async selectChannelAndShowItsMessages( myChannel ){
+                
+            this.$store.commit( 'setCurrentChannel', myChannel );
+            console.log(myChannel)
+
+            await fetch('/rest/channel/messages/' + myChannel.id )
+                .then(messages => messages.json())
+                .then(messages => this.$store.commit( 'setCurrentChannelMessages', messages ))
+                
+                console.log("My channel id " + myChannel.id)
+   
+                for(let accountchannel of this.accountChannels){
+                    if(accountchannel.accountid === this.currentAccount.id && myChannel.id === accountchannel.channelid){
+                        this.$router.push( '/channelMessage')
+                        return
+                        
+                    }
+                   
+                }
+
+                // this.statusForChannel = '✅'
+                //  this.statusForChannel = '➕'
+                
+        },
+
+        alreadyAddedChannel( channel ){
+            for(let accountchannel of this.accountChannels){
+                if(accountchannel.accountid === this.currentAccount.id && accountchannel.channelid === channel.id){
+                    return true
+                }
             }
-            return '';
+
         },
 
-        //Delete a message (click on trashbin)
-        async removeMessage( messageId ){
-            await fetch('/rest/message/' + messageId, {
-                method : 'DELETE'
-            })
-            console.log("testing " + message);
+
+        //gets all channels by the logged in user and stores them in myChannels[]
+        getChannels(){
+            let tempChannels = [];
+
+            for(let channel of this.channels) {
+                if(channel.status === 'public'){
+                    tempChannels.push( channel )
+                    console.log(channel.status)
+                }
+                }
+                return tempChannels;
+            },
             
+      
 
-          this.getMessages();
-
+        //router to views/createChannel
+        createNewChannel(){
+            //this.$router.push( '/createChannel')
+            this.$router.push( '/createChannel')
         },
 
-        async send( channelId ) {
-
-            let message = {
-                id: '',
-                action: "message",
-                channelid: this.channelid,
-                time: this.time,
-                accountid: this.currentAccount.id,
-                text: this.text
-            }
-
-            if( !this.text.trim() ){
-                return;
-            }
-            let newResult = await fetch('/rest/message',{
-                method : 'POST',
-                headers : { 'Content-Type' : 'application/json'},
-                body : JSON.stringify( message )
-            })
-            .then(x => x.json())
-            newResult.action = "newMsg"
-            
-            sendSocketEvent(newResult)
-
-          //this.getMessages();
-
-          this.keepScrollAtBottom();
-        this.text='';
-        },
-
-
-        async getMessages(){
-            await fetch('/rest/channel/messages/' + this.channelid)
-            .then(messages => messages.json())
-            .then(messages => this.$store.commit('setMessages', messages))
-
-            //this.keepScrollAtBottom()
-        },
-
-        async setCurrentChannel(){
-            this.$store.commit('setCurrentChannelId', this.channelid)
-            console.log("setChannelid: " + this.$store.state.currentChannelId );
-            
+        backToHome(){
+            this.$router.push( '/home')
         }
     },
 
-    computed: {
-        messages(){
-            return this.$store.state.messages
-        },
 
-        currentAccount() {
+/*********************************************************************************************************** Computed: */
+
+    computed:{
+
+        currentAccount(){
             return this.$store.state.currentAccount
+        },        
+
+        currentAccountMessages(){
+            return this.$store.state.currentChannelMessages;
         },
+
+        currentChannelId(){
+            return this.$store.state.currentChannelId;
+        },
+
+        getAllChannels(){
+            return this.$store.state.channels
+        }
+
+    },
+
+
+/*********************************************************************************************************** Created: */
+
+    async created(){  
+
+        //Fetches/gets all the channels from channels.db and stores it in a channels ("class-array")
+        await fetch('/rest/channels')
+            .then(channels => channels.json())
+            .then(channels => this.channels = channels)
+
+
+        //Fetches/gets all the accounts from accounts.db and stores it in a accounts ("class-array")
+        await fetch('/rest/accounts')
+            .then( accounts => accounts.json())
+            .then( accounts => this.accounts = accounts )
+
+
+        //Fetches/gets all the accountchannels from accountchannels.db and stores it in a accountChannels ("class-array")
+        await fetch('/rest/accountchannels' )
+            .then(accountChannels => accountChannels.json())
+            .then(accountChannels => this.accountChannels = accountChannels)
+
+
+        //Fetches/gets all the latestchannelmessages from latestchannelmessages.db and stores it in a latestchannelmessages ("class-array")
+        await fetch('/rest/latestchannelmessages/' + this.currentAccount.id )
+            .then( latestChannelMessages => latestChannelMessages.json())
+            .then( latestChannelMessages => this.latestChannelMessages = latestChannelMessages )
+
+        //Fetches/gets via Spring accountID
+        console.log("Test rest/accountChannels: " + this.currentAccount.id);
+        
+        await fetch('/rest/accountchannels/accountid/' + this.currentAccount.id )
+            .then(accountchannelsid => accountchannelsid.json())
+            .then(accountchannelsid => this.$store.commit('setAccountChannels', accountchannelsid))
+            console.log("Reached???");
+            
+        
     }
 }
-
-        
-    
-
-    
-
-    
   
 
