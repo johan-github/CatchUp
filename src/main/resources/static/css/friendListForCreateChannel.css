@@ -11,7 +11,7 @@
 #friendListForCreateChannelBox{
     background-color: indianred;
     display: grid;
-    grid-template-columns: 40px auto;
+    grid-template-columns: 60px auto;
 
     width: 400px;
     height: 25px;
@@ -20,6 +20,8 @@
 
     filter: drop-shadow(2px 2px 2px #222);
     border-radius: 0px 10px 10px 0px;
+
+    justify-items: center;
 
     transition: .1s;
 }

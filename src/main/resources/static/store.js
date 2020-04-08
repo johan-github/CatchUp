@@ -142,6 +142,9 @@ export const store = new Vuex.Store({
         removeForChannelCreationMyFriendThatWillBeAddedToTheNewChannel( state, friend ){
             state.forChannelCreationMyFriendsThatWillBeAddedToTheNewChannel.splice( friend, 1 ) },
 
+        resetForChannelCreationMyFriendsThatWillBeAddedToTheNewChannel(state){
+            state.forChannelCreationMyFriendsThatWillBeAddedToTheNewChannel = [] },
+
 
         /****************************************************** forChannelCreationMyFriends */
 

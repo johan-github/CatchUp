@@ -11,7 +11,7 @@ export default{
                 <input id="friendListForCreateChannelSearch" type="text" placeholder="Search added friend..."
                     @keyup="searchFriend()" @keyup.enter="resetSearchField()" v-model="searchString">
                 <button id="friendListForCreateChannelResetSearch" @click="resetSearchField()">Reset search!</button>
-                <button id="friendListForCreateChannelResetList" @click="resetFriendList()">Reset list!</button>
+                <!--<button id="friendListForCreateChannelResetList" @click="resetFriendList()">Reset list!</button>-->
             </div>
 
             <div id="scrollContainer">
