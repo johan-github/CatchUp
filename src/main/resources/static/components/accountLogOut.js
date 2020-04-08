@@ -3,7 +3,7 @@
 * Last Edited by Johan 2020-04-02
 * Notes: Temp / test
 /**********************************/
-
+import { sendSocketEvent  } from '../socket.js';
 
 export default {
     template: /* html */ `
@@ -42,9 +42,14 @@ export default {
             body: JSON.stringify(changeStatusToOffline)
 
         })
+        let logoutAcc = {
+            action: "logoutAcc",
+            id: this.currentAccount.id,
+        }
+        sendSocketEvent(logoutAcc)
         console.log(changeStatusToOffline.status)
 
-        this.$store.commit('setAccount', null)
+        this.$store.commit('setCurrentAccount', null)
         
         setTimeout( () => this.$router.push({ path: '/loginAccount'}), 5000);
     },

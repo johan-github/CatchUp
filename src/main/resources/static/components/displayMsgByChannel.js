@@ -3,7 +3,7 @@
 * Edited by Hassan 2020-04-07
 * Notes: Here will a channels messages be displayed
 /**********************************/
-
+import { sendSocketEvent  } from '../socket.js';
 
 export default{
   
@@ -28,7 +28,7 @@ export default{
         
         <div id="scrollContainer">
 
-            <div id="messageBoxContainer"  v-for="(message, i) of channelMessages" :key="message.id">
+                <div id="messageBoxContainer"  v-for="(message, i) of currentChannelmessages" :key="message.id">
 
                 <div id="messageBoxAvatarStatus">
                     <img id="messageBoxAvatar" :src="displayAvatar( message )">
@@ -202,11 +202,19 @@ export default{
 
         //Delete a message (click on trashbin)
         async removeMessage( message ){
-            await fetch('/rest/messages/' + message.id, {
+            let responce = await fetch('/rest/message/' + message.id, {
                 method : 'DELETE'
-            });
-
-            this.getMessages();
+            })
+            
+            let delMsg = {
+                action: "delMsg",
+                id: message.id,
+                channelid: message.channelid,
+                accountid: this.currentAccount.id
+            }
+            sendSocketEvent(delMsg)
+        
+            //this.getMessages();
         },
 
 
@@ -224,12 +232,15 @@ export default{
                 text: this.text
             }
 
-            await fetch('/rest/messages',{
+            let responce = await fetch('/rest/message',{
                     method : 'POST',
                     headers : { 'Content-Type' : 'application/json'},
                     body : JSON.stringify( messageToSendToDB )
-            });
-            
+            })
+            .then(x => x.json());
+            responce.action = "newMsg"
+            sendSocketEvent(responce)
+
             this.getMessages( true );
             this.resetSearchField();
         },
@@ -240,7 +251,7 @@ export default{
 
             await fetch('/rest/channel/messages/' + this.currentChannel.id )
                 .then(messages => messages.json())
-                .then(messages => this.channelMessages = messages);
+                .then(messages => this.$store.commit('setMessages', messages))
 
             if( scrollDown === true ){
                 this.keepScrollAtBottom();
@@ -290,6 +301,9 @@ export default{
         //Get selected channel information from $store
         currentChannel(){
             return this.$store.state.currentChannel;
+        },
+        currentChannelmessages(){
+            return this.$store.state.messages
         },
 
         accountChannels(){

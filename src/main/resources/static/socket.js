@@ -28,16 +28,14 @@ function connect() {
 
     ws.onmessage = (e) => {
       let data = JSON.parse(e.data)
-      if(store.state.currentChannel.id !== undefined){        
+      if(store.state.currentChannel.id !== undefined){      
         currentChannelId = store.state.currentChannel.id
       }
-      else if(store.state.currentChannelId !== undefined){
-        currentChannelId = store.state.currentChannelId
+      else { 
+        currentChannelId = 0
       }
-      else{currentChannelId = 0}
-      console.log("my current channel id: " + currentChannelId);
       switch(data.action) {
-        case 'message':
+        case 'newMsg':
           if(currentChannelId == 0){ // this is ment to update if you are in the route-home 
 
           }
@@ -48,9 +46,36 @@ function connect() {
 
           }
           break;
-        case 'login':
+        case 'delMsg':
+          if(currentChannelId == 0){ // this is ment to update if you are in the route-home 
 
+          }
+          else if(currentChannelId == data.channelid){ // if you are in the right channel then print it out.         
+            delMsgEvent();
+          }
+          else { // TODO: This can be a popup thing if you are in another channel and then can't see the message from current channel.
+
+          }
           break;
+          case 'loginAcc':
+            if(currentChannelId === 0){ // this is ment to update if you are in the route-home 
+
+  
+            }
+            else { // if you are in the right channel then print it out.   
+               console.log(currentChannelId);
+                
+              onlineEvent();
+            }
+            break;
+            case 'logoutAcc':
+              if(currentChannelId === 0){ // this is ment to update if you are in the route-home 
+    
+              }
+              else { // if you are in the right channel then print it out.         
+                offlineEvent();
+              }
+              break;
       }
     
     }
@@ -64,9 +89,35 @@ ws.onclose = (e) => { //Triggers when a connection is closed
 console.log("Connected...");
 }
 
+
+
+
 export function sendSocketEvent(payload) {
-  console.log("sendSocketEvent..."); 
   ws.send(JSON.stringify(payload))
+}
+
+async function delMsgEvent(){
+  console.log("socket: delMsg");
+  
+  await fetch('/rest/channel/messages/' + currentChannelId)
+  .then(messages => messages.json())
+  .then(messages => store.commit('setMessages', messages))
+}
+
+async function onlineEvent(){
+  console.log("socket: online");
+  
+  await fetch('/rest/channel/messages/' + currentChannelId)
+  .then(messages => messages.json())
+  .then(messages => store.commit('setMessages', messages))
+}
+
+async function offlineEvent(){
+  console.log("socket: online");
+  
+  await fetch('/rest/channel/messages/' + currentChannelId)
+  .then(messages => messages.json())
+  .then(messages => store.commit('setMessages', messages))
 }
 
 function disconnect() {

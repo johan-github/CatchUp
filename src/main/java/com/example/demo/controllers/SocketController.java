@@ -33,19 +33,28 @@ public class SocketController extends TextWebSocketHandler {
 
         String action = event.get("action").toString();
         switch (action) {
-            case "message":
-                System.out.println("SocketController: message");
-                System.out.print("Message: ");
-                System.out.println(event.get("text").toString());
+            case "newMsg":
+                System.out.println("SocketController: newMsg");
                 socketService.sendToGroup(message.getPayload());
                 break;
-            case "loginEvent":
-                System.out.println("SocketController: loginEvent");
-                System.out.print("LoginEvent: ");
-                System.out.println(event.get("text").toString());
+            case "delMsg":
+                System.out.println("SocketController: delMsg");
+                socketService.sendToGroup(message.getPayload());
+                break;
+            case "loginAcc":
+                System.out.println("SocketController: loginAcc");
+                socketService.sendToGroup(message.getPayload());
+                break;
+            case "logoutAcc":
+                System.out.println("SocketController: logoutAcc");
+                socketService.sendToGroup(message.getPayload());
+                break;
+            case "important":
+                System.out.println("SocketController: important");
+                socketService.sendToAll(message.getPayload());
                 break;
             default:
-                System.out.println("SocketController: handleTextMessage rad 64");
+                System.out.println("SocketController: Unknown action");
                 System.out.println("Could not handle action: " + action);
                 socketService.sendToOne(session, "Could not handle action: " + action);
 
@@ -68,4 +77,7 @@ public class SocketController extends TextWebSocketHandler {
         System.out.println("SocketController: afterConnectionClosed rad 84");
         socketService.removeSession(session);
     }
+
+
+
 }
