@@ -42,6 +42,11 @@ export default {
             body: JSON.stringify(changeStatusToOffline)
 
         })
+        let logoutAcc = {
+            action: "logoutAcc",
+            id: this.currentAccount.id,
+        }
+        sendSocketEvent(logoutAcc)
         console.log(changeStatusToOffline.status)
 
         this.$store.commit('setAccount', null)

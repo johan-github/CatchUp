@@ -11,7 +11,6 @@ import com.example.demo.entities.AccountMessage;
 import com.example.demo.entities.Message;
 import com.example.demo.services.AccountMessageService;
 import com.example.demo.services.MessageService;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +21,6 @@ import java.util.List;
 @Controller
 @RestController
 public class MessageController extends TextWebSocketHandler {
-    Gson gson = new Gson();
 
     @Autowired
     private MessageService messageService;
@@ -33,13 +31,12 @@ public class MessageController extends TextWebSocketHandler {
     //************************************************************************************************* PostMapping
 
 
-    @PostMapping("/rest/messages")
+    @PostMapping("/rest/message")
     public AccountMessage addNewMessage (@RequestBody Message message ){
         Message msg = messageService.addNewMessage( message );
         AccountMessage ac = accountMessageService.findMessageById(msg.getId());
         ac.action = "message";
         return ac;
-        //return messageService.addNewMessage( message );
     }
 
 
@@ -54,15 +51,15 @@ public class MessageController extends TextWebSocketHandler {
 
     //************************************************************************************************* DeleteMapping
 
-    @DeleteMapping("/rest/messages/{id}")
+    @DeleteMapping("/rest/message/{id}")
     public String deleteMessageById( @PathVariable int id ){
         try{
             messageService.deleteMessageById( id );
-            return "Deleted!";
-        } catch (Exception e ){
+            return "Deleted";
+        } catch (Exception e){
 
         }
-        return "Not deleted!";
+        return "Failed";
     }
 
 
