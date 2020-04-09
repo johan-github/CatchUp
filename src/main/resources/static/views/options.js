@@ -25,15 +25,16 @@ export default{
                 <div id="optionsContainer">
                     <h3>O P T I O N S</h3>
                     <form @submit.prevent="changeNickButton" id="optionsBox">
-                    <input id="optionsBoxTextField" type="text" placeholder="Change your nickname">            
-                    <button id="optionsBoxAddButton">Submit</button>    
+                    <input v-model="newNickname" id="optionsBoxTextField" type="text" placeholder="Change your nickname">            
+                    <button id="optionsBoxAddButton">Submit</button>
                     </form>
+                    <p>Your new nickname is: {{yourNewNickname}}</p>
                 
                 
-                <form @submit.prevent="changeAvatarButton" id="optionsBox">
+                <!-- <form @submit.prevent="changeAvatarButton" id="optionsBox">
                     <input id="optionsBoxTextField" type="text" placeholder="Enter avatar URL">            
                     <button id="optionsBoxAddButton">Submit</button> 
-                </form>
+                </form> -->
 
                
                 </div> <!-- div-end tag id="container" -->
@@ -42,30 +43,47 @@ export default{
         </div>
     `,
 
-    methods: {
-
-        changeNickButton() {  
-        },
-
-        changeAvatarButton() {
+    data(){
+        return {
+            newNickname: '',
+            yourNewNickname: '',
         }
     },
 
-    computed:{
+    methods: {
 
-        getCurrentAccount(){
+        async changeNickButton(){
+
+            let changeNicknameOfAccount = {
+                            
+                id: this.currentAccount.id,
+                email: this.currentAccount.email,
+                usernick: this.newNickname,
+                password: this.currentAccount.password,
+                avatar: this.currentAccount.avatar,
+                status: this.currentAccount.status
+            
+        }
+        console.log(" 4: " + this.newNickname);
+        await fetch('/rest/accounts',{
+            method:'PUT',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(changeNicknameOfAccount)
+
+        })
+
+        this.$store.commit('setCurrentAccount', changeNicknameOfAccount)
+        
+        this.yourNewNickname = this.newNickname
+
+        },
+    },
+
+    computed:{
+        currentAccount() {
             return this.$store.state.currentAccount
         }
-        
-        },
-   
-    async setNewNickname(){
-        console.log("your new nickname is: " + this.getCurrentAccount.usernick)
-        let newUserNick = await fetch('/rest/accounts/' + this.getCurrentAccount.usernick)
-        newUserNick = await newUserNick.json()
-
-        //console.log(friendList.id)
-        this.$store.commit('setCurrentAccount', newUserNick)
-     }
-
+    }
 }
