@@ -1,0 +1,24 @@
+#optionsContainer{
+    display: grid;
+
+    width: 600px;
+    
+    height: 600px;
+
+    padding: 100px;
+    margin: 20px;
+
+    background-color: rgb(26, 68, 26);
+
+    align-items: center;
+    justify-items: center;
+
+    transition: .3s;
+    opacity: .95;
+}
+
+@media screen and ( min-width: 1200px ){
+    #optionsContainer{
+        width: 1200px;
+    }
+}

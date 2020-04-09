@@ -43,6 +43,7 @@
 #displayChannelMemberBox{
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
 }
         #displayChannelMember{
             /*background-image: url('https://cdn.iconscout.com/icon/free/png-512/avatar-380-456332.png');*/
@@ -59,6 +60,10 @@
             margin-left: 10px;
             margin-right: 10px;
             transition: .2s;
+        }
+        #messageBoxStatus{
+            width: 10px;
+            height: 10px;
         }
         
 #displayChannelMessageBlock{
@@ -87,6 +92,7 @@
             box-shadow: 1px 1px 3px black;
             transition: .4s;
         }
+
 
 #messageBoxButtonBack:hover{
     background-color: rgb(224, 81, 62);
