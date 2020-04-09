@@ -31,10 +31,10 @@ export default{
                     <p>Your new nickname is: {{yourNewNickname}}</p>
                 
                 
-                <form @submit.prevent="changeAvatarButton" id="optionsBox">
+                <!-- <form @submit.prevent="changeAvatarButton" id="optionsBox">
                     <input id="optionsBoxTextField" type="text" placeholder="Enter avatar URL">            
                     <button id="optionsBoxAddButton">Submit</button> 
-                </form>
+                </form> -->
 
                
                 </div> <!-- div-end tag id="container" -->
