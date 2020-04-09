@@ -25,13 +25,14 @@ export default{
             <div id="scrollContainer">
 
                 <div id="displayChannelBox" v-for="(channel, i ) of searchChannel()">
-                <div id="displayChannelName" @click="seeChannels( channel )"> {{ channel.name }}
+                <div id="displayChannelName" > {{ channel.name }}
                 
-                <div v-if="alreadyAddedChannel( channel )">{{ addedChannel }}</div>
+                <div v-if="alreadyAddedChannel( channel )" @click="seeChannels( channel )">{{ addedChannel }}</div>
                 
                 <div v-else style="font-size:2rem;width:50%;">{{ notAddedChannel }}
-                <button @click="joinChannel" >J O I N ➕</button>
+                <button @click="joinChannel( channel )" >J O I N ➕</button>
                 </div>
+                
                 
             </div>
            
@@ -60,6 +61,7 @@ export default{
             latestChannelMessages : [],
             allMessages : [],
             addedChannel: '',
+            notAddedChannel: '⛔',
     
             searchString : '',
         }
@@ -94,6 +96,7 @@ export default{
 
         // See all public channels from database
         async seeChannels( myChannel ){
+            console.log("THIS IS THE CHANNEL BOX")
                 
             this.$store.commit( 'setCurrentChannel', myChannel );
             console.log(myChannel)
@@ -108,7 +111,7 @@ export default{
                     }
                 }
 
-                this.joinChannel(myChannel.id, myChannel.name)
+                //this.joinChannel(myChannel.id, myChannel.name)
 
                 
         },
@@ -126,6 +129,14 @@ export default{
 
         },
 
+        // noAddedChannel( channel ){
+        //     for(let accountchannel of this.accountChannels){
+        //         if(accountchannel.accountid === this.currentAccount.id && accountchannel.channelid === channel.id){
+        //             this.notAddedChannel = '⛔'
+        //             return true
+        //         }
+        //     }
+        // },
 
 
         //gets all channels by the logged in user and stores them in myChannels[]
@@ -142,14 +153,19 @@ export default{
             },
 
        // Add and join a new channel from list
-        async joinChannel(channelId, name){
-            console.log("id" + channelId )
+        async joinChannel( myChannel ){
+
+            this.$store.commit( 'setCurrentChannel', myChannel );
+            console.log(myChannel)
+
+            console.log("JOINED CHANNEL")
+            console.log("id" + myChannel.id )
             console.log("name "  + name)
             console.log("current account "  + this.currentAccount.id)
 
             let addNewChannel = {
                 accountid: this.currentAccount.id,
-                channelid: channelId,
+                channelid: myChannel.id,
                 admin: 'no'
             }
 
@@ -161,6 +177,8 @@ export default{
                  },
                  body : JSON.stringify( addNewChannel )
              })
+
+             this.$router.push('/home')
 
         },
             
