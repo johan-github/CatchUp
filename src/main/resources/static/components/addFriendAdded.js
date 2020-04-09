@@ -8,10 +8,10 @@ export default{
         <section id="friendListForCreateChannelContainer">
 
             <div id="friendListForCreateChannelSearchBox">
-                <input id="friendListForCreateChannelSearch" type="text" placeholder="Search added friend..."
+                <input id="friendListForCreateChannelSearch" type="text" placeholder="Search selected friend(s)..."
                     @keyup="searchFriend()" @keyup.enter="resetSearchField()" v-model="searchString">
                 <button id="friendListForCreateChannelResetSearch" @click="resetSearchField()">Reset search!</button>
-                <button id="friendListForCreateChannelResetList" @click="resetFriendList()">Reset list!</button>
+                <!--<button id="friendListForCreateChannelResetList" @click="resetFriendList()">Reset list!</button>-->
             </div>
 
             <div id="scrollContainer">

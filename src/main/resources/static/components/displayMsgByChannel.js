@@ -80,7 +80,7 @@ export default{
 
     //constructor
     async created(){
-        this.getMessages();
+        this.getMessages( true );
         this.getAccount();
         this.getAccountChannel();
         this.displayChannelSettings();

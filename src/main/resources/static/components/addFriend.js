@@ -9,7 +9,7 @@ export default{
         <section id="friendListForCreateChannelContainer">
 
             <div>
-                <input id="friendListForCreateChannelSearch" type="text" placeholder="Search available friend..."
+                <input id="friendListForCreateChannelSearch" type="text" placeholder="Search available friend(s)..."
                     @keyup="searchFriend()" @keyup.enter="resetSearchField()" v-model="searchString">
                 <button id="friendListForCreateChannelResetSearch" @click="resetSearchField()">Reset search!</button>
             </div>

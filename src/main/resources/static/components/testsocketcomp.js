@@ -25,12 +25,17 @@ export default{
             <div id="scrollContainer">
 
                 <div id="displayChannelBox" v-for="(channel, i ) of searchChannel()">
-                <div id="displayChannelName" @click="selectChannelAndShowItsMessages( channel )"> {{ channel.name }}
-                <div v-if="alreadyAddedChannel( channel )">✅</div>
-                <div v-else>⛔</div>
+                <div id="displayChannelName" > {{ channel.name }}
+                
+                <div v-if="alreadyAddedChannel( channel )" @click="seeChannels( channel )">{{ addedChannel }}</div>
+                
+                <div v-else style="font-size:2rem;width:50%;">{{ notAddedChannel }}
+                <button @click="joinChannel( channel )" >J O I N ➕</button>
                 </div>
                 
-
+                
+            </div>
+           
             </div>
 
             </div>
@@ -55,8 +60,9 @@ export default{
             accounts : [],
             latestChannelMessages : [],
             allMessages : [],
-            statusForChannel: true,
-
+            addedChannel: '',
+            notAddedChannel: '⛔',
+    
             searchString : '',
         }
     },
@@ -88,15 +94,13 @@ export default{
         },
 
 
-        //Method to activate when selecting/clicking a channel to route the user to channelMessage
-        async selectChannelAndShowItsMessages( myChannel ){
+        // See all public channels from database
+        async seeChannels( myChannel ){
+            console.log("THIS IS THE CHANNEL BOX")
                 
             this.$store.commit( 'setCurrentChannel', myChannel );
             console.log(myChannel)
 
-            await fetch('/rest/channel/messages/' + myChannel.id )
-                .then(messages => messages.json())
-                .then(messages => this.$store.commit( 'setCurrentChannelMessages', messages ))
                 
                 console.log("My channel id " + myChannel.id)
    
@@ -104,24 +108,35 @@ export default{
                     if(accountchannel.accountid === this.currentAccount.id && myChannel.id === accountchannel.channelid){
                         this.$router.push( '/channelMessage')
                         return
-                        
                     }
-                   
                 }
 
-                // this.statusForChannel = '✅'
-                //  this.statusForChannel = '➕'
+                //this.joinChannel(myChannel.id, myChannel.name)
+
                 
         },
 
+        // See if channels are already added to our account or not
         alreadyAddedChannel( channel ){
             for(let accountchannel of this.accountChannels){
                 if(accountchannel.accountid === this.currentAccount.id && accountchannel.channelid === channel.id){
+                    this.addedChannel = '✅'
                     return true
                 }
+                this.notAddedChannel = '⛔'
+                
             }
 
         },
+
+        // noAddedChannel( channel ){
+        //     for(let accountchannel of this.accountChannels){
+        //         if(accountchannel.accountid === this.currentAccount.id && accountchannel.channelid === channel.id){
+        //             this.notAddedChannel = '⛔'
+        //             return true
+        //         }
+        //     }
+        // },
 
 
         //gets all channels by the logged in user and stores them in myChannels[]
@@ -136,6 +151,36 @@ export default{
                 }
                 return tempChannels;
             },
+
+       // Add and join a new channel from list
+        async joinChannel( myChannel ){
+
+            this.$store.commit( 'setCurrentChannel', myChannel );
+            console.log(myChannel)
+
+            console.log("JOINED CHANNEL")
+            console.log("id" + myChannel.id )
+            console.log("name "  + name)
+            console.log("current account "  + this.currentAccount.id)
+
+            let addNewChannel = {
+                accountid: this.currentAccount.id,
+                channelid: myChannel.id,
+                admin: 'no'
+            }
+
+            //Post to database and update
+            await fetch('/rest/accountchannels',{
+                 method : 'POST',
+                 headers : {
+                     'Content-Type' : 'application/json'
+                 },
+                 body : JSON.stringify( addNewChannel )
+             })
+
+             this.$router.push('/home')
+
+        },
             
       
 

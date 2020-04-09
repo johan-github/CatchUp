@@ -3,7 +3,7 @@
     background-color: rgb(219, 93, 156);
 
     display: grid;
-    grid-template-rows: 20px auto;
+    grid-template-rows: 50px auto;
 
     justify-self: center;
 }
@@ -11,7 +11,7 @@
 #friendListForCreateChannelBox{
     background-color: indianred;
     display: grid;
-    grid-template-columns: 40px auto;
+    grid-template-columns: 60px auto;
 
     width: 400px;
     height: 25px;
@@ -20,6 +20,8 @@
 
     filter: drop-shadow(2px 2px 2px #222);
     border-radius: 0px 10px 10px 0px;
+
+    justify-items: center;
 
     transition: .1s;
 }
@@ -41,16 +43,16 @@
         #friendListForCreateChannelSearch{            
             font-weight: 900;
             background-color: white;
-            width: 68px;
+            width: 200px;
             border-radius: 25px 0px 0px 25px;
         }
         #friendListForCreateChannelSearch:empty::after{
             content: "-";
         }
-        #friendListForCreateChannelSearch:focus-within{
+        /*#friendListForCreateChannelSearch:focus-within{
             box-shadow: 2px 2px 2px #222;
             width: 200px;
-        }
+        }*/
         #friendListForCreateChannelResetSearch{
             width: 10px;
             font-size: 0px;

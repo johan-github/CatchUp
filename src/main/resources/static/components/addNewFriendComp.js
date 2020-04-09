@@ -5,10 +5,15 @@
 /**********************************/
 export default{
     template:`
-        <section>            
-            <input v-model="searchNickname" type="text" placeholder="Enter nickname here"/>
-            <button @click="searchByNickname" type="submit">Add Friend</button>
-            <div id="addedFriend">{{ addedFriend }}</div>
+        <section id="container">
+            <div>
+                <h3 id="label">Add a new friend</h3>
+                <input v-model="searchNickname" type="text" placeholder="Enter nickname here"/>
+                <button @click="searchByNickname" type="submit">Add Friend</button>
+                <div id="addedFriend">{{ addedFriend }}</div>
+            </div>
+            <div></div>
+            <button @click="routeToFriends" > Back </button>
         </section>
     `,
 
@@ -66,8 +71,9 @@ export default{
          
          
      },
-
-        
+        routeToFriends(){
+        this.$router.push('/friends')
+        }
     },
 
     computed:{
