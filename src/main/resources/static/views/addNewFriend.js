@@ -4,26 +4,30 @@
 * Notes: 
 /**********************************/
 import addNewFriendComp from '../components/addNewFriendComp.js'
+import navBar from '../components/navbar.js'
 
 export default{
     components:{
-        addNewFriendComp
+        addNewFriendComp,
+        navBar
     },
 
     template:`
-        <div>
-        <h2> ADD NEW FRIEND </h2>
-        <addNewFriendComp/>
-        <button @click="routeToFriends" > Back </button>
+    <div id="homeContainer">
+            
+            <div id="appButton">
+                <h3>| | |</h3>
+            </div>
+            
+
+            <div id="appNav">
+                <navBar/>
+            </div>
+
+            
+            <main id="appMain">
+                <addNewFriendComp/>
+            </main>
         </div>
     `,
-
-
-    methods:
-    {
-        routeToFriends(){
-            this.$router.push('/friends')
-        }
-    }
-
 }
