@@ -1,0 +1,157 @@
+#messageBoxMainContainer{    
+    display: grid;
+    grid-template-rows: 200px auto 50px;
+
+    width: 1200px;
+    
+    height: 800px;
+
+    padding: 20px;
+    margin: 20px;
+
+    background-color: rgb(71, 80, 71);
+
+    align-items: center;
+    justify-items: center;
+
+    transition: .3s;
+    opacity: .95;
+}
+
+#messageBoxAvatarStatus{ grid-area: mBAS;}
+#messageBoxStatus{ grid-area: mBS;}
+#messageBoxAvatar{ grid-area: mBA;}
+
+#messageBoxNickDelete{ grid-area: mBND;}
+#messageBoxNick{ grid-area: mBN;}
+#messageBoxMessageDelete{ grid-area: mBD;}
+
+#messageBoxMessageTime{ grid-area: mBMT;}
+#messageBoxMessage{ grid-area: mBM;}
+
+#messageBoxContainer{
+    background-image: linear-gradient(rgb(116, 17, 0), rgb(29, 0, 0));;
+
+    display: grid;
+    grid-template-columns: 60px auto;
+    grid-template-rows: 20px 20px auto;
+    grid-template-areas:
+    "mBAS mBND"
+    "mBAS mBMT"
+    "mBM mBM";
+
+    width: 900px;
+    height: 80px;
+
+    border-radius: 10px;
+
+    padding: 5px;
+    margin: 10px;
+}
+
+        #messageBoxNick{
+            font-weight: 900;
+        }
+
+        #messageBoxMessageTime{          
+            font-size: 10px;
+            font-style: italic;
+        }
+        
+        #messageBoxMessage{
+            margin: 5px 5px 5px 15px;
+        }
+
+#messageBoxNickDelete{
+    display: grid;
+    grid-template-columns: auto 20px;
+    grid-template-areas:
+    "mBN mBD";
+}
+
+#messageBoxAvatarStatus{
+    display: grid;
+    grid-template-columns: 10px auto;
+    grid-template-areas:
+    "mBS mBA";
+}
+
+#messageBoxAvatar{
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    box-shadow: 1px 1px 3px black;
+}
+
+#messageBoxMessageDelete:empty{
+    display: none;
+}
+        #messageBoxMessageDelete:hover{
+            cursor: pointer;
+        }
+
+
+#messageBoxGear{
+    background-color: inherit;
+    width: 20px;
+    padding: 0px;
+    margin:0;
+    border-radius: 25px;
+    font-size: 20px;
+    box-shadow: 2px 2px 2px black;
+}
+#messageBoxGear::after{
+    content: '⚙️';
+}
+
+#messageBoxGear:hover{
+    box-shadow: 6px 6px 2px black;
+}
+
+#messageBoxGear:active{
+    transition: .0s;
+    box-shadow: 2px 2px 2px black;
+}
+
+#messageBoxSettingsInput{
+    background-color: white;
+    border-radius: 25px 0px 0px 25px;
+}
+
+#messageBoxSettingsChangeChannelName{
+    border-radius: 0px 50px 50px 0px;
+}
+
+#messageBoxSettingsChangeChannelName:hover{
+    box-shadow: 3px 3px 2px black;
+}
+#messageBoxSettingsChangeChannelName:active{
+    box-shadow: 3px 3px 2px black;
+}
+
+#messageBoxSettingsLeaveChannel{
+    border-radius: 50px;
+    transition: .3s;
+    background-color: rgb(88, 0, 0);
+}
+
+#messageBoxSettingsLeaveChannel:hover{
+    transition: .3s;
+    background-color: red;
+    background-image: radial-gradient(rgb(251, 255, 0),red);
+    color: rgb(255, 0, 0);
+    box-shadow: 3px 3px 5px rgb(206, 134, 0);
+    font-weight: bold;
+}
+
+@media screen and ( max-width: 1200px ){
+    #messageBoxMainContainer{
+        width: 600px;
+    }
+    #messageBoxContainer{    
+        width: 400px;
+        max-height: 100%;
+    }
+}

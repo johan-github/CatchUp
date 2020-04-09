@@ -1,0 +1,92 @@
+
+#friendListForCreateChannelContainer{
+    background-color: rgb(219, 93, 156);
+
+    display: grid;
+    grid-template-rows: 50px auto;
+
+    justify-self: center;
+}
+
+#friendListForCreateChannelBox{
+    background-color: indianred;
+    display: grid;
+    grid-template-columns: 60px auto;
+
+    width: 400px;
+    height: 25px;
+    max-height: 25px;
+    margin: 10px;
+
+    filter: drop-shadow(2px 2px 2px #222);
+    border-radius: 0px 10px 10px 0px;
+
+    justify-items: center;
+
+    transition: .1s;
+}
+        #friendListForCreateChannelBox:hover{
+            filter: drop-shadow(5px 5px 5px #222);
+            transition: .2s;
+        }
+        #friendListForCreateChannelBox:hover #friendListForCreateChannelAvatar{
+            width: 50px;
+            height: 50px;
+        }
+
+#friendListForCreateChannelSearchBox{
+    display: inline;
+}
+        #friendListForCreateChannelSearch, #friendListForCreateChannelResetSearch{
+            filter: drop-shadow(1px 1px 2px #222);
+        }
+        #friendListForCreateChannelSearch{            
+            font-weight: 900;
+            background-color: white;
+            width: 200px;
+            border-radius: 25px 0px 0px 25px;
+        }
+        #friendListForCreateChannelSearch:empty::after{
+            content: "-";
+        }
+        /*#friendListForCreateChannelSearch:focus-within{
+            box-shadow: 2px 2px 2px #222;
+            width: 200px;
+        }*/
+        #friendListForCreateChannelResetSearch{
+            width: 10px;
+            font-size: 0px;
+            border-radius: 0px 25px 25px 0px;
+        }
+        #friendListForCreateChannelSearch:focus-within + #friendListForCreateChannelResetSearch{
+            filter: drop-shadow(1px 1px 2px #222);
+            font-size: 15px;
+            width: 150px;
+        }
+        #friendListForCreateChannelResetList{
+            position: absolute;
+            left: 80%;
+            background-color: rgb(14, 107, 2);
+            border-radius: 25px;
+            font-size: 15px;
+            width: 100px;
+        }
+        
+
+#friendListForCreateChannelAvatar{
+    position: relative;
+
+    filter: drop-shadow(5px 5px 5px #222);
+
+    bottom: 10px;
+    left: 10px;
+
+    width: 45px;
+    height: 45px;
+
+    transition: .2s;
+}
+
+#friendListForCreateChannelUsernick{
+    font-weight: 900;
+}

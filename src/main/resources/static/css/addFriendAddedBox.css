@@ -1,0 +1,67 @@
+/************************************************************************************ addFriendAddedBox */
+
+#addFriendAddedBoxBottom{ grid-area: aFABottom; }
+#addFriendAddedBoxForm{ grid-area: aFAForm; }
+#addFriendAddedBoxPic{ grid-area: aFAPic; }
+#addFriendAddedBoxName{ grid-area: aFAName; }
+
+#addFriendAddedBox{
+    display: grid;
+    grid-template-rows: minmax(auto, 325px);
+    grid-template-areas:
+    "aFABottom";
+
+    padding: 10px;
+
+    max-height: 300px;
+}
+        #addFriendAddedBoxBottom{
+            /*background-color: rgb(46, 69, 77);*/
+            height: 100%;
+            overflow: auto;
+        }
+
+#addFriendAddedBoxForm{
+    display: grid;
+    grid-template-columns: 50px minmax( 200px, auto);
+    grid-template-rows: 10px;
+    grid-template-areas:
+    "aFAPic aFAName";
+
+    background-color: rgb(26, 141, 26);
+    
+    opacity: 0.9;
+    
+    padding: 10px;
+    margin: 10px;
+
+    box-shadow: 5px 5px 5px #000000;
+    border-radius: 5px 0px 5px 0px;
+
+    transition: 1s;
+}
+        #addFriendAddedBox, #addFriendAddedBoxForm{
+            align-items: center;
+            justify-items: center;
+        }
+        #addFriendAddedBoxForm > div {
+            padding: 10px;
+        }
+        #addFriendAddedBoxName{
+            font: bold 16px Arial, Helvetica, sans-serif;
+            color: white;
+            justify-self: end;
+        }
+        #addFriendAddedBoxPic{
+            background-image: url("https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png");
+            background-size: cover;
+            background-position: center;
+            box-shadow: 5px 5px 5px #000000;
+
+            justify-self: start;
+        }
+        #addFriendAddedBoxForm:hover{
+            transition: .2s;
+            background-color: rgb(184, 28, 28);
+            opacity: 0.9;
+        }

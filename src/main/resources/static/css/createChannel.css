@@ -1,0 +1,107 @@
+
+#createChannelContainer{
+    display: grid;
+    grid-template-rows: 100px auto 25px;
+
+    width: 600px;
+    
+    height: 800px;
+
+    padding: 10px;
+    margin: 10px;
+
+    background-color: rgb(71, 80, 71);
+
+    align-items: center;
+    justify-items: center;
+
+    transition: .3s;
+    opacity: .95;
+}
+
+#createChannelNameInput{ grid-area: cCNInput; }
+#msgError{ grid-area: cCError; }
+#selectBox{ grid-area: cCSelect; }
+#createChannelButton{ grid-area: cCButton; }
+
+#createChannelForm{
+    display: grid;
+    grid-template-columns: repeat(2, auto) 150px;
+    grid-template-rows: repeat(2,50px);
+    grid-template-areas:
+    "cCNInput cCSelect cCButton"
+    "cCError cCError cCError";
+
+    justify-items: center;
+    align-items: center;
+
+    width: 100%;
+}
+        #createChannelNameInput,#selectBox,#createChannelButton{
+            margin: 0px;
+            padding: 0px;
+        }
+        #createChannelNameInput{
+            width: 200px;
+            padding-left: 10px;
+        }
+        #msgError{
+            width: 500px;
+        }
+        #selectBox{
+            width: 200px;
+        }
+        #createChannelButton{
+            width: 100px;
+        }
+        #msgError{
+            margin: 0px;
+            padding: 10px;
+        }
+
+
+
+#friendsListsContainer{
+    display: grid;
+    grid-template-columns: 550px;
+    grid-template-rows: repeat(2, 300px);
+    grid-row-gap: 20px;
+
+    transition: .2s;
+}
+
+#addFriendList, #addFriendAddedList{
+    background-color: rgb(134, 101, 101);
+}
+
+@media screen and ( min-width: 1200px ){
+    #createChannelContainer{
+        grid-template-rows: 100px auto 25px;
+        width: 1200px;
+    }
+    #friendsListsContainer{
+        grid-template-columns: repeat(2, 500px);
+        grid-template-rows: 500px;
+        grid-column-gap: 20px;
+        transition: .2s;
+    }
+    #createChannelForm{
+        grid-template-columns: repeat(3, auto);
+        width: 800px;
+    }
+    #createChannelNameInput,#selectBox,#createChannelButton{
+        margin: 10px;
+    }
+    #createChannelNameInput{
+        width: 300px;
+    }
+    #msgError{
+        width: 500px;
+    }
+    #selectBox{
+        width: 250px;
+    }
+    #createChannelButton{
+        width: 150px;
+    }
+}
