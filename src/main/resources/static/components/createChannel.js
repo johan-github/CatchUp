@@ -212,7 +212,7 @@ export default{
         routeToChannels(){
             this.$store.commit( 'resetForChannelCreationMyFriendsThatWillBeAddedToTheNewChannel' );
 
-            this.$router.push('/channels')
+            this.$router.push('/home')
         },
 
 
@@ -220,7 +220,7 @@ export default{
         backToDisplayChannelPage(){
             this.$store.commit( 'resetForChannelCreationMyFriendsThatWillBeAddedToTheNewChannel' );
 
-            this.$router.push( '/channels')
+            this.$router.push( '/home')
         },
     },
 
