@@ -5,10 +5,15 @@
 /**********************************/
 export default{
     template:`
-        <section>            
-            <input v-model="searchNickname" type="text" placeholder="Enter nickname here"/>
-            <button @click="searchByNickname" type="submit">Add Friend</button>
-            <div id="addedFriend">{{ addedFriend }}</div>
+        <section id="container">
+            <div>
+                <h3 id="label">Add a new friend</h3>
+                <input v-model="searchNickname" type="text" placeholder="Enter nickname here"/>
+                <button @click="searchByNickname" type="submit">Add Friend</button>
+                <div id="addedFriend">{{ addedFriend }}</div>
+            </div>
+            <div></div>
+            <button @click="routeToFriends" > Back </button>
         </section>
     `,
 
@@ -38,10 +43,14 @@ export default{
                     console.log(account.usernick)
                     this.addFriendToFriendlist(account.id);
                     this.addedFriend = "You have added " + account.usernick + " as a friend"
-                    console.log("TEST usernick " + this.addedFriend)
+                    //console.log("TEST usernick " + this.addedFriend)
+                    break
                 }
-            
+                if(account.usernick !== this.searchNickname){
+                    this.addedFriend = "Could not find user " + this.searchNickname
+                }
             }
+           
         },
 
         async addFriendToFriendlist( friendId ) {
@@ -62,8 +71,9 @@ export default{
          
          
      },
-
-        
+        routeToFriends(){
+        this.$router.push('/friends')
+        }
     },
 
     computed:{
